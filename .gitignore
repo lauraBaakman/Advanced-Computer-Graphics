@@ -141,6 +141,7 @@ Makefile*
 *.lof
 *.log
 *.lot
+*.fls
 *.maf
 *.mtc
 *.mtc0
