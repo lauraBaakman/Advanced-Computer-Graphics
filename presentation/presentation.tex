@@ -8,20 +8,11 @@
 \setbeamercovered{dynamic}
 
 % Beamer settings
-\usetheme{Frankfurt}
-\usecolortheme{default}
-
-\AtBeginSection{\frame{\sectionpage}}
-\setbeamertemplate{navigation symbols}{}
-
-
-%Colours
-\definecolor{blue}{RGB}{43,15,162}
-\definecolor{green}{RGB}{116, 253, 116}
-\definecolor{brown}{RGB}{101, 20, 16}
-
-\let\oldemptyset\emptyset
-\let\emptyset\varnothing
+\usetheme{metropolis}
+\metroset{
+	everytitleformat=uppercase,
+	progressbar=frametitle
+} 
 
 \renewcommand{\vec}[1]{\boldsymbol{#1}}
 \newcommand{\hsp}{\hspace{0.5em}}
@@ -29,6 +20,7 @@
 \title{PN triangles}
 \author{Rick van Veen \and Laura Baakman}
 \date{December 14, 2015}
+\institute{Advanced Computer Graphics}
 
 \begin{document}
 	\begin{frame}
