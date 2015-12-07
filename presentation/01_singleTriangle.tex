@@ -1,15 +1,9 @@
 % !TEX root = presentation.tex
-	
-	\begin{frame}\frametitle{Construction}
-		% \todo[inline]{The steps. Recap of everything construct geometry and normals and evaluate less (low lod) or more points (high lod)}
+	\begin{frame}\frametitle{Overview}
 		\begin{columns}
 			\begin{column}{0.9\textwidth}
 				\begin{center}
-					% \only<1>{\includegraphics[width=\textwidth]{./img/1_single/recap_initialTriangle.png}}
-					\only<1>{\includegraphics[width=\textwidth]{./img/1_single/recap_geometry.png}}
-					% \only<3>{\includegraphics[width=\textwidth]{./img/1_single/recap_normals.png}}
-					% \only<4>{\includegraphics[width=\textwidth]{./img/1_single/recap_result.png}}
-					% \only<5>{\includegraphics[width=\textwidth]{./img/1_single/recap_quadraticVsCubicPatch.png}}
+					\includegraphics[width=\textwidth]{./img/1_single/recap_geometry.png}
 				\end{center}		
 			\end{column}
 		\end{columns}
@@ -119,16 +113,11 @@
 		\end{columns}
 	\end{frame}
 
-	\begin{frame}\frametitle{Construction}
-		% \todo[inline]{The steps. Recap of everything construct geometry and normals and evaluate less (low lod) or more points (high lod)}
+	\begin{frame}\frametitle{Overview}
 		\begin{columns}
 			\begin{column}{0.9\textwidth}
 				\begin{center}
-					% \only<1>{\includegraphics[width=\textwidth]{./img/1_single/recap_initialTriangle.png}}
-					% \only<2>{\includegraphics[width=\textwidth]{./img/1_single/recap_geometry.png}}
-					% \only<1>{\includegraphics[width=\textwidth]{./img/1_single/recap_normals.png}}
-					\only<4>{\includegraphics[width=\textwidth]{./img/1_single/recap_result.png}}
-					% \only<1>{\includegraphics[width=\textwidth]{./img/1_single/recap_quadraticVsCubicPatch.png}}
+					\includegraphics[width=\textwidth]{./img/1_single/recap_result.png}
 				\end{center}		
 			\end{column}
 		\end{columns}
@@ -153,16 +142,12 @@
 		\end{columns}
 	\end{frame}
 
-		\begin{frame}\frametitle{Construction}
+		\begin{frame}\frametitle{Overview}
 		% \todo[inline]{The steps. Recap of everything construct geometry and normals and evaluate less (low lod) or more points (high lod)}
 		\begin{columns}
 			\begin{column}{0.9\textwidth}
-				\begin{center}
-					% \only<1>{\includegraphics[width=\textwidth]{./img/1_single/recap_initialTriangle.png}}
-					% \only<2>{\includegraphics[width=\textwidth]{./img/1_single/recap_geometry.png}}
-					\only<1>{\includegraphics[width=\textwidth]{./img/1_single/recap_normals.png}}
-					% \only<4>{\includegraphics[width=\textwidth]{./img/1_single/recap_result.png}}
-					% \only<5>{\includegraphics[width=\textwidth]{./img/1_single/recap_quadraticVsCubicPatch.png}}
+				\begin{center}	
+					\includegraphics[width=\textwidth]{./img/1_single/recap_normals.png}
 				\end{center}		
 			\end{column}
 		\end{columns}
@@ -258,6 +243,18 @@
 	\end{frame}
 
 
+	\begin{frame}\frametitle{Overview}
+		% \todo[inline]{The steps. Recap of everything construct geometry and normals and evaluate less (low lod) or more points (high lod)}
+		\begin{columns}
+			\begin{column}{0.9\textwidth}
+				\begin{center}
+					\includegraphics[width=\textwidth]{./img/1_single/recap_result.png}
+				\end{center}		
+			\end{column}
+		\end{columns}
+	\end{frame}	
+
+
 	\begin{frame}\frametitle{Quadratic Patch}
 		\begin{equation*}
 			n: \mathbb{R}^2 \rightarrow \mathbb{R}^3 \text{, for}\ w = 1 - u - v \text{,}\ u, v, w \geq 0 
@@ -270,21 +267,6 @@
 			\end{aligned}
 		\end{equation*}
 	\end{frame}	
-
-	% \begin{frame}
-	% 	\frametitle{Level Of Detail}
-	% 	\todo[inline]{Barycentric coordinates recap}
-	% 	\begin{equation*}
-	% 		n: \mathbb{R}^2 \rightarrow \mathbb{R}^3 \text{, for } w = 1 - u - v \text{, } u, v, w \geq 0 
-	% 	\end{equation*}
-	% 	\begin{equation*}
-	% 		\begin{aligned}
-	% 		n(u,v) & = \sum\limits_{i+j+k=2} n_{ijk} u^i v^j w^k\\
-	% 		& = n_{200} w^2 + n_{020} u^2 + n_{002} v^2\\
-	% 		& + n_{110} w u + n_{011} u v + n_{101} w v
-	% 		\end{aligned}
-	% 	\end{equation*}
-	% \end{frame}	
 
 	\begin{frame}
 		\frametitle{Level Of Detail}
@@ -317,17 +299,14 @@
 		\end{columns}
 	\end{frame}	
 
-	% \begin{frame}\frametitle{Construction}
-	% 	% \todo[inline]{The steps. Recap of everything construct geometry and normals and evaluate less (low lod) or more points (high lod)}
-	% 	\begin{columns}
-	% 		\begin{column}{0.9\textwidth}
-	% 			\begin{center}
-	% 				\only<1>{\includegraphics[width=\textwidth]{./img/1_single/recap_initialTriangle.png}}
-	% 				\only<2>{\includegraphics[width=\textwidth]{./img/1_single/recap_geometry.png}}
-	% 				\only<3>{\includegraphics[width=\textwidth]{./img/1_single/recap_normals.png}}
-	% 				\only<4>{\includegraphics[width=\textwidth]{./img/1_single/recap_result.png}}
-	% 				\only<5>{\includegraphics[width=\textwidth]{./img/1_single/recap_quadraticVsCubicPatch.png}}
-	% 			\end{center}		
-	% 		\end{column}
-	% 	\end{columns}
-	% \end{frame}	
+
+	\begin{frame}\frametitle{Overview}
+		% \todo[inline]{The steps. Recap of everything construct geometry and normals and evaluate less (low lod) or more points (high lod)}
+		\begin{columns}
+			\begin{column}{0.9\textwidth}
+				\begin{center}
+					\includegraphics[width=\textwidth]{./img/1_single/recap_quadraticVsCubicPatch.png}
+				\end{center}		
+			\end{column}
+		\end{columns}
+	\end{frame}	
