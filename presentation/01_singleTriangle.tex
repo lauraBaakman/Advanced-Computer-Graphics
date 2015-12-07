@@ -1,24 +1,76 @@
 % !TEX root = presentation.tex
-	\begin{frame}
-		\frametitle{Geometry}
-		\todo[inline]{Bezier and Bernstein recap/why cubic?}
+	\begin{frame}\frametitle{Cubic B\'ezier triangles}
+		\begin{columns}
+			\begin{column}{0.6\textwidth}
+				\todo[inline]{What are they.}
+			\end{column}
+		\end{columns}
+	\end{frame}
 
+	\begin{frame}\frametitle{Geometry}
+		\begin{columns}
+			\begin{column}{0.6\textwidth}
+				\begin{center}
+					\includegraphics[width=\textwidth]{img/1_single/inputPrimitive.png}
+					\small{Input primitive}
+				\end{center}
+			\end{column}
+		\end{columns}
 	\end{frame}
 
 	% Geometry process
 	\begin{frame}\frametitle{Geometry - step 1}
-		\missingfigure{Flat triangle picture, with uniform distributed control points}
-		\begin{equation*}
-			b_{ijk} = (iP_1 + jP_2 + kP_3)/3
-		\end{equation*}
+		\begin{columns}
+			\begin{column}{0.6\textwidth}
+				\begin{center}
+					\includegraphics[width=\textwidth]{img/1_single/geometry_1.png}
+					\small{Control net}
+				\end{center}
+			\end{column}
+			\uncover<2>{
+				\begin{column}{0.4\textwidth}
+					\begin{equation*}
+						b_{ijk} = (iP_1 + jP_2 + kP_3)/3
+					\end{equation*}
+				\end{column}
+			}
+		\end{columns}
 	\end{frame}
 
 	\begin{frame}\frametitle{Geometry - step 2}
-		\missingfigure{Figure 6 of the paper}
+		\begin{columns}
+			\begin{column}{0.6\textwidth}
+				\begin{center}
+				\includegraphics[width=\textwidth]{img/1_single/geometry_2.png}
+				\small{Normal projection}
+				\end{center}
+			\end{column}
+			\uncover<2>{
+				\begin{column}{0.4\textwidth}
+					\begin{equation*}
+						A^2 + B^2 = C^2
+					\end{equation*}
+				\end{column}
+			}
+		\end{columns}
 	\end{frame}
 
 	\begin{frame}\frametitle{Geometry - step 3}
-		\missingfigure{Figure 3 with center down.}
+		\begin{columns}
+			\begin{column}{0.6\textwidth}
+				\begin{center}
+				\includegraphics[width=\textwidth]{img/1_single/geometry_3.png}
+				\small{Center control point}
+				\end{center}
+			\end{column}
+			\uncover<2>{
+				\begin{column}{0.4\textwidth}
+					\begin{equation*}
+						A^2 + B^2 = C^2
+					\end{equation*}
+				\end{column}
+			}
+		\end{columns}
 	\end{frame}	
 
 	\begin{frame}\frametitle{Geometry - result}
@@ -29,22 +81,91 @@
 				\includegraphics[width=\textwidth]{img/1_single/geometry_4.png}
 				\end{center}	
 			\end{column}
-			\begin{column}{0.4\textwidth}
-				\begin{equation*}
-					A^2 + B^2 = C^2
-				\end{equation*}
+		\end{columns}
+	\end{frame}
+
+		\begin{frame}\frametitle{Normals}
+		\begin{columns}
+			\begin{column}{0.6\textwidth}
+				\begin{center}
+					\includegraphics[width=\textwidth]{img/1_single/inputPrimitive.png}
+					\small{Input primitive}
+				\end{center}
 			\end{column}
 		\end{columns}
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{Normals}
-		\todo[inline]{How do you create the PN triangle normals}
+		\begin{columns}
+			\begin{column}{0.6\textwidth}
+				\begin{center}
+					\includegraphics[width=\textwidth]{img/1_single/normals.png}
+				\end{center}	
+			\end{column}
+			\uncover<2>{
+				\begin{column}{0.4\textwidth}
+					\begin{equation*}
+						A^2 + B^2 = C^2
+					\end{equation*}
+				\end{column}
+			}
+		\end{columns}
 	\end{frame}
 
-	\begin{frame}
-		\frametitle{Normals}
-		\todo[inline]{Quadratic why no linear / cubic}
+	\begin{frame}\frametitle{Normals - theory}
+		\begin{columns}
+			\begin{column}{0.6\textwidth}
+				\begin{center}
+					\includegraphics[width=\textwidth]{img/1_single/linearVsQuadraticNormals_linear.png}
+					\small{Linear}
+				\end{center}	
+			\end{column}
+		\end{columns}
+		\pause
+		\vspace{0.8cm}
+		\begin{columns}
+			\begin{column}{0.6\textwidth}
+				\begin{center}
+					\includegraphics[width=\textwidth]{img/1_single/linearVsQuadraticNormals_quadratic.png}
+					\small{Quadratic}
+				\end{center}	
+			\end{column}
+		\end{columns}
+	\end{frame}
+
+	\begin{frame}\frametitle{Normals - theory}
+		\begin{columns}
+			\begin{column}{0.6\textwidth}
+				\begin{center}
+					\includegraphics[width=\textwidth]{img/1_single/computingNormals.png}
+				\end{center}
+			\end{column}
+			\uncover<2>{
+				\begin{column}{0.4\textwidth}
+					\begin{equation*}
+						A^2 + B^2 = C^2
+					\end{equation*}
+				\end{column}
+			}
+		\end{columns}
+	\end{frame}
+
+	\begin{frame}\frametitle{Normals - result}
+		\begin{columns}
+			\begin{column}{0.4\textwidth}
+			\begin{center}
+					\includegraphics[width=\textwidth]{img/1_single/linearlyVaryingNormals.png}
+					\small{Linear}
+				\end{center}	
+			\end{column}
+			\begin{column}{0.4\textwidth}
+			\begin{center}
+					\includegraphics[width=\textwidth]{img/1_single/quadriticallyVaryingNormals.png}
+					\small{Quadratic}
+				\end{center}	
+			\end{column}
+		\end{columns}
 	\end{frame}
 
 	\begin{frame}
