@@ -1,8 +1,19 @@
 % !TEX root = presentation.tex
 	\begin{frame}\frametitle{Cubic B\'ezier triangles}
 		\begin{columns}
-			\begin{column}{0.6\textwidth}
-				\todo[inline]{What are they.}
+			\begin{column}{\textwidth}
+				\begin{equation*}
+					b: \mathbb{R}^2 \rightarrow \mathbb{R}^3 \text{, for } w = 1 - u - v, u, v \text{, } w \geq 0
+				\end{equation*}
+				\begin{equation*}
+					\begin{aligned}
+						b(u,v) & = \sum\limits_{i+j+k=3} b_{ijk} \frac{3!}{i!j!k!} u^i v^j w^k\\
+						& = b_{300} w^3 + b_{030} u^3 + b_{003} v^3 \\
+						& + b_{210} 3 w^2 u + b_{120} 3 w u^2 + b_{201} 3 w^2 v\\
+						& + b_{021} 3 u^2 v + b_{102} 3 w v^2 + b_{012} 3 u v^2\\
+						& + b_{111} 6 w u v.
+ 					\end{aligned}
+				\end{equation*}
 			\end{column}
 		\end{columns}
 	\end{frame}
@@ -32,6 +43,14 @@
 					\begin{equation*}
 						b_{ijk} = (iP_1 + jP_2 + kP_3)/3
 					\end{equation*}
+
+					\begin{equation*}
+						\begin{aligned}
+						b_{300} & = P_1,\\
+						b_{030} & = P_2,\\
+						b_{003} & = P_3
+						\end{aligned}
+					\end{equation*}
 				\end{column}
 			}
 		\end{columns}
@@ -48,7 +67,15 @@
 			\uncover<2>{
 				\begin{column}{0.4\textwidth}
 					\begin{equation*}
-						A^2 + B^2 = C^2
+						\begin{aligned}
+						w_{ij} & = (P_j - P_i) \cdot N_i \in \mathbb{R} \\
+						b_{210} & = (2 P_1 + P_2 - w_{12}N1) / 3,\\
+						b_{120} & = (2 P_2 + P_1 - w_{21}N2) / 3,\\
+						b_{021} & = (2 P_2 + P_3 - w_{23}N2) / 3,\\
+						b_{012} & = (2 P_3 + P_2 - w_{32}N3) / 3,\\
+						b_{102} & = (2 P_3 + P_1 - w_{31}N3) / 3,\\
+						b_{201} & = (2 P_1 + P_3 - w_{13}N1) / 3\\
+						\end{aligned}
 					\end{equation*}
 				\end{column}
 			}
@@ -66,7 +93,12 @@
 			\uncover<2>{
 				\begin{column}{0.4\textwidth}
 					\begin{equation*}
-						A^2 + B^2 = C^2
+						\begin{aligned}
+						E & = (b_{210} + b_{120} + b_{021} \\ 
+						+ & b_{012} + b_{102} + b_{201}) / 6,\\
+						V & = (P_1 + P_2 + P_3)/ 3, \\
+						b_{111} & = E + (E - V) / 2
+						\end{aligned}
 					\end{equation*}
 				\end{column}
 			}
@@ -171,6 +203,16 @@
 	\begin{frame}
 		\frametitle{Level Of Detail}
 		\todo[inline]{Barycentric coordinates recap}
+		\begin{equation*}
+			n: \mathbb{R}^2 \rightarrow \mathbb{R}^3 \text{, for } w = 1 - u - v \text{, } u, v, w \geq 0 
+		\end{equation*}
+		\begin{equation*}
+			\begin{aligned}
+			n(u,v) & = \sum\limits_{i+j+k=2} n_{ijk} u^i v^j w^k\\
+			& = n_{200} w^2 + n_{020} u^2 + n_{002} v^2\\
+			& + n_{110} w u + n_{011} u v + n_{101} w v
+			\end{aligned}
+		\end{equation*}
 	\end{frame}	
 
 	\begin{frame}
@@ -204,7 +246,14 @@
 		\end{columns}
 	\end{frame}	
 
-	\begin{frame}
-		\frametitle{Construction}
+	\begin{frame}\frametitle{Construction}
 		\todo[inline]{The steps. Recap of everything construct geometry and normals and evaluate less (low lod) or more points (high lod)}
+		\begin{columns}
+			\begin{column}{0.6\textwidth}
+				\begin{center}
+					% \includegraphics[width=\textwidth]{recap.png}
+					\missingfigure{Recap}
+				\end{center}		
+			\end{column}
+		\end{columns}
 	\end{frame}	
