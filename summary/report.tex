@@ -48,12 +48,10 @@
 \usepackage[noabbrev]{cleveref}
 
 % References
-% \usepackage[backend=bibtex]{biblatex}
-\usepackage[square,numbers]{natbib}
-\bibliographystyle{plainnat}
+\usepackage[backend=bibtex]{biblatex}
 
 \usepackage{csquotes}
-% \bibliography{biblio}
+\bibliography{biblio}
 
 % Temp
 \usepackage[obeyFinal]{todonotes}
@@ -84,7 +82,6 @@
 
 \input{body.tex}
 
-\bibliography{biblio}
-\nocite{*}
+\printbibliography
 
 \end{document}

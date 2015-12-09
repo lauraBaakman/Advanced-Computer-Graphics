@@ -1,4 +1,5 @@
 %!TEX root = report.tex
+\noindent Point normal triangles, or PN triangles for short, were introduced by \textcite{vlachos2001curved} to improve the visual quality of existing triangle-based art in realtime entertainment, such as computer games. An important aspect of this approach is, that it uses the existing information that is available per triangle primitive. Therefore no changes to authoring tools and hardware designs are needed while providing a smoother, although not everywhere tangent continuous, silhouette and more organic shapes (see \cref{fig:sum:result}). We provide a brief review of the construction of the PN triangle, its advantages and disadvantages, and where this fits in the hardware pipeline. 
 
 \begin{figure*}
 	\centering
@@ -8,15 +9,13 @@
 	\label{fig:sum:result}
 \end{figure*}
 
-Point normal triangles, or PN triangle for short, were introduced by \cite{vlachos2001curved} to improve the visual quality of existing triangle-based art in realtime entertainment, such as computer games. An important aspect of this approach is, that it uses the existing informations that is available per triangle primitive. Therefore no changes to authoring tools and hardware designs are needed while providing a smoother, although not everywhere tangent continuous, silhouette and more organic shapes (see \cref{fig:sum:result}). We provide a brief review of the construction of the PN triangle, advantages and disadvantages, and where this fits in the hardware pipeline. 
-
-The PN triangle is specified by its normal and geometric component. The geometry of a curved PN triangle is defined by a cubic b\'ezier patch which is shown in \eqref{eq:pn:geometry}. Consequently the flat triangle needs to be converted to a control net or control polyhedron of coefficients. Three sets of coefficients $b_{ijk}$ are grouped together: Vertex coefficients, Tangent coefficient and the center coefficient.
+A PN triangle is specified by its normal and geometric component. The geometry of a curved PN triangle is defined by a cubic b\'ezier patch which is shown in \eqref{eq:pn:geometry}. Consequently the flat triangle needs to be converted to a control net or control polyhedron of coefficients. Three sets of coefficients $b_{ijk}$ are grouped together: Vertex coefficients, Tangent coefficient and the center coefficient.
 
 \begin{equation}\label{eq:pn:geometry}
 	b(u,v) = \sum\limits_{i+j+k=3} b_{ijk} \frac{3!}{i!j!k!} u^i v^j w^k
 \end{equation}
 
-To obtain the control coefficients which describe the cubic control net, the first step is to spread out the intermediate control points using the formula shown in \eqref{eq:pn:spread}. The vertex coefficients are the intermediate coefficients that lay on the original vertices. The tangent coefficients are derived by projecting the intermediate control points, that lie on the edges of the original flat triangle, onto the plane that is defined by the vector that is orthogonal to the closest by vertex normal. The only vertex left is the center coefficient, which lies in the center of the triangle. This position is obtained by computing the average of the final tangent coefficients and raising it by the the difference between the tangent and vertex coefficients divided by two (see original paper by \citeauthor{vlachos2001curved}).
+To obtain the control coefficients which describe the cubic control net, the first step is to spread out the intermediate control points using the formula shown in \eqref{eq:pn:spread}. The vertex coefficients are the intermediate coefficients that lay on the original vertices. The tangent coefficients are derived by projecting the intermediate control points, that lie on the edges of the original flat triangle, onto the plane that is defined by the vector that is orthogonal to the closest by vertex normal. The only vertex left is the center coefficient, which lies in the center of the triangle. This position is obtained by computing the average of the final tangent coefficients and raising it by the the difference between the tangent and vertex coefficients divided by two. We refer the reader to \textcite{vlachos2001curved} for the implementation details.
 
 \begin{equation}\label{eq:pn:spread}
 	b_{ijk} = (iP_1 + jP_2 + kP_3) / 3
@@ -24,9 +23,13 @@ To obtain the control coefficients which describe the cubic control net, the fir
 
 By using cubic b\'ezier patches for the geometry, has as consequence that quadratically varying normals are needed to capture the inflection points (see \eqref{eq:pn:normals}). These normals can be computed by reflecting the averaged end-normals on/by/bleh the plane perpendicular to the edge.
 
+\todo[inline]{Wahy cubic geometry and quadratic normals?}
+
 \begin{equation}\label{eq:pn:normals}
 	n(u,v) = \sum\limits_{i+j+k=2} n_{ijk} u^i v^j w^k
 \end{equation}
+
+\todo[inline]{Iets over continuity}
 
 % Problem:  Sharp edges
 \todo[inline]{Sharp edges... blunt edged who cares...}
