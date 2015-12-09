@@ -135,23 +135,24 @@
 \end{frame}	
 
 \begin{frame}\frametitle{Cubic patch}
-\todo[inline]{Spacing van de for all}
-\todo[inline]{Plaatje?}
 	\begin{columns}
-		\begin{column}{\textwidth}
-			\begin{equation*}
-				b: \mathbb{R}^2 \rightarrow \mathbb{R}^3 \text{, for } w = 1 - u - v, u, v \text{, } w \geq 0
-			\end{equation*}
-			\begin{equation*}
-				\begin{aligned}
-					b(u,v) & = \sum\limits_{i+j+k=3} b_{ijk} \frac{3!}{i!j!k!} u^i v^j w^k\\
-					& = b_{300} w^3 + b_{030} u^3 + b_{003} v^3 \\
-					& + b_{210} 3 w^2 u + b_{120} 3 w u^2 + b_{201} 3 w^2 v\\
-					& + b_{021} 3 u^2 v + b_{102} 3 w v^2 + b_{012} 3 u v^2\\
-					& + b_{111} 6 w u v.
-					\end{aligned}
-			\end{equation*}
+		\begin{column}{0.5\textwidth}
+			\includegraphics[width=\textwidth]{img/1_single/cubicPatch.png}
 		\end{column}
+		\begin{column}{0.5\textwidth}
+			% \begin{equation*}
+				\note{u, v, w are a convex combination}
+				% b: \mathbb{R}^2 \rightarrow \mathbb{R}^3 
+				% \text{, for } w = 1 - u - v, u, v \text{, } w \geq 0
+			% \end{equation*}
+			\begin{equation*}
+				b(u,v) = \sum\limits_{i+j+k=3} b_{ijk} \frac{3!}{i!j!k!} u^i v^j w^k
+				% & = b_{300} w^3 + b_{030} u^3 + b_{003} v^3 \\
+				% & + b_{210} 3 w^2 u + b_{120} 3 w u^2 + b_{201} 3 w^2 v\\
+				% & + b_{021} 3 u^2 v + b_{102} 3 w v^2 + b_{012} 3 u v^2\\
+				% & + b_{111} 6 w u v.
+			\end{equation*}
+		\end{column}		
 	\end{columns}
 	\note<1>{\textbf{[Name]} Very nice formula with a nice picture.}
 \end{frame}
