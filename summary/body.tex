@@ -1,5 +1,5 @@
 %!TEX root = report.tex
-\noindent Point normal triangles, or PN triangles for short, were introduced by \textcite{vlachos2001curved} to improve the visual quality of existing triangle-based art in realtime entertainment, such as computer games. An important aspect of this approach is, that it uses the existing information that is available per triangle primitive. Therefore no changes to authoring tools and hardware designs are needed while providing a smoother, although not everywhere tangent continuous, silhouette and more organic shapes (see \cref{fig:sum:result}). We provide a brief review of the construction of the PN triangle, its advantages and disadvantages, and where this fits in the hardware pipeline. 
+\noindent Point normal triangles, or PN triangles for short, were introduced by \textcite{vlachos2001curved} to improve the visual quality of existing triangle-based art in real time entertainment. An important aspect of this approach is that it uses only the information of the primitive and not of adjacent triangles. Therefore no changes to authoring tools and hardware designs are needed while providing a smoother, although not everywhere tangent continuous, silhouette and more organic shapes, compare the two rightmost images in \cref{fig:sum:result}. We provide a brief review of the construction of a PN triangle mesh, its advantages and disadvantages, and where this approach fits in the graphics pipeline. 
 
 \begin{figure*}
 	\centering
@@ -9,36 +9,24 @@
 	\label{fig:sum:result}
 \end{figure*}
 
-A PN triangle is specified by its normal and geometric component. The geometry of a curved PN triangle is defined by a cubic b\'ezier patch which is shown in \eqref{eq:pn:geometry}. Consequently the flat triangle needs to be converted to a control net or control polyhedron of coefficients. Three sets of coefficients $b_{ijk}$ are grouped together: Vertex coefficients, Tangent coefficient and the center coefficient.
+A PN triangle is specified by its normal and geometric component. To capture inflections implied by these components at least a cubic geometry and quadratic normals are needed.
 
-\begin{equation}\label{eq:pn:geometry}
-	b(u,v) = \sum\limits_{i+j+k=3} b_{ijk} \frac{3!}{i!j!k!} u^i v^j w^k
-\end{equation}
+\subsubsection*{Geometry}
+The geometry of a curved PN triangle is defined by a cubic b\'ezier patch. We can distinguish three sets of control points in such a patch: the vertex, tangent and center coefficients. Below we describe for each of these sets of control points how they are obtained from the input primitive. 
 
-To obtain the control coefficients which describe the cubic control net, the first step is to spread out the intermediate control points using the formula shown in \eqref{eq:pn:spread}. The vertex coefficients are the intermediate coefficients that lay on the original vertices. The tangent coefficients are derived by projecting the intermediate control points, that lie on the edges of the original flat triangle, onto the plane that is defined by the vector that is orthogonal to the closest by vertex normal. The only vertex left is the center coefficient, which lies in the center of the triangle. This position is obtained by computing the average of the final tangent coefficients and raising it by the the difference between the tangent and vertex coefficients divided by two. We refer the reader to \textcite{vlachos2001curved} for the implementation details.
+The vertex coefficients match the vertices of the input primitive. The tangent coefficients are the coefficients on the edge of the PN triangle that are not vertex coefficients. Initially the tangent coefficients are spread out uniformly over their associated edge. To obtain the final tangent coefficients, the initial coefficients are projected onto the tangent plane defined by the normal at the nearest vertex coefficient. 
 
-\begin{equation}\label{eq:pn:spread}
-	b_{ijk} = (iP_1 + jP_2 + kP_3) / 3
-\end{equation}
+The center vertex is the vertex in the center of the triangle. Its position is obtained by computing the average of the final tangent coefficients and raising it by the the difference between the tangent and vertex coefficients divided by two. We refer the reader to \textcite{vlachos2001curved} for the implementation details.
 
-By using cubic b\'ezier patches for the geometry, has as consequence that quadratically varying normals are needed to capture the inflection points (see \eqref{eq:pn:normals}). These normals can be computed by reflecting the averaged end-normals on/by/bleh the plane perpendicular to the edge.
+\subsubsection*{Normals}
+A quadratic b\'ezier patch is used for the normal component of the PN triangles. To effectively capture inflections one needs to use quadratically varying normals. These normals are computed by reflecting the averaged vertex normals in the plane perpendicular to the edge placed at the middle of the edge.
 
-\todo[inline]{Wahy cubic geometry and quadratic normals?}
-
-\begin{equation}\label{eq:pn:normals}
-	n(u,v) = \sum\limits_{i+j+k=2} n_{ijk} u^i v^j w^k
-\end{equation}
-
-\todo[inline]{Iets over continuity}
+The resulting mesh has $C^1$ continuity at the vertices and $C^0$ continuity everywhere else. 
 
 % Problem:  Sharp edges
-\todo[inline]{Sharp edges... blunt edged who cares...}
-As stated in the first paragraph PN triangles provide better visual quality of existing triangle based art, but this is not always the case as observed by \citeauthor{vlachos2001curved}. If two patches share a vertex but not the corresponding normal, there is no strategy based only on the vertex and normal information (and respecting the vertex and normal information) local to one patch at a time to generate the same curve tangent for either patch independent of the normal information of the other. \todo[inline]{How do they solve this?}
+\subsubsection*{Sharp Edges}
+If one models two triangular patches that share vertices along a curved edge, but not normals at those vertices the combined mesh will show cracks. One exception to this case is when a straight line segment is the common boundary between the two meshes, we refer the reader to \citeauthor{vlachos2001curved} for an exhaustive discussion of this exception.
 
 % How does this fit in the pipeline
-\todo[inline]{Pipeline... of dit moet eerder}
-It is important to note that the in the time (2001) of the paper by \citeauthor{vlachos2001curved} not the same programmable shaders existed. In the paper they provide an overview of a pipeline that suggest to do the assembly of the control nets and normals in a preprocessing stage, which is done on the CPU. Today the process could in total be controlled on the GPU by making use of the so called tessellation shaders.
-
-% Conclusion...
-\todo[inline]{Conclusion: huilen met de pet op dit.}
-MEEEEH
+\subsubsection*{Graphics Pipeline}
+It is important to note that at the time \textcite{vlachos2001curved} was published there were no programmable tesselation or geometry shader. The pipeline provided by \citeauthor{vlachos2001curved} suggests computing the PN-triangles in a preprocessing stage on the CPU. Today the full assembly of PN triangles could be done on the GPU by making use of tessellation shaders.
