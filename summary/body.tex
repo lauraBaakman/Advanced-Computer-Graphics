@@ -1,0 +1,41 @@
+%!TEX root = report.tex
+
+\begin{figure*}
+	\centering
+	% \includegraphics[width=0.\textwidth]{./img/_}
+	\missingfigure{Figure 1 from paper. This is the best single image we can provide, I guess.}
+	\caption{From left to right (a) Input triangulation, (b) Gouraud shaded input triangulation, (c) geometric component of the PN triangles (shaded according to surface normal variation), and (d) curved PN Triangles (shaded with independently constructed quadratically varying normals)}
+	\label{fig:sum:result}
+\end{figure*}
+
+Point normal triangles, or PN triangle for short, were introduced by \cite{vlachos2001curved} to improve the visual quality of existing triangle-based art in realtime entertainment, such as computer games. An important aspect of this approach is, that it uses the existing informations that is available per triangle primitive. Therefore no changes to authoring tools and hardware designs are needed while providing a smoother, although not everywhere tangent continuous, silhouette and more organic shapes (see \cref{fig:sum:result}). We provide a brief review of the construction of the PN triangle, advantages and disadvantages, and where this fits in the hardware pipeline. 
+
+The PN triangle is specified by its normal and geometric component. The geometry of a curved PN triangle is defined by a cubic b\'ezier patch which is shown in \eqref{eq:pn:geometry}. Consequently the flat triangle needs to be converted to a control net or control polyhedron of coefficients. Three sets of coefficients $b_{ijk}$ are grouped together: Vertex coefficients, Tangent coefficient and the center coefficient.
+
+\begin{equation}\label{eq:pn:geometry}
+	b(u,v) = \sum\limits_{i+j+k=3} b_{ijk} \frac{3!}{i!j!k!} u^i v^j w^k
+\end{equation}
+
+To obtain the control coefficients which describe the cubic control net, the first step is to spread out the intermediate control points using the formula shown in \eqref{eq:pn:spread}. The vertex coefficients are the intermediate coefficients that lay on the original vertices. The tangent coefficients are derived by projecting the intermediate control points, that lie on the edges of the original flat triangle, onto the plane that is defined by the vector that is orthogonal to the closest by vertex normal. The only vertex left is the center coefficient, which lies in the center of the triangle. This position is obtained by computing the average of the final tangent coefficients and raising it by the the difference between the tangent and vertex coefficients divided by two (see original paper by \citeauthor{vlachos2001curved}).
+
+\begin{equation}\label{eq:pn:spread}
+	b_{ijk} = (iP_1 + jP_2 + kP_3) / 3
+\end{equation}
+
+By using cubic b\'ezier patches for the geometry, has as consequence that quadratically varying normals are needed to capture the inflection points (see \eqref{eq:pn:normals}). These normals can be computed by reflecting the averaged end-normals on/by/bleh the plane perpendicular to the edge.
+
+\begin{equation}\label{eq:pn:normals}
+	n(u,v) = \sum\limits_{i+j+k=2} n_{ijk} u^i v^j w^k
+\end{equation}
+
+% Problem:  Sharp edges
+\todo[inline]{Sharp edges... blunt edged who cares...}
+As stated in the first paragraph PN triangles provide better visual quality of existing triangle based art, but this is not always the case as observed by \citeauthor{vlachos2001curved}. If two patches share a vertex but not the corresponding normal, there is no strategy based only on the vertex and normal information (and respecting the vertex and normal information) local to one patch at a time to generate the same curve tangent for either patch independent of the normal information of the other. \todo[inline]{How do they solve this?}
+
+% How does this fit in the pipeline
+\todo[inline]{Pipeline... of dit moet eerder}
+It is important to note that the in the time (2001) of the paper by \citeauthor{vlachos2001curved} not the same programmable shaders existed. In the paper they provide an overview of a pipeline that suggest to do the assembly of the control nets and normals in a preprocessing stage, which is done on the CPU. Today the process could in total be controlled on the GPU by making use of the so called tessellation shaders.
+
+% Conclusion...
+\todo[inline]{Conclusion: huilen met de pet op dit.}
+MEEEEH

@@ -1,0 +1,90 @@
+\documentclass[a4paper, twocolumn, fleqn]{article}
+\usepackage[english]{babel}
+\usepackage{a4wide}
+
+% Fonts
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\linespread{1.05}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{lettrine}
+
+% Document layout
+% \usepackage[hmarginratio=1:1,top=32mm,columnsep=20pt]{geometry}
+\usepackage{paralist}
+
+% Floats
+\usepackage{float}
+\usepackage[section]{placeins}
+
+%Plaatjes
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage[hang, small,labelfont=bf,up,textfont=sl,up, justification=raggedright]{caption}
+\usepackage{subcaption}
+\DeclareCaptionLabelFormat{opening}{(#2)}
+\captionsetup{subrefformat=opening}
+
+% Tables
+\usepackage{booktabs}
+
+% Custom section headers
+\usepackage{titlesec}
+\titleformat{\section}[block]{\large\scshape}{\thesection.}{1em}{}
+\titleformat{\subsection}[block]{\large\scshape}{\thesubsection.}{1em}{}
+\titleformat{\subsubsection}[block]{\scshape}{\thesubsubsection.}{1em}{}
+
+%Wiskunde
+\usepackage[scientific-notation=true, round-mode=figures, round-precision=3, exponent-base=e, exponent-product={}]{siunitx}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% References
+\usepackage{varioref}
+\usepackage{hyperref}
+\usepackage[noabbrev]{cleveref}
+
+% References
+% \usepackage[backend=bibtex]{biblatex}
+\usepackage[square,numbers]{natbib}
+\bibliographystyle{plainnat}
+
+\usepackage{csquotes}
+% \bibliography{biblio}
+
+% Temp
+\usepackage[obeyFinal]{todonotes}
+% \usepackage{showlabels}
+
+% Math commands
+\newcommand{\normal}[2]{\ensuremath{\mathcal{N}\left(#1,\, #2\right)}}
+\renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}}
+
+% Lists
+\usepackage{paralist}
+
+% Other commands
+\renewcommand{\t}[1]{\texttt{#1}}
+
+\title{Curved PN Triangles}
+\author{%
+	Rick van Veen (s1883933)%
+	%\thanks{These authors contributed equally to this work.}% 
+	\and% 
+	Laura Baakman (s1869140)%
+	%\footnotemark[1]%
+}
+
+\begin{document}
+
+\maketitle
+
+\input{body.tex}
+
+\bibliography{biblio}
+\nocite{*}
+
+\end{document}
