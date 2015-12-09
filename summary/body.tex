@@ -11,12 +11,12 @@ The vertex coefficients match the vertices of the input primitive. The tangent c
 The center vertex is the vertex in the center of the triangle. Its position is obtained by computing the average of the final tangent coefficients and raising it by the the difference between the tangent and vertex coefficients divided by two. We refer the reader to \textcite{vlachos2001curved} for the implementation details.
 
 \subsubsection*{Normals}
-A quadratic b\'ezier patch is used for the normal component of the PN triangles. To effectively capture inflections one needs to use quadratically varying normals. The normals of the vertex coefficients are the normals of the input normals. The tangent normals are computed by reflecting the averaged vertex normals in the plane perpendicular to the edge placed at the middle of the edge. 
+A quadratic b\'ezier patch is used for the normal component of the PN triangles. To effectively capture inflections one needs to use quadratically varying normals. The normals of the vertex coefficients are the normals of the input normals. The tangent normals are computed by reflecting the averaged vertex normals in the plane perpendicular to the edge placed at the middle of that edge. 
 
 \subsubsection*{Triangular Mesh}
-Using the patch one can subdivide the primitives to a desired level of detail to generated a finer triangle mesh. This mesh has $C^1$ continuity at the vertices and $C^0$ continuity everywhere else.  
+Using the PN triangles one can subdivide to a desired level of detail to generated a finer triangular mesh. This mesh has $C^1$ continuity at the vertices and $C^0$ continuity everywhere else.  
 
-One downside of PN triangles is that they cannot handle adjacent triangular patches that share their vertices, but not the normals at those vertices, along a curved edge. The resulting triangulation will then show cracks. One exception to this case is when the normals of a shared vertex are perpendicular to the edge. \citeauthor{vlachos2001curved} propose handling this case by using the information of adjacent triangles, we refer the reader to the original paper for the details.
+One downside of PN triangles is that they cannot handle adjacent patches that share their vertices, but not the normals at those vertices. The resulting triangulation will then show cracks. One exception to this case is when the normals of a shared vertex are perpendicular to the edge. \citeauthor{vlachos2001curved} propose handling this case by using the information of adjacent triangles, we refer the reader to the original paper for the details.
 
 % How does this fit in the pipeline
 \subsubsection*{Graphics Pipeline}
