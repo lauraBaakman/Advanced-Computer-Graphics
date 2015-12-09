@@ -1,6 +1,6 @@
 %!TEX program = xelatex
-
-\documentclass[13pt, final]{beamer}
+\documentclass[13pt, draft]{beamer}
+\usepackage{pgfpages}
 \usepackage{amsmath}
 \usepackage{mathtools}
 \usepackage{graphbox}
@@ -13,10 +13,6 @@
 \usepackage[backend=bibtex]{biblatex}
 \bibliography{biblio}
 \nocite{*}
-
-% \usepackage[compatibility=false]{caption}
-% \usepackage{subcaption}
-
 
 \setbeamercovered{dynamic}
 
@@ -35,12 +31,15 @@
 \date{December 14, 2015}
 \institute{Advanced Computer Graphics}
 
+% Enable this to generate a file with only the notes
+\setbeameroption{show notes on second screen=right}
+
 \begin{document}
 	\begin{frame}
+		\note{~}
 		\titlepage
 	\end{frame}
 
-	% \section{Introduction}
 	\input{00_intro}
 
 	\section{Single PN Triangle}
