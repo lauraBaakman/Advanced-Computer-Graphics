@@ -17,7 +17,7 @@
 %Plaatjes
 \usepackage{tikz}
 \usepackage{graphicx}
-\usepackage[hang, small,labelfont=bf,up,textfont=sl,up, justification=raggedright]{caption}
+\usepackage[small,labelfont=bf,up,textfont=sl,up]{caption}
 \usepackage{subcaption}
 \DeclareCaptionLabelFormat{opening}{(#2)}
 \captionsetup{subrefformat=opening}
@@ -45,12 +45,12 @@
 % Temp
 \usepackage[obeyFinal]{todonotes}
 
-\pretitle{\centering \LARGE}
-\posttitle{%
-  	% \begin{center}
-  	% \LARGE
-  	\missingfigure{Figure 1 from paper. This is the best single image we can provide, I guess.}
-	% \end{center}
+\predate{\centering\large}
+\postdate{%
+	\centering
+	\vspace{2ex}
+  	~\\\includegraphics[width=0.9\textwidth]{img/plaatje.png}
+  	\captionof{figure}{From left to right the input triangulation, the Gouraud shaded input triangulation, the geometric component of the PN triangles, shaded according to surface normal variation, and the curved PN triangles, shaded with independently constructed quadratically varying normals.}
 }
 
 \title{Curved PN Triangles}

@@ -1,14 +1,6 @@
 %!TEX root = report.tex
 \noindent Point normal triangles, or PN triangles for short, were introduced by \textcite{vlachos2001curved} to improve the visual quality of existing triangle-based art in real time entertainment. An important aspect of this approach is that it uses only the information of the primitive and not of adjacent triangles. Therefore no changes to authoring tools and hardware designs are needed while providing a smoother, although not everywhere tangent continuous, silhouette and more organic shapes, compare the two rightmost images in \cref{fig:sum:result}. We provide a brief review of the construction of a PN triangle mesh, its advantages and disadvantages, and where this approach fits in the graphics pipeline. 
 
-\begin{figure*}
-	\centering
-	% \includegraphics[width=0.\textwidth]{./img/_}
-	\missingfigure{Figure 1 from paper. This is the best single image we can provide, I guess.}
-	\caption{From left to right (a) Input triangulation, (b) Gouraud shaded input triangulation, (c) geometric component of the PN triangles (shaded according to surface normal variation), and (d) curved PN Triangles (shaded with independently constructed quadratically varying normals)}
-	\label{fig:sum:result}
-\end{figure*}
-
 A PN triangle is specified by its normal and geometric component. To capture inflections implied by these components at least a cubic geometry and quadratic normals are needed.
 
 \subsubsection*{Geometry}
