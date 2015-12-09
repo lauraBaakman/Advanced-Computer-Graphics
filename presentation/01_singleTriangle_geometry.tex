@@ -7,6 +7,7 @@
 			\end{center}		
 		\end{column}
 	\end{columns}
+	\note{\textbf{[Name]} Why PN triangles? Look at the nice result it gives :-) and we will see that it easy to extend it to the `existing' pipeline.}
 \end{frame}	
 
 \begin{frame}\frametitle{Geometry}
@@ -19,6 +20,7 @@
 			\end{center}
 		\end{column}
 	\end{columns}
+	\note{\textbf{[Name]} This a standard triangle primitive, defined by its vertices and normals.\\ Focus on getting the different control primitives. }
 \end{frame}
 
 % Geometry process
@@ -47,6 +49,9 @@
 				}
 			\end{column}
 	\end{columns}
+	\note<1>{\textbf{[Name]} These are all the initial control point. Evenly divided on the triangle. -> formula}
+	\note<2>{\textbf{[Name]} Nice formula}
+	\note<3>{\textbf{[Name]} Stress that the vertex coefficients/control points are the one on the original vertices and that they do not move.}
 \end{frame}
 
 \begin{frame}\frametitle{Geometry - Tangent Coefficients}
@@ -70,6 +75,8 @@
 			\end{column}
 		}
 	\end{columns}
+	\note<1>{\textbf{[Name]} How to get the tangent coefficient (the ones on the edge but now curvy)}
+	\note<2>{\textbf{[Name]} Projection of the initial control points on the normal plane of a vertex.}
 \end{frame}
 
 % b_{120} & = (2 P_2 + P_1 - w_{21}N2) / 3,\\
@@ -100,6 +107,8 @@
 			\end{column}
 		}
 	\end{columns}
+	\note<1>{\textbf{[Name]} Note that this is the result of the previous step -> now only center coefficient is left.}
+	\note<2>{\textbf{[Name]} Average of the tangent coefficients plus  half the difference between the tangent and vertex coefficients. -> why?}
 \end{frame}	
 
 \begin{frame}\frametitle{Geometry - Result}
@@ -111,6 +120,7 @@
 			\end{center}	
 		\end{column}
 	\end{columns}
+	\note<1>{\textbf{[Name]} Results}
 \end{frame}
 
 \begin{frame}\frametitle{Overview}
@@ -121,6 +131,7 @@
 			\end{center}		
 		\end{column}
 	\end{columns}
+	\note<1>{\textbf{[Name]} Overview -> how to get from this to shading. Sample/subdivide with formula on following slide.}
 \end{frame}	
 
 \begin{frame}\frametitle{Cubic patch}
@@ -142,4 +153,5 @@
 			\end{equation*}
 		\end{column}
 	\end{columns}
+	\note<1>{\textbf{[Name]} Very nice formula with a nice picture.}
 \end{frame}

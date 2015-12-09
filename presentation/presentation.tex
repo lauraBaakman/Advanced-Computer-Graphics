@@ -1,5 +1,5 @@
 %!TEX program = xelatex
-\documentclass[13pt, draft]{beamer}
+\documentclass[13pt, final]{beamer}
 \usepackage{pgfpages}
 \usepackage{amsmath}
 \usepackage{mathtools}
@@ -40,11 +40,17 @@
 
 	\begin{frame}
 		\titlepage
+
+		\note{\textbf{[Rick]} Welcome everybody. Tell people that PN means Point Normal triangles.}
 	\end{frame}
 
 	\input{00_intro}
 
 	\section{Single PN Triangle}
+	\note{
+	\textbf{[Name]} 	How does one construct a single PN triangle?\\
+	\textit{Overview on the next slide}
+	}
 	\input{01_singleTriangle}
 
 	\section{A Triangle Mesh}
