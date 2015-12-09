@@ -9,12 +9,12 @@
 %      \end{frame}
 % }
 
-
 \begin{frame}\frametitle{Properties}
 	\begin{quote}
 		``PN triangles should not deviate too much from the original triangle to preserve the shape and avoid interference with other curved triangles."
 		\footnote{\citeauthor{vlachos2001curved}}
 	\end{quote}
+	\note<1>{\textbf{[Name]} Problem when combining multiple triangles, so this is a important property}
 \end{frame}
 
 \begin{frame}\frametitle{Continuity}	
@@ -23,6 +23,7 @@
 		\item $C^1$ continuity in the vertex points
 		\item $C^0$ continuity everywhere else
 	\end{itemize}
+	\note<1>{\textbf{[Name]} Continuity C0 is important -> no gaps. Higher is better because this gives a more smooth result.}
 \end{frame}
 
 \begin{frame}\frametitle{Sharp Edges}
@@ -52,6 +53,7 @@
 			\end{center}	
 		\end{column}
 	\end{columns}
+	\note<1>{\textbf{[Name]} Curved triangles do not always give the preferred results -> sharp edges. Solution is to insert more triangles at the sharp edges -> model needs to be changed :(}
 \end{frame}	
 
 \begin{frame}\frametitle{Separate Normals}
@@ -69,4 +71,5 @@
 			\end{center}	
 		\end{column}
 	\end{columns}
+	\note<1>{\textbf{[Name]} Beyond the scope of the paper extension exist to overcome the problem what you have when combining multiple meshes. Story about shared vertices.}
 \end{frame}
