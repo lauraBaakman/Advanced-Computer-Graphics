@@ -1,0 +1,99 @@
+%!TEX root = presentation.tex
+\begin{frame}\frametitle{Overview}
+	% \todo[inline]{The steps. Recap of everything construct geometry and normals and evaluate less (low lod) or more points (high lod)}
+	\begin{columns}
+		\begin{column}{0.9\textwidth}
+			\begin{center}	
+				\includegraphics[width=\textwidth]{./img/1_single/recap_inputToNormals.png}
+			\end{center}		
+		\end{column}
+	\end{columns}
+\end{frame}	
+
+\begin{frame}\frametitle{Normals}
+\enhancement{emphasize normals more}
+	\begin{columns}
+		\begin{column}{0.6\textwidth}
+			\begin{center}
+				\includegraphics[width=\textwidth]{img/1_single/inputPrimitive_emphNormal.png}
+				\small{input primitive}
+			\end{center}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+
+\begin{frame}\frametitle{Normals - theory}
+	\begin{columns}
+		\begin{column}{0.6\textwidth}
+			\begin{center}
+				\includegraphics[width=\textwidth]{img/1_single/linearVsQuadraticNormals_linear.png}
+				\small{linear}
+			\end{center}	
+		\end{column}
+	\end{columns}
+	\pause
+	\vspace{0.8cm}
+	\begin{columns}
+		\begin{column}{0.6\textwidth}
+			\begin{center}
+				\includegraphics[width=\textwidth]{img/1_single/linearVsQuadraticNormals_quadratic.png}
+				\small{quadratic}
+			\end{center}	
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}\frametitle{Normals - example}
+	\begin{columns}
+		\begin{column}{0.4\textwidth}
+		\begin{center}
+				\includegraphics[width=\textwidth]{img/1_single/linearlyVaryingNormals.png}
+				\small{linear}
+			\end{center}	
+		\end{column}
+		\begin{column}{0.4\textwidth}
+		\begin{center}
+				\includegraphics[width=\textwidth]{img/1_single/quadriticallyVaryingNormals.png}
+				\small{quadratic}
+			\end{center}	
+		\end{column}
+	\end{columns}
+\end{frame}
+
+
+\begin{frame}\frametitle{Normals - theory}
+	\begin{columns}
+		\begin{column}{0.6\textwidth}
+			\begin{center}
+				\includegraphics[width=\textwidth]{img/1_single/computingNormals.png}
+			\end{center}
+		\end{column}
+	\end{columns}
+	
+	\begin{columns}
+		\begin{column}{0.4\textwidth}
+			\uncover<2>{
+				\begin{equation*}
+				\begin{aligned}
+					v_{ij}  & = 2\frac{(P_j - P_i) \cdot (N_i + N_j)}{(P_j - P_i) \cdot (P_j - P_i)} \in \mathbb{R} \\
+					h_{110} & = N_1 + N2 - v_{12}(P_2 - P_1)\\
+					n_{110} & =	h_{110} / ||h_{110}||
+				\end{aligned}
+				\end{equation*}
+			}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Normals - result}
+	\enhancement{Set result slide to plain}
+	\begin{columns}
+		\begin{column}{0.6\textwidth}
+			\begin{center}
+				\includegraphics[width=\textwidth]{img/1_single/normals.png}
+			\end{center}	
+		\end{column}
+	\end{columns}
+\end{frame}
