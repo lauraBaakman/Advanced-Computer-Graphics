@@ -10,10 +10,6 @@
 \usepackage{microtype}
 \usepackage{lettrine}
 
-% Document layout
-% \usepackage[hmarginratio=1:1,top=32mm,columnsep=20pt]{geometry}
-\usepackage{paralist}
-
 % Floats
 \usepackage{float}
 \usepackage[section]{placeins}
@@ -26,26 +22,19 @@
 \DeclareCaptionLabelFormat{opening}{(#2)}
 \captionsetup{subrefformat=opening}
 
-% Tables
-\usepackage{booktabs}
 
 % Custom section headers
 \usepackage{titlesec}
 \titleformat{\section}[block]{\large\scshape}{\thesection.}{1em}{}
-\titleformat{\subsection}[block]{\large\scshape}{\thesubsection.}{1em}{}
 \titleformat{\subsubsection}[block]{\scshape}{\thesubsubsection.}{1em}{}
-
-%Wiskunde
-\usepackage[scientific-notation=true, round-mode=figures, round-precision=3, exponent-base=e, exponent-product={}]{siunitx}
-\usepackage{mathtools}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
 
 % References
 \usepackage{varioref}
 \usepackage{hyperref}
 \usepackage[noabbrev]{cleveref}
+
+% Plaatje boven titel
+\usepackage{titling}
 
 % References
 \usepackage[backend=bibtex]{biblatex}
@@ -55,17 +44,14 @@
 
 % Temp
 \usepackage[obeyFinal]{todonotes}
-% \usepackage{showlabels}
 
-% Math commands
-\newcommand{\normal}[2]{\ensuremath{\mathcal{N}\left(#1,\, #2\right)}}
-\renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}}
-
-% Lists
-\usepackage{paralist}
-
-% Other commands
-\renewcommand{\t}[1]{\texttt{#1}}
+\pretitle{\centering \LARGE}
+\posttitle{%
+  	% \begin{center}
+  	% \LARGE
+  	\missingfigure{Figure 1 from paper. This is the best single image we can provide, I guess.}
+	% \end{center}
+}
 
 \title{Curved PN Triangles}
 \author{%
