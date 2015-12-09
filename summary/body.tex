@@ -23,10 +23,12 @@ A quadratic b\'ezier patch is used for the normal component of the PN triangles.
 
 The resulting mesh has $C^1$ continuity at the vertices and $C^0$ continuity everywhere else. 
 
-% Problem:  Sharp edges
-\subsubsection*{Sharp Edges}
-If one models two triangular patches that share vertices along a curved edge, but not normals at those vertices the combined mesh will show cracks. One exception to this case is when a straight line segment is the common boundary between the two meshes, we refer the reader to \citeauthor{vlachos2001curved} for an exhaustive discussion of this exception.
+\subsubsection*{Triangular Mesh}
+Using the patch one can subdivide the primitives to a desired level of detail to generated a finer triangle mesh. 
+
+One downside of PN triangle is that they cannot handle triangular patches that share vertices along a curved edge, but not normals at those vertices. The resulting triangulation will show cracks. One exception to this case is when the normals of a shared vertex are perpendicular to the edge. \citeauthor{vlachos2001curved} propose handling this case by using the information of adjacent triangles, we refer the reader to the original paper for the details.
 
 % How does this fit in the pipeline
 \subsubsection*{Graphics Pipeline}
-It is important to note that at the time \textcite{vlachos2001curved} was published there were no programmable tesselation or geometry shader. The pipeline provided by \citeauthor{vlachos2001curved} suggests computing the PN-triangles in a preprocessing stage on the CPU. Today the full assembly of PN triangles could be done on the GPU by making use of tessellation shaders.
+It is important to note that at the time \textcite{vlachos2001curved} was published there were no programmable tesselation or geometry shader. The pipeline provided by \citeauthor{vlachos2001curved} suggests computing the PN-triangles in a preprocessing stage on the CPU. Today the full assembly of PN triangles could be done on the GPU by making use of tessellation shaders.\\
+
