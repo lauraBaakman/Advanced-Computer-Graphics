@@ -1,13 +1,16 @@
 %!TEX root = presentation.tex
 \begin{frame}\frametitle{Overview}
-	\begin{columns}
-		\begin{column}{0.9\textwidth}
-			\begin{center}
-				\includegraphics[width=\textwidth]{./img/1_single/recap_inputToGeom.png}
-			\end{center}		
-		\end{column}
-	\end{columns}
-	\note{\textbf{[Name]} Why PN triangles? Look at the nice result it gives :-) and we will see that it easy to extend it to the `existing' pipeline. Story about Bezier patches...}
+	\only<1>{
+		\begin{center}
+			\includegraphics[width=\textwidth]{./img/1_single/recap_overview.png}
+		\end{center}
+	}
+	\only<2>{
+		\begin{center}
+			\includegraphics[width=\textwidth]{./img/1_single/recap_inputToGeom.png}
+		\end{center}
+	}
+	\note{\textbf{[Laura]} PN triangle is defined by geometry and normal component.}
 \end{frame}	
 
 \begin{frame}\frametitle{Geometry}
@@ -20,7 +23,7 @@
 			\end{center}
 		\end{column}
 	\end{columns}
-	\note{\textbf{[Name]} This a standard triangle primitive, defined by its vertices and normals.\\ Focus on getting the different control primitives. }
+	\note{\textbf{[Laura]} This a standard triangle primitive, defined by its vertices and normals.\\ Focus on getting the different control primitives. }
 \end{frame}
 
 % Geometry process
@@ -49,9 +52,9 @@
 				}
 			\end{column}
 	\end{columns}
-	\note<1>{\textbf{[Name]} These are all the initial control point. Evenly divided on the triangle. -> formula}
-	\note<2>{\textbf{[Name]} Nice formula}
-	\note<3>{\textbf{[Name]} Stress that the vertex coefficients/control points are the one on the original vertices and that they do not move.}
+	\note<1>{\textbf{[Laura]} These are all the initial control point. Evenly divided on the triangle. -> formula}
+	\note<2>{\textbf{[Laura]} Nice formula}
+	\note<3>{\textbf{[Laura]} Stress that the vertex coefficients/control points are the one on the original vertices and that they do not move.}
 \end{frame}
 
 \begin{frame}\frametitle{Geometry - Tangent Coefficients}
@@ -75,8 +78,8 @@
 			\end{column}
 		}
 	\end{columns}
-	\note<1>{\textbf{[Name]} How to get the tangent coefficient (the ones on the edge but now curvy)}
-	\note<2>{\textbf{[Name]} Projection of the initial control points on the normal plane of a vertex.}
+	\note<1>{\textbf{[Laura]} How to get the tangent coefficient (the ones on the edge but now curvy)}
+	\note<2>{\textbf{[Laura]} Projection of the initial control points on the normal plane of a vertex.}
 \end{frame}
 
 % b_{120} & = (2 P_2 + P_1 - w_{21}N2) / 3,\\
@@ -107,8 +110,8 @@
 			\end{column}
 		}
 	\end{columns}
-	\note<1>{\textbf{[Name]} Note that this is the result of the previous step -> now only center coefficient is left.}
-	\note<2>{\textbf{[Name]} Average of the tangent coefficients plus  half the difference between the tangent and vertex coefficients. -> why?}
+	\note<1>{\textbf{[Laura]} Note that this is the result of the previous step -> now only center coefficient is left.}
+	\note<2>{\textbf{[Laura]} Average of the tangent coefficients plus  half the difference between the tangent and vertex coefficients. -> why?}
 \end{frame}	
 
 \begin{frame}\frametitle{Geometry - Result}
@@ -120,7 +123,7 @@
 			\end{center}	
 		\end{column}
 	\end{columns}
-	\note<1>{\textbf{[Name]} Results}
+	\note<1>{\textbf{[Laura]} Results}
 \end{frame}
 
 \begin{frame}\frametitle{Overview}
@@ -131,7 +134,7 @@
 			\end{center}		
 		\end{column}
 	\end{columns}
-	\note<1>{\textbf{[Name]} Overview -> how to get from this to shading. Sample/subdivide with formula on following slide.}
+	\note<1>{\textbf{[Rick]} Overview -> how to get from this to shading. Sample/subdivide with formula on following slide.}
 \end{frame}	
 
 \begin{frame}\frametitle{Cubic B\'ezier patch}
@@ -160,5 +163,5 @@
 			\end{equation*}
 		\end{column}		
 	\end{columns}
-	\note<1>{\textbf{[Name]} Very nice formula with a nice picture. Menstion \textbf{Barycentric coordinates}}
+	\note<1>{\textbf{[Rick]} Very nice formula with a nice picture. Menstion \textbf{Barycentric coordinates}}
 \end{frame}
