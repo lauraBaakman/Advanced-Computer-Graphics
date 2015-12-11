@@ -103,3 +103,37 @@
 	\end{columns}
 	\note<1>{\textbf{[Name]} Result}
 \end{frame}
+
+\begin{frame}\frametitle{Overview}
+	% \todo[inline]{The steps. Recap of everything construct geometry and normals and evaluate less (low lod) or more points (high lod)}
+	\begin{columns}
+		\begin{column}{0.9\textwidth}
+			\begin{center}
+				\includegraphics[width=\textwidth]{./img/1_single/recap_normalsToShading.png}
+			\end{center}		
+		\end{column}
+	\end{columns}
+
+	\note{\textbf{[Name]} Why PN triangles? Look at the nice result it gives :-) and we will see that it easy to extend it to the `existing' pipeline.}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Quadratic Patch}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\includegraphics[width=\textwidth]{img/1_single/quadraticPatch.png}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{equation*}
+				w = 1 - u - v
+			\end{equation*}
+			\begin{equation*}
+				u,\, v,\, w \geq 0
+			\end{equation*}
+			\begin{equation*}
+				n(u,v) = \sum\limits_{i+j+k=2} n_{ijk} u^i v^j w^k
+			\end{equation*}
+		\end{column}		
+	\end{columns}
+	\note<1>{\textbf{[Name]} u, v and w are an convex combination}
+\end{frame}

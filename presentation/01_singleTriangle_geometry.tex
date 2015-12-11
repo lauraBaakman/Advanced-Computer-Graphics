@@ -67,9 +67,9 @@
 				\begin{equation*}
 					\begin{aligned}
 					w_{ij} & = (P_j - P_i) \cdot N_i \in \mathbb{R} \\
-					b_{210} & = \frac{2 P_1 + P_2 - w_{12}N1}{3},\\
+					b_{210} & = \frac{2 P_1 + P_2 - w_{12}N_1}{3},\\
 					~ & \vdots \\
-					b_{201} & = \frac{2 P_1 + P_3 - w_{13}N1}{3}
+					b_{201} & = \frac{2 P_1 + P_3 - w_{13}N_1}{3}
 					\end{aligned}
 				\end{equation*}
 			\end{column}
@@ -134,7 +134,7 @@
 	\note<1>{\textbf{[Name]} Overview -> how to get from this to shading. Sample/subdivide with formula on following slide.}
 \end{frame}	
 
-\begin{frame}\frametitle{Cubic patch}
+\begin{frame}\frametitle{Cubic B\'ezier patch}
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
 			\includegraphics[width=\textwidth]{img/1_single/cubicPatch.png}
@@ -146,6 +146,12 @@
 				% \text{, for } w = 1 - u - v, u, v \text{, } w \geq 0
 			% \end{equation*}
 			\begin{equation*}
+				w = 1 - u - v
+			\end{equation*}
+			\begin{equation*}
+				u,\, v,\, w \geq 0
+			\end{equation*}
+			\begin{equation*}
 				b(u,v) = \sum\limits_{i+j+k=3} b_{ijk} \frac{3!}{i!j!k!} u^i v^j w^k
 				% & = b_{300} w^3 + b_{030} u^3 + b_{003} v^3 \\
 				% & + b_{210} 3 w^2 u + b_{120} 3 w u^2 + b_{201} 3 w^2 v\\
@@ -154,5 +160,5 @@
 			\end{equation*}
 		\end{column}		
 	\end{columns}
-	\note<1>{\textbf{[Name]} Very nice formula with a nice picture.}
+	\note<1>{\textbf{[Name]} Very nice formula with a nice picture. Menstion \textbf{Barycentric coordinates}}
 \end{frame}
