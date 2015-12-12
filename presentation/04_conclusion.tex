@@ -1,9 +1,11 @@
 % !TEX root = presentation.tex
 
 \plain{	
-    \begin{center}
-    	\LARGE{questions?}
-    \end{center}		
+	\only<2>{
+	    \begin{center}
+	    	\LARGE{questions?}
+	    \end{center}		
+    }
 	\begin{columns}
 		\begin{column}[b]{.5\textwidth}
 			\begin{center}
@@ -27,7 +29,7 @@
 				\small{pn triangles}
 			\end{center}
 		\end{column}
-		\note{\textbf{Laura} 
+		\note<1>{\textbf{Laura} 
 			Why PN triangles are not suited to rendering for CAD: On real objects, the normal field is determined by the geometry and thus fixed. If you invent fake normals the rendering looks better but the user gets an unpleasant surprise when the product is actually manufactured.
 		}
 	\end{columns}
