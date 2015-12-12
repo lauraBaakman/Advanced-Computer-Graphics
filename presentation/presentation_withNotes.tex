@@ -1,0 +1,69 @@
+%!TEX program = xelatex
+\documentclass[13pt, final]{beamer}
+\usepackage{pgfpages}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{graphbox}
+\usepackage{color}
+\usepackage[obeyFinal]{todonotes}
+\usepackage[export]{adjustbox}
+
+\setbeamercovered{transparent=60}
+
+\usepackage[backend=bibtex]{biblatex}
+\bibliography{biblio}
+\nocite{*}
+
+\setbeamercovered{dynamic}
+
+% Beamer settings
+\usetheme{metropolis}
+\metroset{
+	everytitleformat=uppercase,
+	progressbar=frametitle
+} 
+
+\title{Point Normal triangles}
+\author{Rick van Veen \and Laura Baakman}
+\date{December 14, 2015}
+\institute{Advanced Computer Graphics}
+
+\newcommand{\enhancement}[1]{\todo[inline, color=green!30]{{\bf enhancement:} #1}}
+
+% Enable this to generate a file with only the notes
+\setbeameroption{show notes on second screen=right}
+
+\begin{document}
+
+	\begin{frame}
+		\titlepage
+
+		\note{\textbf{[Rick]} Welcome everybody. Tell people that PN means Point Normal triangles.}
+	\end{frame}
+
+	\input{00_intro}
+
+	\section{Single PN Triangle}
+	\note{
+	\textbf{[Rick]} 	How does one construct a single PN triangle?\\
+	\textit{Overview on the next slide}
+	}
+	\input{01_singleTriangle}
+
+	\section{A Triangle Mesh}
+	\note{\textbf[rick] blaat}
+
+	\input{02_multipleTriangles}
+
+	\section{Graphics Pipeline}
+	\note{
+	\textbf{[Laura]} 	How does one construct a single PN triangle?\\
+	}
+	\input{03_pipeline}
+
+	\input{04_conclusion}
+
+	\input{05_references}
+
+
+\end{document}

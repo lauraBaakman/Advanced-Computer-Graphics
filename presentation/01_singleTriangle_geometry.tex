@@ -10,7 +10,8 @@
 			\includegraphics[width=\textwidth]{./img/1_single/recap_inputToGeom.png}
 		\end{center}
 	}
-	\note{\textbf{[Laura]} PN triangle is defined by geometry and normal component.}
+	\note<1>{\textbf{[Laura]} PN triangle is defined by geometry and normal component.}
+	\note<2>{\textbf{Laura} From geometric component of input primitive to geometric component of PN triangle}
 \end{frame}	
 
 \begin{frame}\frametitle{Geometry}
@@ -54,6 +55,7 @@
 			\end{column}
 	\end{columns}
 	\note<1>{\textbf{[Laura]} These are all the initial control point. Evenly divided on the triangle. -> formula}
+	\note<1>{\textbf{Laura} Mention which vertices are vertex, tangent and center coefficient.}
 	\note<2>{\textbf{[Laura]} Nice formula}
 	\note<3>{\textbf{[Laura]} Stress that the vertex coefficients/control points are the one on the original vertices and that they do not move.}
 \end{frame}
@@ -79,8 +81,7 @@
 			\end{column}
 		}
 	\end{columns}
-	\note<1>{\textbf{[Laura]} How to get the tangent coefficient (the ones on the edge but now curvy)}
-	\note<2>{\textbf{[Laura]} Projection of the initial control points on the normal plane of a vertex.}
+	\note{\textbf{[Laura]} Define a plane using the closest vertex and its normal. Find the point on this plane that is closest to the uniformly distributed point.}
 \end{frame}
 
 % b_{120} & = (2 P_2 + P_1 - w_{21}N2) / 3,\\
@@ -112,7 +113,7 @@
 		}
 	\end{columns}
 	\note<1>{\textbf{[Laura]} Note that this is the result of the previous step -> now only center coefficient is left.}
-	\note<2>{\textbf{[Laura]} Average of the tangent coefficients plus  half the difference between the tangent and vertex coefficients. -> why?}
+	\note<2>{\textbf{[Laura]} Average of the tangent coefficients plus  half the difference between the tangent and vertex coefficients.}
 \end{frame}	
 
 \begin{frame}\frametitle{Geometry - Result}
@@ -145,7 +146,6 @@
 		\end{column}
 		\begin{column}{0.5\textwidth}
 			% \begin{equation*}
-				\note{u, v, w are a convex combination}
 				% b: \mathbb{R}^2 \rightarrow \mathbb{R}^3 
 				% \text{, for } w = 1 - u - v, u, v \text{, } w \geq 0
 			% \end{equation*}
@@ -164,5 +164,6 @@
 			\end{equation*}
 		\end{column}		
 	\end{columns}
-	\note<1>{\textbf{[Rick]} Very nice formula with a nice picture. Menstion \textbf{Barycentric coordinates}}
+	\note<1>{\textbf{[Rick]} Very nice formula with a nice picture. Mention \textbf{Barycentric coordinates}}
+	\note{u, v, w are a convex combination}
 \end{frame}

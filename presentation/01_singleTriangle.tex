@@ -6,6 +6,18 @@
 % & = n_{200} w^2 + n_{020} u^2 + n_{002} v^2\\
 % 		& + n_{110} w u + n_{011} u v + n_{101} w v
 
+\begin{frame}\frametitle{Level Of Detail}
+\begin{columns}
+		\begin{column}[b]{0.6\textwidth}
+			\begin{center}
+				\includegraphics[width=\textwidth]{./img/1_single/lodExpanation.png}
+				\small{$(u,\, v,\, w)$}
+			\end{center}	
+		\end{column}
+	\end{columns}
+	\note<1>{\textbf{[Laura]} LOD = 2}
+\end{frame}
+
 \begin{frame}
 	\frametitle{Level Of Detail}
 	\begin{columns}
@@ -37,17 +49,6 @@
 	\note<1>{\textbf{[Laura]} Level of detail -> subdivision -> how many triangles go through to the next shaders.}	
 \end{frame}
 
-\begin{frame}\frametitle{Level Of Detail}
-\begin{columns}
-		\begin{column}[b]{0.6\textwidth}
-			\begin{center}
-				\includegraphics[width=\textwidth]{./img/1_single/lodExpanation.png}
-				\small{$(u,\, v,\, w)$}
-			\end{center}	
-		\end{column}
-	\end{columns}
-	\note<1>{\textbf{[Laura]} blaat}
-\end{frame}
 
 \begin{frame}\frametitle{Overview}
 	% \todo[inline]{The steps. Recap of everything construct geometry and normals and evaluate less (low lod) or more points (high lod)}
@@ -58,6 +59,8 @@
 			\end{center}		
 		\end{column}
 	\end{columns}
-	\note<1>{\textbf{[Laura]} Shading out of the scope of this presentation}
-	\note<1>{\textbf{[Laura]} Why quadartic patch for normals, why cubic patch for geometry}
+	\note[item]{\textbf{[Laura]} Recap of the whole process}
+	\note[item]{\textbf{[Laura]} Shading out of the scope of this presentation}
+	\note[item]{\textbf{[Laura]} Why quadratic patch for normals, why cubic patch for geometry: We need at least cubic geometry and quadratic normals to capture inflections. There are no additional data to suggest higher degree patches.} 
+	\note[item]{\textbf{[Laura]} Why PN triangles? Look at the nice result it gives :-) and we will see that it easy to extend it to the `existing' pipeline.}	
 \end{frame}	
