@@ -25,8 +25,7 @@
 		\end{column}
 	\end{columns}
 	\note[item]{\textbf{[Laura]} This a standard triangle primitive, defined by its vertices and normals.}
-	\note[item]{\textbf{[Laura]} Focus on getting the different control primitives.}
-	\note[item]{\textbf{[Laura]} Note that we only have this input primite, without information about its neighbours.}
+	\note[item]{\textbf{[Laura]} Note that we only have this input primitive, without information about its neighbors.}
 \end{frame}
 
 % Geometry process
@@ -39,12 +38,12 @@
 			\end{center}
 		\end{column}
 			\begin{column}{0.4\textwidth}
-				\uncover<2,3>{
+				\only<2,3>{
 				\begin{equation*}
 					b_{ijk} = (iP_1 + jP_2 + kP_3)/3
 				\end{equation*}
 				}
-				\uncover<3>{
+				\only<3>{
 				\begin{equation*}
 					\begin{aligned}
 					b_{300} & = P_1,\\
@@ -55,10 +54,11 @@
 				}
 			\end{column}
 	\end{columns}
-	\note[note]<1>{\textbf{[Laura]} These are all the initial control point. Evenly divided on the triangle. -> formula}
-	\note[note]<1>{\textbf{[Laura]} Mention which vertices are vertex, tangent and center coefficient.}
-	\note[note]<2>{\textbf{[Laura]} Nice formula}
-	\note[note]<3>{\textbf{[Laura]} Stress that the vertex coefficients/control points are the one on the original vertices and that they do not move.}
+	\note[item]<1>{\textbf{[Laura]} This is the topology of the final patch}
+	\note[item]<1>{\textbf{[Laura]} Mention which vertices are vertex, tangent and center coefficient.}	
+	\note[item]<2>{\textbf{[Laura]} These are all the initial control point. Evenly divided on the triangle. -> formula}
+	\note[item]<2>{\textbf{[Laura]} Nice formula}
+	\note[item]<3>{\textbf{[Laura]} Stress that the vertex coefficients/control points are the one on the original vertices and that they do not move.}
 \end{frame}
 
 \begin{frame}\frametitle{Geometry - Tangent Coefficients}
