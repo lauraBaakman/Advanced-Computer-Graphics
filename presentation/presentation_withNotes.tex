@@ -1,11 +1,11 @@
 %!TEX program = xelatex
-\documentclass[13pt, final]{beamer}
+\documentclass[13pt, draft]{beamer}
 \usepackage{pgfpages}
 \usepackage{amsmath}
 \usepackage{mathtools}
 \usepackage{graphbox}
 \usepackage{color}
-\usepackage[obeyFinal]{todonotes}
+\usepackage[obeyFinal, disable]{todonotes}
 \usepackage[export]{adjustbox}
 
 \setbeamercovered{transparent=60}
@@ -15,6 +15,7 @@
 \nocite{*}
 
 \setbeamercovered{dynamic}
+\setbeamerfont{note page}{size=\Large}
 
 % Beamer settings
 \usetheme{metropolis}
@@ -35,35 +36,6 @@
 
 \begin{document}
 
-	\begin{frame}
-		\titlepage
-
-		\note{\textbf{[Rick]} Welcome everybody. Tell people that PN means Point Normal triangles.}
-	\end{frame}
-
-	\input{00_intro}
-
-	\section{Single PN Triangle}
-	\note{
-	\textbf{[Rick]} 	How does one construct a single PN triangle?\\
-	\textit{Overview on the next slide}
-	}
-	\input{01_singleTriangle}
-
-	\section{A Triangle Mesh}
-	\note{\textbf[rick] blaat}
-
-	\input{02_multipleTriangles}
-
-	\section{Graphics Pipeline}
-	\note{
-	\textbf{[Laura]} 	How does one construct a single PN triangle?\\
-	}
-	\input{03_pipeline}
-
-	\input{04_conclusion}
-
-	\input{05_references}
-
+	\input{content}
 
 \end{document}
