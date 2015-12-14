@@ -131,6 +131,8 @@ Makefile*
 *.blg
 *.dvi
 *.fdb_latexmk
+*-blx.bib
+*.run.xml
 *.glg
 *.glo
 *.gls
