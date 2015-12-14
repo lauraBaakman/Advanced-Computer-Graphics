@@ -14,7 +14,8 @@
 		``PN triangles should not deviate too much from the original triangle to preserve the shape and avoid interference with other curved triangles."
 		\footnote{\citeauthor{vlachos2001curved}}
 	\end{quote}
-	\note<1>{\textbf{[Rick]} Problem when combining multiple triangles, so this is a important property}
+	\note{\textbf{[Rick]}}
+	\note{Stress: important property (of Pn traignle) for a mesh -> else \textbf{gaps} and other \textbf{artifacts} will emerge -> continuity}
 \end{frame}
 
 \begin{frame}\frametitle{Continuity}	
@@ -24,7 +25,10 @@
 		\item $C^0$ continuity along the edges
 		\item $C^\infty$ everywhere else
 	\end{itemize}
-	\note<1>{\textbf{[Rick]} Continuity C0 is important -> no gaps. Higher is better because this gives a more smooth result.}
+	\note{\textbf{[Rick]}}
+	\note[item]{Continuity C0 is important -> no gaps}
+	\note[item]{Continuity C0 along edges only when shared normals -> later example of separate normals}
+	\note[item]{$C^2$ desirable but not a real problem -> given too us by literature}
 \end{frame}
 
 \begin{frame}\frametitle{Sharp Edges}
@@ -54,7 +58,10 @@
 			\end{center}	
 		\end{column}
 	\end{columns}
-	\note<1>{\textbf{[Rick]} Curved triangles do not always give the preferred results -> sharp edges. Solution is to insert more triangles at the sharp edges -> model needs to be changed :(}
+	\note{\textbf{[Rick]}}
+	\note[item]{\textbf{Problem} Pn triangles perform well, but not always desired results.}
+	\note[item]{\textbf{Example} Sharp edges.}
+	\note[item]{\textbf{Solution} insert more triangles at the sharp edges -> model needs to be changed :(}
 \end{frame}	
 
 \begin{frame}\frametitle{Separate Normals}
@@ -72,5 +79,8 @@
 			\end{center}	
 		\end{column}
 	\end{columns}
-	\note<1>{\textbf{[Rick]} Beyond the scope of the paper extension exist to overcome the problem what you have when combining multiple meshes. Story about shared vertices.}
+	\note{\textbf{[Rick]}}
+	\note[item]{Pn triangle work -> restrict the model -> shared normals}
+	\note[item]{Describe slides -> Pn triangle can thus not deal with this}
+	\note[item]{Extension exists -> PN-AEN (Adjacent edge normals) (Nvidia)}
 \end{frame}

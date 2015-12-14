@@ -8,7 +8,11 @@
 			\end{center}		
 		\end{column}
 	\end{columns}
-	\note<1>{\textbf{[Rick]} From the primitive normals the the PN triangle normals}
+	\note{\textbf{[Rick]}}
+	\note[item]{\textbf{Seen}: Construction of cubic b\'ezier \textbf{geometry}}
+	\note[item]{Summarize (?)}
+	\note[item]{\textbf{Now}: Construction of normals -> next slide}
+	% \note[item]{From the primitive normals the the PN triangle normals}}
 \end{frame}	
 
 \begin{frame}\frametitle{Normals}
@@ -21,7 +25,9 @@
 			\end{center}
 		\end{column}
 	\end{columns}
-	\note<1>{\textbf{[Rick]} Recap input primitive and with emphasis on the normals.}
+	\note{\textbf{[Rick]}}
+	\note[item]{This step: Again input primitive -> only vertices and normals are known}
+	\note[item]{Stress (again): no knowledge of adjacent triangles}
 \end{frame}
 
 \begin{frame}\frametitle{Normals - theory}
@@ -43,8 +49,14 @@
 			\end{center}	
 		\end{column}
 	\end{columns}
-	\note<1>{\textbf{[Rick]} Stress that there is a need to capture the cubic bezier curve (inflection points) and that this cannot be }
-	\note<2>{\textbf{[Rick]} Quadratic does capture inflection points. Trade off between performance and result (maybe?)}
+	\note<1>{\textbf{[Rick]}}
+	\note[item]<1>{Stress: Two (more but ...) methods are possible}
+	\note[item]<1>{\textbf{First}: \underline{Linear} -> GOOD for parabolic curve -> BAD with inflection points (\textbf{cubic})}
+
+
+	\note<2>{\textbf{[Rick]}}
+	\note[item]<2>{\textbf{Second} option: \underline{quadratic} does capture inflection points}
+	\note[item]<2>{\textbf{Higher order?} not necessary (performance vs quality)}
 \end{frame}
 
 \begin{frame}\frametitle{Normals - example}
@@ -62,7 +74,9 @@
 			\end{center}	
 		\end{column}
 	\end{columns}
-	\note<1>{\textbf{[Rick]} Look how pretty.}
+	\note{\textbf{[Rick]}}
+	\note[item]{Theory is just fine, but what about some results!}
+	\note[item]{Which one is more pleasing/better?}
 \end{frame}
 
 
@@ -88,7 +102,11 @@
 			}
 		\end{column}
 	\end{columns}
-	\note{\textbf{[Rick]} Formula in words: reflect the averaged normal (average of N1 and N2) on the plane orthogonal/perpendicular the the edge at the mid point.}
+	\note{\textbf{[Rick]}}
+	\note[item]{Intuitively -> take the average of the two normals.}
+	\note[item]{GOOD parabolic (different normals). BAD cubic (same normals)}
+	\note[item]{Drawing (?)}
+	\note[item]{Solution -> reflect the average.}
 \end{frame}
 
 \begin{frame}
@@ -101,7 +119,8 @@
 			\end{center}	
 		\end{column}
 	\end{columns}
-	\note<1>{\textbf{[Rick]} Result}
+	\note{\textbf{[Rick]}}
+	\note[item]{The 6 control points (normals) for the parametrization used during subdivision. -> Laura}
 \end{frame}
 
 \begin{frame}\frametitle{Overview}
