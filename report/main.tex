@@ -17,8 +17,26 @@
 \usepackage{cite}
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Math
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% References within paper
+\usepackage{varioref}
+\usepackage{hyperref}
+\usepackage[noabbrev, capitalise]{cleveref}
+
+
 % Temporary
 \usepackage{todonotes}
+\newcommand{\laura}[1]{\todo[inline, color=red]{\textbf{laura:} #1}}
+\newcommand{\rick}[1]{\todo[inline, color=green]{\textbf{rick:} #1}}
+
+% Settings for header
 
 \title[Korte titel]%
       {Lange titel}
@@ -32,8 +50,7 @@
   
 \begin{document}
 	
-\todo[inline]{Fix refrences}	
-\todo[inline]{Set up cleverref}
+\laura{Fix refrences}	
 \todo[inline]{See EGauthorGuideline-body-with-teaser.inc for an example of how to include a full width image.}
 
 \listoftodos
