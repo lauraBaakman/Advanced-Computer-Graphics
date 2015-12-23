@@ -16,8 +16,41 @@
 \usepackage{egweblnk}
 \usepackage{cite}
 
+
+% Temporary
+\usepackage{todonotes}
+
+\title[Korte titel]%
+      {Lange titel}
+
+\author[R. van Veen \& L. Baakman]
+       {R. van Veen\thanks{These authors contributed equally to this work.}$^{1}$
+        and L.\,E.\,N. Baakman\footnotemark[1]$^{1}$
+        \\
+         $^1$Computing Science Department University of Groningen
+       }
+  
 \begin{document}
 	
-hoi
+\todo[inline]{Fix refrences}	
+\todo[inline]{Set up cleverref}
+\todo[inline]{See EGauthorGuideline-body-with-teaser.inc for an example of how to include a full width image.}
+
+\listoftodos
+
+\input{content/header}
+
+\input{content/abstract}
+
+\input{content/introduction}
+
+\input{content/method}
+
+\input{content/implementation}
+
+\input{content/results}
+
+\bibliographystyle{eg-alpha}
+\bibliography{./content/biblio}
 
 \end{document}
