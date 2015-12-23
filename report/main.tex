@@ -1,5 +1,4 @@
 \documentclass{egpubl}
-\usepackage[utf8]{inputenc}
 \usepackage{eg2014}
 
 \ConferencePaper
@@ -8,6 +7,35 @@
 \ifpdf \usepackage[pdftex]{graphicx} \pdfcompresslevel=9
 \else \usepackage[dvips]{graphicx} \fi
 
+\let\bibhang\arealyundefinedcommand
+\usepackage[backend=bibtex]{biblatex}
+\usepackage{csquotes}
+
+\makeatletter
+\renewcommand{\electronic@Version}{%
+   \usepackage[pdftex,
+    %pagebackref=true,
+    colorlinks,linkcolor=blue,citecolor=blue,urlcolor=blue,
+    bookmarks=false,
+    pdfpagemode=UseNone,
+    pdftitle={\@shorttitle},
+    pdfauthor={\@shortauthor},
+    pdfsubject={\pdf@Subject},
+    pdfkeywords={Computer Graphics Forum, EUROGRAPHICS}]{hyperref}
+  }
+\renewcommand{\printed@Version}{%
+   \usepackage[pdftex,
+    %pagebackref=false,
+    colorlinks,linkcolor=black,citecolor=black,urlcolor=black,
+    bookmarks=false,
+    pdfpagemode=UseNone,
+    pdftitle={\@shorttitle},
+    pdfauthor={\@shortauthor},
+    pdfsubject={\pdf@Subject},
+    pdfkeywords={Computer Graphics Forum, EUROGRAPHICS}]{hyperref}
+  }  
+\makeatother  
+\electronicVersion
 \PrintedOrElectronic
 
 % prepare for electronic version of your document
@@ -15,7 +43,6 @@
 \usepackage{dfadobe}
 
 \usepackage{egweblnk}
-\usepackage{cite}
 
 % Fix the invalid paperheight warning
 \setlength{\paperheight}{11in}
@@ -53,7 +80,10 @@
         \\
          $^1$Computing Science Department University of Groningen
        }
-  
+
+\addbibresource{content/biblio.bib}
+
+
 \begin{document}
 	
 \laura{Fix refrences}	
@@ -73,7 +103,9 @@
 
 \input{content/results}
 
-\bibliographystyle{eg-alpha}
-\bibliography{./content/biblio}
+% \bibliographystyle{eg-alpha}
+% \bibliography{./content/biblio}
+
+\printbibliography
 
 \end{document}
