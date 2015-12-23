@@ -158,6 +158,8 @@ Makefile*
 *.vrb
 *.xdy
 *.tdo
+*.lbl
+*.pdf
 
 
 ###SublimeText###
