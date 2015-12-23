@@ -8,7 +8,7 @@
 \else \usepackage[dvips]{graphicx} \fi
 
 \let\bibhang\arealyundefinedcommand
-\usepackage[backend=bibtex, safeinputenc]{biblatex}
+\usepackage[backend=bibtex, safeinputenc, style=alphabetic]{biblatex}
 \usepackage{csquotes}
 
 \makeatletter
@@ -86,7 +86,6 @@
 
 \begin{document}
 	
-\laura{Fix refrences}	
 \todo[inline]{See EGauthorGuideline-body-with-teaser.inc for an example of how to include a full width image.}
 
 \listoftodos
@@ -102,9 +101,6 @@
 \input{content/implementation}
 
 \input{content/results}
-
-% \bibliographystyle{eg-alpha}
-% \bibliography{./content/biblio}
 
 \printbibliography
 
