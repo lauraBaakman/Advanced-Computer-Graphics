@@ -160,6 +160,7 @@ Makefile*
 *.tdo
 *.lbl
 *.pdf
+*.bcf
 
 
 ###SublimeText###
