@@ -1,3 +1,6 @@
+###QT###
+code/build*Debug/*
+
 ###OSX###
 
 .DS_Store
