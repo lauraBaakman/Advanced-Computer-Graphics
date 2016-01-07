@@ -4,4 +4,3 @@ Settings::Settings(QObject *parent) : QObject(parent)
 {
 
 }
-

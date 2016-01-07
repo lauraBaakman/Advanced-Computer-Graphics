@@ -1,7 +1,7 @@
 #include <QApplication>
 
 #include "main.ih"
-#include "mainwindow.h"
+#include "view/ui/mainwindow.h"
 
 int main(int argc, char *argv[])
 {

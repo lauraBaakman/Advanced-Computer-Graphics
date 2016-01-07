@@ -9,6 +9,8 @@ class Settings : public QObject
 public:
     explicit Settings(QObject *parent = 0);
 
+    class Render;
+
 signals:
 
 public slots:

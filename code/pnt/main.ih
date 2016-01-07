@@ -1,6 +1,8 @@
 #ifndef MAIN_IH
 #define MAIN_IH
 
+#include <QSurfaceFormat>
+
 int const majorOpenGLVersion = 4;
 int const minorOpenGLVersion = 1;
 

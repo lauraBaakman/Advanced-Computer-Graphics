@@ -19,20 +19,22 @@ SOURCES += main.cpp\
     model/mesh.cpp \
     model/vertex.cpp \
     model/edge.cpp \
-    settings.cpp \
+    settings/settings.cpp \
     view/canvas.cpp \
     view/ui/sidebar.cpp \
-    controller/meshcontroller.cpp
+    controller/meshcontroller.cpp \
+    settings/render.cpp
 
 HEADERS  += view/ui/mainwindow.h \
     main.ih \
     model/mesh.h \
     model/vertex.h \
     model/edge.h \
-    settings.h \
+    settings/settings.h \
     view/canvas.h \
     view/ui/sidebar.h \
-    controller/meshcontroller.h
+    controller/meshcontroller.h \
+    settings/render.h
 
 FORMS    += view/ui/mainwindow.ui \
     view/ui/sidebar.ui
