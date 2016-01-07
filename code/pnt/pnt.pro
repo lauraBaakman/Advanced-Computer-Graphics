@@ -13,10 +13,20 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    model/mesh.cpp \
+    model/vertex.cpp \
+    model/edge.cpp \
+    settings.cpp \
+    view/canvas.cpp
 
 HEADERS  += mainwindow.h \
-    main.ih
+    main.ih \
+    model/mesh.h \
+    model/vertex.h \
+    model/edge.h \
+    settings.h \
+    view/canvas.h
 
 FORMS    += mainwindow.ui
 
