@@ -6,6 +6,8 @@
 
 QT       += core gui
 
+QMAKE_CXXFLAGS += -std=c++11 -stdlib=libc++ -mmacosx-version-min=10.10
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = pnt
@@ -13,21 +15,26 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
+    view/ui/mainwindow.cpp \
     model/mesh.cpp \
     model/vertex.cpp \
     model/edge.cpp \
     settings.cpp \
-    view/canvas.cpp
+    view/canvas.cpp \
+    view/ui/sidebar.cpp \
+    controller/meshcontroller.cpp
 
-HEADERS  += mainwindow.h \
+HEADERS  += view/ui/mainwindow.h \
     main.ih \
     model/mesh.h \
     model/vertex.h \
     model/edge.h \
     settings.h \
-    view/canvas.h
+    view/canvas.h \
+    view/ui/sidebar.h \
+    controller/meshcontroller.h
 
-FORMS    += mainwindow.ui
+FORMS    += view/ui/mainwindow.ui \
+    view/ui/sidebar.ui
 
 DISTFILES +=
