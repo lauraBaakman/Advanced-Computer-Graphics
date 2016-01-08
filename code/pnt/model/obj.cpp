@@ -15,7 +15,6 @@ Obj::Obj()
 
 Obj* Obj::fromFile(QFile *file)
 {
-    qDebug() << "Received file: " << file->fileName();
     QTextStream* inStream = openFile(file);
     if(inStream) {
         Obj* obj = processFile(inStream);
