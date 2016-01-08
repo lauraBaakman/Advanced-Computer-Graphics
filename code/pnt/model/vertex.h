@@ -13,11 +13,11 @@ public:
 
     QVector3D getLocation() const;
 
-    void setNormal(const QVector3D &value);
-
     static Vertex* fromObjString(QString string);
 
     friend QDebug operator<<(QDebug stream, const Vertex &vertex);
+
+    QVector3D getNormal() const;
 
 private:
     QVector3D location;
