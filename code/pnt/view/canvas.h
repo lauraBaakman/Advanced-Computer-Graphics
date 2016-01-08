@@ -40,11 +40,17 @@ private:
     // Buffers
     QOpenGLBuffer *vertexBuffer;
     QOpenGLBuffer *normalBuffer;
-    QOpenGLVertexArrayObject *vertexArrayObject;
+    QOpenGLBuffer *indexBuffer;
+    QOpenGLVertexArrayObject vertexArrayObject;
 
     // OpenGL initialization
     void initializeShaders();
     void initializeBuffers();
+
+    //OpenGL update
+    void updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data);
+    void updateBuffer(QOpenGLBuffer *buffer, QVector<unsigned int> data);
+    void updateBuffers(Mesh *model);
 
     // Transformation variables;
     QMatrix4x4 mvpMatrix;

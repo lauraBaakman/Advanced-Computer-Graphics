@@ -23,12 +23,55 @@ void Canvas::initializeGL()
 
 void Canvas::initializeShaders()
 {
-
+    this->shaderProgram = new QOpenGLShaderProgram();
+    this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::Vertex, ":/shaders/resources/shaders/vertex_shader.vert");
+    this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::Fragment, ":/shaders/resources/shaders/fragment_shader.frag");
+    this->shaderProgram->link();
 }
 
 void Canvas::initializeBuffers()
 {
+    this->vertexArrayObject.create();
+    this->vertexArrayObject.bind();
 
+    this->vertexBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
+    this->vertexBuffer->setUsagePattern(QOpenGLBuffer::DynamicDraw);
+    this->vertexBuffer->create();
+    this->vertexBuffer->bind();
+
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+    this->normalBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
+    this->normalBuffer->setUsagePattern(QOpenGLBuffer::DynamicDraw);
+    this->normalBuffer->create();
+
+    this->indexBuffer = new QOpenGLBuffer(QOpenGLBuffer::IndexBuffer);
+    this->indexBuffer->setUsagePattern(QOpenGLBuffer::DynamicDraw);
+    this->indexBuffer->create();
+
+    this->vertexArrayObject.release();
+}
+
+void Canvas::updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data)
+{
+    buffer->bind();
+    buffer->allocate(data.data(), data.size() * sizeof(data[0]));
+    buffer->release();
+}
+
+void Canvas::updateBuffer(QOpenGLBuffer *buffer, QVector<unsigned int> data)
+{
+    buffer->bind();
+    buffer->allocate(data.data(), data.size() * sizeof(data[0]));
+    buffer->release();
+}
+
+void Canvas::updateBuffers(Mesh *model)
+{
+    updateBuffer(this->vertexBuffer, model->getVertexPositions());
+    updateBuffer(this->normalBuffer, model->getVertexNormals());
+    updateBuffer(this->indexBuffer, model->getIndexBuffer());
 }
 
 void Canvas::paintGL()
@@ -58,9 +101,10 @@ void Canvas::onRotationDialChanged(int axis, int value)
 
 void Canvas::onModelChanged(Mesh *model)
 {
-    qDebug() << "Model changed canvas";
     // build buffers
+    updateBuffers();
     // update();
+    update();
 }
 
 bool Canvas::event(QEvent *event)

@@ -1,5 +1,7 @@
-attribute vec3 vertex;
-attribute vec3 normal;
+#version 410
+
+in vec3 vertex;
+in vec3 normal;
 
 uniform mat4 mvpMatrix;
 
