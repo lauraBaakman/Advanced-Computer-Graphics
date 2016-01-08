@@ -7,8 +7,6 @@ Sidebar::Sidebar(QWidget *parent) :
 {
     ui->setupUi(this);
     fixLayout();
-
-    Settings::modelMap();
 }
 
 Sidebar::~Sidebar()

@@ -22,7 +22,7 @@ public:
          void setMode(const Mode &value);
     };
 
-    static QMap<QString, QString> modelMap;
+    static QMap<QString, QString> modelMap();
 signals:
 
 public slots:
