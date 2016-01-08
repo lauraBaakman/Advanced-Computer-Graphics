@@ -24,7 +24,14 @@ private:
     //    class vertexNormal;
     //    class face;
 
-    QList<Obj::VertexPosition*> vertexPositions;
+    struct Counters {
+        unsigned int vertexPositions;
+        unsigned int vertexNormals;
+        unsigned int faces;
+    };
+
+    QMap<int, Obj::VertexPosition*> vertexPositions;
+    Counters counters;
 
     void add(Obj::VertexPosition* vertexPosition);
 

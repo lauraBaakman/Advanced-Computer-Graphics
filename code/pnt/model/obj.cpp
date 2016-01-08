@@ -8,7 +8,9 @@ const QRegExp Obj::floatRegularExpression("[-+]?[0-9]*\\.?[0-9]+");
 
 Obj::Obj()
 {
-
+    counters.faces = 0;
+    counters.vertexNormals = 0;
+    counters.vertexPositions = 0;
 }
 
 Obj* Obj::fromFile(QFile *file)
@@ -26,7 +28,7 @@ Obj* Obj::fromFile(QFile *file)
 
 void Obj::add(Obj::VertexPosition *vertexPosition)
 {
-    vertexPositions.append(vertexPosition);
+    vertexPositions.insert(counters.vertexPositions++, vertexPosition);
 }
 
 QTextStream* Obj::openFile(QFile *file)
@@ -79,8 +81,6 @@ Obj::VertexPosition::VertexPosition(double x, double y, double z):
 
 Obj::VertexPosition* Obj::VertexPosition::fromString(QString string)
 {
-
-
     QList<QString> numbers = extractMatchesFromString(string, floatRegularExpression);
 
     VertexPosition* position = new VertexPosition(
@@ -89,8 +89,6 @@ Obj::VertexPosition* Obj::VertexPosition::fromString(QString string)
                 numbers.at(2).toDouble());
     return position;
 }
-
-
 
 QList<QString> extractMatchesFromString(QString string, QRegExp regularExpression)
 {
