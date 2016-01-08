@@ -22,7 +22,6 @@ public:
     class VertexPosition;
     class VertexNormal;
     class Face;
-    class Edge;
 
     QMap<unsigned int, Obj::VertexPosition *> getVertexPositions() const;
 
@@ -78,19 +77,10 @@ public:
     static Obj::VertexNormal *fromString(QString string);
 };
 
-class Obj::Face : public QList<Obj::Edge*> {
+class Obj::Face : public QList<unsigned int> {
 public:
     Face();
 
     static Obj::Face *fromString(QString string);
 };
-
-class Obj::Edge : public QPair<unsigned int, unsigned int> {
-public:
-    Edge(int a, int b);
-
-    static Obj::Edge *fromString(QString string);
-};
-
-
 #endif // OBJ_H

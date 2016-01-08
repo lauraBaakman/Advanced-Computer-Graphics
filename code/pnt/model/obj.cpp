@@ -106,12 +106,9 @@ QDebug operator<<(QDebug stream, const Obj &obj) {
     }
     stream << &endl;
 
-    stream << "faces: " << &endl;
+    stream << "faces: " << &endl << "\t ";
     for(auto i : obj.faces){
-        for(auto j : *i){
-            stream << "\t" << *j;
-        }
-        stream << &endl;
+        stream << *i;
     }
     stream << &endl;
 
@@ -153,12 +150,10 @@ Obj::Face::Face()
 Obj::Face *Obj::Face::fromString(QString string)
 {
     Face *face = new Face();
-    QRegExp regEx("[1-9][0-9]*//[1-9][0-9]*");
-    QList<QString> edgeStrings = extractMatchesFromString(string, regEx);
-    Edge* edge;
-    for(auto edgeString : edgeStrings){
-        edge = Edge::fromString(edgeString);
-        face->append(edge);
+    QRegExp regEx("([1-9][0-9]*)//[1-9][0-9]*");
+    QList<QList<QString>> numbers = extractMatchesFromString(string, regEx, 1);
+    for(auto number : numbers){
+        face->append(number.first().toInt());
     }
     return face;
 }
@@ -190,18 +185,4 @@ QList<QList<QString>> extractMatchesFromString(QString string, QRegExp regEx, in
         floatPosition += regEx.matchedLength();
     }
     return matches;
-}
-
-Obj::Edge::Edge(int a, int b):
-    QPair<unsigned int, unsigned int>(a, b)
-{}
-
-Obj::Edge *Obj::Edge::fromString(QString string)
-{
-    QRegExp regEx("[1-9][0-9]*");
-    QList<QString> numbers = extractMatchesFromString(string, regEx);
-    Edge *edge = new Edge(
-                numbers.at(0).toInt(),
-                numbers.at(1).toInt());
-    return edge;
 }
