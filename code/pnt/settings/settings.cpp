@@ -13,8 +13,10 @@ Settings::~Settings()
 QMap<QString, QString> Settings::modelMap()
 {
     QMap<QString, QString> modelMap;
-    modelMap["Cube"] = "cube.obj";
-    modelMap["Triangle"] = "triangle.obj";
+    modelMap["Cube"]        = ":/models/resources/models/cube.obj";
+    modelMap["Cone"]        = ":/models/resources/models/cone.obj";
+    modelMap["Suzanne"]     = ":/models/resources/models/monkey.obj";
+    modelMap["Ico Sphere"]  = ":/models/resources/models/ico_sphere.obj";
     return modelMap;
 }
 

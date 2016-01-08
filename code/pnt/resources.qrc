@@ -1,6 +1,9 @@
 <RCC>
     <qresource prefix="/models">
         <file>resources/models/cube.obj</file>
+        <file>resources/models/cone.obj</file>
+        <file>resources/models/ico_sphere.obj</file>
+        <file>resources/models/monkey.obj</file>
     </qresource>
     <qresource prefix="/shaders"/>
 </RCC>
