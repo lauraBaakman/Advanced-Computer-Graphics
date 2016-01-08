@@ -21,7 +21,10 @@ private:
     QVector<QVector3D> vertexPositions;
     QVector<QVector3D> vertexNormals;
 
+    QVector<unsigned int> indexBuffer;
+
     void addVertices(Obj *object);
+    void createIndexBuffer(Obj* object);
 
 signals:
 

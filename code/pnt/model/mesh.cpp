@@ -4,8 +4,7 @@ Mesh::Mesh(Obj *object, QObject *parent):
     QObject(parent)
 {
     addVertices(object);
-    qDebug() << vertexPositions;
-    qDebug() << vertexNormals;
+    createIndexBuffer(object);
 }
 
 void Mesh::addVertices(Obj *object)
@@ -26,11 +25,21 @@ void Mesh::addVertices(Obj *object)
     }
 }
 
+void Mesh::createIndexBuffer(Obj *object)
+{
+    for(auto face: object->getFaces()){
+        for(auto elem : *face){
+            indexBuffer.append(elem);
+        }
+    }
+}
+
 QDebug operator<<(QDebug stream, const Mesh &mesh)
 {
     stream << "Mesh[ "                                             <<  &endl
-           << "  vertexPositions:   ["  << mesh.vertexPositions    <<  &endl
-           << "  vertexNormals:     ["  << mesh.vertexNormals      <<  &endl
+           << "  vertexPositions:   "  << mesh.vertexPositions    <<  &endl
+           << "  vertexNormals:     "  << mesh.vertexNormals      <<  &endl
+           << "  faces:             "  << mesh.indexBuffer        <<  &endl
            << "]";
     return stream;
 }
