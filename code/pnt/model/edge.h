@@ -3,11 +3,19 @@
 
 #include <QObject>
 
+#include "vertex.h"
+
 class Edge : public QObject
 {
     Q_OBJECT
 public:
-    explicit Edge(QObject *parent = 0);
+    explicit Edge(Vertex* a, Vertex* b, QObject *parent = 0);
+
+    friend QDebug operator<<(QDebug stream, const Edge &edge);
+
+private:
+    Vertex* a;
+    Vertex* b;
 
 signals:
 

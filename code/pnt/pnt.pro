@@ -18,11 +18,12 @@ SOURCES += main.cpp\
     view/ui/mainwindow.cpp \
     model/mesh.cpp \
     model/vertex.cpp \
+    model/obj.cpp \
     model/edge.cpp \
-    settings/settings.cpp \
     view/canvas.cpp \
     view/ui/sidebar.cpp \
     controller/meshcontroller.cpp \
+    settings/settings.cpp \
     settings/render.cpp
 
 HEADERS  += view/ui/mainwindow.h \
@@ -30,12 +31,17 @@ HEADERS  += view/ui/mainwindow.h \
     model/mesh.h \
     model/vertex.h \
     model/edge.h \
-    settings/settings.h \
+    model/obj.h \
     view/canvas.h \
     view/ui/sidebar.h \
-    controller/meshcontroller.h
+    controller/meshcontroller.h \
+    settings/settings.h \
+    settings/render.h
 
 FORMS    += view/ui/mainwindow.ui \
     view/ui/sidebar.ui
 
 DISTFILES +=
+
+RESOURCES += \
+    resources.qrc

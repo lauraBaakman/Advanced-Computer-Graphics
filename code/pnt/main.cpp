@@ -3,15 +3,21 @@
 #include "main.ih"
 #include "view/ui/mainwindow.h"
 
+//Temp
+#include <QFile>
+#include "model/obj.h"
+#include "model/mesh.h"
+
+
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    setOpenGLVersion(majorOpenGLVersion, minorOpenGLVersion);
+        QApplication a(argc, argv);
+        setOpenGLVersion(majorOpenGLVersion, minorOpenGLVersion);
 
-    MainWindow w;
-    w.show();
+        MainWindow w;
+        w.show();
 
-    return a.exec();
+        return a.exec();
 }
 
 void setOpenGLVersion(int const majorVersion, int const minorVersion)
