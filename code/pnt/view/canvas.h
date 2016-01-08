@@ -12,6 +12,7 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLBuffer>
 #include <QOpenGLVertexArrayObject>
+#include "model/mesh.h"
 
 class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 {
@@ -23,6 +24,7 @@ public:
 
 public slots:
     void onRotationDialChanged(int axis, int value);
+    void onModelChanged(Mesh *model);
 
 protected:
     void initializeGL() Q_DECL_OVERRIDE;

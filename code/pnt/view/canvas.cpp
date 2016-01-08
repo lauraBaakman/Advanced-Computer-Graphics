@@ -56,6 +56,13 @@ void Canvas::onRotationDialChanged(int axis, int value)
     update();
 }
 
+void Canvas::onModelChanged(Mesh *model)
+{
+    qDebug() << "Model changed canvas";
+    // build buffers
+    // update();
+}
+
 bool Canvas::event(QEvent *event)
 {
     if (event->type() == QEvent::Gesture) {

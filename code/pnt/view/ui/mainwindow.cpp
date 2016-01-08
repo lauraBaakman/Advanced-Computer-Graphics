@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connectUiToSettings();
     connectUiToCanvas();
     connectUiToModelController();
+    connectModelControllerToCanvas();
 }
 
 MainWindow::~MainWindow()
@@ -57,6 +58,12 @@ void MainWindow::connectUiToModelController()
 {
     QObject::connect(this->settings, SIGNAL(modelChanged(QString)),
                      this->controller, SLOT(onModelChanged(QString)));
+}
+
+void MainWindow::connectModelControllerToCanvas()
+{
+    QObject::connect(this->controller, SIGNAL(modelChanged(Mesh*)),
+                     this->canvas, SLOT(onModelChanged(Mesh*)));
 }
 
 void MainWindow::connectUiToSettings()
