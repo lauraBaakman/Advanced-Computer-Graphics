@@ -19,19 +19,25 @@ public:
 
     friend QDebug operator<<(QDebug stream, const Obj &obj);
 
-private:
     class VertexPosition;
     class VertexNormal;
     class Face;
     class Edge;
 
+    QMap<unsigned int, Obj::VertexPosition *> getVertexPositions() const;
+
+    QMap<unsigned int, Obj::VertexNormal *> getVertexNormals() const;
+
+    QMap<unsigned int, Obj::Face *> getFaces() const;
+
+private:
     struct Counters {
         unsigned int vertexPositions;
         unsigned int vertexNormals;
         unsigned int faces;
     };
 
-    QMap<unsigned int, Obj::VertexPosition*> vertexPositions;
+    QMap<unsigned int, Obj::VertexPosition *> vertexPositions;
     QMap<unsigned int, Obj::VertexNormal*> vertexNormals;
     QMap<unsigned int, Obj::Face*> faces;
 

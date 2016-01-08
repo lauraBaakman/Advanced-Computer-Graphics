@@ -26,6 +26,21 @@ Obj* Obj::fromFile(QFile *file)
     return nullptr;
 }
 
+QMap<unsigned int, Obj::VertexPosition *> Obj::getVertexPositions() const
+{
+    return vertexPositions;
+}
+
+QMap<unsigned int, Obj::VertexNormal *> Obj::getVertexNormals() const
+{
+    return vertexNormals;
+}
+
+QMap<unsigned int, Obj::Face *> Obj::getFaces() const
+{
+    return faces;
+}
+
 void Obj::add(Obj::VertexPosition *vertexPosition)
 {
     vertexPositions.insert(counters.vertexPositions++, vertexPosition);
@@ -78,12 +93,28 @@ Obj *Obj::processLine(QString line, Obj *obj)
 }
 
 QDebug operator<<(QDebug stream, const Obj &obj) {
-    stream << "Obj[ "                                             <<  &endl
-           << "  vertexPositions:   ["  << obj.vertexPositions    <<  &endl
-           << "  vertexNormals:     ["  << obj.vertexNormals      <<  &endl
-           << "  faces:             ["  << obj.faces              <<  &endl
-           << "]"
-           << &endl;
+    stream << "Obj" <<  &endl;
+    stream << "vertexPositions: " << &endl << "\t ";
+    for(auto i : obj.vertexPositions){
+        stream << *i;
+    }
+    stream << &endl;
+
+    stream << "vertexNormals: " << &endl << "\t ";
+    for(auto i : obj.vertexNormals){
+        stream << *i;
+    }
+    stream << &endl;
+
+    stream << "faces: " << &endl;
+    for(auto i : obj.faces){
+        for(auto j : *i){
+            stream << "\t" << *j;
+        }
+        stream << &endl;
+    }
+    stream << &endl;
+
     return stream;
 }
 
