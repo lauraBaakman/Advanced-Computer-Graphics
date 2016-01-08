@@ -31,6 +31,11 @@ void Obj::add(Obj::VertexPosition *vertexPosition)
     vertexPositions.insert(counters.vertexPositions++, vertexPosition);
 }
 
+void Obj::add(Obj::VertexNormal *vertexNormal)
+{
+    vertexNormals.insert(counters.vertexNormals++, vertexNormal);
+}
+
 QTextStream* Obj::openFile(QFile *file)
 {
     if(!(file->open(QIODevice::ReadOnly))){
@@ -58,7 +63,7 @@ Obj *Obj::processLine(QString line, Obj *obj)
     Qt::CaseSensitivity caseSensitivity = Qt::CaseInsensitive;
 
     if (line.startsWith(Obj::ObjLineTypes::vertexNormal, caseSensitivity)){
-        qDebug("Detected a vertex normal");
+        obj->add(VertexNormal::fromString(line));
     } else if(line.startsWith(Obj::ObjLineTypes::vertex, caseSensitivity)){
         obj->add(VertexPosition::fromString(line));
     } else if (line.startsWith(Obj::ObjLineTypes::face, caseSensitivity)){
@@ -70,6 +75,7 @@ Obj *Obj::processLine(QString line, Obj *obj)
 QDebug operator<<(QDebug stream, const Obj &obj) {
     stream << "Obj[ "
            << "vertexPositions: ["    << obj.vertexPositions
+           << "vertexNormals: ["    << obj.vertexNormals
            << "]"
            << &endl;
     return stream;
@@ -88,6 +94,20 @@ Obj::VertexPosition* Obj::VertexPosition::fromString(QString string)
                 numbers.at(1).toDouble(),
                 numbers.at(2).toDouble());
     return position;
+}
+
+Obj::VertexNormal::VertexNormal(double x, double y, double z):
+    QVector3D(x, y, z)
+{}
+
+Obj::VertexNormal *Obj::VertexNormal::fromString(QString string)
+{
+    QList<QString> numbers = extractMatchesFromString(string, floatRegularExpression);
+    VertexNormal* normal = new VertexNormal(
+                numbers.at(0).toDouble(),
+                numbers.at(1).toDouble(),
+                numbers.at(2).toDouble());
+    return normal;
 }
 
 QList<QString> extractMatchesFromString(QString string, QRegExp regularExpression)
