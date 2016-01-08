@@ -2,12 +2,11 @@
 #define MESH_H
 
 #include <QObject>
-#include <QFile>
-#include <QTextStream>
-#include <QMessageBox>
+
 #include <QVector>
 
 #include "vertex.h"
+#include "edge.h"
 
 class Mesh : public QObject
 {
@@ -15,11 +14,12 @@ class Mesh : public QObject
 public:
     explicit Mesh(QObject *parent = 0);
 
-    static Mesh* fromObjFile(QString file);
-
 private:
-    QVector<Vertex*> vertices;
 
+    QVector<Vertex*> vertices;
+    QVector<Edge*> edges;
+    QVector<QVector3D> vertexPositions;
+    QVector<QVector3D> vertexNormals;
 
 signals:
 

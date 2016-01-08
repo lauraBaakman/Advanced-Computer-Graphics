@@ -9,11 +9,10 @@ class Vertex : public QObject
 {
     Q_OBJECT
 public:
-    explicit Vertex(QVector3D location, QObject *parent = 0);
+    explicit Vertex(QVector3D location, QVector3D normal, QObject *parent = 0);
 
     QVector3D getLocation() const;
 
-    QVector3D getNormal() const;
     void setNormal(const QVector3D &value);
 
     static Vertex* fromObjString(QString string);

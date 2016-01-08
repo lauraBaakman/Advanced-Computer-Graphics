@@ -1,8 +1,9 @@
 #include "vertex.h"
 
-Vertex::Vertex(QVector3D location, QObject *parent) :
+Vertex::Vertex(QVector3D location, QVector3D normal, QObject *parent):
     QObject(parent),
-    location(location)
+    location(location),
+    normal(normal)
 {
 
 }
@@ -15,16 +16,6 @@ QVector3D Vertex::getLocation() const
 QVector3D Vertex::getNormal() const
 {
     return normal;
-}
-
-void Vertex::setNormal(const QVector3D &value)
-{
-    normal = value;
-}
-
-Vertex *Vertex::fromObjString(QString string)
-{
-
 }
 
 QDebug operator<<(QDebug stream, const Vertex &vertex)
