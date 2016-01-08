@@ -11,16 +11,13 @@
 
 int main(int argc, char *argv[])
 {
-    //    QApplication a(argc, argv);
-    //    setOpenGLVersion(majorOpenGLVersion, minorOpenGLVersion);
+        QApplication a(argc, argv);
+        setOpenGLVersion(majorOpenGLVersion, minorOpenGLVersion);
 
-    //    MainWindow w;
-    //    w.show();
+        MainWindow w;
+        w.show();
 
-    //    return a.exec();
-    QFile file(":/models/resources/models/cube.obj");
-    Obj* obj = Obj::fromFile(&file);
-    Mesh mesh(obj);
+        return a.exec();
 }
 
 void setOpenGLVersion(int const majorVersion, int const minorVersion)
