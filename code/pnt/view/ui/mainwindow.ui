@@ -40,7 +40,7 @@
    </property>
    <layout class="QHBoxLayout" name="centralWidgetLayout">
     <item>
-     <widget class="Sidebar" name="widget" native="true">
+     <widget class="Sidebar" name="sideBarWidget" native="true">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
         <horstretch>0</horstretch>

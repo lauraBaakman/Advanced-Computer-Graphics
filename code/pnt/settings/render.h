@@ -10,16 +10,16 @@ public:
         POINTCLOUD,
         WIREFRAME,
         FLAT,
-        PNTRIANGLES
+        PHONG
     };
 
     Render();
 
-    Mode getMode() const;
-    void setMode(const Mode &value);
+    Settings::Render::Mode getMode() const;
+    void setMode(const Settings::Render::Mode &value);
 
 private:
-    Mode mode;
+    Settings::Render::Mode mode;
 };
 
 #endif // RENDER_H

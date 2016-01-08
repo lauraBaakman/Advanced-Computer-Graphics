@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "settings/settings.h"
+#include "view/ui/sidebar.h"
 
 namespace Ui {
 class MainWindow;
@@ -15,8 +17,16 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    Settings *getSettings() const;
+    void setSettings(Settings *value);
+
 private:
     Ui::MainWindow *ui;
+    Settings *settings;
+    Sidebar *sidebar;
+
+    void fixLayout();
+    void fixWindowSize();
 };
 
 #endif // MAINWINDOW_H

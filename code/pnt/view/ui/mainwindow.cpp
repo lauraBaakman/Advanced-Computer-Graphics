@@ -6,11 +6,43 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->centralWidgetLayout->setAlignment(Qt::AlignLeft);
-    ui->centralWidgetLayout->setAlignment(Qt::AlignTop);
+
+    fixLayout();
+    fixWindowSize();
+
+    this->settings = new Settings();
+    this->sidebar = ui->sideBarWidget;
 }
 
 MainWindow::~MainWindow()
 {
+    delete settings;
     delete ui;
 }
+
+Settings *MainWindow::getSettings() const
+{
+    return settings;
+}
+
+void MainWindow::setSettings(Settings *value)
+{
+    settings = value;
+}
+
+void MainWindow::fixLayout()
+{
+    ui->centralWidgetLayout->setAlignment(Qt::AlignLeft);
+    ui->centralWidgetLayout->setAlignment(Qt::AlignTop);
+}
+
+/*
+ * This are magical numbers, but I have no idea
+ *   how to get the size of the other ui elements
+ *   inside the MainWindow.
+*/
+void MainWindow::fixWindowSize()
+{
+    this->setFixedSize(1210, 824);
+}
+

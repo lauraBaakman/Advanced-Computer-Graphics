@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>374</width>
-    <height>1155</height>
+    <height>507</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -36,11 +36,42 @@
   </property>
   <layout class="QVBoxLayout" name="sidebarUiLayout" stretch="0,0,0">
    <property name="spacing">
-    <number>-1</number>
+    <number>24</number>
    </property>
    <property name="sizeConstraint">
     <enum>QLayout::SetDefaultConstraint</enum>
    </property>
+   <item>
+    <widget class="QGroupBox" name="modelUi">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="title">
+      <string>Model</string>
+     </property>
+     <layout class="QGridLayout" name="modelUiLayout">
+      <item row="0" column="2">
+       <widget class="QPushButton" name="loadModelButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>load</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="modelComboBox"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
    <item>
     <widget class="QGroupBox" name="rotateUi">
      <property name="sizePolicy">
@@ -70,7 +101,23 @@
        </widget>
       </item>
       <item row="0" column="3">
-       <widget class="QDial" name="zDial"/>
+       <widget class="QDial" name="zDial">
+        <property name="maximum">
+         <number>359</number>
+        </property>
+        <property name="pageStep">
+         <number>10</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="wrapping">
+         <bool>true</bool>
+        </property>
+        <property name="notchesVisible">
+         <bool>true</bool>
+        </property>
+       </widget>
       </item>
       <item row="0" column="2">
        <widget class="QDial" name="yDial">
@@ -79,6 +126,15 @@
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="maximum">
+         <number>359</number>
+        </property>
+        <property name="wrapping">
+         <bool>true</bool>
+        </property>
+        <property name="notchesVisible">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -118,38 +174,19 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="modelUi">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="title">
-      <string>Model</string>
-     </property>
-     <layout class="QGridLayout" name="modelUiLayout">
-      <item row="0" column="2">
-       <widget class="QPushButton" name="loadModelButton">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
+        <property name="maximum">
+         <number>359</number>
         </property>
-        <property name="text">
-         <string>load</string>
+        <property name="tracking">
+         <bool>true</bool>
+        </property>
+        <property name="wrapping">
+         <bool>true</bool>
+        </property>
+        <property name="notchesVisible">
+         <bool>true</bool>
         </property>
        </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QComboBox" name="modelComboBox"/>
       </item>
      </layout>
     </widget>
@@ -174,6 +211,26 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <item>
+         <property name="text">
+          <string>Point cloud</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Wireframe</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Flat shading</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Phong shading</string>
+         </property>
+        </item>
        </widget>
       </item>
       <item>

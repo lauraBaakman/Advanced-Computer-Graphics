@@ -23,7 +23,7 @@ SOURCES += main.cpp\
     view/canvas.cpp \
     view/ui/sidebar.cpp \
     controller/meshcontroller.cpp \
-    settings/render.cpp
+#    settings/render.cpp
 
 HEADERS  += view/ui/mainwindow.h \
     main.ih \
@@ -34,7 +34,7 @@ HEADERS  += view/ui/mainwindow.h \
     view/canvas.h \
     view/ui/sidebar.h \
     controller/meshcontroller.h \
-    settings/render.h
+#    settings/render.h
 
 FORMS    += view/ui/mainwindow.ui \
     view/ui/sidebar.ui
