@@ -83,7 +83,7 @@ class Obj::Edge : public QPair<unsigned int, unsigned int> {
 public:
     Edge(int a, int b);
 
-    static Obj::Edge *fromString(QList<QString>);
+    static Obj::Edge *fromString(QString string);
 };
 
 

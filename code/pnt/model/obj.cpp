@@ -121,13 +121,13 @@ Obj::Face::Face()
 
 Obj::Face *Obj::Face::fromString(QString string)
 {
-    QRegExp regEx("([1-9][0-9]*)//([1-9][0-9]*)");
-    QList<QList<QString>> numbers = extractMatchesFromString(string, regEx, 2);
-    qDebug() << numbers;
-//    Face* face = new Face(
-//                numbers.at(0).toDouble(),
-//                numbers.at(1).toDouble(),
-//                numbers.at(2).toDouble());
+    QRegExp regEx("[1-9][0-9]*//[1-9][0-9]*");
+    QList<QString> edgeStrings = extractMatchesFromString(string, regEx);
+    Edge* edge;
+    for(auto edgeString : edgeStrings){
+        edge = Edge::fromString(edgeString);
+        qDebug() << *edge;
+    }
     return nullptr;
 }
 
@@ -164,7 +164,12 @@ Obj::Edge::Edge(int a, int b):
     QPair<unsigned int, unsigned int>(a, b)
 {}
 
-Obj::Edge *Obj::Edge::fromString(QList<QString>)
+Obj::Edge *Obj::Edge::fromString(QString string)
 {
-    return new Edge(1, 1);
+    QRegExp regEx("[1-9][0-9]*");
+    QList<QString> numbers = extractMatchesFromString(string, regEx);
+    Edge *edge = new Edge(
+                numbers.at(0).toInt(),
+                numbers.at(1).toInt());
+    return edge;
 }
