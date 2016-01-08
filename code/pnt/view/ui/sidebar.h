@@ -3,7 +3,6 @@
 
 #include <QWidget>
 #include "settings/settings.h"
-#include "settings/render.h"
 
 namespace Ui {
 class Sidebar;

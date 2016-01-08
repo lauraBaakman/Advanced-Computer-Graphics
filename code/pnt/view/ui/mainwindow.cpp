@@ -12,6 +12,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->settings = new Settings();
     this->sidebar = ui->sideBarWidget;
+
+    connectUiToSettings();
 }
 
 MainWindow::~MainWindow()
@@ -44,5 +46,11 @@ void MainWindow::fixLayout()
 void MainWindow::fixWindowSize()
 {
     this->setFixedSize(1210, 824);
+}
+
+void MainWindow::connectUiToSettings()
+{
+    QObject::connect(this->sidebar, SIGNAL(renderModeChanged(Settings::Render::Mode)),
+                     this->settings, SLOT(onRenderModeChanged(Settings::Render::Mode)));
 }
 

@@ -27,6 +27,8 @@ private:
 
     void fixLayout();
     void fixWindowSize();
+
+    void connectUiToSettings();
 };
 
 #endif // MAINWINDOW_H

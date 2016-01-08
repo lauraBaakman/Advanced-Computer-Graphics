@@ -1,17 +1,11 @@
-#include "render.h"
-
-Settings::Render::Render()
-{
-
-}
+#include "settings/settings.h"
 
 Settings::Render::Mode Settings::Render::getMode() const
 {
-    return this->mode;
+    return mode;
 }
 
-void Settings::Render::setMode(const Settings::Render::Mode &value)
+void Settings::Render::setMode(const Mode &value)
 {
-    this->mode = value;
+    mode = value;
 }
-
