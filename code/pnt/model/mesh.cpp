@@ -15,6 +15,8 @@ void Mesh::addVertices(Obj *object)
 
     QMapIterator<unsigned int, Obj::VertexPosition *> iterator(object->getVertexPositions());
 
+    qDebug() << "in addVertices:" << &endl;
+
     while (iterator.hasNext()) {
         iterator.next();
 
@@ -25,6 +27,7 @@ void Mesh::addVertices(Obj *object)
         normal = &(vertexNormals[iterator.key()]);
 
         vertex = new Vertex(position, normal);
+
         vertices.insert(iterator.key(), vertex);
     }
 }

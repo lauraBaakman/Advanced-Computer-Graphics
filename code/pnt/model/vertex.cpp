@@ -13,13 +13,17 @@ QVector3D *Vertex::getLocation() const
     return location;
 }
 
+QVector3D *Vertex::getNormal() const
+{
+    return normal;
+}
+
 QDebug operator<<(QDebug stream, const Vertex &vertex)
 {
-//    stream << "Vertex ["
-//           << "\t location: "   << *(vertex.location)
-//           << "\t normal: "     << (vertex.normal)
-//           << "]"               << &endl;
-    stream << vertex.location;
+    stream << "Vertex ["
+           << "\t location: "   << vertex.location
+           << "\t normal: "     << vertex.normal
+           << "]"               << &endl;
     return stream;
 }
 

@@ -15,6 +15,8 @@ public:
 
     QVector3D *getLocation() const;
 
+    QVector3D *getNormal() const;
+
 private:
     QVector3D *location;
     QVector3D *normal;
