@@ -54,7 +54,8 @@ private:
 
 };
 
-QList<QString> extractMatchesFromString(QString string, QRegExp regularExpression);
+QList<QString> extractMatchesFromString(QString string, QRegExp regEx);
+QList<QList<QString>> extractMatchesFromString(QString string, QRegExp regEx, int numGroups);
 
 class Obj::VertexPosition : public QVector3D {
 public:

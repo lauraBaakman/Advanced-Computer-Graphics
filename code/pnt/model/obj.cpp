@@ -122,23 +122,41 @@ Obj::Face::Face(double x, double y, double z):
 
 Obj::Face *Obj::Face::fromString(QString string)
 {
-    QList<QString> numbers = extractMatchesFromString(string, floatRegularExpression);
-    Face* face = new Face(
-                numbers.at(0).toDouble(),
-                numbers.at(1).toDouble(),
-                numbers.at(2).toDouble());
-    return face;
+    QRegExp regEx("([1-9][0-9]*)//([1-9][0-9]*)");
+    QList<QList<QString>> numbers = extractMatchesFromString(string, regEx, 2);
+    qDebug() << numbers;
+//    Face* face = new Face(
+//                numbers.at(0).toDouble(),
+//                numbers.at(1).toDouble(),
+//                numbers.at(2).toDouble());
+    return nullptr;
 }
 
-QList<QString> extractMatchesFromString(QString string, QRegExp regularExpression)
+QList<QString> extractMatchesFromString(QString string, QRegExp regEx)
 {
     QList<QString> matches;
     int floatPosition = 0;
 
-    while((floatPosition = regularExpression.indexIn(string, floatPosition)) != -1){
-        QString match = regularExpression.cap(0);
+    while((floatPosition = regEx.indexIn(string, floatPosition)) != -1){
+        QString match = regEx.cap(0);
         matches.append(match);
-        floatPosition += regularExpression.matchedLength();
+        floatPosition += regEx.matchedLength();
+    }
+    return matches;
+}
+
+QList<QList<QString>> extractMatchesFromString(QString string, QRegExp regEx, int numGroups){
+    QList<QList<QString>> matches;
+    int floatPosition = 0;
+    while((floatPosition = regEx.indexIn(string, floatPosition)) != -1){
+        QString match;
+        QList<QString> groups;
+        for(int i = 1; i <= numGroups; i++){
+            match = regEx.cap(i);
+            groups.append(match);
+        }
+        matches.append(groups);
+        floatPosition += regEx.matchedLength();
     }
     return matches;
 }
