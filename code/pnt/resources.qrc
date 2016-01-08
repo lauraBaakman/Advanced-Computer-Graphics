@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/models">
         <file>resources/models/cube.obj</file>
-        <file>resources/models/teapot.obj</file>
     </qresource>
     <qresource prefix="/shaders"/>
 </RCC>
