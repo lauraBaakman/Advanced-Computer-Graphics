@@ -8,12 +8,18 @@ Vertex::Vertex(QVector3D *location, QVector3D *normal, QObject *parent):
 
 }
 
+QVector3D *Vertex::getLocation() const
+{
+    return location;
+}
+
 QDebug operator<<(QDebug stream, const Vertex &vertex)
 {
     stream << "Vertex ["
            << "\t location: "   << *(vertex.location)  << &endl
            << "\t normal: "     << *(vertex.normal)    << &endl
            << "]"                                   << &endl;
+    return stream;
 }
 
 

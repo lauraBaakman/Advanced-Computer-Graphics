@@ -39,13 +39,15 @@ void Mesh::addVertices(Obj *object)
 void Mesh::addEdges(Obj *object)
 {
     QMapIterator<unsigned int, Obj::Face*> iterator(object->getFaces());
-    Edge *edge;
+    Obj::Face* face;
     while(iterator.hasNext()){
         iterator.next();
-        for (int i = 0, j = 1; i < 3; i++, j = (i + 1) % 3){
+        Edge* edge;
+        face = iterator.value();
+        for(int i = 0, j = 0; i < 3; i++, j = (i + 1) % 3){
             edge = new Edge(
-                        this->vertices.value(iterator.value()->at(i)),
-                        this->vertices.value(iterator.value()->at(j)));
+                        vertices.value(face->value(i)),
+                        vertices.value(face->value(j)));
             add(edge);
         }
     }

@@ -153,7 +153,7 @@ Obj::Face *Obj::Face::fromString(QString string)
     QRegExp regEx("([1-9][0-9]*)//[1-9][0-9]*");
     QList<QList<QString>> numbers = extractMatchesFromString(string, regEx, 1);
     for(auto number : numbers){
-        face->append(number.first().toInt());
+        face->append(number.first().toInt() - 1);
     }
     return face;
 }

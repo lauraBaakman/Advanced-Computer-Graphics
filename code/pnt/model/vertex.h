@@ -13,6 +13,8 @@ public:
 
     friend QDebug operator<<(QDebug stream, const Vertex &vertex);
 
+    QVector3D *getLocation() const;
+
 private:
     QVector3D *location;
     QVector3D *normal;

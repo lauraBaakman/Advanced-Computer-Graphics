@@ -8,8 +8,10 @@ Edge::Edge(Vertex *a, Vertex *b, QObject *parent):
 
 QDebug operator<<(QDebug stream, const Edge &edge)
 {
-    stream << "Vertex ["
-           << "\t a: "   << *(edge.a)  << &endl
-           << "\t b: "     << *(edge.b)    << &endl
-           << "]"                                   << &endl;
+    stream << "Edge ["
+           << *(edge.a->getLocation())
+           << "\t"
+           << *(edge.b->getLocation())
+           << "]" << &endl;
+    return stream;
 }
