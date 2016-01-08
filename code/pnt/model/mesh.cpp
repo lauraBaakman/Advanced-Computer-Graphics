@@ -5,8 +5,8 @@ Mesh::Mesh(QObject *parent):
 {
 }
 
-Mesh* Mesh::fromObjFile(QString filename)
-{
+//Mesh* Mesh::fromObjFile(QString filename)
+//{
 //    QFile file(filename);
 //    if (file.open(QIODevice::ReadOnly)){
 //        QTextStream in(&file);
@@ -19,4 +19,4 @@ Mesh* Mesh::fromObjFile(QString filename)
 //        QMessageBox::critical(0, "Error", "The file " + file.fileName() + " could not be opened.\n\n" + file.errorString());
 //    }
 //    return nullptr;
-}
+//}
