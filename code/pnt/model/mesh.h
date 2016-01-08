@@ -19,7 +19,6 @@ public:
 
     friend QDebug operator<<(QDebug stream, const Mesh &mesh);
 private:
-    QList<unsigned int> faces;
     QVector<QVector3D> vertexPositions;
     QVector<QVector3D> vertexNormals;
 
