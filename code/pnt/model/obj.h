@@ -23,6 +23,7 @@ private:
     class VertexPosition;
     class VertexNormal;
     class Face;
+    class Edge;
 
     struct Counters {
         unsigned int vertexPositions;
@@ -71,11 +72,18 @@ public:
     static Obj::VertexNormal *fromString(QString string);
 };
 
-class Obj::Face : public QVector3D {
+class Obj::Face : public QList<Obj::Edge*> {
 public:
-    Face(double x, double y, double z);
+    Face();
 
     static Obj::Face *fromString(QString string);
+};
+
+class Obj::Edge : public QPair<unsigned int, unsigned int> {
+public:
+    Edge(int a, int b);
+
+    static Obj::Edge *fromString(QList<QString>);
 };
 
 

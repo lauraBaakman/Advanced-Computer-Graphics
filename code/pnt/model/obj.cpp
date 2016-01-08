@@ -116,8 +116,7 @@ Obj::VertexNormal *Obj::VertexNormal::fromString(QString string)
     return normal;
 }
 
-Obj::Face::Face(double x, double y, double z):
-    QVector3D(x, y, z)
+Obj::Face::Face()
 {}
 
 Obj::Face *Obj::Face::fromString(QString string)
@@ -159,4 +158,13 @@ QList<QList<QString>> extractMatchesFromString(QString string, QRegExp regEx, in
         floatPosition += regEx.matchedLength();
     }
     return matches;
+}
+
+Obj::Edge::Edge(int a, int b):
+    QPair<unsigned int, unsigned int>(a, b)
+{}
+
+Obj::Edge *Obj::Edge::fromString(QList<QString>)
+{
+    return new Edge(1, 1);
 }
