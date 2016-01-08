@@ -12,23 +12,34 @@
 class Obj
 {
 public:
-    Obj(QFile *file);
+    Obj();
+
+    static Obj* fromFile(QFile *file);
 
 private:
-
-    QTextStream* openFile(QFile *file) const;
-
-//    class vertexPosition;
+    class VertexPosition;
 //    class vertexNormal;
 //    class face;
 
+    QList<Obj::VertexPosition*> vertexPositions;
 
-//    QList<vertexPosition*> vertexPositions;
+    static QTextStream* openFile(QFile *file);
+    static Obj* processFile(QTextStream* stream);
+    static Obj* processLine(QString line, Obj *obj);
+
+    static const struct ObjLineTypes {
+       static const QString vertex;
+       static const QString vertexNormal;
+       static const QString face;
+     } objLineTypes;
+
 };
 
-//class Obj::vertexPosition : public QVector3D {
-//public:
-//    static fromString(QString string);
-//};
+class Obj::VertexPosition : public QVector3D {
+public:
+    VertexPosition();
+
+    static Obj::VertexPosition* fromString(QString string);
+};
 
 #endif // OBJ_H
