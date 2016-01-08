@@ -1,7 +1,8 @@
 #include "meshcontroller.h"
 
-MeshController::MeshController(QObject *parent) : QObject(parent)
+MeshController::MeshController(Mesh *mesh, QObject *parent) :
+    QObject(parent),
+    mesh(mesh)
 {
 
 }
-

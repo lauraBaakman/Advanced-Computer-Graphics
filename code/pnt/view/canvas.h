@@ -9,6 +9,9 @@
 #include <QPinchGesture>
 #include <QMatrix4x4>
 #include <QVector3D>
+#include <QOpenGLShaderProgram>
+#include <QOpenGLBuffer>
+#include <QOpenGLVertexArrayObject>
 
 class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 {
@@ -29,6 +32,13 @@ protected:
     bool event(QEvent *event) Q_DECL_OVERRIDE;
 
 private:
+    // Shaders
+    QOpenGLShaderProgram *shaderProgram;
+
+    // Buffers
+    QOpenGLBuffer *vertexBuffer;
+    QOpenGLBuffer *normalBuffer;
+    QOpenGLVertexArrayObject *vertexArrayObject;
 
     // OpenGL initialization
     void initializeShaders();
