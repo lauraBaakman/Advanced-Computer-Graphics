@@ -2,14 +2,18 @@
 
 Mesh::Mesh(Obj *object, QObject *parent)
 {
-    qDebug() << "Mesh constructor:";
     addVertices(object);
-    addEdges(object->getFaces());
+    addEdges(object);
 }
 
-void Mesh::add(Vertex *vertex)
+void Mesh::add(int key, Vertex *vertex)
 {
-    this->vertices.append(vertex);
+    this->vertices.insert(key, vertex);
+}
+
+void Mesh::add(Edge *edge)
+{
+    this->edges.append(edge);
 }
 
 void Mesh::addVertices(Obj *object)
@@ -28,13 +32,23 @@ void Mesh::addVertices(Obj *object)
         vertexNormals.insert(iterator.key(), *(dynamic_cast<QVector3D*>(object->getVertexNormals().value(iterator.key()))));
         normal = &(vertexPositions[iterator.key()]);
 
-        add(new Vertex(position, normal));
+        add(iterator.key(), new Vertex(position, normal));
     }
 }
 
-void Mesh::addEdges(QMap<unsigned int, Obj::Face *> faces)
+void Mesh::addEdges(Obj *object)
 {
-
+    QMapIterator<unsigned int, Obj::Face*> iterator(object->getFaces());
+    Edge *edge;
+    while(iterator.hasNext()){
+        iterator.next();
+        for (int i = 0, j = 1; i < 3; i++, j = (i + 1) % 3){
+            edge = new Edge(
+                        this->vertices.value(iterator.value()->at(i)),
+                        this->vertices.value(iterator.value()->at(j)));
+            add(edge);
+        }
+    }
 }
 
 QDebug operator<<(QDebug stream, const Mesh &mesh)
@@ -47,9 +61,9 @@ QDebug operator<<(QDebug stream, const Mesh &mesh)
         stream << *i;
     }
     stream << &endl;
-
-
-    //           << "]"
-    //           << &endl;
+    for(auto i : mesh.edges){
+        stream << *i;
+    }
+    stream << &endl;
     return stream;
 }

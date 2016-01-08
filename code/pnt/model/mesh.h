@@ -15,18 +15,19 @@ class Mesh : public QObject
 public:
     explicit Mesh(Obj *object, QObject *parent = 0);
 
-
     friend QDebug operator<<(QDebug stream, const Mesh &mesh);
 private:
 
-    QList<Vertex*> vertices;
+    QMap<unsigned int, Vertex*> vertices;
     QList<Edge*> edges;
     QVector<QVector3D> vertexPositions;
     QVector<QVector3D> vertexNormals;
 
-    void add(Vertex* vertex);
+    void add(int key, Vertex* vertex);
+    void add(Edge* edge);
+
     void addVertices(Obj *object);
-    void addEdges(QMap<unsigned int, Obj::Face *> faces);
+    void addEdges(Obj *object);
 
 signals:
 
