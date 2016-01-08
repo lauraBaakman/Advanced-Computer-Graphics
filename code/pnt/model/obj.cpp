@@ -21,7 +21,7 @@ Obj* Obj::fromFile(QFile *file)
         Obj* obj = processFile(inStream);
         file->close();
         delete inStream;
-        if(obj->acceptable()) return obj;
+        return obj;
     }
     return nullptr;
 }
