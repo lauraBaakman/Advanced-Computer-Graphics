@@ -3,13 +3,14 @@
 
 #include <QObject>
 #include "model/mesh.h"
+#include "model/obj.h"
 
 class MeshController : public QObject
 {
     Q_OBJECT
 public:
-    explicit MeshController(Mesh *mesh, QObject *parent = 0);
-
+    explicit MeshController(QObject *parent = 0);
+    ~MeshController();
 signals:
 
 public slots:

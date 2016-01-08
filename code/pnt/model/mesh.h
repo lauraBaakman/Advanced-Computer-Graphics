@@ -15,6 +15,7 @@ class Mesh : public QObject
 public:
     explicit Mesh(Obj *object, QObject *parent = 0);
     explicit Mesh(QObject *parent = 0);
+    ~Mesh();
 
     friend QDebug operator<<(QDebug stream, const Mesh &mesh);
 private:

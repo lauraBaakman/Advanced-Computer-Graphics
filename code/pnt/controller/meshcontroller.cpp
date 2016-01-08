@@ -1,18 +1,21 @@
 #include "meshcontroller.h"
 
-MeshController::MeshController(Mesh *mesh, QObject *parent) :
+MeshController::MeshController(QObject *parent) :
     QObject(parent),
-    mesh(mesh)
+    mesh(nullptr)
 {
 
 }
 
 MeshController::~MeshController()
 {
-    delete grid;
+    delete mesh;
 }
 
 void MeshController::onModelChanged(QString modelPath)
 {
-    qDebug() << "MeshController::onModelChanged(QString modelPath): " << modelPath;
+    QFile file(modelPath);
+    Obj *obj = Obj::fromFile(&file);
+    if(this->mesh != nullptr) delete this->mesh;
+    this->mesh = new Mesh(obj);
 }

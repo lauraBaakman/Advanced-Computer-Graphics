@@ -13,8 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->settings = new Settings();
     this->sidebar = ui->sideBarWidget;
     this->canvas = ui->openGLWidget;
-    Mesh *mesh = new Mesh();
-    this->controller = new MeshController(mesh);
+    this->controller = new MeshController();
 
     connectUiToSettings();
     connectUiToCanvas();

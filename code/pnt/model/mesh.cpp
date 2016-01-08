@@ -11,6 +11,11 @@ Mesh::Mesh(QObject *parent):
     QObject(parent)
 {}
 
+Mesh::~Mesh()
+{
+    qDebug() << "Deconstructor not implemented.";
+}
+
 void Mesh::addVertices(Obj *object)
 {
     QVector3D* position;
