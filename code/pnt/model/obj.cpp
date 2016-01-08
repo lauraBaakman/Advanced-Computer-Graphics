@@ -4,6 +4,8 @@ const QString Obj::ObjLineTypes::vertex = "v";
 const QString Obj::ObjLineTypes::face = "f";
 const QString Obj::ObjLineTypes::vertexNormal = "vn";
 
+const QRegExp Obj::floatRegularExpression("[-+]?[0-9]*\\.?[0-9]+");
+
 Obj::Obj()
 {
 
@@ -48,24 +50,45 @@ Obj *Obj::processLine(QString line, Obj *obj)
 
     Qt::CaseSensitivity caseSensitivity = Qt::CaseInsensitive;
 
-    //Brrr, should be strings with descriptive names
     if (line.startsWith(Obj::ObjLineTypes::vertexNormal, caseSensitivity)){
         qDebug("Detected a vertex normal");
     } else if(line.startsWith(Obj::ObjLineTypes::vertex, caseSensitivity)){
         VertexPosition *position = VertexPosition::fromString(line);
+        qDebug() << "Detected a vertex position: " << *position;
     } else if (line.startsWith(Obj::ObjLineTypes::face, caseSensitivity)){
         qDebug("Detected a face");
     } //else ignore the line
     return obj;
 }
 
-Obj::VertexPosition::VertexPosition(){}
+Obj::VertexPosition::VertexPosition(double x, double y, double z):
+    QVector3D(x, y, z)
+{}
 
 Obj::VertexPosition* Obj::VertexPosition::fromString(QString string)
 {
-    VertexPosition *position = new VertexPosition();
 
-   qDebug() << "Todo: convertet string to VertexPosition";
 
+    QList<QString> numbers = extractMatchesFromString(string, floatRegularExpression);
+
+    VertexPosition* position = new VertexPosition(
+                numbers.at(0).toDouble(),
+                numbers.at(1).toDouble(),
+                numbers.at(2).toDouble());
     return position;
+}
+
+
+
+QList<QString> extractMatchesFromString(QString string, QRegExp regularExpression)
+{
+    QList<QString> matches;
+    int floatPosition = 0;
+
+    while((floatPosition = regularExpression.indexIn(string, floatPosition)) != -1){
+        QString match = regularExpression.cap(0);
+        matches.append(match);
+        floatPosition += regularExpression.matchedLength();
+    }
+    return matches;
 }

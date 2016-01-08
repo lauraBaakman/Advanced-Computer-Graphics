@@ -6,6 +6,7 @@
 #include <QVector3D>
 #include <QTextStream>
 #include <QMessageBox>
+#include <QList>
 
 #include <QDebug>
 
@@ -31,13 +32,17 @@ private:
        static const QString vertex;
        static const QString vertexNormal;
        static const QString face;
-     } objLineTypes;
+     } objline;
+
+    static const QRegExp floatRegularExpression;
 
 };
 
+QList<QString> extractMatchesFromString(QString string, QRegExp regularExpression);
+
 class Obj::VertexPosition : public QVector3D {
 public:
-    VertexPosition();
+    VertexPosition(double x, double y, double z);
 
     static Obj::VertexPosition* fromString(QString string);
 };
