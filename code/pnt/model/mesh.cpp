@@ -10,19 +10,9 @@ Mesh::Mesh(Obj *object, QObject *parent)
     }
 
     for(auto vn : vertexNormals){
-        qDebug() << &vn;
+        qDebug() << vn;
     }
     exit(-1);
-}
-
-void Mesh::add(int key, Vertex *vertex)
-{
-    this->vertices.insert(key, vertex);
-}
-
-void Mesh::add(Edge *edge)
-{
-    this->edges.append(edge);
 }
 
 void Mesh::addVertices(Obj *object)
@@ -43,13 +33,7 @@ void Mesh::addVertices(Obj *object)
         normal = &(vertexNormals[iterator.key()]);
 
         vertex = new Vertex(position, normal);
-
-        qDebug() << "position pointer:  " << position;
-        qDebug() << "normal pointer:    " << normal;
-        qDebug() << "vertex:            " << *vertex;
-        exit(-1);
-
-        add(iterator.key(), vertex);
+        vertices.insert(iterator.key(), vertex);
     }
 }
 
@@ -61,11 +45,11 @@ void Mesh::addEdges(Obj *object)
         iterator.next();
         Edge* edge;
         face = iterator.value();
-        for(int i = 0, j = 0; i < 3; i++, j = (i + 1) % 3){
+        for(int i = 0, j = 1; i < 3; i++, j = (i + 1) % 3){
             edge = new Edge(
                         vertices.value(face->value(i)),
                         vertices.value(face->value(j)));
-            add(edge);
+            edges.append(edge);
         }
     }
 }

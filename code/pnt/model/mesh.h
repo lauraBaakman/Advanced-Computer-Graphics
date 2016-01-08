@@ -23,9 +23,6 @@ private:
     QVector<QVector3D> vertexPositions;
     QVector<QVector3D> vertexNormals;
 
-    void add(int key, Vertex* vertex);
-    void add(Edge* edge);
-
     void addVertices(Obj *object);
     void addEdges(Obj *object);
 
