@@ -17,6 +17,12 @@ public:
     explicit Mesh(QObject *parent = 0);
 
     friend QDebug operator<<(QDebug stream, const Mesh &mesh);
+    QList<unsigned int> getFaces() const;
+
+    QVector<QVector3D> getVertexPositions() const;
+
+    QVector<QVector3D> getVertexNormals() const;
+
 private:
     QList<unsigned int> faces;
     QVector<QVector3D> vertexPositions;
