@@ -16,6 +16,21 @@ Mesh::~Mesh()
     qDebug() << "Deconstructor not implemented.";
 }
 
+QList<unsigned int> Mesh::getFaces() const
+{
+    return faces;
+}
+
+QVector<QVector3D> Mesh::getVertexPositions() const
+{
+    return vertexPositions;
+}
+
+QVector<QVector3D> Mesh::getVertexNormals() const
+{
+    return vertexNormals;
+}
+
 void Mesh::addVertices(Obj *object)
 {
     QVector3D* position;
