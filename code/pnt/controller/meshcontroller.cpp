@@ -7,6 +7,11 @@ MeshController::MeshController(Mesh *mesh, QObject *parent) :
 
 }
 
+MeshController::~MeshController()
+{
+    delete grid;
+}
+
 void MeshController::onModelChanged(QString modelPath)
 {
     qDebug() << "MeshController::onModelChanged(QString modelPath): " << modelPath;
