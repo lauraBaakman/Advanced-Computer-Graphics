@@ -53,6 +53,7 @@ void Canvas::constructModelViewProjectionMatrix()
 void Canvas::onRotationDialChanged(int axis, int value)
 {
     this->rotationAngles[axis] = value;
+    constructModelViewProjectionMatrix();
     update();
 }
 
