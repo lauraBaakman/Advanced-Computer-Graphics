@@ -21,8 +21,8 @@ public:
 
 private:
     class VertexPosition;
-        class VertexNormal;
-    //    class face;
+    class VertexNormal;
+    class Face;
 
     struct Counters {
         unsigned int vertexPositions;
@@ -32,11 +32,13 @@ private:
 
     QMap<unsigned int, Obj::VertexPosition*> vertexPositions;
     QMap<unsigned int, Obj::VertexNormal*> vertexNormals;
+    QMap<unsigned int, Obj::Face*> faces;
 
     Counters counters;
 
     void add(Obj::VertexPosition* vertexPosition);
     void add(Obj::VertexNormal* vertexNormal);
+    void add(Obj::Face* face);
 
     static QTextStream* openFile(QFile *file);
     static Obj* processFile(QTextStream* stream);
@@ -58,14 +60,22 @@ class Obj::VertexPosition : public QVector3D {
 public:
     VertexPosition(double x, double y, double z);
 
-    static Obj::VertexPosition* fromString(QString string);
+    static Obj::VertexPosition *fromString(QString string);
 };
 
 class Obj::VertexNormal : public QVector3D {
 public:
     VertexNormal(double x, double y, double z);
 
-    static Obj::VertexNormal* fromString(QString string);
+    static Obj::VertexNormal *fromString(QString string);
 };
+
+class Obj::Face : public QVector3D {
+public:
+    Face(double x, double y, double z);
+
+    static Obj::Face *fromString(QString string);
+};
+
 
 #endif // OBJ_H

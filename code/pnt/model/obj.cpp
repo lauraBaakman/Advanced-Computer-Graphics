@@ -36,6 +36,11 @@ void Obj::add(Obj::VertexNormal *vertexNormal)
     vertexNormals.insert(counters.vertexNormals++, vertexNormal);
 }
 
+void Obj::add(Obj::Face *face)
+{
+    faces.insert(counters.faces++, face);
+}
+
 QTextStream* Obj::openFile(QFile *file)
 {
     if(!(file->open(QIODevice::ReadOnly))){
@@ -67,15 +72,16 @@ Obj *Obj::processLine(QString line, Obj *obj)
     } else if(line.startsWith(Obj::ObjLineTypes::vertex, caseSensitivity)){
         obj->add(VertexPosition::fromString(line));
     } else if (line.startsWith(Obj::ObjLineTypes::face, caseSensitivity)){
-        qDebug("Detected a face");
+        obj->add(Face::fromString(line));
     } //else ignore the line
     return obj;
 }
 
 QDebug operator<<(QDebug stream, const Obj &obj) {
-    stream << "Obj[ "
-           << "vertexPositions: ["    << obj.vertexPositions
-           << "vertexNormals: ["    << obj.vertexNormals
+    stream << "Obj[ "                                             <<  &endl
+           << "  vertexPositions:   ["  << obj.vertexPositions    <<  &endl
+           << "  vertexNormals:     ["  << obj.vertexNormals      <<  &endl
+           << "  faces:             ["  << obj.faces              <<  &endl
            << "]"
            << &endl;
     return stream;
@@ -108,6 +114,20 @@ Obj::VertexNormal *Obj::VertexNormal::fromString(QString string)
                 numbers.at(1).toDouble(),
                 numbers.at(2).toDouble());
     return normal;
+}
+
+Obj::Face::Face(double x, double y, double z):
+    QVector3D(x, y, z)
+{}
+
+Obj::Face *Obj::Face::fromString(QString string)
+{
+    QList<QString> numbers = extractMatchesFromString(string, floatRegularExpression);
+    Face* face = new Face(
+                numbers.at(0).toDouble(),
+                numbers.at(1).toDouble(),
+                numbers.at(2).toDouble());
+    return face;
 }
 
 QList<QString> extractMatchesFromString(QString string, QRegExp regularExpression)
