@@ -3,10 +3,11 @@
 in vec3 vertex;
 in vec3 normal;
 
-uniform mat4 mvpMatrix;
+//uniform mat4 mvpMatrix;
+out vec4 vPosition;
 
 void main(void)
 {
-    gl_Position = mvpMatrix * vec4(vertex, 1.0);
+    vPosition = vec4(vertex, 1.0);
 }
 

@@ -8,6 +8,11 @@ Canvas::Canvas(QWidget *parent) :
 
 Canvas::~Canvas()
 {
+    delete this->shaderProgram;
+    delete this->vertexBuffer;
+    delete this->normalBuffer;
+    delete this->indexBuffer;
+    this->vertexArrayObject.destroy();
 }
 
 void Canvas::initializeGL()
@@ -45,10 +50,12 @@ void Canvas::initializeBuffers()
     this->normalBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
     this->normalBuffer->setUsagePattern(QOpenGLBuffer::DynamicDraw);
     this->normalBuffer->create();
+    this->normalBuffer->bind();
 
     this->indexBuffer = new QOpenGLBuffer(QOpenGLBuffer::IndexBuffer);
     this->indexBuffer->setUsagePattern(QOpenGLBuffer::DynamicDraw);
     this->indexBuffer->create();
+    this->indexBuffer->bind();
 
     this->vertexArrayObject.release();
 }
@@ -77,6 +84,22 @@ void Canvas::updateBuffers(Mesh *model)
 void Canvas::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT);
+
+    if (!isAllocated(this->vertexBuffer)) {
+        return;
+    }
+
+    this->shaderProgram->bind();
+    this->vertexBuffer->bind();
+    glPointSize(8.0f);
+    glDrawArrays(GL_POINTS, 0, 8);
+    this->vertexBuffer->release();
+    this->shaderProgram->release();
+}
+
+bool Canvas::isAllocated(QOpenGLBuffer *buffer)
+{
+    return buffer->size() != 0;
 }
 
 void Canvas::constructModelViewProjectionMatrix()
@@ -101,9 +124,8 @@ void Canvas::onRotationDialChanged(int axis, int value)
 
 void Canvas::onModelChanged(Mesh *model)
 {
-    // build buffers
-    updateBuffers();
-    // update();
+    qDebug() << *model;
+    updateBuffers(model);
     update();
 }
 
