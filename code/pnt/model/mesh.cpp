@@ -7,6 +7,10 @@ Mesh::Mesh(Obj *object, QObject *parent):
     createIndexBuffer(object);
 }
 
+Mesh::Mesh(QObject *parent):
+    QObject(parent)
+{}
+
 void Mesh::addVertices(Obj *object)
 {
     QVector3D* position;
