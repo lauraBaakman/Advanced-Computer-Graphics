@@ -18,14 +18,14 @@ public:
     ~Mesh();
 
     friend QDebug operator<<(QDebug stream, const Mesh &mesh);
-    QList<unsigned int> getFaces() const;
 
     QVector<QVector3D> getVertexPositions() const;
 
     QVector<QVector3D> getVertexNormals() const;
 
+    QVector<unsigned int> getIndexBuffer() const;
+
 private:
-    QList<unsigned int> faces;
     QVector<QVector3D> vertexPositions;
     QVector<QVector3D> vertexNormals;
 
