@@ -40,3 +40,18 @@ void Sidebar::fillModelComboBox()
         ui->modelComboBox->addItem(modelKeys.at(i));
     }
 }
+
+void Sidebar::on_xDial_valueChanged(int value)
+{
+    emit rotationDialChanged(0, value);
+}
+
+void Sidebar::on_yDial_valueChanged(int value)
+{
+    emit rotationDialChanged(1, value);
+}
+
+void Sidebar::on_zDial_valueChanged(int value)
+{
+    emit rotationDialChanged(2, value);
+}

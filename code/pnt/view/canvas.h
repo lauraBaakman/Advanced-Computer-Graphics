@@ -7,6 +7,8 @@
 #include <QDebug>
 #include <QGestureEvent>
 #include <QPinchGesture>
+#include <QMatrix4x4>
+#include <QVector3D>
 
 class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 {
@@ -15,6 +17,9 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 public:
     Canvas(QWidget *parent = 0);
     ~Canvas();
+
+public slots:
+    void onRotationDialChanged(int axis, int value);
 
 protected:
     void initializeGL() Q_DECL_OVERRIDE;
@@ -31,8 +36,9 @@ private:
 
     // Transformation variables;
     QMatrix4x4 mvpMatrix;
-    QVector3D rotationAngle;
+    QVector3D rotationAngles;
     float zoomingFactor;
+    void constructModelViewProjectionMatrix();
 
     // Events
     bool gestureEvent(QGestureEvent *event);

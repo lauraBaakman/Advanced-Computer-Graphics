@@ -25,11 +25,13 @@ private:
     Ui::MainWindow *ui;
     Settings *settings;
     Sidebar *sidebar;
+    Canvas *canvas;
 
     void fixLayout();
     void fixWindowSize();
 
     void connectUiToSettings();
+    void connectUiToCanvas();
 };
 
 #endif // MAINWINDOW_H

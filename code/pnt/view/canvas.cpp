@@ -16,24 +16,44 @@ void Canvas::initializeGL()
     initializeOpenGLFunctions();
 
     glEnable(GL_DEPTH_TEST);
-    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
     initializeShaders();
     initializeBuffers();
 }
 
+void Canvas::initializeShaders()
+{
+
+}
+
+void Canvas::initializeBuffers()
+{
+
+}
+
 void Canvas::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT);
-
-
 }
 
 void Canvas::constructModelViewProjectionMatrix()
 {
     mvpMatrix.setToIdentity();
+
+    // Scale determined by QPinchEvents
     mvpMatrix.scale(this->zoomingFactor);
-    mvpMatrix.rotate(this->rotationAngle, 0.0, 0.0, 1.0);
+
+    // Rotation along the axis determined by QDials in the ui.
+    mvpMatrix.rotate(this->rotationAngles.x(), 1.0, 0.0, 0.0);
+    mvpMatrix.rotate(this->rotationAngles.y(), 0.0, 1.0, 0.0);
+    mvpMatrix.rotate(this->rotationAngles.z(), 0.0, 0.0, 1.0);
+}
+
+void Canvas::onRotationDialChanged(int axis, int value)
+{
+    this->rotationAngles[axis] = value;
+    update();
 }
 
 bool Canvas::event(QEvent *event)

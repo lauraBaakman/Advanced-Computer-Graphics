@@ -12,8 +12,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->settings = new Settings();
     this->sidebar = ui->sideBarWidget;
+    this->canvas = ui->openGLWidget;
 
     connectUiToSettings();
+    connectUiToCanvas();
 }
 
 MainWindow::~MainWindow()
@@ -55,5 +57,11 @@ void MainWindow::connectUiToSettings()
 
     QObject::connect(this->sidebar, SIGNAL(modelChanged(QString)),
                      this->settings, SLOT(onModelChanged(QString)));
+}
+
+void MainWindow::connectUiToCanvas()
+{
+    QObject::connect(this->sidebar, SIGNAL(rotationDialChanged(int,int)),
+                     this->canvas, SLOT(onRotationDialChanged(int,int)));
 }
 

@@ -19,11 +19,18 @@ public:
 signals:
     void renderModeChanged(Settings::Render::Mode mode);
     void modelChanged(QString modelKey);
+    void rotationDialChanged(int axis, int value);
 
 private slots:
     void on_renderModeComboBox_currentIndexChanged(int index);
 
     void on_loadModelButton_clicked();
+
+    void on_xDial_valueChanged(int value);
+
+    void on_yDial_valueChanged(int value);
+
+    void on_zDial_valueChanged(int value);
 
 private:
     Ui::Sidebar *ui;
