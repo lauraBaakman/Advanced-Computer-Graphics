@@ -4,6 +4,15 @@ Mesh::Mesh(Obj *object, QObject *parent)
 {
     addVertices(object);
     addEdges(object);
+
+    for(auto v : vertices){
+        qDebug() << *v;
+    }
+
+    for(auto vn : vertexNormals){
+        qDebug() << &vn;
+    }
+    exit(-1);
 }
 
 void Mesh::add(int key, Vertex *vertex)
@@ -20,6 +29,7 @@ void Mesh::addVertices(Obj *object)
 {
     QVector3D* position;
     QVector3D* normal;
+    Vertex* vertex;
 
     QMapIterator<unsigned int, Obj::VertexPosition *> iterator(object->getVertexPositions());
 
@@ -30,9 +40,16 @@ void Mesh::addVertices(Obj *object)
         position = &(vertexPositions[iterator.key()]);
 
         vertexNormals.insert(iterator.key(), *(dynamic_cast<QVector3D*>(object->getVertexNormals().value(iterator.key()))));
-        normal = &(vertexPositions[iterator.key()]);
+        normal = &(vertexNormals[iterator.key()]);
 
-        add(iterator.key(), new Vertex(position, normal));
+        vertex = new Vertex(position, normal);
+
+        qDebug() << "position pointer:  " << position;
+        qDebug() << "normal pointer:    " << normal;
+        qDebug() << "vertex:            " << *vertex;
+        exit(-1);
+
+        add(iterator.key(), vertex);
     }
 }
 
@@ -58,7 +75,7 @@ QDebug operator<<(QDebug stream, const Mesh &mesh)
     stream << "Mesh[ "                                             <<  &endl
            << "  vertexPositions:   ["  << mesh.vertexPositions    <<  &endl
            << "  vertexNormals:     ["  << mesh.vertexNormals      <<  &endl;
-    stream << "vertexNormals: " << &endl;
+    stream << "vertices: " << &endl;
     for(auto i : mesh.vertices){
         stream << *i;
     }

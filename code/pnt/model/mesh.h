@@ -18,7 +18,7 @@ public:
     friend QDebug operator<<(QDebug stream, const Mesh &mesh);
 private:
 
-    QMap<unsigned int, Vertex*> vertices;
+    QList<Vertex*> vertices;
     QList<Edge*> edges;
     QVector<QVector3D> vertexPositions;
     QVector<QVector3D> vertexNormals;
