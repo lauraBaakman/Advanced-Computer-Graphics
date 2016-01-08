@@ -5,6 +5,8 @@
 #include "settings/settings.h"
 #include "view/ui/sidebar.h"
 #include "view/canvas.h"
+#include "controller/meshcontroller.h"
+#include "model/mesh.h"
 
 namespace Ui {
 class MainWindow;
@@ -26,12 +28,14 @@ private:
     Settings *settings;
     Sidebar *sidebar;
     Canvas *canvas;
+    MeshController *controller;
 
     void fixLayout();
     void fixWindowSize();
 
     void connectUiToSettings();
     void connectUiToCanvas();
+    void connectUiToModelController();
 };
 
 #endif // MAINWINDOW_H

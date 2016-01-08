@@ -13,7 +13,6 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = pnt
 TEMPLATE = app
 
-
 SOURCES += main.cpp\
     view/ui/mainwindow.cpp \
     model/mesh.cpp \

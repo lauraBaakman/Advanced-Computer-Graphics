@@ -6,3 +6,8 @@ MeshController::MeshController(Mesh *mesh, QObject *parent) :
 {
 
 }
+
+void MeshController::onModelChanged(QString modelPath)
+{
+    qDebug() << "MeshController::onModelChanged(QString modelPath): " << modelPath;
+}

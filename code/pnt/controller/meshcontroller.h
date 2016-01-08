@@ -13,6 +13,7 @@ public:
 signals:
 
 public slots:
+    void onModelChanged(QString modelPath);
 
 private:
     Mesh *mesh;

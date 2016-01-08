@@ -13,8 +13,7 @@ Settings::~Settings()
 QMap<QString, QString> Settings::modelMap()
 {
     QMap<QString, QString> modelMap;
-    modelMap["Cube"] = "cube.obj";
-    modelMap["Triangle"] = "triangle.obj";
+    modelMap["Cube"] = ":/models/resources/models/cube.obj";
     return modelMap;
 }
 
@@ -26,4 +25,5 @@ void Settings::onRenderModeChanged(Settings::Render::Mode mode)
 void Settings::onModelChanged(QString modelKey)
 {
     qDebug() << "Settings::onModelChanged: " << modelKey;
+    emit modelChanged(Settings::modelMap().value(modelKey));
 }

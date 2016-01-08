@@ -24,6 +24,7 @@ public:
 
     static QMap<QString, QString> modelMap();
 signals:
+    void modelChanged(QString path);
 
 public slots:
     void onRenderModeChanged(Settings::Render::Mode mode);
