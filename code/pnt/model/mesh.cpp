@@ -1,18 +1,10 @@
 #include "mesh.h"
 
-Mesh::Mesh(Obj *object, QObject *parent)
+Mesh::Mesh(Obj *object, QObject *parent):
+    QObject(parent)
 {
     addVertices(object);
     addEdges(object);
-
-    for(auto v : vertices){
-        qDebug() << *v;
-    }
-
-    for(auto vn : vertexNormals){
-        qDebug() << vn;
-    }
-    exit(-1);
 }
 
 void Mesh::addVertices(Obj *object)

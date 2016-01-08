@@ -13,5 +13,6 @@ QDebug operator<<(QDebug stream, const Edge &edge)
            << "\t"
            << *(edge.b->getLocation())
            << "]" << &endl;
+
     return stream;
 }

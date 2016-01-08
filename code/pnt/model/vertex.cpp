@@ -15,10 +15,11 @@ QVector3D *Vertex::getLocation() const
 
 QDebug operator<<(QDebug stream, const Vertex &vertex)
 {
-    stream << "Vertex ["
-           << "\t location: "   << *(vertex.location)  << &endl
-           << "\t normal: "     << *(vertex.normal)    << &endl
-           << "]"                                   << &endl;
+//    stream << "Vertex ["
+//           << "\t location: "   << *(vertex.location)
+//           << "\t normal: "     << (vertex.normal)
+//           << "]"               << &endl;
+    stream << vertex.location;
     return stream;
 }
 
