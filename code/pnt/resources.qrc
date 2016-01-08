@@ -2,5 +2,8 @@
     <qresource prefix="/models">
         <file>resources/models/cube.obj</file>
     </qresource>
-    <qresource prefix="/shaders"/>
+    <qresource prefix="/shaders">
+        <file>resources/shaders/vertex_shader.vert</file>
+        <file>resources/shaders/fragment_shader.frag</file>
+    </qresource>
 </RCC>

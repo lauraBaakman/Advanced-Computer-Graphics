@@ -8,7 +8,6 @@ Canvas::Canvas(QWidget *parent) :
 
 Canvas::~Canvas()
 {
-
 }
 
 void Canvas::initializeGL()

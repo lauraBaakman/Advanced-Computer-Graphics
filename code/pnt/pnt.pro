@@ -39,7 +39,5 @@ HEADERS  += view/ui/mainwindow.h \
 FORMS    += view/ui/mainwindow.ui \
     view/ui/sidebar.ui
 
-DISTFILES +=
-
 RESOURCES += \
     resources.qrc
