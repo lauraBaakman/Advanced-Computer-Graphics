@@ -7,6 +7,8 @@ Sidebar::Sidebar(QWidget *parent) :
 {
     ui->setupUi(this);
     fixLayout();
+
+    Settings::modelMap();
 }
 
 Sidebar::~Sidebar()
@@ -23,3 +25,4 @@ void Sidebar::on_renderModeComboBox_currentIndexChanged(int index)
 {   // Note that the order of the combo box needs to be the same as the enum.
     emit renderModeChanged(static_cast<Settings::Render::Mode>(index));
 }
+

@@ -22,6 +22,7 @@ public:
          void setMode(const Mode &value);
     };
 
+    static QMap<QString, QString> modelMap;
 signals:
 
 public slots:
@@ -29,7 +30,6 @@ public slots:
 
 private:
     Render *render;
-
 };
 
 #endif // SETTINGS_H

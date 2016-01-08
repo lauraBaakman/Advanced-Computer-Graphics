@@ -27,7 +27,7 @@ private:
 
     void fixLayout();
 
-    void fillRenderUi();
+    void fillModelComboBox();
 };
 
 #endif // SIDEBAR_H
