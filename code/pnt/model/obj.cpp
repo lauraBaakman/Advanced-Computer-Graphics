@@ -24,6 +24,11 @@ Obj* Obj::fromFile(QFile *file)
     return nullptr;
 }
 
+void Obj::add(Obj::VertexPosition *vertexPosition)
+{
+    vertexPositions.append(vertexPosition);
+}
+
 QTextStream* Obj::openFile(QFile *file)
 {
     if(!(file->open(QIODevice::ReadOnly))){
@@ -53,12 +58,19 @@ Obj *Obj::processLine(QString line, Obj *obj)
     if (line.startsWith(Obj::ObjLineTypes::vertexNormal, caseSensitivity)){
         qDebug("Detected a vertex normal");
     } else if(line.startsWith(Obj::ObjLineTypes::vertex, caseSensitivity)){
-        VertexPosition *position = VertexPosition::fromString(line);
-        qDebug() << "Detected a vertex position: " << *position;
+        obj->add(VertexPosition::fromString(line));
     } else if (line.startsWith(Obj::ObjLineTypes::face, caseSensitivity)){
         qDebug("Detected a face");
     } //else ignore the line
     return obj;
+}
+
+QDebug operator<<(QDebug stream, const Obj &obj) {
+    stream << "Obj[ "
+           << "vertexPositions: ["    << obj.vertexPositions
+           << "]"
+           << &endl;
+    return stream;
 }
 
 Obj::VertexPosition::VertexPosition(double x, double y, double z):

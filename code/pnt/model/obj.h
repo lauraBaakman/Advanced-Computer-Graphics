@@ -17,22 +17,26 @@ public:
 
     static Obj* fromFile(QFile *file);
 
+    friend QDebug operator<<(QDebug stream, const Obj &obj);
+
 private:
     class VertexPosition;
-//    class vertexNormal;
-//    class face;
+    //    class vertexNormal;
+    //    class face;
 
     QList<Obj::VertexPosition*> vertexPositions;
+
+    void add(Obj::VertexPosition* vertexPosition);
 
     static QTextStream* openFile(QFile *file);
     static Obj* processFile(QTextStream* stream);
     static Obj* processLine(QString line, Obj *obj);
 
     static const struct ObjLineTypes {
-       static const QString vertex;
-       static const QString vertexNormal;
-       static const QString face;
-     } objline;
+        static const QString vertex;
+        static const QString vertexNormal;
+        static const QString face;
+    } objline;
 
     static const QRegExp floatRegularExpression;
 
