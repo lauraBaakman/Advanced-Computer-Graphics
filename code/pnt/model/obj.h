@@ -41,6 +41,9 @@ private:
     void add(Obj::VertexNormal* vertexNormal);
     void add(Obj::Face* face);
 
+    //Check if the read in obj file will not cause crashes
+    bool acceptable();
+
     static QTextStream* openFile(QFile *file);
     static Obj* processFile(QTextStream* stream);
     static Obj* processLine(QString line, Obj *obj);

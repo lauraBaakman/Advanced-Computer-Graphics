@@ -21,7 +21,7 @@ Obj* Obj::fromFile(QFile *file)
         Obj* obj = processFile(inStream);
         file->close();
         delete inStream;
-        return obj;
+        if(obj->acceptable()) return obj;
     }
     return nullptr;
 }
@@ -121,14 +121,15 @@ Obj::Face::Face()
 
 Obj::Face *Obj::Face::fromString(QString string)
 {
+    Face *face = new Face();
     QRegExp regEx("[1-9][0-9]*//[1-9][0-9]*");
     QList<QString> edgeStrings = extractMatchesFromString(string, regEx);
     Edge* edge;
     for(auto edgeString : edgeStrings){
         edge = Edge::fromString(edgeString);
-        qDebug() << *edge;
+        face->append(edge);
     }
-    return nullptr;
+    return face;
 }
 
 QList<QString> extractMatchesFromString(QString string, QRegExp regEx)
