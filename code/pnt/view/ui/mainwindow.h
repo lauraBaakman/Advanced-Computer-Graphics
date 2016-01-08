@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "settings/settings.h"
 #include "view/ui/sidebar.h"
+#include "view/canvas.h"
 
 namespace Ui {
 class MainWindow;

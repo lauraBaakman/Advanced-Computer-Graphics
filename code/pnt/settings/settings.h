@@ -27,6 +27,7 @@ signals:
 
 public slots:
     void onRenderModeChanged(Settings::Render::Mode mode);
+    void onModelChanged(QString modelKey);
 
 private:
     Render *render;

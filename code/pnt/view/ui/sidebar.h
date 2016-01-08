@@ -18,9 +18,12 @@ public:
 
 signals:
     void renderModeChanged(Settings::Render::Mode mode);
+    void modelChanged(QString modelKey);
 
 private slots:
     void on_renderModeComboBox_currentIndexChanged(int index);
+
+    void on_loadModelButton_clicked();
 
 private:
     Ui::Sidebar *ui;

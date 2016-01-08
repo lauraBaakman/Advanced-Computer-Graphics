@@ -62,7 +62,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QOpenGLWidget" name="openGLWidget">
+     <widget class="Canvas" name="openGLWidget">
       <property name="sizePolicy">
        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
         <horstretch>0</horstretch>
@@ -85,8 +85,13 @@
   <customwidget>
    <class>Sidebar</class>
    <extends>QWidget</extends>
-   <header>sidebar.h</header>
+   <header>view/ui/sidebar.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Canvas</class>
+   <extends>QOpenGLWidget</extends>
+   <header>view/canvas.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

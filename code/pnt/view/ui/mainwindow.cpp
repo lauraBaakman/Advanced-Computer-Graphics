@@ -52,5 +52,8 @@ void MainWindow::connectUiToSettings()
 {
     QObject::connect(this->sidebar, SIGNAL(renderModeChanged(Settings::Render::Mode)),
                      this->settings, SLOT(onRenderModeChanged(Settings::Render::Mode)));
+
+    QObject::connect(this->sidebar, SIGNAL(modelChanged(QString)),
+                     this->settings, SLOT(onModelChanged(QString)));
 }
 

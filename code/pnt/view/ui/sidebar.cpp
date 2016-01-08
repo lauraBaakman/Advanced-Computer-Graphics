@@ -6,6 +6,9 @@ Sidebar::Sidebar(QWidget *parent) :
     ui(new Ui::Sidebar)
 {
     ui->setupUi(this);
+
+    fillModelComboBox();
+
     fixLayout();
 }
 
@@ -24,3 +27,16 @@ void Sidebar::on_renderModeComboBox_currentIndexChanged(int index)
     emit renderModeChanged(static_cast<Settings::Render::Mode>(index));
 }
 
+void Sidebar::on_loadModelButton_clicked()
+{
+    emit modelChanged(ui->modelComboBox->currentText());
+}
+
+void Sidebar::fillModelComboBox()
+{
+    QList<QString> modelKeys = Settings::modelMap().keys();
+    for (int i = 0; i < modelKeys.size(); i++)
+    {
+        ui->modelComboBox->addItem(modelKeys.at(i));
+    }
+}
