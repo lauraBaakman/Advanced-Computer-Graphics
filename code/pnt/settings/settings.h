@@ -12,22 +12,22 @@ public:
     ~Settings();
 
     class Render {
-        public:
-            enum Mode {
-
-            };
-         Mode mode;
-
-         Mode getMode() const;
-         void setMode(const Mode &value);
+    public:
+        enum Mode {
+            POINTCLOUD,
+            WIREFRAME,
+            FLAT,
+            PHONG
+        };
     };
 
     static QMap<QString, QString> modelMap();
 signals:
     void modelChanged(QString path);
+    void renderModeChanged(Settings::Render::Mode);
 
 public slots:
-    void onRenderModeChanged(Settings::Render::Mode mode);
+    void onRenderModeChanged(int index);
     void onModelChanged(QString modelKey);
 
 private:

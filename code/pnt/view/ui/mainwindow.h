@@ -37,6 +37,7 @@ private:
     void connectUiToCanvas();
     void connectUiToModelController();
     void connectModelControllerToCanvas();
+    void connectSettingsToCanvas();
 };
 
 #endif // MAINWINDOW_H

@@ -19,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connectUiToCanvas();
     connectUiToModelController();
     connectModelControllerToCanvas();
+    connectSettingsToCanvas();
 }
 
 MainWindow::~MainWindow()
@@ -68,8 +69,8 @@ void MainWindow::connectModelControllerToCanvas()
 
 void MainWindow::connectUiToSettings()
 {
-    QObject::connect(this->sidebar, SIGNAL(renderModeChanged(Settings::Render::Mode)),
-                     this->settings, SLOT(onRenderModeChanged(Settings::Render::Mode)));
+    QObject::connect(this->sidebar, SIGNAL(renderModeChanged(int)),
+                     this->settings, SLOT(onRenderModeChanged(int)));
 
     QObject::connect(this->sidebar, SIGNAL(modelChanged(QString)),
                      this->settings, SLOT(onModelChanged(QString)));
@@ -79,5 +80,11 @@ void MainWindow::connectUiToCanvas()
 {
     QObject::connect(this->sidebar, SIGNAL(rotationDialChanged(int,int)),
                      this->canvas, SLOT(onRotationDialChanged(int,int)));
+}
+
+void MainWindow::connectSettingsToCanvas()
+{
+    QObject::connect(this->settings, SIGNAL(renderModeChanged(Settings::Render::Mode)),
+                     this->canvas, SLOT(onRenderModeChanged(Settings::Render::Mode)));
 }
 

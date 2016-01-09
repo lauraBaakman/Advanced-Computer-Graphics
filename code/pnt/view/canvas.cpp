@@ -105,9 +105,7 @@ void Canvas::paintGL()
     this->shaderProgram->bind();
     this->vertexArrayObject.bind();
 
-    // update model view projection matrix;
-    constructModelViewProjectionMatrix();
-    this->shaderProgram->setUniformValue("mvpMatrix", this->mvpMatrix);
+    updateTransformationMatrix();
 
     glPointSize(20.0f);
     glDrawElements(GL_TRIANGLES, this->numIndices, GL_UNSIGNED_INT, (void*)(0));
@@ -119,6 +117,12 @@ void Canvas::paintGL()
 bool Canvas::isAllocated(QOpenGLBuffer *buffer)
 {
     return buffer->size() != 0;
+}
+
+void Canvas::updateTransformationMatrix()
+{
+    constructModelViewProjectionMatrix();
+    this->shaderProgram->setUniformValue("mvpMatrix", this->mvpMatrix);
 }
 
 void Canvas::constructModelViewProjectionMatrix()
@@ -142,8 +146,13 @@ void Canvas::onRotationDialChanged(int axis, int value)
 
 void Canvas::onModelChanged(Mesh *model)
 {
-    qDebug() << *model;
     updateBuffers(model);
+    update();
+}
+
+void Canvas::onRenderModeChanged(Settings::Render::Mode mode)
+{
+    this->mode = mode;
     update();
 }
 

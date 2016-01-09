@@ -22,8 +22,7 @@ SOURCES += main.cpp\
     view/canvas.cpp \
     view/ui/sidebar.cpp \
     controller/meshcontroller.cpp \
-    settings/settings.cpp \
-    settings/render.cpp
+    settings/settings.cpp
 
 HEADERS  += view/ui/mainwindow.h \
     main.ih \

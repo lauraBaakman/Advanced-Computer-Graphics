@@ -20,9 +20,9 @@ QMap<QString, QString> Settings::modelMap()
     return modelMap;
 }
 
-void Settings::onRenderModeChanged(Settings::Render::Mode mode)
-{   qDebug() << "Settings::onRenderModeChanged" << mode;
-    render->setMode(mode);
+void Settings::onRenderModeChanged(int index)
+{   qDebug() << "Settings::onRenderModeChanged" << index;
+    emit renderModeChanged(static_cast<Settings::Render::Mode>(index));
 }
 
 void Settings::onModelChanged(QString modelKey)

@@ -22,16 +22,6 @@ void Sidebar::fixLayout()
     ui->sidebarUiLayout->setAlignment(Qt::AlignTop);
 }
 
-void Sidebar::on_renderModeComboBox_currentIndexChanged(int index)
-{   // Note that the order of the combo box needs to be the same as the enum.
-    emit renderModeChanged(static_cast<Settings::Render::Mode>(index));
-}
-
-void Sidebar::on_loadModelButton_clicked()
-{
-    emit modelChanged(ui->modelComboBox->currentText());
-}
-
 void Sidebar::fillModelComboBox()
 {
     QList<QString> modelKeys = Settings::modelMap().keys();
@@ -39,6 +29,16 @@ void Sidebar::fillModelComboBox()
     {
         ui->modelComboBox->addItem(modelKeys.at(i));
     }
+}
+
+void Sidebar::on_renderModeComboBox_currentIndexChanged(int index)
+{
+    emit renderModeChanged(index);
+}
+
+void Sidebar::on_loadModelButton_clicked()
+{
+    emit modelChanged(ui->modelComboBox->currentText());
 }
 
 void Sidebar::on_xDial_valueChanged(int value)

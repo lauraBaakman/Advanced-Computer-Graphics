@@ -13,6 +13,7 @@
 #include <QOpenGLBuffer>
 #include <QOpenGLVertexArrayObject>
 #include "model/mesh.h"
+#include "settings/settings.h"
 
 class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 {
@@ -25,6 +26,7 @@ public:
 public slots:
     void onRotationDialChanged(int axis, int value);
     void onModelChanged(Mesh *model);
+    void onRenderModeChanged(Settings::Render::Mode mode);
 
 protected:
     void initializeGL() Q_DECL_OVERRIDE;
@@ -62,6 +64,9 @@ private:
     float zoomingFactor;
     void constructModelViewProjectionMatrix();
     void updateTransformationMatrix();
+
+    // Paint stuff
+    Settings::Render::Mode mode = Settings::Render::Mode::POINTCLOUD;
 
     // Events
     bool gestureEvent(QGestureEvent *event);
