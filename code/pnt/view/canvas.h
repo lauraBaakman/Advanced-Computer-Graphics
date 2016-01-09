@@ -59,6 +59,7 @@ private:
     QVector3D rotationAngles;
     float zoomingFactor;
     void constructModelViewProjectionMatrix();
+    void updateTransformationMatrix();
 
     // Events
     bool gestureEvent(QGestureEvent *event);

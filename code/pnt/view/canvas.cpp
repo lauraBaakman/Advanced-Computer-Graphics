@@ -8,11 +8,15 @@ Canvas::Canvas(QWidget *parent) :
 
 Canvas::~Canvas()
 {
+//    this->vertexBuffer->destroy();
+//    this->normalBuffer->destroy();
+//    this->indexBuffer->destroy();
+    this->vertexArrayObject.destroy();
+
     delete this->shaderProgram;
     delete this->vertexBuffer;
     delete this->normalBuffer;
     delete this->indexBuffer;
-    this->vertexArrayObject.destroy();
 }
 
 void Canvas::initializeGL()
@@ -20,7 +24,7 @@ void Canvas::initializeGL()
     initializeOpenGLFunctions();
 
     glEnable(GL_DEPTH_TEST);
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
     initializeShaders();
     initializeBuffers();
@@ -29,8 +33,8 @@ void Canvas::initializeGL()
 void Canvas::initializeShaders()
 {
     this->shaderProgram = new QOpenGLShaderProgram();
-    this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::Vertex, ":/shaders/resources/shaders/vertex_shader.vert");
-    this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::Fragment, ":/shaders/resources/shaders/fragment_shader.frag");
+    this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::Vertex, ":/shaders/resources/shaders/vertex.glsl");
+    this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::Fragment, ":/shaders/resources/shaders/fragment.glsl");
     this->shaderProgram->link();
 }
 
@@ -47,10 +51,10 @@ void Canvas::initializeBuffers()
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
-    this->normalBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
-    this->normalBuffer->setUsagePattern(QOpenGLBuffer::DynamicDraw);
-    this->normalBuffer->create();
-    this->normalBuffer->bind();
+//    this->normalBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
+//    this->normalBuffer->setUsagePattern(QOpenGLBuffer::DynamicDraw);
+//    this->normalBuffer->create();
+//    this->normalBuffer->bind();
 
     this->indexBuffer = new QOpenGLBuffer(QOpenGLBuffer::IndexBuffer);
     this->indexBuffer->setUsagePattern(QOpenGLBuffer::DynamicDraw);
@@ -77,7 +81,7 @@ void Canvas::updateBuffer(QOpenGLBuffer *buffer, QVector<unsigned int> data)
 void Canvas::updateBuffers(Mesh *model)
 {
     updateBuffer(this->vertexBuffer, model->getVertexPositions());
-    updateBuffer(this->normalBuffer, model->getVertexNormals());
+//    updateBuffer(this->normalBuffer, model->getVertexNormals());
     updateBuffer(this->indexBuffer, model->getIndexBuffer());
 }
 
@@ -90,10 +94,16 @@ void Canvas::paintGL()
     }
 
     this->shaderProgram->bind();
-    this->vertexBuffer->bind();
-    glPointSize(8.0f);
+    this->vertexArrayObject.bind();
+
+    constructModelViewProjectionMatrix();
+    this->shaderProgram->setUniformValue("mvpMatrix", this->mvpMatrix);
+    qDebug() << this->mvpMatrix;
+
+    glPointSize(20.0f);
     glDrawArrays(GL_POINTS, 0, 8);
-    this->vertexBuffer->release();
+
+    this->vertexArrayObject.release();
     this->shaderProgram->release();
 }
 
@@ -118,7 +128,6 @@ void Canvas::constructModelViewProjectionMatrix()
 void Canvas::onRotationDialChanged(int axis, int value)
 {
     this->rotationAngles[axis] = value;
-    constructModelViewProjectionMatrix();
     update();
 }
 

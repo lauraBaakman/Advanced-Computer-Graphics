@@ -6,7 +6,7 @@
         <file>resources/models/monkey.obj</file>
     </qresource>
     <qresource prefix="/shaders">
-        <file>resources/shaders/vertex_shader.vert</file>
-        <file>resources/shaders/fragment_shader.frag</file>
+        <file>resources/shaders/vertex.glsl</file>
+        <file>resources/shaders/fragment.glsl</file>
     </qresource>
 </RCC>
