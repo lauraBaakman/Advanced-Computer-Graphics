@@ -50,6 +50,8 @@ private:
     void initializeBuffers();
 
     //OpenGL update
+    int numIndices;
+    int numVertices;
     void updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data);
     void updateBuffer(QOpenGLBuffer *buffer, QVector<unsigned int> data);
     void updateBuffers(Mesh *model);

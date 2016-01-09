@@ -4,6 +4,8 @@ Canvas::Canvas(QWidget *parent) :
     QOpenGLWidget(parent)
 {
     grabGesture(Qt::PinchGesture);
+
+    this->zoomingFactor = 0.5;
 }
 
 Canvas::~Canvas()
@@ -51,10 +53,13 @@ void Canvas::initializeBuffers()
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
-//    this->normalBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
-//    this->normalBuffer->setUsagePattern(QOpenGLBuffer::DynamicDraw);
-//    this->normalBuffer->create();
-//    this->normalBuffer->bind();
+    this->normalBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
+    this->normalBuffer->setUsagePattern(QOpenGLBuffer::DynamicDraw);
+    this->normalBuffer->create();
+    this->normalBuffer->bind();
+
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
     this->indexBuffer = new QOpenGLBuffer(QOpenGLBuffer::IndexBuffer);
     this->indexBuffer->setUsagePattern(QOpenGLBuffer::DynamicDraw);
@@ -80,8 +85,12 @@ void Canvas::updateBuffer(QOpenGLBuffer *buffer, QVector<unsigned int> data)
 
 void Canvas::updateBuffers(Mesh *model)
 {
+    this->numVertices = model->getVertexPositions().size();
     updateBuffer(this->vertexBuffer, model->getVertexPositions());
-//    updateBuffer(this->normalBuffer, model->getVertexNormals());
+
+    updateBuffer(this->normalBuffer, model->getVertexNormals());
+
+    this->numIndices = model->getIndexBuffer().size();
     updateBuffer(this->indexBuffer, model->getIndexBuffer());
 }
 
@@ -96,12 +105,12 @@ void Canvas::paintGL()
     this->shaderProgram->bind();
     this->vertexArrayObject.bind();
 
+    // update model view projection matrix;
     constructModelViewProjectionMatrix();
     this->shaderProgram->setUniformValue("mvpMatrix", this->mvpMatrix);
-    qDebug() << this->mvpMatrix;
 
     glPointSize(20.0f);
-    glDrawArrays(GL_POINTS, 0, 8);
+    glDrawElements(GL_TRIANGLES, this->numIndices, GL_UNSIGNED_INT, (void*)(0));
 
     this->vertexArrayObject.release();
     this->shaderProgram->release();
