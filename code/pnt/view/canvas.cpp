@@ -31,6 +31,8 @@ void Canvas::initializeShaders()
     this->shaderProgram = new QOpenGLShaderProgram();
     this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::Vertex, ":/shaders/resources/shaders/vertex.glsl");
     this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::Fragment, ":/shaders/resources/shaders/fragment.glsl");
+    this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::TessellationControl, ":/shaders/resources/shaders/controll.glsl");
+    this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::TessellationEvaluation, ":/shaders/resources/shaders/evaluation.glsl");
     this->shaderProgram->link();
 }
 
@@ -101,16 +103,20 @@ void Canvas::paintGL()
 
     updateTransformationMatrix();
 
-    switch(mode) {
-    case Settings::Render::Mode::POINTCLOUD:
-        drawPointCloud();
-        break;
-    case Settings::Render::Mode::WIREFRAME:
-        drawWireframe();
-        break;
-    case Settings::Render::Mode::NORMALS:
-        drawNormalSurface();
-    }
+//    switch(mode) {
+//    case Settings::Render::Mode::POINTCLOUD:
+//        drawPointCloud();
+//        break;
+//    case Settings::Render::Mode::WIREFRAME:
+//        drawWireframe();
+//        break;
+//    case Settings::Render::Mode::NORMALS:
+//        drawNormalSurface();
+//    }
+
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    glDrawElements(GL_PATCHES, this->numIndices, GL_UNSIGNED_INT, (void*)(0));
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     this->vertexArrayObject.release();
     this->shaderProgram->release();

@@ -40,3 +40,7 @@ FORMS    += view/ui/mainwindow.ui \
 
 RESOURCES += \
     resources.qrc
+
+DISTFILES += \
+    resources/shaders/controll.frag \
+    resources/shaders/evaluation.frag
