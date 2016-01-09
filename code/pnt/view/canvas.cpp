@@ -109,7 +109,7 @@ void Canvas::paintGL()
         drawWireframe();
         break;
     case Settings::Render::Mode::NORMALS:
-        drawNormals();
+        drawNormalSurface();
     }
 
     this->vertexArrayObject.release();
@@ -140,7 +140,7 @@ void Canvas::drawWireframe()
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
-void Canvas::drawNormals()
+void Canvas::drawNormalSurface()
 {
     glDrawElements(GL_TRIANGLES, this->numIndices, GL_UNSIGNED_INT, (void*)(0));
 }
