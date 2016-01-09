@@ -67,6 +67,9 @@ private:
 
     // Paint stuff
     Settings::Render::Mode mode = Settings::Render::Mode::POINTCLOUD;
+    void drawPointCloud();
+    void drawWireframe();
+    void drawNormals();
 
     // Events
     bool gestureEvent(QGestureEvent *event);

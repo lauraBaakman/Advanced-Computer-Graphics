@@ -268,12 +268,7 @@ QGroupBox::title {
         </item>
         <item>
          <property name="text">
-          <string>Flat shading</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Phong shading</string>
+          <string>Normal surface</string>
          </property>
         </item>
        </widget>

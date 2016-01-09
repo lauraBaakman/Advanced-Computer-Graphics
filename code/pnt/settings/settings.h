@@ -16,8 +16,7 @@ public:
         enum Mode {
             POINTCLOUD,
             WIREFRAME,
-            FLAT,
-            PHONG
+            NORMALS
         };
     };
 

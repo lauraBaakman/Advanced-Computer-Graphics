@@ -4,21 +4,15 @@ Canvas::Canvas(QWidget *parent) :
     QOpenGLWidget(parent)
 {
     grabGesture(Qt::PinchGesture);
-
-    this->zoomingFactor = 0.5;
 }
 
 Canvas::~Canvas()
 {
-//    this->vertexBuffer->destroy();
-//    this->normalBuffer->destroy();
-//    this->indexBuffer->destroy();
+    this->vertexBuffer->destroy();
+    this->normalBuffer->destroy();
+    this->indexBuffer->destroy();
     this->vertexArrayObject.destroy();
-
     delete this->shaderProgram;
-    delete this->vertexBuffer;
-    delete this->normalBuffer;
-    delete this->indexBuffer;
 }
 
 void Canvas::initializeGL()
@@ -107,8 +101,16 @@ void Canvas::paintGL()
 
     updateTransformationMatrix();
 
-    glPointSize(20.0f);
-    glDrawElements(GL_TRIANGLES, this->numIndices, GL_UNSIGNED_INT, (void*)(0));
+    switch(mode) {
+    case Settings::Render::Mode::POINTCLOUD:
+        drawPointCloud();
+        break;
+    case Settings::Render::Mode::WIREFRAME:
+        drawWireframe();
+        break;
+    case Settings::Render::Mode::NORMALS:
+        drawNormals();
+    }
 
     this->vertexArrayObject.release();
     this->shaderProgram->release();
@@ -125,17 +127,35 @@ void Canvas::updateTransformationMatrix()
     this->shaderProgram->setUniformValue("mvpMatrix", this->mvpMatrix);
 }
 
+void Canvas::drawPointCloud()
+{
+    glPointSize(5.0f);
+    glDrawArrays(GL_POINTS, 0, this->numVertices);
+}
+
+void Canvas::drawWireframe()
+{
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    glDrawElements(GL_TRIANGLES, this->numIndices, GL_UNSIGNED_INT, (void*)(0));
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+}
+
+void Canvas::drawNormals()
+{
+    glDrawElements(GL_TRIANGLES, this->numIndices, GL_UNSIGNED_INT, (void*)(0));
+}
+
 void Canvas::constructModelViewProjectionMatrix()
 {
     mvpMatrix.setToIdentity();
-
-    // Scale determined by QPinchEvents
-    mvpMatrix.scale(this->zoomingFactor);
 
     // Rotation along the axis determined by QDials in the ui.
     mvpMatrix.rotate(this->rotationAngles.x(), 1.0, 0.0, 0.0);
     mvpMatrix.rotate(this->rotationAngles.y(), 0.0, 1.0, 0.0);
     mvpMatrix.rotate(this->rotationAngles.z(), 0.0, 0.0, 1.0);
+
+    // Scale determined by QPinchEvents
+    mvpMatrix.scale(this->zoomingFactor);
 }
 
 void Canvas::onRotationDialChanged(int axis, int value)
