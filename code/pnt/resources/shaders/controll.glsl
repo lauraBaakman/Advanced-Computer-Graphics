@@ -9,6 +9,10 @@ struct pnPatch {
     float b102;
     float b201;
     float b111;
+
+    float n110;
+    float n011;
+    float n101;
 };
 
 // Variable in
@@ -34,6 +38,10 @@ float N1 = vsNormals[1][gl_InvocationID];
 float N2 = vsNormals[2][gl_InvocationID];
 float N3 = vsNormals[3][gl_InvocationID];
 
+
+vec3 substractPoints(int i, int j){
+    return (gl_in[i].gl_Position.xyz - gl_in[j].gl_Position.xyz);
+}
 
 ////Project a point on a plane
 float wij(int i, int j){
@@ -62,6 +70,30 @@ void computeGeomtryControlPoints() {
     tcsPatches[gl_InvocationID].b111 = E + (E - V)/2.0;
 }
 
+float vij(int i, int j){
+    vec3 deltaP = substractPoints(j, i);
+
+    float numerator = dot(deltaP, (vsNormals[i] + vsNormals[j]));
+    float denominator = dot(deltaP, deltaP);
+
+    return 2.0 * (numerator / denominator);
+}
+
+vec3 hij(int i, int j){
+    return vsNormals[i] + vsNormals[j] - vij(i, j) * substractPoints(j, i);
+}
+
+float computeNormalControlPoint(int i, int j){
+    vec3 h = hij(i, j);
+    return h[gl_InvocationID] / length(h);
+}
+
+void computeNormalControlPoints(){
+    tcsPatches[gl_InvocationID].n110 = computeNormalControlPoint(1, 2);
+    tcsPatches[gl_InvocationID].n011 = computeNormalControlPoint(2, 3);
+    tcsPatches[gl_InvocationID].n101 = computeNormalControlPoint(3, 1);
+}
+
 void passThroughToTES(){
     tcsNormals[gl_InvocationID] = vsNormals[gl_InvocationID];
     gl_out[gl_InvocationID].gl_Position = gl_in[gl_InvocationID].gl_Position;
@@ -80,6 +112,7 @@ void main(void)
 {
     setTesselationLevels(2.0, 1.0);
     computeGeomtryControlPoints();
+    computeNormalControlPoints();
     passThroughToTES();
 }
 
