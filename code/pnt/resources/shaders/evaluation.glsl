@@ -62,7 +62,7 @@ void interpolateGeometricComponent(){
     gl_Position = vec4(position, 1.0);
 }
 
-void interpolateNormalComponent(){
+void interpolateFakeNormals(){
     vec3 n200 = tcsNormals[0];
     vec3 n020 = tcsNormals[1];
     vec3 n002 = tcsNormals[2];
@@ -75,6 +75,25 @@ void interpolateNormalComponent(){
         n110 * w * u + n011 * u * v + n101 * w * v);
 }
 
+void interpolateRealNormals(){
+    vec3 b300 = gl_in[0].gl_Position.xyz;
+    vec3 b030 = gl_in[1].gl_Position.xyz;
+    vec3 b003 = gl_in[2].gl_Position.xyz;
+
+    vec3 b210 = vec3(tcsPatches[0].b210, tcsPatches[1].b210, tcsPatches[2].b210);
+    vec3 b120 = vec3(tcsPatches[0].b120, tcsPatches[1].b120, tcsPatches[2].b120);
+    vec3 b021 = vec3(tcsPatches[0].b021, tcsPatches[1].b021, tcsPatches[2].b021);
+    vec3 b012 = vec3(tcsPatches[0].b012, tcsPatches[1].b012, tcsPatches[2].b012);
+    vec3 b102 = vec3(tcsPatches[0].b102, tcsPatches[1].b102, tcsPatches[2].b102);
+    vec3 b201 = vec3(tcsPatches[0].b201, tcsPatches[1].b201, tcsPatches[2].b201);
+
+    vec3 b111 = vec3(tcsPatches[0].b111, tcsPatches[1].b111, tcsPatches[2].b111);
+
+    vec3 tangent1 = w2 * b102 + v2 * b120 + u2 * b300 + 
+        2 * v * w * b111 + 2 * u * w * b201 + 2 * u * v * b210;
+
+}
+
 void main(void)
 {
 //     gl_Position = (gl_TessCoord.x * gl_in[0].gl_Position) +
@@ -82,6 +101,6 @@ void main(void)
 //                       (gl_TessCoord.z * gl_in[2].gl_Position);
 
     interpolateGeometricComponent();
-    interpolateNormalComponent();
+    interpolateFakeNormals();
 }
 
