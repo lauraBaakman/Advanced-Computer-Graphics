@@ -5,6 +5,7 @@
         <file>resources/models/ico_sphere.obj</file>
         <file>resources/models/monkey.obj</file>
         <file>resources/models/triangle.obj</file>
+        <file>resources/models/Laurana50k.obj</file>
     </qresource>
     <qresource prefix="/shaders">
         <file>resources/shaders/vertex.glsl</file>
@@ -12,4 +13,5 @@
         <file>resources/shaders/controll.glsl</file>
         <file>resources/shaders/evaluation.glsl</file>
     </qresource>
+    <qresource prefix="/"/>
 </RCC>

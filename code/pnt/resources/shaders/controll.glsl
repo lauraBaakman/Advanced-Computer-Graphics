@@ -34,9 +34,9 @@ float P1 = gl_in[0].gl_Position[gl_InvocationID];
 float P2 = gl_in[1].gl_Position[gl_InvocationID];
 float P3 = gl_in[2].gl_Position[gl_InvocationID];
 
-float N1 = vsNormals[1][gl_InvocationID];
-float N2 = vsNormals[2][gl_InvocationID];
-float N3 = vsNormals[3][gl_InvocationID];
+float N1 = vsNormals[0][gl_InvocationID];
+float N2 = vsNormals[1][gl_InvocationID];
+float N3 = vsNormals[2][gl_InvocationID];
 
 
 vec3 substractPoints(int i, int j){
@@ -115,7 +115,7 @@ void setTesselationLevels(float inner, float outer){
 
 void main(void)
 {
-    setTesselationLevels(12.0, 12.0);
+    setTesselationLevels(4.0, 4.0);
     computeGeomtryControlPoints();
     computeNormalControlPoints();
     passThroughToTES();
