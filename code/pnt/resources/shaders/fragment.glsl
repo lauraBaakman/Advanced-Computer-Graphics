@@ -1,6 +1,6 @@
 #version 410 core
 
-//in vec3 eColor;
+//Variable out
 out vec4 fColor;
 
 void main(void)

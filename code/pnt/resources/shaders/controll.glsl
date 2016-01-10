@@ -38,8 +38,6 @@ void main(void)
             gl_TessLevelOuter[1] = 2.0;
             gl_TessLevelOuter[2] = 2.0;
     }
-
-
     tcsNormals[gl_InvocationID] = vsNormals[gl_InvocationID];
     gl_out[gl_InvocationID].gl_Position = gl_in[gl_InvocationID].gl_Position;
 }
