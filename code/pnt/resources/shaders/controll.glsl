@@ -43,19 +43,19 @@ vec3 substractPoints(int i, int j){
     return (gl_in[i].gl_Position.xyz - gl_in[j].gl_Position.xyz);
 }
 
-////Project a point on a plane
+// ###### GEOMETRY START ###### //
 float wij(int i, int j){
     return dot((gl_in[j].gl_Position.xyz - gl_in[i].gl_Position.xyz),
         vsNormals[i]);
 }
 
 void computeGeomtryControlPoints() {
-    tcsPatches[gl_InvocationID].b210 = (2.0 * P1 + P2 - wij(1, 2) * N1) / 3.0;
-    tcsPatches[gl_InvocationID].b120 = (2.0 * P2 + P1 - wij(2, 1) * N2) / 3.0;
-    tcsPatches[gl_InvocationID].b021 = (2.0 * P2 + P3 - wij(2, 3) * N2) / 3.0;
-    tcsPatches[gl_InvocationID].b012 = (2.0 * P3 + P2 - wij(3, 2) * N3) / 3.0;
-    tcsPatches[gl_InvocationID].b102 = (2.0 * P3 + P1 - wij(3, 1) * N3) / 3.0;
-    tcsPatches[gl_InvocationID].b201 = (2.0 * P1 + P3 - wij(1, 3) * N1) / 3.0;
+    tcsPatches[gl_InvocationID].b210 = (2.0 * P1 + P2 - wij(0, 1) * N1) / 3.0;
+    tcsPatches[gl_InvocationID].b120 = (2.0 * P2 + P1 - wij(1, 0) * N2) / 3.0;
+    tcsPatches[gl_InvocationID].b021 = (2.0 * P2 + P3 - wij(1, 2) * N2) / 3.0;
+    tcsPatches[gl_InvocationID].b012 = (2.0 * P3 + P2 - wij(2, 1) * N3) / 3.0;
+    tcsPatches[gl_InvocationID].b102 = (2.0 * P3 + P1 - wij(2, 0) * N3) / 3.0;
+    tcsPatches[gl_InvocationID].b201 = (2.0 * P1 + P3 - wij(0, 2) * N1) / 3.0;
 
     float E = (
         tcsPatches[gl_InvocationID].b210 +
@@ -70,6 +70,9 @@ void computeGeomtryControlPoints() {
     tcsPatches[gl_InvocationID].b111 = E + (E - V)/2.0;
 }
 
+// ###### GEOMETRY END ######## //
+
+// ###### NORMALS START ###### //
 float vij(int i, int j){
     vec3 deltaP = substractPoints(j, i);
 
@@ -89,10 +92,12 @@ float computeNormalControlPoint(int i, int j){
 }
 
 void computeNormalControlPoints(){
-    tcsPatches[gl_InvocationID].n110 = computeNormalControlPoint(1, 2);
-    tcsPatches[gl_InvocationID].n011 = computeNormalControlPoint(2, 3);
-    tcsPatches[gl_InvocationID].n101 = computeNormalControlPoint(3, 1);
+    tcsPatches[gl_InvocationID].n110 = computeNormalControlPoint(0, 1);
+    tcsPatches[gl_InvocationID].n011 = computeNormalControlPoint(1, 2);
+    tcsPatches[gl_InvocationID].n101 = computeNormalControlPoint(2, 0);
 }
+
+// ###### NORMALS END ######## //
 
 void passThroughToTES(){
     tcsNormals[gl_InvocationID] = vsNormals[gl_InvocationID];
@@ -110,7 +115,7 @@ void setTesselationLevels(float inner, float outer){
 
 void main(void)
 {
-    setTesselationLevels(2.0, 1.0);
+    setTesselationLevels(12.0, 12.0);
     computeGeomtryControlPoints();
     computeNormalControlPoints();
     passThroughToTES();

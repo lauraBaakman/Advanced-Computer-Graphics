@@ -16,7 +16,7 @@ struct pnPatch {
 };
 
 //Variable in
-layout (triangles) in;
+layout (triangles, fractional_odd_spacing, ccw) in;
 
 layout(location = 0) in vec3 tcsNormals[];
 layout(location = 3) in pnPatch tcsPatches[];
@@ -25,13 +25,13 @@ layout(location = 3) in pnPatch tcsPatches[];
 layout(location = 0) out vec3 tesNormal;
 
 float u = gl_TessCoord.x;
-float u2 = pow(u, 2);
+float u2 = pow(u, 2.0);
 
 float v = gl_TessCoord.y;
-float v2 = pow(v, 2);
+float v2 = pow(v, 2.0);
 
 float w = gl_TessCoord.z;
-float w2 = pow(w, 2);
+float w2 = pow(w, 2.0);
 
 void interpolateGeometricComponent(){
     vec3 b300 = gl_in[0].gl_Position.xyz;
@@ -54,7 +54,7 @@ void interpolateGeometricComponent(){
     vec3 position = b300 * w3 + b030 * u3 + b003 * v3 +
         b210 * 3.0 * w2 * u +
         b120 * 3.0 * w * u2 +
-        b210 * 3.0 * w2 * v +
+        b201 * 3.0 * w2 * v +
         b021 * 3.0 * u2 * v +
         b102 * 3.0 * w * v2 +
         b012 * 3.0 * u * v2 +
@@ -71,8 +71,8 @@ void interpolateNormalComponent(){
     vec3 n011 = normalize(vec3(tcsPatches[0].n011, tcsPatches[1].n011, tcsPatches[2].n011));
     vec3 n101 = normalize(vec3(tcsPatches[0].n101, tcsPatches[1].n101, tcsPatches[2].n101));
 
-    tesNormal = n200 * w2 + n020 * u2 + n002 * v2 +
-        n110 * w * u + n011 * u * v + n101 * w * v;
+    tesNormal = normalize(n200 * w2 + n020 * u2 + n002 * v2 +
+        n110 * w * u + n011 * u * v + n101 * w * v);
 }
 
 void main(void)
