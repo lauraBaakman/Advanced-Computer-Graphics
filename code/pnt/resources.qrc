@@ -5,6 +5,7 @@
         <file>resources/models/ico_sphere.obj</file>
         <file>resources/models/monkey.obj</file>
         <file>resources/models/triangle.obj</file>
+        <file>resources/models/stanfordBunny.obj</file>
     </qresource>
     <qresource prefix="/shaders">
         <file>resources/shaders/vertex.glsl</file>
