@@ -103,20 +103,20 @@ void Canvas::paintGL()
 
     updateTransformationMatrix();
 
-//    switch(mode) {
-//    case Settings::Render::Mode::POINTCLOUD:
-//        drawPointCloud();
-//        break;
-//    case Settings::Render::Mode::WIREFRAME:
-//        drawWireframe();
-//        break;
-//    case Settings::Render::Mode::NORMALS:
-//        drawNormalSurface();
-//    }
+    switch(mode) {
+    case Settings::Render::Mode::POINTCLOUD:
+        drawPointCloud();
+        break;
+    case Settings::Render::Mode::WIREFRAME:
+        drawWireframe();
+        break;
+    case Settings::Render::Mode::NORMALS:
+        drawNormalSurface();
+    }
 
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    glDrawElements(GL_PATCHES, this->numIndices, GL_UNSIGNED_INT, (void*)(0));
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+//    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+//    glDrawElements(GL_PATCHES, this->numIndices, GL_UNSIGNED_INT, (void*)(0));
+//    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     this->vertexArrayObject.release();
     this->shaderProgram->release();
@@ -142,13 +142,15 @@ void Canvas::drawPointCloud()
 void Canvas::drawWireframe()
 {
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    glDrawElements(GL_TRIANGLES, this->numIndices, GL_UNSIGNED_INT, (void*)(0));
+//    glDrawElements(GL_TRIANGLES, this->numIndices, GL_UNSIGNED_INT, (void*)(0));
+    glDrawElements(GL_PATCHES, this->numIndices, GL_UNSIGNED_INT, (void*)(0));
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
 void Canvas::drawNormalSurface()
 {
-    glDrawElements(GL_TRIANGLES, this->numIndices, GL_UNSIGNED_INT, (void*)(0));
+//    glDrawElements(GL_TRIANGLES, this->numIndices, GL_UNSIGNED_INT, (void*)(0));
+    glDrawElements(GL_PATCHES, this->numIndices, GL_UNSIGNED_INT, (void*)(0));
 }
 
 void Canvas::constructModelViewProjectionMatrix()
