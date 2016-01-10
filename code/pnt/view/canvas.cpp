@@ -55,7 +55,7 @@ void Canvas::initializeBuffers()
     this->normalBuffer->bind();
 
     glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_TRUE, 0, 0);
 
     this->indexBuffer = new QOpenGLBuffer(QOpenGLBuffer::IndexBuffer);
     this->indexBuffer->setUsagePattern(QOpenGLBuffer::DynamicDraw);
