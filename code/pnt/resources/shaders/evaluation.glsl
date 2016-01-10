@@ -22,7 +22,7 @@ layout(location = 0) in vec3 tcsNormals[];
 layout(location = 3) in pnPatch tcsPatches[];
 
 //Variable out
-layout(location = 0) out vec3 tesNormal;
+layout(location = 0) out vec3 tesNormals;
 
 float u = gl_TessCoord.x;
 float u2 = pow(u, 2.0);
@@ -71,7 +71,7 @@ void interpolateFakeNormals(){
     vec3 n011 = normalize(vec3(tcsPatches[0].n011, tcsPatches[1].n011, tcsPatches[2].n011));
     vec3 n101 = normalize(vec3(tcsPatches[0].n101, tcsPatches[1].n101, tcsPatches[2].n101));
 
-    tesNormal = normalize(n200 * w2 + n020 * u2 + n002 * v2 +
+    tesNormals = normalize(n200 * w2 + n020 * u2 + n002 * v2 +
         n110 * w * u + n011 * u * v + n101 * w * v);
 }
 
@@ -100,8 +100,8 @@ void interpolateRealNormals(){
         2.0 * v * w * b021 + 2.0 * u * w * b111 + 2.0 * u * v * b120;
 
     vec3 meanNormal = (n200 + n020 + n002) / 3.0;
-    tesNormal = normalize(cross(tangent1, tangent2));
-    if(dot(meanNormal, tesNormal) < 0) tesNormal = normalize(cross(tangent2, tangent1));
+    tesNormals = normalize(cross(tangent1, tangent2));
+    if(dot(meanNormal, tesNormals) < 0) tesNormals = normalize(cross(tangent2, tangent1));
 }
 
 void main(void)
@@ -111,7 +111,7 @@ void main(void)
 //                       (gl_TessCoord.z * gl_in[2].gl_Position);
 
     interpolateGeometricComponent();
-    // interpolateFakeNormals();
-    interpolateRealNormals();
+     interpolateFakeNormals();
+//    interpolateRealNormals();
 }
 
