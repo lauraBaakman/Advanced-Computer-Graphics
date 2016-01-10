@@ -1,4 +1,4 @@
-#version 410
+#version 410 core
 
 //in vec3 eColor;
 out vec4 fColor;

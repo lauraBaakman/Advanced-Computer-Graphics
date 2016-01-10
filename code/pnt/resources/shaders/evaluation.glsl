@@ -1,9 +1,15 @@
-#version 410
+#version 410 core
 
+//Variable in
 layout (triangles) in;
 
+layout(location = 0) in vec3 tcsNormals[];
+
+
+//Variable out
 //in vec3 vColor[3];
 out vec3 eColor;
+
 
 
 void main(void)
