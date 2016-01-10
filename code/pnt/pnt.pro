@@ -43,4 +43,5 @@ RESOURCES += \
 
 DISTFILES += \
     resources/shaders/controll.frag \
-    resources/shaders/evaluation.frag
+    resources/shaders/evaluation.frag \
+    geometry.glsl
