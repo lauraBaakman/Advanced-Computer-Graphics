@@ -16,6 +16,7 @@ QMap<QString, QString> Settings::modelMap()
     modelMap["Cube"]            = ":/models/resources/models/cube.obj";
     modelMap["Cone"]            = ":/models/resources/models/cone.obj";
     modelMap["Suzanne"]         = ":/models/resources/models/monkey.obj";
+    modelMap["Laurana"]         = ":/models/resources/models/Laurana50k.obj";
     modelMap["Ico Sphere"]      = ":/models/resources/models/ico_sphere.obj";
     modelMap["Triangle"]        = ":/models/resources/models/triangle.obj";
     modelMap["Stanford Bunny"]  = ":/models/resources/models/stanfordBunny.obj";

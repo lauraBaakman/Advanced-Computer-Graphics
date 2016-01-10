@@ -12,7 +12,9 @@ uniform mat4 mvpMatrix;
 
 void passThroughToFragmentShader()
 {
-    vsNormals = inputNormal;
+//    vsNormals = inputNormal;
+    vec4 temp = mvpMatrix * vec4(inputNormal, 1.0);
+    vsNormals = temp.xyz;
 }
 
 void setVertexPosition() {
