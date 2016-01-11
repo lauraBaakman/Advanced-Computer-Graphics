@@ -1,18 +1,24 @@
 %!TEX root = ../main.tex
 
 \section{Method}
+\label{s:method}
+\laura{Nalezen}
 
-\todo[inline]{Global idea of PN triangles, lit less global than in introduction}
+% \todo[inline]{Global idea of PN triangles, lit less global than in introduction}
 
-PN triangles were designed to make models look better \todo{organics, visual performance}, but with the idea to not impact the graphics pipeline, as other more sophisticated methods (\todo{e.g. ...?} do. They are therefore a good alternative for resource-limited hardware environments where e.g. no information about neighboring triangles can be accumulated. Although the origin paper from \citeauthor{vlachos2001curved}\textcite{vlachos2001curved} was written in 2001, when there were no programmable tessellation shaders, the following given list ... bla bla bla 
+The main goal of PN triangles is to improve on the visual quality of the models being rendered \todo{see figure 1, with illustration of this}, but also being able to do this on resource-limited hardware environments where e.g. no information about neighboring triangles can be accumulated. As described by \citeauthor{vlachos2001curved}, more specifically the goal of PN triangles is to soften triangle creases and improve the visual appeal by generating smoother silhouettes and better shading. Besides the visual improvements PN triangles provide the following list of benefits:
 
-\todo[inline]{pros list... page 160}
+\begin{enumerate}
+ 	\item PN triangle construction is \textit{compatible} with the existing API data structures i.e. vertex arrays together with triangle index streams, where triangles arrive in an unpredictable order.
+ 	\item The models are \textit{backward compatible} with hardware that does not support PN triangles, with minimal or no changes needed to existing models.
+ 	\item No setup of the application, API, or hardware driver is needed. Specifically hardware should not be able to provide random access to neighboring primitives. Consequently the only possible communicated information between primitives are provided by using shared normals at the vertices.\todo{, which is a restriction on the model, with consequences which are discussed in section x... (shared vs separate normals)}.
+ 	\item Pn triangles are applicable to \textit{arbitrary topology}.
+ 	\item \textit{Fast execution} and simple implementation in hardware on the cpu in 2001. Even faster execution at the time of writing (2016), by utilizing the programmable tessellation shaders.
+ \end{enumerate} 
 
-In section \ref{sec:implementation} we discuss the difference between the implementation of \citeauthor{vlachos2001curved} and implementation using the tessellation shaders.
+In the remaining part of this section we will discuss the construction of PN triangles both conceptually as mathematically. As mentioned in the introduction, the construction of a PN triangle is split in two different components: we refer to section \ref{ss:geometric_component} for a discussion on the geometric component and to section \ref{ss:normal_component} for the discussion of the normal component construction. 
 
-
-\todo[inline]{What is the structure of this section?}
-
+% \todo[inline]{What is the structure of this section?}
 
 \input{content/method_geometric}
 
