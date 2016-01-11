@@ -3,13 +3,12 @@
 
 \section{Introduction}
 \label{s:introduction}
-\rick{Nalezen:}
 
 % \todo[inline]{Context: Why PN triangles: fast smooth real-time rendering}
-\textcite{vlachos2001curved} introduced curved point-normal triangles as a method to improve the visual quality of triangular meshes in real-time entertainment. A major advantage of this method at the time of introduction (\citeyear{vlachos2001curved}) is that it is fast method to improve the visual quality of the rendered objects.
+\textcite{vlachos2001curved} introduced curved point-normal triangles as a method to improve the visual quality of triangular meshes in real-time entertainment. A major advantage of this method at the time of introduction (\citeyear{vlachos2001curved}) is that it is a fast method to improve the visual quality of the rendered objects.
 
 % \todo[inline]{Context: global idea of PN triangles}
-If PN triangles are used each triangle of the mesh is replaced by a curved shape, that can be subdivided into a, user selected, number of flat smaller triangles. Each point-normal triangle consists of a geometric and a normal component. These components are respectively defined as a cubic and a quadratic Bézier patch. These patches are based on the points and the normals of the corresponding triangle in the mesh. 
+If PN-triangles are used, each triangle of the mesh is replaced by a curved shape, that can be subdivided into a user selected number of flat smaller triangles. Each point-normal triangle consists of a geometric and a normal component. These components are respectively defined as a cubic and a quadratic Bézier patch. The coefficient of the patches are based on the points and the normals of the corresponding triangle in the mesh. 
 
 \iftoggle{PHONG}{
 	\future{Context: global idea of phong tesselation}
@@ -18,7 +17,7 @@ If PN triangles are used each triangle of the mesh is replaced by a curved shape
 
 
 % \todo[inline]{Application Domain: useful for real time rendering, not for CAD, explain why not....}
-Although curved point-normal triangles improve the visual appeal of a rendered mesh via``smoother silhouettes and better shading" \cite{vlachos2001curved} and are fast enough for real-time rendering their application domain is restricted to entertainment. They should not be used in for example computer-aided design. Since the rendering gives the model a visual smoothness that is not present in the actual mesh. 
+Although curved point-normal triangles improve the visual appeal of a rendered mesh via``smoother silhouettes and better shading" \cite{vlachos2001curved} and are fast enough for real-time rendering, their application domain is restricted to entertainment. They should not be used in, for example computer-aided design. Since the rendering gives the model a visual smoothness that is not present in the actual mesh. 
 
 % \todo[inline]{Required Background knowledge: nothing comes to mind, currently}
 
