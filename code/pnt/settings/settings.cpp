@@ -22,6 +22,7 @@ QMap<QString, QString> Settings::modelMap()
     modelMap["Quake Dog"]       = ":/models/resources/models/dog.obj";
     modelMap["Vore"]            = ":/models/resources/models/shalrath.obj";
     modelMap["Shambler"]        = ":/models/resources/models/shambler.obj";
+    modelMap["Enforcer"]        = ":/models/resources/models/enforcer.obj";
     return modelMap;
 }
 

@@ -9,6 +9,7 @@
         <file>resources/models/dog.obj</file>
         <file>resources/models/shalrath.obj</file>
         <file>resources/models/shambler.obj</file>
+        <file>resources/models/enforcer.obj</file>
     </qresource>
     <qresource prefix="/shaders">
         <file>resources/shaders/vertex.glsl</file>
