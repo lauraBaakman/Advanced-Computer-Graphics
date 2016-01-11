@@ -111,7 +111,7 @@ void main(void)
 //                       (gl_TessCoord.z * gl_in[2].gl_Position);
 
     interpolateGeometricComponent();
-    // interpolateFakeNormals();
-    interpolateRealNormals();
+     interpolateFakeNormals();
+//    interpolateRealNormals();
 }
 
