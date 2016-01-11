@@ -13,7 +13,7 @@ The main goal of PN triangles is to improve on the visual quality of the models 
  	\item The models are \textit{backward compatible} with hardware that does not support PN triangles, with minimal or no changes needed to existing models.
  	\item No setup of the application, API, or hardware driver is needed. Specifically hardware should not be able to provide random access to neighboring primitives. Consequently the only possible communicated information between primitives are provided by using shared normals at the vertices.\todo{, which is a restriction on the model, with consequences which are discussed in section x... (shared vs separate normals)}.
  	\item Pn triangles are applicable to \textit{arbitrary topology}.
- 	\item \textit{Fast execution} and simple implementation in hardware on the cpu in 2001. Even faster execution at the time of writing (2016), by utilizing the programmable tessellation shaders.
+ 	\item \textit{Fast execution} and \textit{simple implementation} in hardware on the CPU in 2001. Even faster execution at the time of writing (2016), by utilizing the programmable tessellation shaders on the GPU.
  \end{enumerate} 
 
 In the remaining part of this section we will discuss the construction of PN triangles both conceptually as mathematically. As mentioned in the introduction, the construction of a PN triangle is split in two different components: we refer to section \ref{ss:geometric_component} for a discussion on the geometric component and to section \ref{ss:normal_component} for the discussion of the normal component construction.
