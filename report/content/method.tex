@@ -2,29 +2,31 @@
 
 \section{Method}
 \label{s:method}
-\laura{Nalezen}
 
 % \todo[inline]{Global idea of PN triangles, lit less global than in introduction}
-
-The main goal of PN triangles is to improve on the visual quality of the models being rendered \todo{see figure 1, with illustration of this}, but also being able to do this on resource-limited hardware environments where e.g. no information about neighboring triangles can be accumulated. As described by \citeauthor{vlachos2001curved}, more specifically the goal of PN triangles is to soften triangle creases and improve the visual appeal by generating smoother silhouettes and better shading. Besides the visual improvements PN triangles provide the following list of benefits:
+The main goal of PN triangles is to improve the visual quality of rendered models, compare the models in \cref{fig:preamble:teaser}, and to do this on resource-limited hardware environments where e.g. no information about neighboring triangles can be accumulated. Or more precisely, the goal of point-normal triangles is ``to soften triangle creases and improve the visual appeal by generating smoother silhouettes and better shading" \cite{vlachos2001curved}. Other than the visual improvements PN triangles provide, \citeauthor{vlachos2001curved} mention the following benefits:
 
 \begin{enumerate}
- 	\item PN triangle construction is \textit{compatible} with the existing API data structures i.e. vertex arrays together with triangle index streams, where triangles arrive in an unpredictable order.
- 	\item The models are \textit{backward compatible} with hardware that does not support PN triangles, with minimal or no changes needed to existing models.
- 	\item No setup of the application, API, or hardware driver is needed. Specifically hardware should not be able to provide random access to neighboring primitives. Consequently the only possible communicated information between primitives are provided by using shared normals at the vertices.\todo{, which is a restriction on the model, with consequences which are discussed in section x... (shared vs separate normals)}.
- 	\item Pn triangles are applicable to \textit{arbitrary topology}.
- 	\item \textit{Fast execution} and \textit{simple implementation} in hardware on the CPU in 2001. Even faster execution at the time of writing (2016), by utilizing the programmable tessellation shaders on the GPU.
+ 	\item 
+ 		Point-normal triangle construction is \textit{compatible} with the existing API data structures i.e. vertex arrays together with triangle index streams are used, and the triangles arrive in an unpredictable order.
+ 	\item 
+ 		The models are \textit{backward compatible} with hardware that does not support point-normal triangles, with minimal or no changes needed to existing models.
+ 	\item 
+ 		No setup of the application, API, or hardware driver is needed. Specifically hardware should not be able to provide random access to neighboring primitives. Consequently the only possible communicated information between primitives are provided by using shared normals at the vertices. Which does restrict the models to be rendered somewhat, as discussed in section \ref{sss:method:geometric:properties}.
+ 	\item 
+ 		Point-normal triangles are applicable to \textit{arbitrary topology}.
+ 	\item 
+ 		PN-triangle rendering is done \textit{fast} and via \textit{simple implementation} in hardware on the CPU in 2001. At the time of writing even faster executing is possible by using programmable tessellation shaders on the GPU.
  \end{enumerate} 
 
-In the remaining part of this section we will discuss the construction of PN triangles both conceptually as mathematically. As mentioned in the introduction, the construction of a PN triangle is split in two different components: we refer to section \ref{ss:geometric_component} for a discussion on the geometric component and to section \ref{ss:normal_component} for the discussion of the normal component construction.
+In the remaining part of this section we discuss the construction of point-normal triangles conceptually as well as mathematically. As mentioned in the introduction, A PN triangle is split in two different components: we refer to section \ref{ss:geometric_component} for a discussion on the geometric component and to section \ref{ss:normal_component} for the review of the normal component.
 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.45\textwidth]{./content/img/method/input.png}
-	\caption{``The input primitive''. Only the information from a single primitive is used during construction. The labels of the vertices and normals coincide with the equations provided in the geometric and normal component sections. \laura{Lezen}}
+	\caption{An input primitive as used by point-normal triangle consists of three vertices and three vertex normals. Note that only the information from a single primitive is used during the construction of both the geometric and the normal component. The labels of the vertices and normals coincide with those used in the equations in this section.}
 	\label{fig:method:input_primitive}
 \end{figure}
-% \todo[inline]{What is the structure of this section?}
 
 \input{content/method_geometric}
 
