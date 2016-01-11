@@ -59,7 +59,7 @@ Since only the tessellation shaders are relevant for point-normal triangles we d
 		\label{fig:implementation:tessellationPipeline}
 	\end{figure}
 
-\subsection{Tesselation Control Shader}
+\subsection{Tessellation Control Shader}
 \label{ss:implementation:tcs}
 	% Input
 	The TCS receives both the normals and the positions of the vertices of the input patch, in our case a single triangle. 
@@ -77,9 +77,9 @@ Since only the tessellation shaders are relevant for point-normal triangles we d
 		%
 		Alternatively one could always compute all vertices of the output patch, independent of the \texttt{invocation\_ID}. This results in a lot of unnecessary computations, but removes the branching required to only compute the control net if the \texttt{invocation\_ID} has a specific value. Neither of these methods are more efficient than the one we used. A downside of our method is that one has to construct the vectors that represent the vertices of the control net in the tessellation evaluation shader. 
 
-	%Output
-
-	% To speed up the computation of the control net(s) we make use of the fact that the dimensionality of the positions is the same as the number of vertices of the input patch. Based on the \texttt{invocation\_ID}, for which of the three dimensions we compute the component of the output patch, e.g. if the \texttt{invocation\_ID} is 0 we compute the $y$ component of the data in the output patch for all vertices of that patch. This allows up to parallelize the computations of the control net. Although we perform some computations more often than necessary, e.g. $w(ij)$ and $v(ij)$ \todo{as defined in...}, this is faster than computing all three dimension of the output patch for each invocation of a patch or only performing the computations for one specific invocation of the patch. 
+		Other than computing the control nets this shader also sets the inner and outer tessellation levels for the Tessellation Primitive Generator. 
+%Output
+	The control nets are output to the tessellation evaluation shader whereas the tessellation levels our sent to the tessellation primitive generator. 
 
 
 \subsection{Tessellation Primitive Generator}
