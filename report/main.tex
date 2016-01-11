@@ -1,6 +1,9 @@
 \documentclass{egpubl}
 \usepackage{eg2014}
 
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
 \ConferencePaper
 \electronicVersion
 
@@ -8,7 +11,7 @@
 \else \usepackage[dvips]{graphicx} \fi
 
 \let\bibhang\arealyundefinedcommand
-\usepackage[backend=bibtex, safeinputenc, style=alphabetic]{biblatex}
+\usepackage[backend=bibtex, bibencoding=ascii, safeinputenc, style=alphabetic]{biblatex}
 \usepackage{csquotes}
 
 \makeatletter
@@ -73,7 +76,7 @@
 % Settings for header
 
 \title[PN Triangles]%
-      {A Discussion of PN Triangles}
+      {A Discussion of Curved Point-Normal Triangles}
 
 \author[R. van Veen \& L. Baakman]
        {R. van Veen\thanks{These authors contributed equally to this work.}$^{1}$
