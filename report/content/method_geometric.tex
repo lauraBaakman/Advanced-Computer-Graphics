@@ -51,7 +51,7 @@ This section discusses how the `curved' control net geometry, see \cref{fig:meth
 		The intermediate positions of the vertex coefficients are the same as their final positions, see equation \eqref{eq:method:vertex_coefficients}. Since their intermediate position places them at the vertices of the input triangle, which is where they are required to stay to keep the mesh water tight.
 	\item 
 		The tangent coefficients are placed at their final position by projecting the intermediate position into the tangent plane of the closest corner, see equation \eqref{eq:method:tangent_coefficients}. This is illustrated in \cref{fig:method:geometry_tangent_projection.png}.
-	\item The center coefficient is moved to the average of the tangent coefficients plus $1/2$ the distance it had to travel from its intermediate position, see \cref{eq:method:center_coefficient}.
+	\item The center coefficient is moved to the average of the tangent coefficients plus $1/2$ the distance it had to travel from its intermediate position, see equation \eqref{eq:method:center_coefficient}.
 \end{enumerate}
 %
 \begin{figure}
