@@ -2,7 +2,6 @@
 
 \section{Implementation}
 \label{s:implementation}
-\rick{Nalezen:}
 
 \begin{figure}
 	\plaatje{Pas de kleuren aan, pas het font aan, maak de pipelines verticaal, laat de twee teseelations shaders zien, geef alle blokjes dezelfde stijl, met tikz maken?}
@@ -23,7 +22,7 @@
 	\label{fig:implementation:pipeline}
 \end{figure}
 
-A schematic overview of both the OpenGL pipeline at the time of the publication of the paper and the introduces PN-triangles and the current pipeline are presented in \cref{fig:implementation:pipeline}. These images show that since \citeyear{vlachos2001curved} three new shaders have been introduced into the pipeline, namely the tessellation control, tessellation evaluation and the geometry shader. 
+A schematic overview of both the OpenGL pipeline at the time of the publication of the paper and the current pipeline are presented in \cref{fig:implementation:pipeline}. These images show that since \citeyear{vlachos2001curved} three new shaders have been introduced into the pipeline, namely the tessellation control, tessellation evaluation and the geometry shader. 
 
 Since only the tessellation shaders are relevant for point-normal triangles we discuss those in more detail in section \ref{ss:implementation:pipeline}. Section \ref{ss:implementation:tcs} through section \ref{ss:implementation:tes} present our implementation of point-normal triangles per discussed tessellation stage. 
 
@@ -31,14 +30,14 @@ Since only the tessellation shaders are relevant for point-normal triangles we d
 \label{ss:implementation:pipeline}
 
 	% Tesselation:
-	A schematic overview of tessellation in OpenGL is presented \Cref{fig:implementation:tessellationPipeline}.
+	A schematic overview of tessellation in OpenGL is presented in \Cref{fig:implementation:tessellationPipeline}.
 	% Tesselation control
 	% Invoked for
-	The tessellation control shader (TCS) is invoked once for each vertex in the output patch, a triangle in our case. 
+	The tessellation control shader (TCS) is invoked once for each vertex in the input patch, which is a triangle in our case. 
 	% What does it do
-	The primary function of the tessellation control shader is the setting of both the inner and the outer tessellation levels. Additionally the TCS can compute additional information about the vertices in the input patch. 
+	One of the functions of the tessellation control shader is to set the inner and the outer tessellation levels. Furthermore the TCS can compute additional information about the vertices in the input patch. 
 	% Output:
-	As can been seen in \cref{fig:implementation:tessellationPipeline} the TCS passes additional information about that patch along to the tessellation evaluation shader (TES) via the output patch. The tessellation levels are sent to the tessellation primitive generator (TPG) \cite{wolff2013opengl}.
+	As can been seen in \cref{fig:implementation:tessellationPipeline} the TCS passes additional information about that patch along to the tessellation evaluation shader (TES) via the output patch. The set inner and outer tessellation levels are sent to the tessellation primitive generator (TPG) \cite{wolff2013opengl}.
 
 	The TPG generates a number of new primitives based on the tessellation levels. How these primitives are generated depends on the selected edge tessellation spacing algorithm. Equal spacing results in evenly divided edges, whereas fractional spacing allows for two shorter edges in the subdivision for more stable interpolation under changing tessellation levels \cite{wolff2013opengl,openGL41Core}. In the case of triangles the barycentric coordinates of the vertices of the newly generated primitives are passed to the TES, as shown in \cref{fig:implementation:tessellationPipeline}.
 
@@ -62,7 +61,7 @@ Since only the tessellation shaders are relevant for point-normal triangles we d
 \subsection{Tessellation Control Shader}
 \label{ss:implementation:tcs}
 	% Input
-	The TCS receives both the normals and the positions of the vertices of the input patch, in our case a single triangle. 
+	The TCS receives both the normals and the positions of the vertices of the input patch, in our case, a single triangle. 
 	%Computation:
 		% Geometry
 		Using these it computes the cubic Bézier patch that defines the geometry of the point-normal triangle according to equation \eqref{eq:method:cubic_bezier_patch}.
@@ -145,4 +144,4 @@ Since only the tessellation shaders are relevant for point-normal triangles we d
 	% Geometry
 	If we have the control nets we determine the positions of the vertices of the flat triangles that will form the final mesh, according to Equation \eqref{eq:method:cubic_bezier_patch}. 
 	% Normals
-	We compute the normals according to Equation \todo{referentie naar vergelijking} or \todo{referentie naar vergelijking} depending on which normal computation is used. 
+	We compute the normals according to Equation \eqref{eq:method:quadratic_normal_patch} or \todo{reference to the at this point non existing equation.} depending on which normal computation is used. 
