@@ -61,6 +61,13 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 
+%Floats
+\usepackage{graphicx}
+% \usepackage[hang, small,labelfont=bf,up,textfont=sl,up, justification=raggedright]{caption}
+\usepackage{subcaption}
+\DeclareCaptionLabelFormat{opening}{(#2)}
+\captionsetup{subrefformat=opening}
+
 % References within paper
 \usepackage{varioref}
 \usepackage{hyperref}
@@ -74,6 +81,8 @@
 \newcommand{\laura}[1]{\todo[inline, color=red]{\textbf{Laura:} #1}}
 \newcommand{\rick}[1]{\todo[inline, color=green]{\textbf{Rick:} #1}}
 \newcommand{\future}[1]{\todo[inline, color=yellow]{\textbf{Possibly eventually:} #1}}
+\newcommand{\plaatje}[1]{\todo[inline, color=blue!20]{\textbf{Plaatje:} #1}}
+
 
 % Settings for header
 
