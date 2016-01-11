@@ -81,14 +81,55 @@ Since only the tessellation shaders are relevant for point-normal triangles we d
 %Output
 	The control nets are output to the tessellation evaluation shader whereas the tessellation levels our sent to the tessellation primitive generator. 
 
+\begin{figure}
+	\plaatje{Overtrekken in illustrator, 'nough said.}
+	\centering
+	\begin{subfigure}{0.18\columnwidth}
+		\centering
+		\includegraphics[width=\textwidth]{content/img/implementation/tessellation_input.png}
+		\caption{Input}
+		\label{fig:implementation:step:input}
+	\end{subfigure}
+	\begin{subfigure}{0.18\columnwidth}
+		\centering
+		\includegraphics[width=\textwidth]{content/img/implementation/tessellation_1.png}
+		\caption{Step \ref{it:implementation:step:1}}
+		\label{fig:implementation:step:1}
+	\end{subfigure}	
+	\begin{subfigure}{0.18\columnwidth}
+		\centering
+		\includegraphics[width=\textwidth]{content/img/implementation/tessellation_2.png}
+		\caption{Step \ref{it:implementation:step:2}}
+		\label{fig:implementation:step:2}
+	\end{subfigure}		
+	\begin{subfigure}{0.18\columnwidth}
+		\centering
+		\includegraphics[width=\textwidth]{content/img/implementation/tessellation_3.png}
+		\caption{Step \ref{it:implementation:step:3}}
+		\label{fig:implementation:step:3}
+	\end{subfigure}		
+			\begin{subfigure}{0.18\columnwidth}
+		\centering
+		\includegraphics[width=\textwidth]{content/img/implementation/tessellation_4.png}
+		\caption{Step \ref{it:implementation:step:4}}
+		\label{fig:implementation:step:4}
+	\end{subfigure}		
+	\caption{The primitive generation of triangles by the tessellation primitive generator of an}
+	\label{fig:implementation:step}
+\end{figure}
 
 \subsection{Tessellation Primitive Generator}
 \label{ss:implementation:tpg}
-	% Geometry
+	The tessellation primitive generator tessellates the triangles according to these steps \cite{cozzi2012opengl}:
+		\begin{enumerate}[label=(\roman*)]
+			\item \label{it:implementation:1} The patch is divided into the same number of concentric triangles as the inner tessellation level, see \cref{fig:implementation:step:1}.
+			\item \label{it:implementation:2} The spaces between the concentric triangles, except the outer triangle, are subdivided intro triangles, see \cref{fig:implementation:step:2}.
+			\item \label{it:implementation:3} The outer edges of the triangles are decomposed in smaller edges according to the outer tessellation level, see \cref{fig:implementation:step:3}.
+			\item \label{it:implementation:4} The outer ring of triangles is subdivided into triangles by connecting the vertices from the inner triangles with those of the other triangles, see \cref{fig:implementation:step:4}.
+		\end{enumerate}
 
-	% Fake normals
 
-	% Real normals
+	% Although the TPG is not programmable, we should mention that it tessellates according to a different pattern than the one proposed by \citeauthor{vlachos2001curved}. We opted for \textt{fractional\_odd\_spacing} to make changes between tessellation levels seem more smooth. 
 
 \subsection{Tessellation Evaluation Shader}
 \label{ss:implementation:tes}
