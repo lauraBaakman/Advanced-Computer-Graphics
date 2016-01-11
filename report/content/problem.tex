@@ -2,7 +2,7 @@
 \section{Problem Definition}
 \rick{Nalezen:}
 \label{s:problem}
-We consider a number a number of sub problems associated with point-normal triangles.
+We consider a number of sub problems associated with point-normal triangles.
 
 \begin{enumerate}[label=(\roman*)]
 	\item \label{it:problem:fakeNormals}
@@ -17,9 +17,10 @@ We consider a number a number of sub problems associated with point-normal trian
 		% Wat verwachten we
 		We do not expect a large difference in visual performance when `real' normals are used. Nor do we suppose that computing the normals based on the geometry will have a significant impact on the computational complexity of point-normal triangles.
 
-
+\iftoggle{PHONG}{
 	\item \label{it:problem:CompareWithPhongTesselation}
 		\future{2: Compare PN triangles with phong tesselation on the following aspects: performance, continuity, visual. We try to answer the question: When use PN when Phong?}
+}	
 
 	\item \label{it:problem:GPUImplementation}
 		%Waarom willen we het weten
