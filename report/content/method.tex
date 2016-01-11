@@ -16,8 +16,14 @@ The main goal of PN triangles is to improve on the visual quality of the models 
  	\item \textit{Fast execution} and simple implementation in hardware on the cpu in 2001. Even faster execution at the time of writing (2016), by utilizing the programmable tessellation shaders.
  \end{enumerate} 
 
-In the remaining part of this section we will discuss the construction of PN triangles both conceptually as mathematically. As mentioned in the introduction, the construction of a PN triangle is split in two different components: we refer to section \ref{ss:geometric_component} for a discussion on the geometric component and to section \ref{ss:normal_component} for the discussion of the normal component construction. 
+In the remaining part of this section we will discuss the construction of PN triangles both conceptually as mathematically. As mentioned in the introduction, the construction of a PN triangle is split in two different components: we refer to section \ref{ss:geometric_component} for a discussion on the geometric component and to section \ref{ss:normal_component} for the discussion of the normal component construction.
 
+\begin{figure}
+	\centering
+	\includegraphics[width=0.45\textwidth]{./content/img/method/input.png}
+	\caption{``The input primitive''. Only the information from a single primitive is used during construction. The labels of the vertices and normals coincide with the equations provided in the geometric and normal component sections. \laura{Lezen}}
+	\label{fig:method:input_primitive}
+\end{figure}
 % \todo[inline]{What is the structure of this section?}
 
 \input{content/method_geometric}
