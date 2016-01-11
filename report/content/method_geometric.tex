@@ -17,6 +17,7 @@ As may have become clear from the previous section, the only available informati
 In the next subsection we discuss the definition of the geometry of a PN triangle. Next in subsection \ref{sss:control_point_construction} we discuss the construction of the control points necessary for defining the geometry. 
 
 \subsubsection{Basic form}
+\laura{lezen}
 The geometric component of a PN triangle is defined by a triangular cubic B\`ezier patch. Such a patch $b$ is defines as follows:
 %
 \begin{align}
@@ -44,11 +45,12 @@ The formula in equation \ref{eq:method:cubic_bezier_patch} can be used to interp
 %
 % ## Geometry coefficients construction (tangent, vertex, and center) so three cases
 %
-\subsubsection{Coefficients construction} \label{sss:control_point_construction}
+\subsubsection{Coefficients} \label{sss:control_point_construction}
+\laura{lezen}
 In this section we discuss how the `curved' control net geometry (see figure \ref{fig:method:input_primitive}) is calculated, from the flat input primitive shown in figure \ref{fig:method:input_primitive}. The input primitive provides the the positions $P_1, P_2, P_3 \in \Real^3$ and normals $N_1, N_2, N_3 \in \Real^3$, which are the three corner vertices of the triangle. The coefficients $b_{ijk}$ are computed as follows:
 %
 \begin{enumerate}
-	\item Initially the coefficient $b_{ijk}$ are spread uniformly i.e. the intermediate position of $b_{ijk}$ is given by $(i P_i + j P_2 + kP_3) / 3$.
+	\item Initially the coefficient $b_{ijk}$ are spread uniformly i.e. the intermediate position of $b_{ijk}$ is calculated using the formula $(i P_i + j P_2 + kP_3) / 3$.
 	\item The vertex coefficients are now in the three corners, so these are left as is.
 	\item The tangent coefficients are placed by projecting the intermediate position of the coefficient into the tangent plane of the closest corner. This is illustrated by the image in figure \ref{fig:method:geometry_tangent_projection.png}.
 	\item The center coefficient is moved to the average of the tangent coefficients plus $1/2$ the distance it had to travel from its intermediate position.
@@ -61,15 +63,39 @@ In this section we discuss how the `curved' control net geometry (see figure \re
 	\label{fig:method:geometry_tangent_projection.png}
 \end{figure}
 %
-The following set of formulas describe mathematically how the position of the coefficient can be calculated. For clarity we group together the formulas together in the same way as the coefficients. The vertex coefficients are now given by:
-\begin{align}
-	b_{300} = P_1,\ b_{030} = P_2,\ b_{003} = P_3
+The following set of formulas describe how the position of the coefficient can be calculated. For clarity we group together the formulas in the same way as the coefficients. This gives the following formulas for the \textit{vertex coefficients}:
+\begin{align}\label{eq:method:vertex_coefficients}
+	b_{300} = P_1,\ b_{030} = P_2,\ b_{003} = P_3.
 \end{align}
-%
-% ## Properties of PN triangle geometry bla bla 500 BC verhaal.
-%
+The tangent coefficients are given by the projection of a point $Q$ onto a plane defined by the normal $N$ of the point $P$. The projected point $Q'$ is then given by: $Q' = Q - wN$, where $w = (Q - P) \cdot N$. Using this the following set of formulas give the positions of the \textit{tangent coefficients}:
+\begin{align}\label{eq:method:tangent_coefficients}
+	w_{ij} = {}& (P_j - P_i) \cdot N_i \in \Real \nonumber\\
+	b_{210} = {}& (2 P_1 + P_2 - w_{12}N_1) / 3,\nonumber\\
+	b_{120} = {}& (2 P_2 + P_1 - w_{21}N_2) / 3,\nonumber\\
+	b_{021} = {}& (2 P_2 + P_3 - w_{23}N_2) / 3, \\
+	b_{012} = {}& (2 P_3 + P_2 - w_{32}N_3) / 3,\nonumber\\
+	b_{102} = {}& (2 P_3 + P_1 - w_{31}N_3) / 3,\nonumber\\
+	b_{201} = {}& (2 P_1 + P_3 - w_{13}N_1) / 3. \nonumber
+\end{align}
+The last coefficient is the center coefficient which is, as explained in the list above, moved to the average of the previous computed tangent coefficients plus $1/2$ the distance it traveled from its intermediate location to that average position. \todo{reason why is very vague, and I do not know what it is... Let them tell us this is not enough?} The \textit{center coefficient} is given by:
+\begin{align}\label{eq:method:center_coefficient}
+	E = {}& (b_{210} + b_{120} + b_{021} \nonumber \\
+		{}& + b_{012} + b_{102} + b_{201}) / 6, \nonumber\\
+	V = {}& (P_1 + P_2 + P_3) / 3, \\
+	b_{111} = {}& E + (E - V) / 2. \nonumber
+\end{align}
+Now the formulas in equations \ref{eq:method:vertex_coefficients}-\ref{eq:method:center_coefficient} can be combined to get the resulting control net as shown in figure \ref{fig:method:control_net}.
+\subsubsection{Properties}
+\laura{lezen}
+\citeauthor{vlachos2001curved} have shown that PN triangles do not deviate to much from the original triangle. This is an important property because then the shape of the model is preserved an adjacent triangles do not interfere with each other. 
 
+By demanding shared normals i.e. one unique normal per vertex, the boundary between two PN triangles is generated by the same algorithm, thus the surface is without cracks. Except at the corners, PN triangles do not usually join with tangent continuity. To illustrate what would happen when normals were not shared an cartoon mesh has been included in figure \ref{fig:method:cracks}.
 
-\todo[inline]{We express geometric compinent as a cubic patch}
-\todo[inline]{Discuss parametrization of cubic patch}
-\todo[inline]{Discuss the construction of the control points for the cubic patch}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.45\textwidth]{./content/img/method/cracks.png}
+	\caption{Illustration of what would happen if non-unique normals per vertex are used, while using PN triangles }
+	\label{fig:method:cracks}
+\end{figure}
+
+\plaatje{Haha, primitives in figuur \ref{fig:method:cracks} zijn quads... We zouden eigenlijk zelf iets moeten renderen wat goed en wat fout gaat... \\future dan maar :P }
