@@ -40,7 +40,7 @@ Since only the tessellation shaders are relevant for point-normal triangles we d
 	% Output:
 	As can been seen in \cref{fig:implementation:tessellationPipeline} the TCS passes additional information about that patch along to the tessellation evaluation shader (TES) via the output patch. The tessellation levels are sent to the tessellation primitive generator (TPG) \cite{wolff2013opengl}.
 
-	The TPG generates a number of new primitives based on the tessellation levels. How these primitives are generated depends on the selected edge tessellation spacing. Equal spacing results in evenly divided edges, whereas fractional spacing allows for two shorter edges in the subdivision for more stable interpolation under changing tessellation levels \cite{wolff2013opengl,openGL41Core}.
+	The TPG generates a number of new primitives based on the tessellation levels. How these primitives are generated depends on the selected edge tessellation spacing algorithm. Equal spacing results in evenly divided edges, whereas fractional spacing allows for two shorter edges in the subdivision for more stable interpolation under changing tessellation levels \cite{wolff2013opengl,openGL41Core}. In the case of triangles the barycentric coordinates of the vertices of the newly generated primitives are passed to the TES, as shown in \cref{fig:implementation:tessellationPipeline}.
 
 	% Tesselation evaluation
 	% Invoked for
@@ -49,8 +49,8 @@ Since only the tessellation shaders are relevant for point-normal triangles we d
 	It receives the coordinates of this vertex in parameter space and the output of the TCS, as is illustrated in \cref{fig:implementation:tessellationPipeline}. 
 	% What does it do
 	Based on this information it computes the position of the current vertex. 
-	% Output:
-	This shader is passed to the next shader in the pipeline, either the geometry shader or the fragment shader, see \cref{fig:implementation:pipeline:new} \cite{wolff2013opengl}.
+	% Output:	
+	The computed data are passed to the next shader in the pipeline, either the geometry shader or the fragment shader, see \cref{fig:implementation:pipeline:new} \cite{wolff2013opengl}.
 
 	\begin{figure}
 		\centering
@@ -79,62 +79,70 @@ Since only the tessellation shaders are relevant for point-normal triangles we d
 
 		Other than computing the control nets this shader also sets the inner and outer tessellation levels for the Tessellation Primitive Generator. 
 %Output
-	The control nets are output to the tessellation evaluation shader whereas the tessellation levels our sent to the tessellation primitive generator. 
+	The control nets are output to the tessellation evaluation shader whereas the tessellation levels are sent to the tessellation primitive generator. 
 
 \begin{figure}
 	\plaatje{Overtrekken in illustrator, 'nough said.}
 	\centering
-	\begin{subfigure}{0.18\columnwidth}
+	\begin{subfigure}[b]{0.18\columnwidth}
 		\centering
 		\includegraphics[width=\textwidth]{content/img/implementation/tessellation_input.png}
 		\caption{Input}
 		\label{fig:implementation:step:input}
 	\end{subfigure}
-	\begin{subfigure}{0.18\columnwidth}
+	\begin{subfigure}[b]{0.18\columnwidth}
 		\centering
 		\includegraphics[width=\textwidth]{content/img/implementation/tessellation_1.png}
-		\caption{Step \ref{it:implementation:step:1}}
+		\caption{Step \ref{it:implementation:1}}
 		\label{fig:implementation:step:1}
 	\end{subfigure}	
-	\begin{subfigure}{0.18\columnwidth}
+	\begin{subfigure}[b]{0.18\columnwidth}
 		\centering
 		\includegraphics[width=\textwidth]{content/img/implementation/tessellation_2.png}
-		\caption{Step \ref{it:implementation:step:2}}
+		\caption{Step \ref{it:implementation:2}}
 		\label{fig:implementation:step:2}
 	\end{subfigure}		
-	\begin{subfigure}{0.18\columnwidth}
+	\begin{subfigure}[b]{0.18\columnwidth}
 		\centering
 		\includegraphics[width=\textwidth]{content/img/implementation/tessellation_3.png}
-		\caption{Step \ref{it:implementation:step:3}}
+		\caption{Step \ref{it:implementation:3}}
 		\label{fig:implementation:step:3}
 	\end{subfigure}		
-			\begin{subfigure}{0.18\columnwidth}
+	\begin{subfigure}[b]{0.18\columnwidth}
 		\centering
 		\includegraphics[width=\textwidth]{content/img/implementation/tessellation_4.png}
-		\caption{Step \ref{it:implementation:step:4}}
+		\caption{Step \ref{it:implementation:4}}
 		\label{fig:implementation:step:4}
 	\end{subfigure}		
-	\caption{The primitive generation of triangles by the tessellation primitive generator of an}
+	\caption{Generation of primitive using the TPG from OpenGL.}
 	\label{fig:implementation:step}
 \end{figure}
 
 \subsection{Tessellation Primitive Generator}
 \label{ss:implementation:tpg}
-	The tessellation primitive generator tessellates the triangles according to these steps \cite{cozzi2012opengl}:
+	The tessellation primitive generator is not programmable, we can however control its output via some parameter, most notably the tessellation levels and the edge tessellation spacing algorithm. The TPG tessellates an input triangle, see \cref{fig:implementation:step:input}, according to these steps \cite{cozzi2012opengl}:
 		\begin{enumerate}[label=(\roman*)]
 			\item \label{it:implementation:1} The patch is divided into the same number of concentric triangles as the inner tessellation level, see \cref{fig:implementation:step:1}.
 			\item \label{it:implementation:2} The spaces between the concentric triangles, except the outer triangle, are subdivided intro triangles, see \cref{fig:implementation:step:2}.
 			\item \label{it:implementation:3} The outer edges of the triangles are decomposed in smaller edges according to the outer tessellation level, see \cref{fig:implementation:step:3}.
 			\item \label{it:implementation:4} The outer ring of triangles is subdivided into triangles by connecting the vertices from the inner triangles with those of the other triangles, see \cref{fig:implementation:step:4}.
 		\end{enumerate}
+	A triangle that is tessellated with fractional spacing, and an inner and outer tessellation level of $4.0$ is presented in \cref{fig:implementation:tessellatedTriangle}. It should be noted that the resulting tessellation is different than the subdivision of triangles proposed by \citeauthor{vlachos2001curved}. 
 
+	We opted for fractional odd spacing to make changes between different tessellation levels as smooth as possible. 
 
-	% Although the TPG is not programmable, we should mention that it tessellates according to a different pattern than the one proposed by \citeauthor{vlachos2001curved}. We opted for \textt{fractional\_odd\_spacing} to make changes between tessellation levels seem more smooth. 
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.5\columnwidth]{content/img/implementation/tesselatedTriangle.png}
+		\caption{A single triangle tessellated with both outer and inner tessellation level set to 4.0, and edge tessellation spacing set to \texttt{fractional\_odd\_spacing}.}
+		\label{fig:implementation:tessellatedTriangle}
+	\end{figure}
 
 \subsection{Tessellation Evaluation Shader}
 \label{ss:implementation:tes}
+	% Input
+	Due to our parallelization the first step in the TES is to extract the control points from the input. 
 	% Geometry
-
-	% Fake normals
-
-	% Real normals
+	If we have the control nets we determine the positions of the vertices of the flat triangles that will form the final mesh, according to Equation \eqref{eq:method:cubic_bezier_patch}. 
+	% Normals
+	We compute the normals according to Equation \todo{referentie naar vergelijking} or \todo{referentie naar vergelijking} depending on which normal computation is used. 

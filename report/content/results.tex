@@ -14,5 +14,24 @@
 	\future{Any unsolved problems?}
 }
 
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.5\columnwidth}
+		\centering
+		\includegraphics[width=\textwidth]{content/img/results/dogCPU.png}
+		\caption{CPU}
+		\label{fig:results:cpugpu:cpu}
+	\end{subfigure}
+	\begin{subfigure}{0.5\columnwidth}
+		\centering
+		% \includegraphics[width=\textwidth]{./img/_}
+		\missingfigure[figwidth=\textwidth]{The dog rendered with our code}
+		\caption{GPU}
+		\label{fig:results:cpugpu:gpu}
+	\end{subfigure}	
+	\caption{A game character \subref{fig:results:cpugpu:cpu} rendered on the CPU by \citeauthor{vlachos2001curved} and \subref{fig:results:cpugpu:gpu} on the GPU by our implementation.}
+	\label{fig:results:cpugpu}
+\end{figure}
+
 \subsection{Pipeline}
-	\todo[inline]{Compare 2001 perormance with 2015 performance, if we can find 2001 data or have time to implement PN triangles on the CPU}
+	\Cref{fig:results:cpugpu} shows the rendering by \citeauthor{vlachos2001curved} next to our rendering of, probably, the same model. The only difference between these two models should be the pattern in which the triangles of the input mesh are subdivided into flat triangles. \todo{A visual inspection of the models shows no differences between the two models.}
