@@ -14,24 +14,53 @@
 	\future{Any unsolved problems?}
 }
 
-\begin{figure}
+\begin{figure*}
+	\plaatje{Roteer onze rendering zodat hij klopt met de blauwe rendering}
 	\centering
-	\begin{subfigure}{0.5\columnwidth}
+	\begin{subfigure}[b]{0.2\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{content/img/results/dogCPU.png}
-		\caption{CPU}
-		\label{fig:results:cpugpu:cpu}
+		\caption{Dog on CPU}
+		\label{fig:results:cpugpu:cpuDog}
 	\end{subfigure}
-	\begin{subfigure}{0.5\columnwidth}
+	\hspace{0.1\textwidth}
+	\begin{subfigure}[b]{0.2\textwidth}
 		\centering
-		% \includegraphics[width=\textwidth]{./img/_}
-		\missingfigure[figwidth=\textwidth]{The dog rendered with our code}
-		\caption{GPU}
-		\label{fig:results:cpugpu:gpu}
+		\includegraphics[width=\textwidth]{content/img/results/voreCPU.png}
+		\caption{Vore on CPU}
+		\label{fig:results:cpugpu:cpuVore}
 	\end{subfigure}	
-	\caption{A game character \subref{fig:results:cpugpu:cpu} rendered on the CPU by \citeauthor{vlachos2001curved} and \subref{fig:results:cpugpu:gpu} on the GPU by our implementation.}
+	\hspace{0.1\textwidth}
+	\begin{subfigure}[b]{0.2\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{content/img/results/shamblercpu.png}
+		\caption{Vore on cpu}
+		\label{fig:results:cpugpu:cpuShambler}
+	\end{subfigure}		
+
+	\begin{subfigure}[b]{0.2\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{content/img/results/doggpu.png}
+		\caption{Dog on GPU}
+		\label{fig:results:cpugpu:gpuDog}
+	\end{subfigure}
+	\hspace{0.1\textwidth}
+	\begin{subfigure}[b]{0.2\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{content/img/results/voregpu.png}
+		\caption{Vore on GPU}
+		\label{fig:results:cpugpu:gpuVore}
+	\end{subfigure}	
+	\hspace{0.1\textwidth}
+	\begin{subfigure}[b]{0.2\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{content/img/results/shamblerGPU.png}
+		\caption{Vore on GPU}
+		\label{fig:results:cpugpu:gpuShambler}
+	\end{subfigure}			
+	\caption{A family of game characters from the game Quake 1. \subref{fig:results:cpugpu:cpuDog}, \subref{fig:results:cpugpu:cpuVore} and \subref{fig:results:cpugpu:cpuShambler} are rendered on a CPU by \citeauthor{vlachos2001curved}. \subref{fig:results:cpugpu:gpuDog}, \subref{fig:results:cpugpu:gpuVore}, \subref{fig:results:cpugpu:gpuShambler} are rendered by our implementation.}
 	\label{fig:results:cpugpu}
-\end{figure}
+\end{figure*}
 
 \subsection{Pipeline}
-	\Cref{fig:results:cpugpu} shows the rendering by \citeauthor{vlachos2001curved} next to our rendering of, probably, the same model. The only difference between these two models should be the pattern in which the triangles of the input mesh are subdivided into flat triangles. \todo{A visual inspection of the models shows no differences between the two models.}
+	\Cref{fig:results:cpugpu} shows the rendering by \citeauthor{vlachos2001curved} next to our rendering of, probably, the same model. The only difference between these two models should be the pattern in which the triangles of the input mesh are subdivided into flat triangles. A visual inspection shows no obvious differences between the models, leading us to suggest that the difference in triangulation does not matter much. 
