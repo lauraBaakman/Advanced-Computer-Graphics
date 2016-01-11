@@ -1,11 +1,21 @@
 %!TEX root = ../main.tex
 \section{Problem Definition}
+\rick{Nalezen:}
 \label{s:problem}
+We consider a number a number of sub problems associated with point-normal triangles.
 
-\todo[inline]{We have three subproblems, namely:}
+\begin{enumerate}[label=(\roman*)]
+	% \todo[inline]{1: Why use a fake normal field, the quadratic patch, if you can compute the normals of the vertices of the cubic patch.}
+	\item \label{it:problem:fakeNormals}
+	As mentioned in the introduction point-normal triangles use `fake' normals, i.e. the normal component of the PN triangle is in no way a reflection of the actual normals. In section \ref{sss:method:normals:realNormals} we show that it is possible to compute the `real' normals of the PN triangle based on its geometric component. We compare both computational and visual performance of these two methods. 
 
-\todo[inline]{1: Why use a fake normal field, the quadratic patch, if you can compute the normals of the vertices of the cubic patch.}
+	\item \label{it:problem:CompareWithPhongTesselation}
+	\future{2: Compare PN triangles with phong tesselation on the following aspects: performance, continuity, visual. We try to answer the question: When use PN when Phong?}
 
-\future{2: Compare PN triangles with phong tesselation on the following aspects: performance, continuity, visual. We try to answer the question: When use PN when Phong?}
-
-\todo[inline]{3: How does implementing PN triangles i the current OpenGL pipeline influence performance as compared to the performance on the CPU?}
+	\item \label{it:problem:GPUImplementation}
+	% Wat willen we weten
+	What changes have to be made to the point-normal triangles as proposed by \citeauthor{vlachos2001curved} to fit this rendering into a recent OpenGL version (4.1).  
+	%
+	% Hoe gaan we het testen
+	In section \ref{s:implementation} we discuss the changes between the CPU implementation proposed by \citeauthor{vlachos2001curved} and our GPU implementation. 
+\end{enumerate}
