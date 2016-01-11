@@ -1,11 +1,36 @@
 %!TEX root = ../main.tex
 \section{Problem Definition}
+\rick{Nalezen:}
 \label{s:problem}
+We consider a number a number of sub problems associated with point-normal triangles.
 
-\todo[inline]{We have three subproblems, namely:}
+\begin{enumerate}[label=(\roman*)]
+	\item \label{it:problem:fakeNormals}
+		% Waarom willen we het weten
+		In the introduction we have mentioned that point-normal triangles are not suitable for rendering in computer aided designed software, due to the `fake' normal field, as the normal component of the PN-triangle does not accurately represent the actual normals. Adapting the PN-triangle algorithm to use `real' normals, expands its application domain to include rendering for CAD software.
+		%
+		% Wat willen we weten
+		However it is possible to compute the `real' normals of the vertices of the subdivided PN-triangle, using the method we present in section \ref{sss:method:normals:realNormals}. 
+		%
+		%Wat gaan we meten
+		In this paper we compare both the computational and the visual performance of the `real' and `fake' normals. 
+		% Wat verwachten we
+		We do not expect a large difference in visual performance when `real' normals are used. Nor do we suppose that computing the normals based on the geometry will have a significant impact on the computational complexity of point-normal triangles.
 
-\todo[inline]{1: Why use a fake normal field, the quadratic patch, if you can compute the normals of the vertices of the cubic patch.}
 
-\future{2: Compare PN triangles with phong tesselation on the following aspects: performance, continuity, visual. We try to answer the question: When use PN when Phong?}
+	\item \label{it:problem:CompareWithPhongTesselation}
+		\future{2: Compare PN triangles with phong tesselation on the following aspects: performance, continuity, visual. We try to answer the question: When use PN when Phong?}
 
-\todo[inline]{3: How does implementing PN triangles i the current OpenGL pipeline influence performance as compared to the performance on the CPU?}
+	\item \label{it:problem:GPUImplementation}
+		%Waarom willen we het weten
+		One major advantage of PN-triangles at the time of its introduction (\citeyear{vlachos2001curved}) was its speed. Since then geometry and tessellation shaders have been introduced into the OpenGL pipeline. 
+		%
+		% Wat willen we weten
+		We investigate which changes have to be made to the point-normal triangles as proposed by \citeauthor{vlachos2001curved} to fit into a recent OpenGL pipeline (version 4.1).
+		%
+		% Hoe gaan we het meten
+		In this paper we discuss the changes between the CPU implementation proposed by \citeauthor{vlachos2001curved} and our GPU implementation. 
+		%
+		% Wat verwachten we
+		We expect that due to their locality point-normal triangles are extremely suited for computation on the GPU. Allowing us to subdivide triangular meshes faster than is possible on the CPU. 
+\end{enumerate}
