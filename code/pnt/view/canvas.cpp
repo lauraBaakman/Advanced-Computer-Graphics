@@ -145,7 +145,7 @@ void Canvas::setUniforms(Material material, Light light)
 
     setShadingModel(this->settings->render->interpolationModel);
     setIlluminationModel(this->settings->render);
-    setNormalComputationMethod(true);
+    setNormalComputationMethod(false);
 }
 
 void Canvas::setMaterialInShader(Material material)
