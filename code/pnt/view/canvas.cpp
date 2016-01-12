@@ -130,6 +130,12 @@ void Canvas::updateTransformationMatrix()
     this->shaderProgram->setUniformValue("mvpMatrix", this->mvpMatrix);
 }
 
+void Canvas::resetZoomAndRotation()
+{
+//    this->zoomingFactor = 1.0;
+    this->rotationAngles = QVector3D(1.0, 1.0, 1.0);
+}
+
 void Canvas::setUniforms(Material material, Light light)
 {
     setMaterialInShader(material);
@@ -236,6 +242,7 @@ void Canvas::onRotationDialChanged(int axis, int value)
 
 void Canvas::onModelChanged(Mesh *model)
 {
+    this->resetZoomAndRotation();
     updateBuffers(model);
     update();
 }

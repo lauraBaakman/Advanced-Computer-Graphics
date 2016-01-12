@@ -69,6 +69,7 @@ private:
     float zoomingFactor;
     void constructModelViewProjectionMatrix();
     void updateTransformationMatrix();
+    void resetZoomAndRotation();
 
     // Set uniforms
     void setUniforms(Material material = Material(), Light light = Light());
