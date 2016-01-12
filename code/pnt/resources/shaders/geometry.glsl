@@ -3,8 +3,13 @@
 layout(triangles) in;
 layout(triangle_strip, max_vertices = 3) out;
 
+//Definitions
+subroutine void interpolationModel();
+
 //Variable in
 layout(location = 0) in vec3 tesNormal[];
+
+uniform subroutine interpolationModel;
 
 //Variable out
 layout(location = 0) out vec3 gsPosition;
@@ -19,6 +24,7 @@ void faceNormal(){
     if(dot(meanNormal, gsNormal) < 0) gsNormal = normalize(cross(edge2, edge1));    	
 }
 
+subroutine(interpolationModel)
 void flatInterpolation(){
 	faceNormal();
 	for(int i = 0; i < 3; i++) {
@@ -29,6 +35,7 @@ void flatInterpolation(){
 	EndPrimitive();		
 }
 
+subroutine(interpolationModel)
 //i.e. phongInterpolation
 void smoothInterpolation(){
   for(int i = 0; i < 3; i++) {
@@ -42,5 +49,6 @@ void smoothInterpolation(){
 
 void main() {
 	// flatInterpolation();
-	smoothInterpolation();
+	// smoothInterpolation();
+	interpolationModel();
 }
