@@ -81,8 +81,14 @@ void visualizeNormals(){
     fColor = vec4(makeUnitVectorAColor(normalize(gsNormal)), 1.0);	
 }
 
+subroutine(reflectionModel)
+void noShading(){
+	fColor = vec4(1.0, 0.0, 0.0, 1.0);
+}
+
 void main(void)
 {
-    phongReflection();
+    // phongReflection();
     // visualizeNormals();
+    noShading();
 }
