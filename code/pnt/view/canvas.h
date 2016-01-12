@@ -31,7 +31,6 @@ public:
 public slots:
     void onRotationDialChanged(int axis, int value);
     void onModelChanged(Mesh *model);
-    void onRenderModeChanged(Settings::Render::Mode mode);
     void onSettingsChanged();
 
 protected:

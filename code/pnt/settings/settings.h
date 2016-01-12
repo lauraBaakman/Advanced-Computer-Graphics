@@ -28,8 +28,9 @@ public:
             NONE
         };
         Render::Mode renderMode;
-        Render::Interpolation interpolationMode;
-        Render::Illumination illuminationMode;
+        Render::Interpolation interpolationModel;
+        Render::Illumination illuminationModel;
+        bool visualizeNormals;
     };
 
     Render *render;
@@ -41,6 +42,8 @@ public:
             bool visualizeGeometry;
     };
 
+    PnTriangle *pnTriangle;
+
     static QMap<QString, QString> modelMap();
     static QPair<float, float> innerTessellationRange;
     static QPair<float, float> outerTessellationRange;
@@ -48,6 +51,7 @@ signals:
     void modelChanged(QString path);
     void renderModeChanged(Settings::Render::Mode);
     void settingsChanged();
+    void tessellationLevelsChanged(float, float);
 
 public slots:
     void onRenderModeChanged(int index);
@@ -55,8 +59,9 @@ public slots:
     void onIlluminationModeChanged(int index);
     void onShadingModeChanged(int index);
     void onVisualizeNormalsChanged(bool toggle);
-//    void onInnerTessellationLevelChanged(float value);
-//    void onOuterTessellationLevelChanged(float value);
+    void onInnerTessellationLevelChanged(float value);
+    void onOuterTessellationLevelChanged(float value);
+    void onVisualizeGeometryChanged(bool toggle);
 
 private:
 

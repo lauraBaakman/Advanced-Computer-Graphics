@@ -204,11 +204,6 @@ void Canvas::onModelChanged(Mesh *model)
     update();
 }
 
-void Canvas::onRenderModeChanged(Settings::Render::Mode mode)
-{
-//    this->mode = mode;
-}
-
 void Canvas::onSettingsChanged()
 {
     qDebug() << "Settings changed in Canvas" << (int)this->settings->render->renderMode;

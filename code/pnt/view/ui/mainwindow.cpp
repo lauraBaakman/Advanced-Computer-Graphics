@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connectUiToModelController();
     connectModelControllerToCanvas();
     connectSettingsToCanvas();
+    connectSettingsToUi();
 }
 
 MainWindow::~MainWindow()
@@ -84,12 +85,21 @@ void MainWindow::connectUiToSettings()
 
     QObject::connect(this->sidebar, SIGNAL(visualizeNormalsChanged(bool)),
                      this->settings, SLOT(onVisualizeNormalsChanged(bool)));
+
+    QObject::connect(this->sidebar, SIGNAL(visualizeGeometryChanged(bool)),
+                     this->settings, SLOT(onVisualizeGeometryChanged(bool)));
 }
 
 void MainWindow::connectUiToCanvas()
 {
     QObject::connect(this->sidebar, SIGNAL(rotationDialChanged(int,int)),
                      this->canvas, SLOT(onRotationDialChanged(int,int)));
+}
+
+void MainWindow::connectSettingsToUi()
+{
+    QObject::connect(this->settings, SIGNAL(tessellationLevelsChanged(float,float)),
+                     this->sidebar, SLOT(onTessellationLevelsChanged(float,float)));
 }
 
 void MainWindow::connectSettingsToCanvas()

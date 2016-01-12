@@ -6,11 +6,13 @@ QPair<float, float> Settings::outerTessellationRange = QPair<float, float>(1.0, 
 Settings::Settings(QObject *parent) : QObject(parent)
 {
     this->render = new Render();
+    this->pnTriangle = new PnTriangle();
 }
 
 Settings::~Settings()
 {
     delete render;
+    delete pnTriangle;
 }
 
 QMap<QString, QString> Settings::modelMap()
@@ -30,30 +32,57 @@ QMap<QString, QString> Settings::modelMap()
 }
 
 void Settings::onRenderModeChanged(int index)
-{   qDebug() << "Settings::onRenderModeChanged" << index;
+{
     render->renderMode = static_cast<Settings::Render::Mode>(index);
-    emit renderModeChanged(static_cast<Settings::Render::Mode>(index));
     emit settingsChanged();
-    // emit entire setting thing...
 }
 
 void Settings::onModelChanged(QString modelKey)
 {
-    qDebug() << "Settings::onModelChanged: " << modelKey;
     emit modelChanged(Settings::modelMap().value(modelKey));
 }
 
 void Settings::onIlluminationModeChanged(int index)
 {
-    qDebug() << "illumination changed settings";
+    render->illuminationModel = static_cast<Settings::Render::Illumination>(index);
+    emit settingsChanged();
 }
 
 void Settings::onShadingModeChanged(int index)
 {
-    qDebug() << "shading changed settings";
+    render->interpolationModel = static_cast<Settings::Render::Interpolation>(index);
+    emit settingsChanged();
 }
 
 void Settings::onVisualizeNormalsChanged(bool toggle)
 {
-    qDebug() << "visualize normals settings";
+    render->visualizeNormals = toggle;
+    emit settingsChanged();
+}
+
+void Settings::onInnerTessellationLevelChanged(float value)
+{
+    pnTriangle->innerTessellationLevel = value;
+    emit settingsChanged();
+}
+
+void Settings::onOuterTessellationLevelChanged(float value)
+{
+    pnTriangle->outerTessellationLevel = value;
+    emit settingsChanged();
+}
+
+void Settings::onVisualizeGeometryChanged(bool toggle)
+{
+    float tessellationLevel = 1.0;
+    // because we need this and this is super informative ;)
+    pnTriangle->visualizeGeometry = toggle;
+    pnTriangle->innerTessellationLevel = tessellationLevel;
+    pnTriangle->outerTessellationLevel = tessellationLevel;
+
+    // Signal back to ui.
+    emit tessellationLevelsChanged(tessellationLevel, tessellationLevel);
+
+    // Signal the listeners;
+    emit settingsChanged();
 }

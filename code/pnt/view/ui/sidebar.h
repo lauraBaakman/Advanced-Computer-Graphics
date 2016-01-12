@@ -16,6 +16,9 @@ public:
     explicit Sidebar(QWidget *parent = 0);
     ~Sidebar();
 
+public slots:
+    void onTessellationLevelsChanged(float inner, float outer);
+
 signals:
     void renderModeChanged(int index);
     void modelChanged(QString modelKey);
@@ -25,6 +28,7 @@ signals:
     void visualizeNormalsChanged(bool toggle);
     void innerTessellationLevelChanged(float value);
     void outerTessellationLevelChanged(float value);
+    void visualizeGeometryChanged(bool toggle);
 
 private slots:
     void on_renderModeComboBox_currentIndexChanged(int index);
@@ -50,9 +54,10 @@ private:
 
     void toggleShaderAndIlluminationUI(bool toggle);
 
-    float innerTessellationMin, innerTessellationMax;
-    float outerTessellationMin, outerTessellationMax;
+    int innerTessellationMin, innerTessellationMax;
+    int outerTessellationMin, outerTessellationMax;
     float mapToRange(int value, QPair<int, int> sourceRange, QPair<float, float> targetRange);
+    int mapToRange(float value, QPair<float, float> sourceRange, QPair<int, int> targetRange);
 
 };
 

@@ -25,6 +25,15 @@ Sidebar::~Sidebar()
     delete ui;
 }
 
+void Sidebar::onTessellationLevelsChanged(float inner, float outer)
+{
+    ui->innerTessellationSlider->setValue(mapToRange(inner, Settings::innerTessellationRange, QPair<int, int>(this->innerTessellationMin, this->innerTessellationMax)));
+    ui->innerTessellationSliderLabel->setText(QString::number(inner, 'g', 2));
+
+    ui->outerTessellationSlider->setValue(mapToRange(outer, Settings::outerTessellationRange, QPair<int, int>(this->outerTessellationMin, this->outerTessellationMax)));
+    ui->outerTessellationSliderLabel->setText(QString::number(outer, 'g', 2));
+}
+
 void Sidebar::fixLayout()
 {
     ui->sidebarUiLayout->setAlignment(Qt::AlignTop);
@@ -87,6 +96,14 @@ float Sidebar::mapToRange(int value, QPair<int, int> sourceRange, QPair<float, f
     return (((static_cast<float>(value) - sourceRange.first) * targetRatio) / sourceRatio) + targetRange.first;
 }
 
+int Sidebar::mapToRange(float value, QPair<float, float> sourceRange, QPair<int, int> targetRange)
+{
+    float sourceRatio = sourceRange.second - sourceRange.first;
+    float targetRatio = static_cast<float>(targetRange.second - targetRange.first);
+
+    return static_cast<int>((((value - sourceRange.first) * targetRatio) / sourceRatio) + static_cast<float>(targetRange.first));
+}
+
 void Sidebar::on_innerTessellationSlider_valueChanged(int position)
 {
     float sliderValue = mapToRange(position,
@@ -137,4 +154,6 @@ void Sidebar::on_visualizeGeometricCompCheckBox_clicked(bool checked)
     ui->outerTessellationLevelLabel->setEnabled(toggle);
     ui->outerTessellationSlider->setEnabled(toggle);
     ui->outerTessellationSliderLabel->setEnabled(toggle);
+
+    emit visualizeGeometryChanged(checked);
 }
