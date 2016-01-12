@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QDebug>
+#include <QPair>
 
 class Settings : public QObject
 {
@@ -21,6 +22,8 @@ public:
     };
 
     static QMap<QString, QString> modelMap();
+    static QPair<float, float> innerTessellationRange;
+    static QPair<float, float> outerTessellationRange;
 signals:
     void modelChanged(QString path);
     void renderModeChanged(Settings::Render::Mode);

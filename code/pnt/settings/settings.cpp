@@ -1,5 +1,8 @@
 #include "settings.h"
 
+QPair<float, float> Settings::innerTessellationRange = QPair<float, float>(1.0, 12.0);
+QPair<float, float> Settings::outerTessellationRange = QPair<float, float>(1.0, 12.0);
+
 Settings::Settings(QObject *parent) : QObject(parent)
 {
     this->render = new Render();
