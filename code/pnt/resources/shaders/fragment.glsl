@@ -27,10 +27,15 @@ uniform MaterialInfo material;
 out vec4 fColor;
 
 //globals
-vec3 eye = vec3(0.0, 0.0, 0.0);
+vec3 eye = vec3(2.0, 5.0, -10.0);
 
 void visualizeNormals(){
     fColor = vec4((gsNormal + vec3(1)) / 2.0, 1.0);	
+}
+
+vec3 frontLightMaterial(float reflectionConstant, vec3 color, vec3 light)
+{
+    return clamp(light * (reflectionConstant * color), 0, 1);
 }
 
 void phongReflection(){
@@ -59,7 +64,6 @@ void phongReflection(){
                     light.specularLightIntensity)
                 * pow( max(dot(reflectionVector, viewVector), 0.0 ), material.alfa);
     }
-
     vec3 phongColor = clamp(ambient + diffuse + specular, 0, 1);         
     fColor = vec4(phongColor, 1.0);
 }

@@ -12,8 +12,11 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLBuffer>
 #include <QOpenGLVertexArrayObject>
+
 #include "model/mesh.h"
 #include "settings/settings.h"
+#include "settings/material.h"
+#include "settings/light.h"
 
 class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 {
@@ -51,7 +54,7 @@ private:
     void initializeShaders();
     void initializeBuffers();
 
-    //OpenGL update
+    // OpenGL update
     int numIndices;
     int numVertices;
     void updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data);
@@ -64,6 +67,11 @@ private:
     float zoomingFactor;
     void constructModelViewProjectionMatrix();
     void updateTransformationMatrix();
+
+    // Set uniforms
+    void setUniforms(Material material = Material(), Light light = Light());
+    void setMaterialInShader(Material material);
+    void setLightInShader(Light light);
 
     // Paint stuff
     Settings::Render::Mode mode = Settings::Render::Mode::POINTCLOUD;
