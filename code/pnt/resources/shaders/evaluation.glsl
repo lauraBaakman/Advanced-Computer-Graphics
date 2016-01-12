@@ -22,7 +22,7 @@ layout(location = 0) in vec3 tcsNormals[];
 layout(location = 3) in pnPatch tcsPatches[];
 
 //Variable out
-layout(location = 0) out vec3 tesNormal ;
+layout(location = 0) out vec3 tesNormal;
 
 float u = gl_TessCoord.x;
 float u2 = pow(u, 2.0);

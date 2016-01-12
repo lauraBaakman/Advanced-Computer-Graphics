@@ -157,3 +157,13 @@ void Sidebar::on_visualizeGeometricCompCheckBox_clicked(bool checked)
 
     emit visualizeGeometryChanged(checked);
 }
+
+void Sidebar::on_normalComboBox_currentIndexChanged(int index)
+{
+    emit normalsChanged(index);
+}
+
+void Sidebar::onNormalCalculationChanged(int index)
+{   qDebug() << "Hallo";
+    ui->normalComboBox->setCurrentIndex(index);
+}

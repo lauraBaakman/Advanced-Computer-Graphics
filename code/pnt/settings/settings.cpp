@@ -88,8 +88,23 @@ void Settings::resetTessellationSliders() {
     emit tessellationLevelsChanged(tessellationLevel, tessellationLevel);
 }
 
+void Settings::resetNormalCalculation()
+{
+    pnTriangle->normalMode = Settings::PnTriangle::Normals::FAKE;
+    emit normalCalculationChanged(static_cast<int>(pnTriangle->normalMode));
+}
+
 void Settings::onRenderPnTrianglesChanged(bool toggle)
 {
-    if(!toggle) resetTessellationSliders();
+    if(!toggle) {
+        resetTessellationSliders();
+        resetNormalCalculation();
+    }
+    emit settingsChanged();
+}
+
+void Settings::onNormalsChanged(int index)
+{
+    pnTriangle->normalMode = static_cast<Settings::PnTriangle::Normals>(index);
     emit settingsChanged();
 }

@@ -48,10 +48,17 @@ public:
             innerTessellationLevel = 1.0;
             outerTessellationLevel = 1.0;
             visualizeGeometry = false;
+            normalMode = Normals::FAKE;
         }
         float innerTessellationLevel;
         float outerTessellationLevel;
         bool visualizeGeometry;
+
+        enum class Normals {
+            FAKE,
+            REAl
+        };
+        PnTriangle::Normals normalMode;
     };
 
     PnTriangle *pnTriangle;
@@ -64,6 +71,7 @@ signals:
     void renderModeChanged(Settings::Render::Mode);
     void settingsChanged();
     void tessellationLevelsChanged(float, float);
+    void normalCalculationChanged(int);
 
 public slots:
     void onRenderModeChanged(int index);
@@ -75,9 +83,11 @@ public slots:
     void onOuterTessellationLevelChanged(float value);
     void onVisualizeGeometryChanged(bool toggle);
     void onRenderPnTrianglesChanged(bool toggle);
+    void onNormalsChanged(int index);
 
 private:
     void resetTessellationSliders();
+    void resetNormalCalculation();
 };
 
 #endif // SETTINGS_H

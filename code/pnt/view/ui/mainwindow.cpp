@@ -97,6 +97,9 @@ void MainWindow::connectUiToSettings()
 
     QObject::connect(this->sidebar, SIGNAL(renderPnTrianglesChanged(bool)),
                      this->settings, SLOT(onRenderPnTrianglesChanged(bool)));
+
+    QObject::connect(this->sidebar, SIGNAL(normalsChanged(int)),
+                     this->settings, SLOT(onNormalsChanged(int)));
 }
 
 void MainWindow::connectUiToCanvas()
@@ -109,6 +112,9 @@ void MainWindow::connectSettingsToUi()
 {
     QObject::connect(this->settings, SIGNAL(tessellationLevelsChanged(float,float)),
                      this->sidebar, SLOT(onTessellationLevelsChanged(float,float)));
+
+    QObject::connect(this->settings, SIGNAL(normalCalculationChanged(int)),
+                     this->sidebar, SLOT(onNormalCalculationChanged(int)));
 }
 
 void MainWindow::connectSettingsToCanvas()
