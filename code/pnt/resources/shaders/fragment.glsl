@@ -89,7 +89,7 @@ void noShading(){
 void main(void)
 {
     // phongReflection();
-    // visualizeNormals();
+     visualizeNormals();
     // noShading();
-    reflectionModel();
+//    reflectionModel();
 }

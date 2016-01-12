@@ -167,17 +167,15 @@ void Canvas::setShadingModel(Settings::Render::Interpolation mode)
 {
     GLuint functionIndex;
     switch(mode){
-        case Settings::Render::Interpolation::FLAT:
-        functionIndex = glGetSubroutineIndex(ShaderProgam->programId(), GL_FRAGMENT_SHADER, "phongReflection");
+    case Settings::Render::Interpolation::FLAT:
+        functionIndex = glGetSubroutineIndex(shaderProgram->programId(), GL_GEOMETRY_SHADER, "flatInterpolation");
         break;
-        case Settings::Render::Interpolation::PHONG:
-        functionIndex = glGetSubroutineIndex(ShaderProgam->programId(), GL_FRAGMENT_SHADER, "phongReflection");
-        break;
-        case Settings::Render::Interpolation::GOURAUD:
-        functionIndex = glGetSubroutineIndex(ShaderProgam->programId(), GL_FRAGMENT_SHADER, "phongReflection");
+    case Settings::Render::Interpolation::GOURAUD:
+    case Settings::Render::Interpolation::PHONG:
+        functionIndex = glGetSubroutineIndex(shaderProgram->programId(), GL_GEOMETRY_SHADER, "smoothInterpolation");
         break;
     }
-    glUniformSubroutinesuiv(GL_FRAGMENT_SHADER, 1, &functionIndex);
+    glUniformSubroutinesuiv(GL_GEOMETRY_SHADER, 1, &functionIndex);
 }
 
 void Canvas::setSettings(Settings *value)
@@ -236,7 +234,7 @@ void Canvas::onSettingsChanged()
 bool Canvas::event(QEvent *event)
 {
     if (event->type() == QEvent::Gesture) {
-          return gestureEvent(static_cast<QGestureEvent*>(event));
+        return gestureEvent(static_cast<QGestureEvent*>(event));
     }
     return QWidget::event(event);
 }
@@ -257,7 +255,7 @@ void Canvas::pinchTriggered(QPinchGesture *gesture)
     }
     if (gesture->state() == Qt::GestureFinished) {
         qDebug() << "Never happens?";
-   }
+    }
     update();
 }
 
