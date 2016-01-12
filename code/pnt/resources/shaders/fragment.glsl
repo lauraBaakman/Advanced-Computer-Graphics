@@ -16,12 +16,15 @@ struct LightInfo {
     vec3 specularLightIntensity;
 };
 
+subroutine void reflectionModel();
+
 //Variable in
 layout(location = 0) in vec3 gsPosition;
 layout(location = 1) in vec3 gsNormal;
 
 uniform LightInfo light;
 uniform MaterialInfo material;
+uniform subroutine reflectionModel;
 
 //Variable out
 out vec4 fColor;
@@ -29,19 +32,20 @@ out vec4 fColor;
 //globals
 vec3 eye = vec3(2.0, 5.0, -10.0);
 
-vec3 makeColor(vec3 vector){
+vec3 makeUnitVectorAColor(vec3 vector){
 	return (gsNormal + vec3(1)) / 2.0;
 }
 
-void visualizeNormals(){
-    fColor = vec4(makeColor(gsNormal), 1.0);	
-}
+//Set the correct function pointer with: 
+//functionIndex = glGetSubroutineIndex(ShaderProgam->programId(), GL_FRAGMENT_SHADER, "phongReflection");
+//glUniformSubroutinesuiv(GL_FRAGMENT_SHADER, 1, &functionIndex);
 
 vec3 frontLightMaterial(float reflectionConstant, vec3 color, vec3 light)
 {
     return clamp(light * (reflectionConstant * color), 0, 1);
 }
 
+subroutine(reflectionModel)
 void phongReflection(){
     vec3 viewVector = normalize(eye - gsPosition);
     vec3 lightVector = normalize(light.position - gsPosition);
@@ -70,6 +74,11 @@ void phongReflection(){
     }
     vec3 phongColor = clamp(ambient + diffuse + specular, 0, 1);         
     fColor = vec4(phongColor, 1.0);
+}
+
+subroutine(reflectionModel)
+void visualizeNormals(){
+    fColor = vec4(makeUnitVectorAColor(normalize(gsNormal)), 1.0);	
 }
 
 void main(void)
