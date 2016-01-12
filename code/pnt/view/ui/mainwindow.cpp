@@ -88,6 +88,12 @@ void MainWindow::connectUiToSettings()
 
     QObject::connect(this->sidebar, SIGNAL(visualizeGeometryChanged(bool)),
                      this->settings, SLOT(onVisualizeGeometryChanged(bool)));
+
+    QObject::connect(this->sidebar, SIGNAL(innerTessellationLevelChanged(float)),
+                     this->settings, SLOT(onInnerTessellationLevelChanged(float)));
+
+    QObject::connect(this->sidebar, SIGNAL(outerTessellationLevelChanged(float)),
+                     this->settings, SLOT(onOuterTessellationLevelChanged(float)));
 }
 
 void MainWindow::connectUiToCanvas()

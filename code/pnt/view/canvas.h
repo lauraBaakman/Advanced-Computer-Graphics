@@ -74,6 +74,7 @@ private:
     void setUniforms(Material material = Material(), Light light = Light());
     void setMaterialInShader(Material material);
     void setLightInShader(Light light);
+    void setTessellationLevels(float inner, float outer);
 
     // Paint stuff
     Settings *settings;

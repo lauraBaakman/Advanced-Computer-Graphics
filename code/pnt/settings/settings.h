@@ -14,6 +14,13 @@ public:
 
     class Render {
     public:
+        Render() {
+            renderMode = Mode::WIREFRAME;
+            interpolationModel = Interpolation::FLAT;
+            illuminationModel = Illumination::NONE;
+            visualizeNormals = false;
+        }
+
         enum class Mode {
             WIREFRAME,
             SURFACE
@@ -24,8 +31,8 @@ public:
             GOURAUD
         };
         enum class Illumination {
-            PHONG,
-            NONE
+            NONE,
+            PHONG
         };
         Render::Mode renderMode;
         Render::Interpolation interpolationModel;
@@ -36,10 +43,15 @@ public:
     Render *render;
 
     class PnTriangle {
-        public:
-            float innerTessellationLevel;
-            float outerTessellationLevel;
-            bool visualizeGeometry;
+    public:
+        PnTriangle() {
+            innerTessellationLevel = 1.0;
+            outerTessellationLevel = 1.0;
+            visualizeGeometry = false;
+        }
+        float innerTessellationLevel;
+        float outerTessellationLevel;
+        bool visualizeGeometry;
     };
 
     PnTriangle *pnTriangle;

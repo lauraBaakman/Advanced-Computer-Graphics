@@ -138,6 +138,8 @@ void Canvas::setUniforms(Material material, Light light)
 {
     setMaterialInShader(material);
     setLightInShader(light);
+    setTessellationLevels(this->settings->pnTriangle->innerTessellationLevel,
+                          this->settings->pnTriangle->outerTessellationLevel);
 }
 
 void Canvas::setMaterialInShader(Material material)
@@ -155,6 +157,12 @@ void Canvas::setLightInShader(Light light)
     shaderProgram->setUniformValue("light.ambientLightIntensity", light.ambientIntensity);
     shaderProgram->setUniformValue("light.diffuseLightIntensity", light.diffuseIntensity);
     shaderProgram->setUniformValue("light.specularLightIntensity", light.specularIntensity);
+}
+
+void Canvas::setTessellationLevels(float inner, float outer)
+{
+    shaderProgram->setUniformValue("innerTessellationLevel", inner);
+    shaderProgram->setUniformValue("outerTessellationLevel", outer);
 }
 
 void Canvas::setSettings(Settings *value)

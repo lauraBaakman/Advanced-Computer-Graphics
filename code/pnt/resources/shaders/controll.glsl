@@ -27,8 +27,8 @@ layout(location = 3) out pnPatch tcsPatches[3];
 
 
 // Uniform in
-//uniform float tessLevelOuter;
-//uniform float tessLevelInner;
+uniform float innerTessellationLevel;
+uniform float outerTessellationLevel;
 
 float P1 = gl_in[0].gl_Position[gl_InvocationID];
 float P2 = gl_in[1].gl_Position[gl_InvocationID];
@@ -115,7 +115,7 @@ void setTesselationLevels(float inner, float outer){
 
 void main(void)
 {
-    setTesselationLevels(1.0, 1.0);
+    setTesselationLevels(innerTessellationLevel, outerTessellationLevel);
     computeGeomtryControlPoints();
     computeNormalControlPoints();
     passThroughToTES();

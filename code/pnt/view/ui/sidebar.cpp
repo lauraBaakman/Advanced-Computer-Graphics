@@ -15,9 +15,6 @@ Sidebar::Sidebar(QWidget *parent) :
 
     this->outerTessellationMin = ui->outerTessellationSlider->minimum();
     this->outerTessellationMax = ui->outerTessellationSlider->maximum();
-
-    // set default
-    emit renderModeChanged(ui->renderModeComboBox->currentIndex());
 }
 
 Sidebar::~Sidebar()
