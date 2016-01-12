@@ -102,10 +102,10 @@ void Canvas::paintGL()
     this->shaderProgram->bind();
     this->vertexArrayObject.bind();
 
-    updateTransformationMatrix();
-
     //Should be placed in correct spot
     setUniforms();
+
+    updateTransformationMatrix();
 
     switch(this->settings->render->renderMode) {
     case Settings::Render::Mode::WIREFRAME:
@@ -114,10 +114,6 @@ void Canvas::paintGL()
     case Settings::Render::Mode::SURFACE:
         drawShadedSurface();
     }
-
-//    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-//    glDrawElements(GL_PATCHES, this->numIndices, GL_UNSIGNED_INT, (void*)(0));
-//    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     this->vertexArrayObject.release();
     this->shaderProgram->release();
@@ -140,6 +136,8 @@ void Canvas::setUniforms(Material material, Light light)
     setLightInShader(light);
     setTessellationLevels(this->settings->pnTriangle->innerTessellationLevel,
                           this->settings->pnTriangle->outerTessellationLevel);
+
+    setShadingModel(this->settings->render->interpolationModel);
 }
 
 void Canvas::setMaterialInShader(Material material)
@@ -163,6 +161,23 @@ void Canvas::setTessellationLevels(float inner, float outer)
 {
     shaderProgram->setUniformValue("innerTessellationLevel", inner);
     shaderProgram->setUniformValue("outerTessellationLevel", outer);
+}
+
+void Canvas::setShadingModel(Settings::Render::Interpolation mode)
+{
+    GLuint functionIndex;
+    switch(mode){
+        case Settings::Render::Interpolation::FLAT:
+        functionIndex = glGetSubroutineIndex(ShaderProgam->programId(), GL_FRAGMENT_SHADER, "phongReflection");
+        break;
+        case Settings::Render::Interpolation::PHONG:
+        functionIndex = glGetSubroutineIndex(ShaderProgam->programId(), GL_FRAGMENT_SHADER, "phongReflection");
+        break;
+        case Settings::Render::Interpolation::GOURAUD:
+        functionIndex = glGetSubroutineIndex(ShaderProgam->programId(), GL_FRAGMENT_SHADER, "phongReflection");
+        break;
+    }
+    glUniformSubroutinesuiv(GL_FRAGMENT_SHADER, 1, &functionIndex);
 }
 
 void Canvas::setSettings(Settings *value)
