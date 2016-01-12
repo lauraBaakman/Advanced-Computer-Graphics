@@ -164,6 +164,6 @@ void Sidebar::on_normalComboBox_currentIndexChanged(int index)
 }
 
 void Sidebar::onNormalCalculationChanged(int index)
-{   qDebug() << "Hallo";
+{
     ui->normalComboBox->setCurrentIndex(index);
 }
