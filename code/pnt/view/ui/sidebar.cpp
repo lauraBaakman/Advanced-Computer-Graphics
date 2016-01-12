@@ -24,10 +24,14 @@ Sidebar::~Sidebar()
 
 void Sidebar::onTessellationLevelsChanged(float inner, float outer)
 {
-    ui->innerTessellationSlider->setValue(mapToRange(inner, Settings::innerTessellationRange, QPair<int, int>(this->innerTessellationMin, this->innerTessellationMax)));
+    ui->innerTessellationSlider->setValue(mapToRange(inner,
+                                                     Settings::innerTessellationRange,
+                                                     QPair<int, int>(this->innerTessellationMin, this->innerTessellationMax)));
     ui->innerTessellationSliderLabel->setText(QString::number(inner, 'g', 2));
 
-    ui->outerTessellationSlider->setValue(mapToRange(outer, Settings::outerTessellationRange, QPair<int, int>(this->outerTessellationMin, this->outerTessellationMax)));
+    ui->outerTessellationSlider->setValue(mapToRange(outer,
+                                                     Settings::outerTessellationRange,
+                                                     QPair<int, int>(this->outerTessellationMin, this->outerTessellationMax)));
     ui->outerTessellationSliderLabel->setText(QString::number(outer, 'g', 2));
 }
 
@@ -104,21 +108,21 @@ int Sidebar::mapToRange(float value, QPair<float, float> sourceRange, QPair<int,
 void Sidebar::on_innerTessellationSlider_valueChanged(int position)
 {
     float sliderValue = mapToRange(position,
-            QPair<int, int>(this->outerTessellationMin, this->outerTessellationMax),
-            Settings::outerTessellationRange);
+                                   QPair<int, int>(this->innerTessellationMin, this->innerTessellationMax),
+                                   Settings::innerTessellationRange);
     ui->innerTessellationSliderLabel->setText(QString::number(sliderValue, 'g', 2));
 
-    emit outerTessellationLevelChanged(sliderValue);
+    emit innerTessellationLevelChanged(sliderValue);
 }
 
 void Sidebar::on_outerTessellationSlider_valueChanged(int position)
 {
     float sliderValue = mapToRange(position,
-            QPair<int, int>(this->innerTessellationMin, this->innerTessellationMax),
-            Settings::innerTessellationRange);
+                                   QPair<int, int>(this->outerTessellationMin, this->outerTessellationMax),
+                                   Settings::outerTessellationRange);
     ui->outerTessellationSliderLabel->setText(QString::number(sliderValue, 'g', 2));
 
-    emit innerTessellationLevelChanged(sliderValue);
+    emit outerTessellationLevelChanged(sliderValue);
 }
 
 void Sidebar::on_shadingModeComboBox_currentIndexChanged(int index)

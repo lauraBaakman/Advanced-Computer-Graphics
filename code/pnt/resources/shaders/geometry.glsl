@@ -49,7 +49,6 @@ void smoothInterpolation(){
 
 void main() {
 	// flatInterpolation();
-	// smoothInterpolation();
-	
-	interpolationModel();
+         smoothInterpolation();
+//	interpolationModel();
 }
