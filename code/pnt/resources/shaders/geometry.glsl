@@ -3,9 +3,8 @@
 layout(triangles) in;
 layout(triangle_strip, max_vertices = 3) out;
 
-//Definitions
-subroutine void interpolationModelType();
-subroutine uniform interpolationModelType interpolationModel;
+//Uniform
+uniform int interpolationMode;
 
 //Variable in
 layout(location = 0) in vec3 tesNormal[];
@@ -23,18 +22,16 @@ void faceNormal(){
     if(dot(meanNormal, gsNormal) < 0) gsNormal = normalize(cross(edge2, edge1));
 }
 
-subroutine(interpolationModelType)
 void flatInterpolation(){
-        faceNormal();
-        for(int i = 0; i < 3; i++) {
-                gsPosition = gl_in[i].gl_Position.xyz;
-                gl_Position = gl_in[i].gl_Position;
-                EmitVertex();
-        }
-        EndPrimitive();
+    faceNormal();
+    for(int i = 0; i < 3; i++) {
+    gsPosition = gl_in[i].gl_Position.xyz;
+    gl_Position = gl_in[i].gl_Position;
+    EmitVertex();
+    }
+    EndPrimitive();
 }
 
-subroutine(interpolationModelType)
 //i.e. phongInterpolation
 void smoothInterpolation(){
   for(int i = 0; i < 3; i++) {
@@ -47,7 +44,7 @@ void smoothInterpolation(){
 }
 
 void main() {
-	// flatInterpolation();
-         smoothInterpolation();
-//	interpolationModel();
+    if(interpolationMode == 1) smoothInterpolation();
+    if(interpolationMode == 2) flatInterpolation();
+//    if(interpolationMode == 3) //gouraud
 }
