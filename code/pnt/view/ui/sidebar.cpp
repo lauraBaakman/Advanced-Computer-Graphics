@@ -133,8 +133,7 @@ void Sidebar::on_illuminationModeComboBox_currentIndexChanged(int index)
 
 void Sidebar::on_pnTrianglesUi_toggled(bool toggle)
 {
-    qDebug() << "Toggle";
-    // Also send slider values
+    emit renderPnTrianglesChanged(toggle);
 }
 
 void Sidebar::on_visualizeGeometricCompCheckBox_clicked(bool checked)

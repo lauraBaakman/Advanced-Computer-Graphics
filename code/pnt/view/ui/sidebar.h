@@ -29,6 +29,7 @@ signals:
     void innerTessellationLevelChanged(float value);
     void outerTessellationLevelChanged(float value);
     void visualizeGeometryChanged(bool toggle);
+    void renderPnTrianglesChanged(bool toggle);
 
 private slots:
     void on_renderModeComboBox_currentIndexChanged(int index);

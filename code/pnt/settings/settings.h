@@ -74,6 +74,7 @@ public slots:
     void onInnerTessellationLevelChanged(float value);
     void onOuterTessellationLevelChanged(float value);
     void onVisualizeGeometryChanged(bool toggle);
+    void onRenderPnTrianglesChanged(bool toggle);
 
 private:
 

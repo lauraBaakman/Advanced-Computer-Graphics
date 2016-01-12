@@ -68,7 +68,6 @@ void Settings::onInnerTessellationLevelChanged(float value)
 
 void Settings::onOuterTessellationLevelChanged(float value)
 {
-
     pnTriangle->outerTessellationLevel = value;
     emit settingsChanged();
 }
@@ -85,4 +84,9 @@ void Settings::onVisualizeGeometryChanged(bool toggle)
 
     // Signal the listeners;
     emit settingsChanged();
+}
+
+void Settings::onRenderPnTrianglesChanged(bool toggle)
+{
+
 }

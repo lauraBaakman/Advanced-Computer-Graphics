@@ -94,6 +94,9 @@ void MainWindow::connectUiToSettings()
 
     QObject::connect(this->sidebar, SIGNAL(outerTessellationLevelChanged(float)),
                      this->settings, SLOT(onOuterTessellationLevelChanged(float)));
+
+    QObject::connect(this->sidebar, SIGNAL(renderPnTrianglesChanged(bool)),
+                     this->settings, SLOT(onRenderPnTrianglesChanged(bool)));
 }
 
 void MainWindow::connectUiToCanvas()
