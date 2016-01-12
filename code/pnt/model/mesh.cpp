@@ -13,7 +13,7 @@ Mesh::Mesh(QObject *parent):
 
 Mesh::~Mesh()
 {
-    qDebug() << "Deconstructor not implemented.";
+    //no need for a deconstructor
 }
 
 QVector<QVector3D> Mesh::getVertexPositions() const
