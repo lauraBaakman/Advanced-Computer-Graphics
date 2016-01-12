@@ -145,7 +145,8 @@ void Canvas::setUniforms(Material material, Light light)
 
     setShadingModel(this->settings->render->interpolationModel, this->settings->pnTriangle->visualizeGeometry);
     setIlluminationModel(this->settings->render);
-    setNormalComputationMethod(this->settings->pnTriangle->normalMode);
+//    setNormalComputationMethod(this->settings->pnTriangle->normalMode);
+    setNormalComputationMethod(Settings::PnTriangle::Normals::FAKE);
 }
 
 void Canvas::setMaterialInShader(Material material)
