@@ -29,6 +29,7 @@ void flatInterpolation(){
 	EndPrimitive();		
 }
 
+//Pass through shader as well
 void phongInterpolation(){
   for(int i = 0; i < 3; i++) {
     gsNormal = tesNormal[i];
