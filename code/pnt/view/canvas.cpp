@@ -107,7 +107,7 @@ void Canvas::paintGL()
     //Should be placed in correct spot
     setUniforms();
 
-    switch(mode) {
+    switch(this->settings->render->renderMode) {
     case Settings::Render::Mode::WIREFRAME:
         drawWireframe();
         break;
@@ -157,6 +157,11 @@ void Canvas::setLightInShader(Light light)
     shaderProgram->setUniformValue("light.specularLightIntensity", light.specularIntensity);
 }
 
+void Canvas::setSettings(Settings *value)
+{
+    settings = value;
+}
+
 void Canvas::drawWireframe()
 {
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -201,13 +206,13 @@ void Canvas::onModelChanged(Mesh *model)
 
 void Canvas::onRenderModeChanged(Settings::Render::Mode mode)
 {
-    this->mode = mode;
-    update();
+//    this->mode = mode;
 }
 
-void Canvas::onSettingsChanged(Settings *settings)
+void Canvas::onSettingsChanged()
 {
-    qDebug() << "Settings changed in Canvas" << (int)settings->render->renderMode;
+    qDebug() << "Settings changed in Canvas" << (int)this->settings->render->renderMode;
+    update();
 }
 
 bool Canvas::event(QEvent *event)

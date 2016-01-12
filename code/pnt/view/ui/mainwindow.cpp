@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->settings = new Settings();
     this->sidebar = ui->sideBarWidget;
     this->canvas = ui->openGLWidget;
+    this->canvas->setSettings(this->settings);
     this->controller = new MeshController();
 
     connectUiToSettings();
@@ -93,11 +94,7 @@ void MainWindow::connectUiToCanvas()
 
 void MainWindow::connectSettingsToCanvas()
 {
-    QObject::connect(this->settings, SIGNAL(renderModeChanged(Settings::Render::Mode)),
-                     this->canvas, SLOT(onRenderModeChanged(Settings::Render::Mode)));
-
-    QObject::connect(this->settings, SIGNAL(settingsChanged(Settings*)),
-                     this->canvas, SLOT(onSettingsChanged(Settings*)));
-
+    QObject::connect(this->settings, SIGNAL(settingsChanged()),
+                     this->canvas, SLOT(onSettingsChanged()));
 }
 

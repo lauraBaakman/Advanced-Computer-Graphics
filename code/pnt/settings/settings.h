@@ -47,7 +47,7 @@ public:
 signals:
     void modelChanged(QString path);
     void renderModeChanged(Settings::Render::Mode);
-    void settingsChanged(Settings *settings);
+    void settingsChanged();
 
 public slots:
     void onRenderModeChanged(int index);

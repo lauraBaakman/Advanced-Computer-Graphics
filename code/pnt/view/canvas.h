@@ -26,11 +26,13 @@ public:
     Canvas(QWidget *parent = 0);
     ~Canvas();
 
+    void setSettings(Settings *value);
+
 public slots:
     void onRotationDialChanged(int axis, int value);
     void onModelChanged(Mesh *model);
     void onRenderModeChanged(Settings::Render::Mode mode);
-    void onSettingsChanged(Settings *settings);
+    void onSettingsChanged();
 
 protected:
     void initializeGL() Q_DECL_OVERRIDE;
@@ -75,7 +77,7 @@ private:
     void setLightInShader(Light light);
 
     // Paint stuff
-    Settings::Render::Mode mode;
+    Settings *settings;
     void drawWireframe();
     void drawShadedSurface();
     void drawPatches();
