@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>374</width>
-    <height>507</height>
+    <height>747</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -110,41 +110,6 @@ QGroupBox::title {
       <string>Rotation</string>
      </property>
      <layout class="QGridLayout" name="rotationUiLayout">
-      <item row="1" column="2">
-       <widget class="QLabel" name="yDialLabel">
-        <property name="text">
-         <string>Rotate Y</string>
-        </property>
-        <property name="textFormat">
-         <enum>Qt::AutoText</enum>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-        <property name="buddy">
-         <cstring>yDial</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="3">
-       <widget class="QDial" name="zDial">
-        <property name="maximum">
-         <number>359</number>
-        </property>
-        <property name="pageStep">
-         <number>10</number>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="wrapping">
-         <bool>true</bool>
-        </property>
-        <property name="notchesVisible">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="2">
        <widget class="QDial" name="yDial">
         <property name="sizePolicy">
@@ -220,6 +185,41 @@ QGroupBox::title {
         </property>
        </widget>
       </item>
+      <item row="0" column="3">
+       <widget class="QDial" name="zDial">
+        <property name="maximum">
+         <number>359</number>
+        </property>
+        <property name="pageStep">
+         <number>10</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="wrapping">
+         <bool>true</bool>
+        </property>
+        <property name="notchesVisible">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLabel" name="yDialLabel">
+        <property name="text">
+         <string>Rotate Y</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::AutoText</enum>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="buddy">
+         <cstring>yDial</cstring>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -248,6 +248,9 @@ QGroupBox::title {
       <string>Render Modes</string>
      </property>
      <layout class="QVBoxLayout" name="renderUiLayout">
+      <property name="topMargin">
+       <number>24</number>
+      </property>
       <item>
        <widget class="QComboBox" name="renderModeComboBox">
         <property name="sizePolicy">
@@ -258,26 +261,84 @@ QGroupBox::title {
         </property>
         <item>
          <property name="text">
-          <string>Point cloud</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
           <string>Wireframe</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Normal surface</string>
+          <string>Surface</string>
          </property>
         </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="ShadingModeComboBoxLabel">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>Shading model:</string>
+        </property>
+        <property name="buddy">
+         <cstring>shadingModeComboBox</cstring>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="shadingModeComboBox">
+        <item>
+         <property name="text">
+          <string>Flat</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Phong</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Gouraud</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="illuminationModeComboBoxLabel">
+        <property name="text">
+         <string>Illumination model:</string>
+        </property>
+        <property name="buddy">
+         <cstring>illuminationModeComboBox</cstring>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="illuminationModeComboBox">
+        <item>
+         <property name="text">
+          <string>None</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Phong</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="visualizeNormalsCheckBox">
+        <property name="text">
+         <string>Visualize normals</string>
+        </property>
        </widget>
       </item>
      </layout>
     </widget>
    </item>
    <item>
-    <widget class="QGroupBox" name="groupBox">
+    <widget class="QGroupBox" name="pnTrianglesUi">
      <property name="styleSheet">
       <string notr="true">QGroupBox {
     border: 1px solid #CCCCCC;
@@ -300,6 +361,136 @@ QGroupBox::title {
      <property name="checked">
       <bool>false</bool>
      </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0" colspan="4">
+       <widget class="QLabel" name="tesselationLevelLabel">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Tesselation Levels:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="innerTessellationLevelLabel">
+        <property name="text">
+         <string>Inner</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QLabel" name="innerTessellationSliderLabel">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>1.0</string>
+        </property>
+        <property name="margin">
+         <number>0</number>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="outerTessellationLevelLabel">
+        <property name="text">
+         <string>Outer</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="3">
+       <widget class="QLabel" name="outerTessellationSliderLabel">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>1.0</string>
+        </property>
+        <property name="margin">
+         <number>0</number>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0" colspan="3">
+       <widget class="QCheckBox" name="visualizeGeometricCompCheckBox">
+        <property name="text">
+         <string>Visualize geometry control coefficients</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" colspan="2">
+       <widget class="QLabel" name="normalComboBoxLabel">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Normals:</string>
+        </property>
+        <property name="margin">
+         <number>0</number>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="2" colspan="2">
+       <widget class="QComboBox" name="normalComboBox">
+        <item>
+         <property name="text">
+          <string>Fake</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Real</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QSlider" name="outerTessellationSlider">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>121</number>
+        </property>
+        <property name="singleStep">
+         <number>1</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QSlider" name="innerTessellationSlider">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>121</number>
+        </property>
+        <property name="singleStep">
+         <number>1</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
   </layout>

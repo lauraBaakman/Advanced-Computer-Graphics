@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->settings = new Settings();
     this->sidebar = ui->sideBarWidget;
     this->canvas = ui->openGLWidget;
+    this->canvas->setSettings(this->settings);
     this->controller = new MeshController();
 
     connectUiToSettings();
@@ -20,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connectUiToModelController();
     connectModelControllerToCanvas();
     connectSettingsToCanvas();
+    connectSettingsToUi();
 }
 
 MainWindow::~MainWindow()
@@ -74,6 +76,30 @@ void MainWindow::connectUiToSettings()
 
     QObject::connect(this->sidebar, SIGNAL(modelChanged(QString)),
                      this->settings, SLOT(onModelChanged(QString)));
+
+    QObject::connect(this->sidebar, SIGNAL(shadingModeChanged(int)),
+                     this->settings, SLOT(onShadingModeChanged(int)));
+
+    QObject::connect(this->sidebar, SIGNAL(illuminationModeChanged(int)),
+                     this->settings, SLOT(onIlluminationModeChanged(int)));
+
+    QObject::connect(this->sidebar, SIGNAL(visualizeNormalsChanged(bool)),
+                     this->settings, SLOT(onVisualizeNormalsChanged(bool)));
+
+    QObject::connect(this->sidebar, SIGNAL(visualizeGeometryChanged(bool)),
+                     this->settings, SLOT(onVisualizeGeometryChanged(bool)));
+
+    QObject::connect(this->sidebar, SIGNAL(innerTessellationLevelChanged(float)),
+                     this->settings, SLOT(onInnerTessellationLevelChanged(float)));
+
+    QObject::connect(this->sidebar, SIGNAL(outerTessellationLevelChanged(float)),
+                     this->settings, SLOT(onOuterTessellationLevelChanged(float)));
+
+    QObject::connect(this->sidebar, SIGNAL(renderPnTrianglesChanged(bool)),
+                     this->settings, SLOT(onRenderPnTrianglesChanged(bool)));
+
+    QObject::connect(this->sidebar, SIGNAL(normalsChanged(int)),
+                     this->settings, SLOT(onNormalsChanged(int)));
 }
 
 void MainWindow::connectUiToCanvas()
@@ -82,9 +108,21 @@ void MainWindow::connectUiToCanvas()
                      this->canvas, SLOT(onRotationDialChanged(int,int)));
 }
 
+void MainWindow::connectSettingsToUi()
+{
+    QObject::connect(this->settings, SIGNAL(tessellationLevelsChanged(float,float)),
+                     this->sidebar, SLOT(onTessellationLevelsChanged(float,float)));
+
+    QObject::connect(this->settings, SIGNAL(normalCalculationChanged(int)),
+                     this->sidebar, SLOT(onNormalCalculationChanged(int)));
+
+    QObject::connect(this->settings, SIGNAL(renderUiChanged(int,int,int,bool)),
+                     this->sidebar, SLOT(onRenderUiChanged(int,int,int,bool)));
+}
+
 void MainWindow::connectSettingsToCanvas()
 {
-    QObject::connect(this->settings, SIGNAL(renderModeChanged(Settings::Render::Mode)),
-                     this->canvas, SLOT(onRenderModeChanged(Settings::Render::Mode)));
+    QObject::connect(this->settings, SIGNAL(settingsChanged()),
+                     this->canvas, SLOT(onSettingsChanged()));
 }
 

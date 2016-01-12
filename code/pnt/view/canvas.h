@@ -12,8 +12,11 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLBuffer>
 #include <QOpenGLVertexArrayObject>
+
 #include "model/mesh.h"
 #include "settings/settings.h"
+#include "settings/material.h"
+#include "settings/light.h"
 
 class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 {
@@ -23,10 +26,12 @@ public:
     Canvas(QWidget *parent = 0);
     ~Canvas();
 
+    void setSettings(Settings *value);
+
 public slots:
     void onRotationDialChanged(int axis, int value);
     void onModelChanged(Mesh *model);
-    void onRenderModeChanged(Settings::Render::Mode mode);
+    void onSettingsChanged();
 
 protected:
     void initializeGL() Q_DECL_OVERRIDE;
@@ -51,7 +56,7 @@ private:
     void initializeShaders();
     void initializeBuffers();
 
-    //OpenGL update
+    // OpenGL update
     int numIndices;
     int numVertices;
     void updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data);
@@ -64,12 +69,22 @@ private:
     float zoomingFactor;
     void constructModelViewProjectionMatrix();
     void updateTransformationMatrix();
+    void resetZoomAndRotation();
+
+    // Set uniforms
+    void setUniforms(Material material = Material(), Light light = Light());
+    void setMaterialInShader(Material material);
+    void setLightInShader(Light light);
+    void setTessellationLevels(float inner, float outer);
+    void setShadingModel(Settings::Render::Interpolation mode);
+    void setIlluminationModel(Settings::Render* renderSettings);
+    void setNormalComputationMethod(bool useRealNormals);
 
     // Paint stuff
-    Settings::Render::Mode mode = Settings::Render::Mode::POINTCLOUD;
-    void drawPointCloud();
+    Settings *settings;
     void drawWireframe();
-    void drawNormalSurface();
+    void drawShadedSurface();
+    void drawPatches();
 
     // Events
     bool gestureEvent(QGestureEvent *event);

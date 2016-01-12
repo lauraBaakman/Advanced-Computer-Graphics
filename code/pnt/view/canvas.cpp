@@ -30,6 +30,9 @@ void Canvas::initializeShaders()
 {
     this->shaderProgram = new QOpenGLShaderProgram();
     this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::Vertex, ":/shaders/resources/shaders/vertex.glsl");
+    this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::TessellationControl, ":/shaders/resources/shaders/controll.glsl");
+    this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::TessellationEvaluation, ":/shaders/resources/shaders/evaluation.glsl");
+    this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::Geometry, ":/shaders/resources/shaders/geometry.glsl");
     this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::Fragment, ":/shaders/resources/shaders/fragment.glsl");
     this->shaderProgram->link();
 }
@@ -53,7 +56,7 @@ void Canvas::initializeBuffers()
     this->normalBuffer->bind();
 
     glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_TRUE, 0, 0);
 
     this->indexBuffer = new QOpenGLBuffer(QOpenGLBuffer::IndexBuffer);
     this->indexBuffer->setUsagePattern(QOpenGLBuffer::DynamicDraw);
@@ -99,17 +102,17 @@ void Canvas::paintGL()
     this->shaderProgram->bind();
     this->vertexArrayObject.bind();
 
+    //Should be placed in correct spot
+    setUniforms();
+
     updateTransformationMatrix();
 
-    switch(mode) {
-    case Settings::Render::Mode::POINTCLOUD:
-        drawPointCloud();
-        break;
+    switch(this->settings->render->renderMode) {
     case Settings::Render::Mode::WIREFRAME:
         drawWireframe();
         break;
-    case Settings::Render::Mode::NORMALS:
-        drawNormalSurface();
+    case Settings::Render::Mode::SURFACE:
+        drawShadedSurface();
     }
 
     this->vertexArrayObject.release();
@@ -127,22 +130,115 @@ void Canvas::updateTransformationMatrix()
     this->shaderProgram->setUniformValue("mvpMatrix", this->mvpMatrix);
 }
 
-void Canvas::drawPointCloud()
+void Canvas::resetZoomAndRotation()
 {
-    glPointSize(5.0f);
-    glDrawArrays(GL_POINTS, 0, this->numVertices);
+//    this->zoomingFactor = 1.0;
+    this->rotationAngles = QVector3D(1.0, 1.0, 1.0);
+}
+
+void Canvas::setUniforms(Material material, Light light)
+{
+    setMaterialInShader(material);
+    setLightInShader(light);
+    setTessellationLevels(this->settings->pnTriangle->innerTessellationLevel,
+                          this->settings->pnTriangle->outerTessellationLevel);
+
+    setShadingModel(this->settings->render->interpolationModel);
+    setIlluminationModel(this->settings->render);
+    setNormalComputationMethod(false);
+}
+
+void Canvas::setMaterialInShader(Material material)
+{
+    shaderProgram->setUniformValue("material.specularReflectionConstant", material.specularReflectionConstant);
+    shaderProgram->setUniformValue("material.diffuseReflectionConstant", material.diffuseReflectionConstant);
+    shaderProgram->setUniformValue("material.ambientReflectionConstant", material.ambientReflectionConstant);
+    shaderProgram->setUniformValue("material.alfa", material.alfa);
+    shaderProgram->setUniformValue("material.color", material.color);
+}
+
+void Canvas::setLightInShader(Light light)
+{
+    shaderProgram->setUniformValue("light.position", light.position);
+    shaderProgram->setUniformValue("light.ambientLightIntensity", light.ambientIntensity);
+    shaderProgram->setUniformValue("light.diffuseLightIntensity", light.diffuseIntensity);
+    shaderProgram->setUniformValue("light.specularLightIntensity", light.specularIntensity);
+}
+
+void Canvas::setTessellationLevels(float inner, float outer)
+{
+    shaderProgram->setUniformValue("innerTessellationLevel", inner);
+    shaderProgram->setUniformValue("outerTessellationLevel", outer);
+}
+
+void Canvas::setIlluminationModel(Settings::Render* renderSettings)
+{
+    GLuint functionIndex;
+    if(renderSettings->visualizeNormals){
+        functionIndex = glGetSubroutineIndex(shaderProgram->programId(), GL_FRAGMENT_SHADER, "visualizeNormals");
+    } else {
+        switch(renderSettings->illuminationModel){
+        case Settings::Render::Illumination::NONE:
+            functionIndex = glGetSubroutineIndex(shaderProgram->programId(), GL_FRAGMENT_SHADER, "noShading");
+            break;
+        case Settings::Render::Illumination::PHONG:
+            functionIndex = glGetSubroutineIndex(shaderProgram->programId(), GL_FRAGMENT_SHADER, "phongReflection");
+            break;
+        }
+    }
+    glUniformSubroutinesuiv(GL_FRAGMENT_SHADER, 1, &functionIndex);
+}
+
+void Canvas::setNormalComputationMethod(bool useRealNormals)
+{
+    GLuint functionIndex;
+    if(useRealNormals){
+        qDebug() << "Use real normals";
+        functionIndex = glGetSubroutineIndex(shaderProgram->programId(), GL_TESS_EVALUATION_SHADER, "interpolateRealNormals");
+    } else {
+        qDebug() << "Use fake normals";
+        functionIndex = glGetSubroutineIndex(shaderProgram->programId(), GL_TESS_EVALUATION_SHADER, "interpolateFakeNormals");
+    }
+    glUniformSubroutinesuiv(GL_TESS_EVALUATION_SHADER, 1, &functionIndex);
+}
+
+void Canvas::setShadingModel(Settings::Render::Interpolation mode)
+{
+    int interpolationMode;
+    switch(mode){
+    case Settings::Render::Interpolation::PHONG:
+        interpolationMode = 1;
+        break;
+    case Settings::Render::Interpolation::FLAT:
+        interpolationMode = 2;
+        break;
+    case Settings::Render::Interpolation::GOURAUD:
+        interpolationMode = 3;
+        break;
+    }
+    shaderProgram->setUniformValue("interpolationMode", interpolationMode);
+}
+
+void Canvas::setSettings(Settings *value)
+{
+    settings = value;
 }
 
 void Canvas::drawWireframe()
 {
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    glDrawElements(GL_TRIANGLES, this->numIndices, GL_UNSIGNED_INT, (void*)(0));
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    drawPatches();
 }
 
-void Canvas::drawNormalSurface()
+void Canvas::drawShadedSurface()
 {
-    glDrawElements(GL_TRIANGLES, this->numIndices, GL_UNSIGNED_INT, (void*)(0));
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    drawPatches();
+}
+
+void Canvas::drawPatches()
+{
+    glDrawElements(GL_PATCHES, this->numIndices, GL_UNSIGNED_INT, (void*)(0));
 }
 
 void Canvas::constructModelViewProjectionMatrix()
@@ -166,20 +262,21 @@ void Canvas::onRotationDialChanged(int axis, int value)
 
 void Canvas::onModelChanged(Mesh *model)
 {
+    this->resetZoomAndRotation();
     updateBuffers(model);
     update();
 }
 
-void Canvas::onRenderModeChanged(Settings::Render::Mode mode)
+void Canvas::onSettingsChanged()
 {
-    this->mode = mode;
+    qDebug() << "Settings changed in Canvas" << (int)this->settings->render->renderMode;
     update();
 }
 
 bool Canvas::event(QEvent *event)
 {
     if (event->type() == QEvent::Gesture) {
-          return gestureEvent(static_cast<QGestureEvent*>(event));
+        return gestureEvent(static_cast<QGestureEvent*>(event));
     }
     return QWidget::event(event);
 }
@@ -200,7 +297,7 @@ void Canvas::pinchTriggered(QPinchGesture *gesture)
     }
     if (gesture->state() == Qt::GestureFinished) {
         qDebug() << "Never happens?";
-   }
+    }
     update();
 }
 

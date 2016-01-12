@@ -33,10 +33,16 @@ HEADERS  += view/ui/mainwindow.h \
     view/canvas.h \
     view/ui/sidebar.h \
     controller/meshcontroller.h \
-    settings/settings.h
+    settings/settings.h \
+    settings/material.h \
+    settings/light.h
 
 FORMS    += view/ui/mainwindow.ui \
     view/ui/sidebar.ui
 
 RESOURCES += \
     resources.qrc
+
+DISTFILES += \
+    resources/shaders/controll.frag \
+    resources/shaders/evaluation.frag
