@@ -30,6 +30,7 @@ public slots:
     void onRotationDialChanged(int axis, int value);
     void onModelChanged(Mesh *model);
     void onRenderModeChanged(Settings::Render::Mode mode);
+    void onSettingsChanged(Settings *settings);
 
 protected:
     void initializeGL() Q_DECL_OVERRIDE;

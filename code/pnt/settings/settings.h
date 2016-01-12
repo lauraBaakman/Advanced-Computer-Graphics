@@ -18,15 +18,27 @@ public:
             WIREFRAME,
             SURFACE
         };
-        enum class Illumination {
+        enum class Interpolation {
             FLAT,
             PHONG,
             GOURAUD
         };
-        enum class Shading {
+        enum class Illumination {
             PHONG,
             NONE
         };
+        Render::Mode renderMode;
+        Render::Interpolation interpolationMode;
+        Render::Illumination illuminationMode;
+    };
+
+    Render *render;
+
+    class PnTriangle {
+        public:
+            float innerTessellationLevel;
+            float outerTessellationLevel;
+            bool visualizeGeometry;
     };
 
     static QMap<QString, QString> modelMap();
@@ -35,6 +47,7 @@ public:
 signals:
     void modelChanged(QString path);
     void renderModeChanged(Settings::Render::Mode);
+    void settingsChanged(Settings *settings);
 
 public slots:
     void onRenderModeChanged(int index);
@@ -42,9 +55,11 @@ public slots:
     void onIlluminationModeChanged(int index);
     void onShadingModeChanged(int index);
     void onVisualizeNormalsChanged(bool toggle);
+//    void onInnerTessellationLevelChanged(float value);
+//    void onOuterTessellationLevelChanged(float value);
 
 private:
-    Render *render;
+
 };
 
 #endif // SETTINGS_H

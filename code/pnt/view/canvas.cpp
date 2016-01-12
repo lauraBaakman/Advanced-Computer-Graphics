@@ -205,6 +205,11 @@ void Canvas::onRenderModeChanged(Settings::Render::Mode mode)
     update();
 }
 
+void Canvas::onSettingsChanged(Settings *settings)
+{
+    qDebug() << "Settings changed in Canvas" << (int)settings->render->renderMode;
+}
+
 bool Canvas::event(QEvent *event)
 {
     if (event->type() == QEvent::Gesture) {

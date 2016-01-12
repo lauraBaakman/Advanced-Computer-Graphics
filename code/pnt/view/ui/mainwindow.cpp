@@ -95,5 +95,9 @@ void MainWindow::connectSettingsToCanvas()
 {
     QObject::connect(this->settings, SIGNAL(renderModeChanged(Settings::Render::Mode)),
                      this->canvas, SLOT(onRenderModeChanged(Settings::Render::Mode)));
+
+    QObject::connect(this->settings, SIGNAL(settingsChanged(Settings*)),
+                     this->canvas, SLOT(onSettingsChanged(Settings*)));
+
 }
 

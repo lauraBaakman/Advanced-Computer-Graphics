@@ -23,6 +23,8 @@ signals:
     void shadingModeChanged(int index);
     void illuminationModeChanged(int index);
     void visualizeNormalsChanged(bool toggle);
+    void innerTessellationLevelChanged(float value);
+    void outerTessellationLevelChanged(float value);
 
 private slots:
     void on_renderModeComboBox_currentIndexChanged(int index);

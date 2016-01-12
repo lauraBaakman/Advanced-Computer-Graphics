@@ -31,7 +31,10 @@ QMap<QString, QString> Settings::modelMap()
 
 void Settings::onRenderModeChanged(int index)
 {   qDebug() << "Settings::onRenderModeChanged" << index;
+    render->renderMode = static_cast<Settings::Render::Mode>(index);
     emit renderModeChanged(static_cast<Settings::Render::Mode>(index));
+    emit settingsChanged(this);
+    // emit entire setting thing...
 }
 
 void Settings::onModelChanged(QString modelKey)

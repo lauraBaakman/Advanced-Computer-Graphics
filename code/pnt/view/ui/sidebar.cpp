@@ -92,8 +92,9 @@ void Sidebar::on_innerTessellationSlider_valueChanged(int position)
     float sliderValue = mapToRange(position,
             QPair<int, int>(this->outerTessellationMin, this->outerTessellationMax),
             Settings::outerTessellationRange);
-    qDebug() << "Outer tessellation: " << sliderValue;
     ui->innerTessellationSliderLabel->setText(QString::number(sliderValue, 'g', 2));
+
+    emit outerTessellationLevelChanged(sliderValue);
 }
 
 void Sidebar::on_outerTessellationSlider_valueChanged(int position)
@@ -101,8 +102,9 @@ void Sidebar::on_outerTessellationSlider_valueChanged(int position)
     float sliderValue = mapToRange(position,
             QPair<int, int>(this->innerTessellationMin, this->innerTessellationMax),
             Settings::innerTessellationRange);
-    qDebug() << "Inner tessellation: " << sliderValue;
     ui->outerTessellationSliderLabel->setText(QString::number(sliderValue, 'g', 2));
+
+    emit innerTessellationLevelChanged(sliderValue);
 }
 
 void Sidebar::on_shadingModeComboBox_currentIndexChanged(int index)
