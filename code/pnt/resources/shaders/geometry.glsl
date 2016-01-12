@@ -23,13 +23,13 @@ void faceNormal(){
 }
 
 void flatInterpolation(){
-        faceNormal();
-        for(int i = 0; i < 3; i++) {
-                gsPosition = gl_in[i].gl_Position.xyz;
-                gl_Position = gl_in[i].gl_Position;
-                EmitVertex();
-        }
-        EndPrimitive();
+    faceNormal();
+    for(int i = 0; i < 3; i++) {
+    gsPosition = gl_in[i].gl_Position.xyz;
+    gl_Position = gl_in[i].gl_Position;
+    EmitVertex();
+    }
+    EndPrimitive();
 }
 
 //i.e. phongInterpolation
@@ -44,18 +44,7 @@ void smoothInterpolation(){
 }
 
 void main() {
-
-if(interpolationMode == 1){
-    smoothInterpolation();
-} else if(interpolationMode == 2){
-    flatInterpolation();
-} else {
-//    gouraudInterpolation();
-}
-
-    if(useSmoothInterpolation){
-    smoothInterpolation();
-    } else {
-    flatInterpolation();
-    }
+    if(interpolationMode == 1) smoothInterpolation();
+    if(interpolationMode == 2) flatInterpolation();
+//    if(interpolationMode == 3) //gouraud
 }

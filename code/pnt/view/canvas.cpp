@@ -180,17 +180,19 @@ void Canvas::setIlluminationModel(Settings::Render::Illumination model)
 
 void Canvas::setShadingModel(Settings::Render::Interpolation mode)
 {
-    GLuint functionIndex;
+    int interpolationMode;
     switch(mode){
+    case Settings::Render::Interpolation::PHONG:
+        interpolationMode = 1;
+        break;
     case Settings::Render::Interpolation::FLAT:
-        functionIndex = glGetSubroutineIndex(shaderProgram->programId(), GL_GEOMETRY_SHADER, "flatInterpolation");
+        interpolationMode = 2;
         break;
     case Settings::Render::Interpolation::GOURAUD:
-    case Settings::Render::Interpolation::PHONG:
-        functionIndex = glGetSubroutineIndex(shaderProgram->programId(), GL_GEOMETRY_SHADER, "smoothInterpolation");
+        interpolationMode = 3;
         break;
     }
-    glUniformSubroutinesuiv(GL_GEOMETRY_SHADER, 1, &functionIndex);
+    shaderProgram->setUniformValue("interpolationMode", interpolationMode);
 }
 
 void Canvas::setSettings(Settings *value)
