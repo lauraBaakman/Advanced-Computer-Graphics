@@ -54,14 +54,19 @@ void interpolateGeometricComponent(){
 
     vec3 b210 = vec3(tcsPatches[0].b210, tcsPatches[1].b210, tcsPatches[2].b210);
     controlNet.b210 = b210;
+
     vec3 b120 = vec3(tcsPatches[0].b120, tcsPatches[1].b120, tcsPatches[2].b120);
     controlNet.b120 = b120;
+
     vec3 b021 = vec3(tcsPatches[0].b021, tcsPatches[1].b021, tcsPatches[2].b021);
     controlNet.b021 = b021;
+
     vec3 b012 = vec3(tcsPatches[0].b012, tcsPatches[1].b012, tcsPatches[2].b012);
     controlNet.b012 = b012;
+
     vec3 b102 = vec3(tcsPatches[0].b102, tcsPatches[1].b102, tcsPatches[2].b102);
     controlNet.b102 = b102;
+    
     vec3 b201 = vec3(tcsPatches[0].b201, tcsPatches[1].b201, tcsPatches[2].b201);
     controlNet.b201 = b201;
 

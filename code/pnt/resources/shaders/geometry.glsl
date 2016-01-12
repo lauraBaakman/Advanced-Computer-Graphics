@@ -14,7 +14,7 @@ struct ControlNet {
 
 //Settings
 layout(triangles) in;
-layout(triangle_strip, max_vertices = 3) out;
+layout(triangle_strip, max_vertices = 27) out;
 
 //Uniform
 uniform int interpolationMode;
@@ -49,16 +49,43 @@ void flatInterpolation(){
 //i.e. phongInterpolation
 void smoothInterpolation(){
   for(int i = 0; i < 3; i++) {
-	gsNormal = tesNormal[i];
-	gsPosition = gl_in[i].gl_Position.xyz;
-	gl_Position = gl_in[i].gl_Position;
-	EmitVertex();
+        gsNormal = tesNormal[i];
+        gsPosition = gl_in[i].gl_Position.xyz;
+        gl_Position = gl_in[i].gl_Position;
+        EmitVertex();
   }
   EndPrimitive();
 }
 
+void emitTriangle(vec3 vertexA, vec3 vertexB, vec3 vertexC){
+    gl_Position = vec4(vertexA, 1.0);
+    gsNormal = vertexA;
+    EmitVertex();
+
+    gl_Position = vec4(vertexB, 1.0);
+    gsNormal = vertexB;
+    EmitVertex();
+
+    gl_Position = vec4(vertexC, 1.0);
+    gsNormal = vertexC;
+    EmitVertex();
+
+    EndPrimitive();
+}
+
 void showGeometricComponent(){
-    smoothInterpolation();
+    //No need to set gsPosition, or gsNormal per emitted vertex, since functions that use those are disabled if geometric component is shown
+    gsPosition = vec3(1.0);
+    gsNormal = vec3(1.0);
+    emitTriangle(gl_in[0].gl_Position.xyz, controlNet[0].b201, controlNet[0].b210);
+    emitTriangle(controlNet[0].b210, controlNet[0].b201, controlNet[0].b111);
+    emitTriangle(controlNet[0].b210, controlNet[0].b111, controlNet[0].b120);
+    emitTriangle(controlNet[0].b201, controlNet[0].b102, controlNet[0].b111);
+    emitTriangle(controlNet[0].b120, controlNet[0].b111, controlNet[0].b021);
+    emitTriangle(controlNet[0].b120, controlNet[0].b021, gl_in[1].gl_Position.xyz);
+    emitTriangle(controlNet[0].b111, controlNet[0].b012, controlNet[0].b021);
+    emitTriangle(controlNet[0].b111, controlNet[0].b102, controlNet[0].b012);
+    emitTriangle(controlNet[0].b102, gl_in[2].gl_Position.xyz, controlNet[0].b012);
 }
 
 void main() {
