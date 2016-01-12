@@ -5,11 +5,10 @@ layout(triangle_strip, max_vertices = 3) out;
 
 //Definitions
 subroutine void interpolationModelType();
+subroutine uniform interpolationModelType interpolationModel;
 
 //Variable in
 layout(location = 0) in vec3 tesNormal[];
-
-subroutine uniform interpolationModelType interpolationModel;
 
 //Variable out
 layout(location = 0) out vec3 gsPosition;
@@ -21,18 +20,18 @@ void faceNormal(){
 
     vec3 meanNormal = (tesNormal[0] + tesNormal[1] + tesNormal[2]) / 3.0;
     gsNormal = normalize(cross(edge1, edge2));
-    if(dot(meanNormal, gsNormal) < 0) gsNormal = normalize(cross(edge2, edge1));    	
+    if(dot(meanNormal, gsNormal) < 0) gsNormal = normalize(cross(edge2, edge1));
 }
 
 subroutine(interpolationModelType)
 void flatInterpolation(){
-	faceNormal();
-	for(int i = 0; i < 3; i++) {
-		gsPosition = gl_in[i].gl_Position.xyz;    
-		gl_Position = gl_in[i].gl_Position;
-		EmitVertex();
-	}
-	EndPrimitive();		
+        faceNormal();
+        for(int i = 0; i < 3; i++) {
+                gsPosition = gl_in[i].gl_Position.xyz;
+                gl_Position = gl_in[i].gl_Position;
+                EmitVertex();
+        }
+        EndPrimitive();
 }
 
 subroutine(interpolationModelType)
@@ -40,11 +39,11 @@ subroutine(interpolationModelType)
 void smoothInterpolation(){
   for(int i = 0; i < 3; i++) {
     gsNormal = tesNormal[i];
-	gsPosition = gl_in[i].gl_Position.xyz;    
+        gsPosition = gl_in[i].gl_Position.xyz;
     gl_Position = gl_in[i].gl_Position;
     EmitVertex();
   }
-  EndPrimitive();	
+  EndPrimitive();
 }
 
 void main() {
