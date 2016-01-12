@@ -12,8 +12,7 @@ layout(location = 1) out vec3 gsNormal;
 
 void passThrough(){
   for(int i = 0; i < 3; i++) {
-    // gsNormal = tesNormal[i];
-    gsNormal = vec3(1.0, 0.0, 0.0);
+    gsNormal = tesNormal[i];
 	gsPosition = gl_in[i].gl_Position.xyz;    
     gl_Position = gl_in[i].gl_Position;
     EmitVertex();
