@@ -18,5 +18,6 @@ void MeshController::onModelChanged(QString modelPath)
     Obj *obj = Obj::fromFile(&file);
     if(this->mesh != nullptr) delete this->mesh;
     this->mesh = new Mesh(obj);
+    delete obj;
     emit modelChanged(this->mesh);
 }
