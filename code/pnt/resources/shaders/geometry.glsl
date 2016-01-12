@@ -29,8 +29,8 @@ void flatInterpolation(){
 	EndPrimitive();		
 }
 
-//Pass through shader as well
-void phongInterpolation(){
+//i.e. phongInterpolation
+void smoothInterpolation(){
   for(int i = 0; i < 3; i++) {
     gsNormal = tesNormal[i];
 	gsPosition = gl_in[i].gl_Position.xyz;    
