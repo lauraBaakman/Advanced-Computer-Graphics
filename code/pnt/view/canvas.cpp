@@ -138,7 +138,7 @@ void Canvas::setUniforms(Material material, Light light)
                           this->settings->pnTriangle->outerTessellationLevel);
 
     setShadingModel(this->settings->render->interpolationModel);
-    setIlluminationModel(this->settings->render->illuminationModel);
+    setIlluminationModel(this->settings->render);
 }
 
 void Canvas::setMaterialInShader(Material material)
@@ -164,16 +164,20 @@ void Canvas::setTessellationLevels(float inner, float outer)
     shaderProgram->setUniformValue("outerTessellationLevel", outer);
 }
 
-void Canvas::setIlluminationModel(Settings::Render::Illumination model)
+void Canvas::setIlluminationModel(Settings::Render* renderSettings)
 {
     GLuint functionIndex;
-    switch(model){
-    case Settings::Render::Illumination::NONE:
-        functionIndex = glGetSubroutineIndex(shaderProgram->programId(), GL_FRAGMENT_SHADER, "noShading");
-        break;
-    case Settings::Render::Illumination::PHONG:
-        functionIndex = glGetSubroutineIndex(shaderProgram->programId(), GL_FRAGMENT_SHADER, "phongReflection");
-        break;
+    if(renderSettings->visualizeNormals){
+        functionIndex = glGetSubroutineIndex(shaderProgram->programId(), GL_FRAGMENT_SHADER, "visualizeNormals");
+    } else {
+        switch(renderSettings->illuminationModel){
+        case Settings::Render::Illumination::NONE:
+            functionIndex = glGetSubroutineIndex(shaderProgram->programId(), GL_FRAGMENT_SHADER, "noShading");
+            break;
+        case Settings::Render::Illumination::PHONG:
+            functionIndex = glGetSubroutineIndex(shaderProgram->programId(), GL_FRAGMENT_SHADER, "phongReflection");
+            break;
+        }
     }
     glUniformSubroutinesuiv(GL_FRAGMENT_SHADER, 1, &functionIndex);
 }

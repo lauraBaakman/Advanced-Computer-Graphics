@@ -76,7 +76,7 @@ private:
     void setLightInShader(Light light);
     void setTessellationLevels(float inner, float outer);
     void setShadingModel(Settings::Render::Interpolation mode);
-    void setIlluminationModel(Settings::Render::Illumination model);
+    void setIlluminationModel(Settings::Render* renderSettings);
 
     // Paint stuff
     Settings *settings;
