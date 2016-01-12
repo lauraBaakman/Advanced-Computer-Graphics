@@ -16,7 +16,7 @@ struct LightInfo {
     vec3 specularLightIntensity;
 };
 
-subroutine void reflectionModel();
+subroutine void reflectionModelType();
 
 //Variable in
 layout(location = 0) in vec3 gsPosition;
@@ -24,7 +24,7 @@ layout(location = 1) in vec3 gsNormal;
 
 uniform LightInfo light;
 uniform MaterialInfo material;
-uniform subroutine reflectionModel;
+uniform subroutine reflectionModelType reflectionModel;
 
 //Variable out
 out vec4 fColor;
@@ -45,7 +45,7 @@ vec3 frontLightMaterial(float reflectionConstant, vec3 color, vec3 light)
     return clamp(light * (reflectionConstant * color), 0, 1);
 }
 
-subroutine(reflectionModel)
+subroutine(reflectionModelType)
 void phongReflection(){
     vec3 viewVector = normalize(eye - gsPosition);
     vec3 lightVector = normalize(light.position - gsPosition);
@@ -76,12 +76,12 @@ void phongReflection(){
     fColor = vec4(phongColor, 1.0);
 }
 
-subroutine(reflectionModel)
+subroutine(reflectionModelType)
 void visualizeNormals(){
     fColor = vec4(makeUnitVectorAColor(normalize(gsNormal)), 1.0);	
 }
 
-subroutine(reflectionModel)
+subroutine(reflectionModelType)
 void noShading(){
 	fColor = vec4(1.0, 0.0, 0.0, 1.0);
 }
@@ -89,6 +89,7 @@ void noShading(){
 void main(void)
 {
     // phongReflection();
-    visualizeNormals();
+    // visualizeNormals();
     // noShading();
+    reflectionModel();
 }
