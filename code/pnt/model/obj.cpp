@@ -13,6 +13,20 @@ Obj::Obj()
     counters.vertexPositions = 0;
 }
 
+Obj::~Obj()
+{
+    qDebug() << "Obj destructor";
+    for(int i = 0; i < vertexPositions.size(); i++){
+        delete vertexPositions[i];
+    }
+    for(int i = 0; i < vertexNormals.size(); i++){
+        delete vertexNormals[i];
+    }
+    for(int i = 0; i < faces.size(); i++){
+        delete faces[i];
+    }
+}
+
 Obj* Obj::fromFile(QFile *file)
 {
     QTextStream* inStream = openFile(file);
