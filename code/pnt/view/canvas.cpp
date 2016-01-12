@@ -199,19 +199,10 @@ void Canvas::setNormalComputationMethod(Settings::PnTriangle::Normals mode)
         break;
     case Settings::PnTriangle::Normals::REAl:
         qDebug() << "Using real normals";
-        functionIndex = glGetSubroutineIndex(shaderProgram->programId(), GL_TESS_EVALUATION_SHADER, "interpolateFakeNormals");
+        functionIndex = glGetSubroutineIndex(shaderProgram->programId(), GL_TESS_EVALUATION_SHADER, "interpolateRealNormals");
         break;
     }
     glUniformSubroutinesuiv(GL_TESS_EVALUATION_SHADER, 1, &functionIndex);
-
-//    if(useRealNormals){
-//        qDebug() << "Use real normals";
-//        functionIndex = glGetSubroutineIndex(shaderProgram->programId(), GL_TESS_EVALUATION_SHADER, "interpolateRealNormals");
-//    } else {
-//        qDebug() << "Use fake normals";
-//        functionIndex = glGetSubroutineIndex(shaderProgram->programId(), GL_TESS_EVALUATION_SHADER, "interpolateFakeNormals");
-//    }
-//    glUniformSubroutinesuiv(GL_TESS_EVALUATION_SHADER, 1, &functionIndex);
 }
 
 void Canvas::setShadingModel(Settings::Render::Interpolation mode, bool showGeometricComponent)
