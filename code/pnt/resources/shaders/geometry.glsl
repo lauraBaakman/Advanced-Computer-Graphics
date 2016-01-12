@@ -1,5 +1,18 @@
 #version 410 core
 
+//Definitions
+struct ControlNet {
+    vec3 b210;
+    vec3 b120;
+    vec3 b021;
+    vec3 b012;
+    vec3 b102;
+    vec3 b201;
+    vec3 b111;
+};
+
+
+//Settings
 layout(triangles) in;
 layout(triangle_strip, max_vertices = 3) out;
 
@@ -8,6 +21,7 @@ uniform int interpolationMode;
 
 //Variable in
 layout(location = 0) in vec3 tesNormal[];
+in ControlNet controlNet[];
 
 //Variable out
 layout(location = 0) out vec3 gsPosition;
@@ -43,8 +57,13 @@ void smoothInterpolation(){
   EndPrimitive();
 }
 
+void showGeometricComponent(){
+    smoothInterpolation();
+}
+
 void main() {
-    if(interpolationMode == 1) smoothInterpolation();
-    if(interpolationMode == 2) flatInterpolation();
+    // if(interpolationMode == 1) smoothInterpolation();
+    // if(interpolationMode == 2) flatInterpolation();
 //    if(interpolationMode == 3) //gouraud
+    showGeometricComponent();
 }
