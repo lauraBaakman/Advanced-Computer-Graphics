@@ -3,6 +3,7 @@
 
 %Plaatjes
 \usepackage{graphicx}
+\usepackage{float}
 \usepackage{subcaption}
 \captionsetup{subrefformat=parens}
 \usepackage[font=small,format=plain,labelfont=bf,textfont=it]{caption}
@@ -17,15 +18,22 @@
 \usepackage{hyperref}
 \usepackage[noabbrev]{cleveref}
 
+\title{Point Normal Gallery}
+\author{Laura Baakman \and Rick van Veen}
 
 \begin{document}
-
-\begin{figure}
+\makeatletter
+\g@addto@macro\@maketitle{
+\begin{figure}[H]
+    \setlength{\linewidth}{\textwidth}
+    \setlength{\hsize}{\textwidth}
+    \centering
 	\includegraphics[width=\textwidth]{enforcer_wireframe.png}
 	\caption{The input mesh.}		
 	\label{fig:enforcerWireframe}	
-\end{figure}
-
+    \end{figure}
+}
+\maketitle
 
 \begin{figure}
 	\includegraphics[width=\textwidth]{enforcer_flat.png}
