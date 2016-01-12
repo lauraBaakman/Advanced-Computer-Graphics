@@ -59,6 +59,10 @@ void interpolateGeometricComponent(){
         b102 * 3.0 * w * v2 +
         b012 * 3.0 * u * v2 +
         b111 * 6.0 * w * u * v;
+
+//Linear interpolation
+//    vec3 position = b300 * w + b030 * u + b003 * v;
+
     gl_Position = vec4(position, 1.0);
 }
 

@@ -41,5 +41,6 @@ void smoothInterpolation(){
 }
 
 void main() {
-	flatInterpolation();
+	// flatInterpolation();
+	smoothInterpolation();
 }

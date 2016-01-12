@@ -89,6 +89,6 @@ void noShading(){
 void main(void)
 {
     // phongReflection();
-    // visualizeNormals();
-    noShading();
+    visualizeNormals();
+    // noShading();
 }
