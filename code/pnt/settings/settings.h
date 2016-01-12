@@ -77,7 +77,7 @@ public slots:
     void onRenderPnTrianglesChanged(bool toggle);
 
 private:
-
+    void resetTessellationSliders();
 };
 
 #endif // SETTINGS_H

@@ -74,19 +74,22 @@ void Settings::onOuterTessellationLevelChanged(float value)
 
 void Settings::onVisualizeGeometryChanged(bool toggle)
 {
+    pnTriangle->visualizeGeometry = toggle;
+    resetTessellationSliders();
+    emit settingsChanged();
+}
+
+void Settings::resetTessellationSliders() {
     float tessellationLevel = 1.0;
     // because we need this and this is super informative ;)
-    pnTriangle->visualizeGeometry = toggle;
     pnTriangle->innerTessellationLevel = tessellationLevel;
     pnTriangle->outerTessellationLevel = tessellationLevel;
     // Signal back to ui.
     emit tessellationLevelsChanged(tessellationLevel, tessellationLevel);
-
-    // Signal the listeners;
-    emit settingsChanged();
 }
 
 void Settings::onRenderPnTrianglesChanged(bool toggle)
 {
-
+    if(!toggle) resetTessellationSliders();
+    emit settingsChanged();
 }
