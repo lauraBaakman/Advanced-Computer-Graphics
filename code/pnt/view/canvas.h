@@ -69,15 +69,16 @@ private:
     float zoomingFactor;
     void constructModelViewProjectionMatrix();
     void updateTransformationMatrix();
+    void resetZoomAndRotation();
 
     // Set uniforms
     void setUniforms(Material material = Material(), Light light = Light());
     void setMaterialInShader(Material material);
     void setLightInShader(Light light);
     void setTessellationLevels(float inner, float outer);
-    void setShadingModel(Settings::Render::Interpolation mode);
+    void setShadingModel(Settings::Render::Interpolation mode, bool showGeometricComponent);
     void setIlluminationModel(Settings::Render* renderSettings);
-    void setNormalComputationMethod(bool useRealNormals);
+    void setNormalComputationMethod(Settings::PnTriangle::Normals mode);
 
     // Paint stuff
     Settings *settings;

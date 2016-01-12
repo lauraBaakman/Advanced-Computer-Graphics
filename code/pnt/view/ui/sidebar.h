@@ -18,6 +18,8 @@ public:
 
 public slots:
     void onTessellationLevelsChanged(float inner, float outer);
+    void onNormalCalculationChanged(int index);
+    void onRenderUiChanged(int renderIndex, int shadingIndex, int illuminationIndex, bool visualizeNormals);
 
 signals:
     void renderModeChanged(int index);
@@ -30,6 +32,7 @@ signals:
     void outerTessellationLevelChanged(float value);
     void visualizeGeometryChanged(bool toggle);
     void renderPnTrianglesChanged(bool toggle);
+    void normalsChanged(int index);
 
 private slots:
     void on_renderModeComboBox_currentIndexChanged(int index);
@@ -46,6 +49,8 @@ private slots:
     void on_illuminationModeComboBox_currentIndexChanged(int index);
     void on_pnTrianglesUi_toggled(bool arg1);
     void on_visualizeGeometricCompCheckBox_clicked(bool checked);
+
+    void on_normalComboBox_currentIndexChanged(int index);
 
 private:
     Ui::Sidebar *ui;

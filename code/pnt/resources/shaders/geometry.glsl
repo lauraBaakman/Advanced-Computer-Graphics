@@ -59,11 +59,9 @@ void smoothInterpolation(){
 
 void emitTriangle(vec3 vertexA, vec3 vertexB, vec3 vertexC){
     gl_Position = vec4(vertexA, 1.0);
-    gsNormal = vertexA;
     EmitVertex();
 
     gl_Position = vec4(vertexB, 1.0);
-    gsNormal = vertexB;
     EmitVertex();
 
     gl_Position = vec4(vertexC, 1.0);
@@ -89,8 +87,8 @@ void showGeometricComponent(){
 }
 
 void main() {
-    // if(interpolationMode == 1) smoothInterpolation();
-    // if(interpolationMode == 2) flatInterpolation();
-//    if(interpolationMode == 3) //gouraud
-    showGeometricComponent();
+    if(interpolationMode == 1) smoothInterpolation();
+    if(interpolationMode == 2) flatInterpolation();
+    if(interpolationMode == 3) showGeometricComponent();
+    //if(interpolationMode == 4) //gouraud
 }

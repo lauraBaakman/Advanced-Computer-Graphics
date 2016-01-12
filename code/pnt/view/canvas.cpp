@@ -130,6 +130,12 @@ void Canvas::updateTransformationMatrix()
     this->shaderProgram->setUniformValue("mvpMatrix", this->mvpMatrix);
 }
 
+void Canvas::resetZoomAndRotation()
+{
+//    this->zoomingFactor = 1.0;
+    this->rotationAngles = QVector3D(1.0, 1.0, 1.0);
+}
+
 void Canvas::setUniforms(Material material, Light light)
 {
     setMaterialInShader(material);
@@ -137,9 +143,9 @@ void Canvas::setUniforms(Material material, Light light)
     setTessellationLevels(this->settings->pnTriangle->innerTessellationLevel,
                           this->settings->pnTriangle->outerTessellationLevel);
 
-    setShadingModel(this->settings->render->interpolationModel);
+    setShadingModel(this->settings->render->interpolationModel, this->settings->pnTriangle->visualizeGeometry);
     setIlluminationModel(this->settings->render);
-    setNormalComputationMethod(true);
+    setNormalComputationMethod(this->settings->pnTriangle->normalMode);
 }
 
 void Canvas::setMaterialInShader(Material material)
@@ -183,32 +189,48 @@ void Canvas::setIlluminationModel(Settings::Render* renderSettings)
     glUniformSubroutinesuiv(GL_FRAGMENT_SHADER, 1, &functionIndex);
 }
 
-void Canvas::setNormalComputationMethod(bool useRealNormals)
+void Canvas::setNormalComputationMethod(Settings::PnTriangle::Normals mode)
 {
     GLuint functionIndex;
-    if(useRealNormals){
-        qDebug() << "Use real normals";
-        functionIndex = glGetSubroutineIndex(shaderProgram->programId(), GL_TESS_EVALUATION_SHADER, "interpolateRealNormals");
-    } else {
-        qDebug() << "Use fake normals";
+    switch(mode){
+    case Settings::PnTriangle::Normals::FAKE:
+        qDebug() << "Using fake normals";
         functionIndex = glGetSubroutineIndex(shaderProgram->programId(), GL_TESS_EVALUATION_SHADER, "interpolateFakeNormals");
+        break;
+    case Settings::PnTriangle::Normals::REAl:
+        qDebug() << "Using real normals";
+        functionIndex = glGetSubroutineIndex(shaderProgram->programId(), GL_TESS_EVALUATION_SHADER, "interpolateFakeNormals");
+        break;
     }
     glUniformSubroutinesuiv(GL_TESS_EVALUATION_SHADER, 1, &functionIndex);
+
+//    if(useRealNormals){
+//        qDebug() << "Use real normals";
+//        functionIndex = glGetSubroutineIndex(shaderProgram->programId(), GL_TESS_EVALUATION_SHADER, "interpolateRealNormals");
+//    } else {
+//        qDebug() << "Use fake normals";
+//        functionIndex = glGetSubroutineIndex(shaderProgram->programId(), GL_TESS_EVALUATION_SHADER, "interpolateFakeNormals");
+//    }
+//    glUniformSubroutinesuiv(GL_TESS_EVALUATION_SHADER, 1, &functionIndex);
 }
 
-void Canvas::setShadingModel(Settings::Render::Interpolation mode)
+void Canvas::setShadingModel(Settings::Render::Interpolation mode, bool showGeometricComponent)
 {
     int interpolationMode;
-    switch(mode){
-    case Settings::Render::Interpolation::PHONG:
-        interpolationMode = 1;
-        break;
-    case Settings::Render::Interpolation::FLAT:
-        interpolationMode = 2;
-        break;
-    case Settings::Render::Interpolation::GOURAUD:
+    if(showGeometricComponent){
         interpolationMode = 3;
-        break;
+    } else {
+        switch(mode){
+        case Settings::Render::Interpolation::PHONG:
+            interpolationMode = 1;
+            break;
+        case Settings::Render::Interpolation::FLAT:
+            interpolationMode = 2;
+            break;
+        case Settings::Render::Interpolation::GOURAUD:
+            interpolationMode = 4;
+            break;
+        }
     }
     shaderProgram->setUniformValue("interpolationMode", interpolationMode);
 }
@@ -256,6 +278,7 @@ void Canvas::onRotationDialChanged(int axis, int value)
 
 void Canvas::onModelChanged(Mesh *model)
 {
+    this->resetZoomAndRotation();
     updateBuffers(model);
     update();
 }

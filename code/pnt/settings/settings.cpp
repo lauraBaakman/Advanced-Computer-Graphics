@@ -76,6 +76,8 @@ void Settings::onVisualizeGeometryChanged(bool toggle)
 {
     pnTriangle->visualizeGeometry = toggle;
     resetTessellationSliders();
+    resetNormalCalculation();
+    resetRenderUi();
     emit settingsChanged();
 }
 
@@ -88,8 +90,36 @@ void Settings::resetTessellationSliders() {
     emit tessellationLevelsChanged(tessellationLevel, tessellationLevel);
 }
 
+void Settings::resetNormalCalculation()
+{
+    pnTriangle->normalMode = Settings::PnTriangle::Normals::FAKE;
+    emit normalCalculationChanged(static_cast<int>(pnTriangle->normalMode));
+}
+
+void Settings::resetRenderUi()
+{
+    render->renderMode = Settings::Render::Mode::WIREFRAME;
+    render->illuminationModel = Settings::Render::Illumination::NONE;
+    render->interpolationModel = Settings::Render::Interpolation::FLAT;
+    render->visualizeNormals = false;
+
+    emit renderUiChanged(static_cast<int>(render->renderMode),
+                         static_cast<int>(render->illuminationModel),
+                         static_cast<int>(render->interpolationModel),
+                         render->visualizeNormals);
+}
+
 void Settings::onRenderPnTrianglesChanged(bool toggle)
 {
-    if(!toggle) resetTessellationSliders();
+    if(!toggle) {
+        resetTessellationSliders();
+        resetNormalCalculation();
+    }
+    emit settingsChanged();
+}
+
+void Settings::onNormalsChanged(int index)
+{
+    pnTriangle->normalMode = static_cast<Settings::PnTriangle::Normals>(index);
     emit settingsChanged();
 }
