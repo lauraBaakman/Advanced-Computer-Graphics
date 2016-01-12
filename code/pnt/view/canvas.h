@@ -77,6 +77,7 @@ private:
     void setTessellationLevels(float inner, float outer);
     void setShadingModel(Settings::Render::Interpolation mode);
     void setIlluminationModel(Settings::Render* renderSettings);
+    void setNormalComputationMethod(bool useRealNormals);
 
     // Paint stuff
     Settings *settings;

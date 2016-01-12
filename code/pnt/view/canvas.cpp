@@ -139,6 +139,7 @@ void Canvas::setUniforms(Material material, Light light)
 
     setShadingModel(this->settings->render->interpolationModel);
     setIlluminationModel(this->settings->render);
+    setNormalComputationMethod(true);
 }
 
 void Canvas::setMaterialInShader(Material material)
@@ -180,6 +181,19 @@ void Canvas::setIlluminationModel(Settings::Render* renderSettings)
         }
     }
     glUniformSubroutinesuiv(GL_FRAGMENT_SHADER, 1, &functionIndex);
+}
+
+void Canvas::setNormalComputationMethod(bool useRealNormals)
+{
+    GLuint functionIndex;
+    if(useRealNormals){
+        qDebug() << "Use real normals";
+        functionIndex = glGetSubroutineIndex(shaderProgram->programId(), GL_TESS_EVALUATION_SHADER, "interpolateRealNormals");
+    } else {
+        qDebug() << "Use fake normals";
+        functionIndex = glGetSubroutineIndex(shaderProgram->programId(), GL_TESS_EVALUATION_SHADER, "interpolateFakeNormals");
+    }
+    glUniformSubroutinesuiv(GL_TESS_EVALUATION_SHADER, 1, &functionIndex);
 }
 
 void Canvas::setShadingModel(Settings::Render::Interpolation mode)

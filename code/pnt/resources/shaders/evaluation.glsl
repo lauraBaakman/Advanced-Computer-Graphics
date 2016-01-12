@@ -1,5 +1,8 @@
 #version 410 core
 
+subroutine void normalComputationMethod();
+subroutine uniform normalComputationMethod normalComputation;
+
 // Definitions
 struct pnPatch {
     float b210;
@@ -66,6 +69,7 @@ void interpolateGeometricComponent(){
     gl_Position = vec4(position, 1.0);
 }
 
+subroutine(normalComputationMethod)
 void interpolateFakeNormals(){
     vec3 n200 = tcsNormals[0];
     vec3 n020 = tcsNormals[1];
@@ -79,6 +83,7 @@ void interpolateFakeNormals(){
         n110 * w * u + n011 * u * v + n101 * w * v);
 }
 
+subroutine(normalComputationMethod)
 void interpolateRealNormals(){
     vec3 b300 = gl_in[0].gl_Position.xyz;
     vec3 b030 = gl_in[1].gl_Position.xyz;
@@ -110,12 +115,7 @@ void interpolateRealNormals(){
 
 void main(void)
 {
-//     gl_Position = (gl_TessCoord.x * gl_in[0].gl_Position) +
-//                       (gl_TessCoord.y * gl_in[1].gl_Position) +
-//                       (gl_TessCoord.z * gl_in[2].gl_Position);
-
     interpolateGeometricComponent();
-    interpolateFakeNormals();
-//    interpolateRealNormals();
+    normalComputation();
 }
 

@@ -35,10 +35,10 @@ void flatInterpolation(){
 //i.e. phongInterpolation
 void smoothInterpolation(){
   for(int i = 0; i < 3; i++) {
-    gsNormal = tesNormal[i];
-        gsPosition = gl_in[i].gl_Position.xyz;
-    gl_Position = gl_in[i].gl_Position;
-    EmitVertex();
+	gsNormal = tesNormal[i];
+	gsPosition = gl_in[i].gl_Position.xyz;
+	gl_Position = gl_in[i].gl_Position;
+	EmitVertex();
   }
   EndPrimitive();
 }
