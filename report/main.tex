@@ -1,6 +1,9 @@
 \documentclass{egpubl}
 \usepackage{eg2014}
 
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
 \ConferencePaper
 \electronicVersion
 
@@ -8,7 +11,7 @@
 \else \usepackage[dvips]{graphicx} \fi
 
 \let\bibhang\arealyundefinedcommand
-\usepackage[backend=bibtex, safeinputenc, style=alphabetic]{biblatex}
+\usepackage[backend=bibtex, bibencoding=ascii, safeinputenc, style=alphabetic]{biblatex}
 \usepackage{csquotes}
 
 \makeatletter
@@ -33,7 +36,7 @@
     pdfauthor={\@shortauthor},
     pdfsubject={\pdf@Subject},
     pdfkeywords={Computer Graphics Forum, EUROGRAPHICS}]{hyperref}
-  }  
+  } 
 \makeatother  
 \electronicVersion
 \PrintedOrElectronic
@@ -51,28 +54,47 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[english]{babel}
+\usepackage{ragged2e}
 
 % Math
 \usepackage{mathtools}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
+\newcommand{\Real}{\ensuremath{\mathbb{R}}}
+
+%Floats
+\usepackage{graphicx}
+% \usepackage[hang, small,labelfont=bf,up,textfont=sl,up, justification=raggedright]{caption}
+\usepackage{subcaption}
+\DeclareCaptionLabelFormat{opening}{(#2)}
+\captionsetup{subrefformat=opening}
 
 % References within paper
 \usepackage{varioref}
 \usepackage{hyperref}
 \usepackage[noabbrev, capitalise]{cleveref}
 
+% Lists
+\usepackage{enumitem}
 
 % Temporary
 \usepackage{todonotes}
-\newcommand{\laura}[1]{\todo[inline, color=red]{\textbf{laura:} #1}}
-\newcommand{\rick}[1]{\todo[inline, color=green]{\textbf{rick:} #1}}
+\newcommand{\laura}[1]{\todo[inline, color=red]{\textbf{Laura:} #1}}
+\newcommand{\rick}[1]{\todo[inline, color=green]{\textbf{Rick:} #1}}
+% \newcommand{\future}[1]{\todo[inline, color=yellow]{\textbf{Possibly eventually:} #1}}
+\newcommand{\future}[1]{}
+% \newcommand{\plaatje}[1]{\todo[inline, color=blue!20]{\textbf{Plaatje:} #1}}
+\newcommand{\plaatje}[1]{}
+\usepackage{etoolbox}
+\newtoggle{PHONG}
+\togglefalse{PHONG}
+
 
 % Settings for header
 
 \title[PN Triangles]%
-      {A Discussion of PN Triangles}
+      {A Discussion of Curved Point-Normal Triangles}
 
 \author[R. van Veen \& L. Baakman]
        {R. van Veen\thanks{These authors contributed equally to this work.}$^{1}$

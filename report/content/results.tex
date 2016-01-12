@@ -1,14 +1,21 @@
 %!TEX root = ../main.tex
 
 \section{Results}
+\label{s:results}
 
 \subsection{Fake versus real normals}
 	\todo[inline]{Show results of PN triangles with fake and real normals, and discuss differences}
+	\todo[inline]{Computational complexity of the fake normals and the real normals, consider one triangle.}
 	\todo[inline]{Any unsolved problems?}
 
+\iftoggle{PHONG}{
 \subsection{Phong tesselation versus PN triangles}
-	\todo[inline]{Show comparison of Phong tesselation with PN triangles: performance, visual results, continuity, probably in cooperation with Jelle and Gerben}
-	\todo[inline]{Any unsolved problems?}
+	\future{Show comparison of Phong tesselation with PN triangles: performance, visual results, continuity, probably in cooperation with Jelle and Gerben}
+	\future{Any unsolved problems?}
+}
+
 
 \subsection{Pipeline}
-	\todo[inline]{Compare 2001 perormance with 2015 performance, if we can find 2001 data or have time to implement PN triangles on the CPU}
+	\Cref{fig:results:cpugpu} shows the rendering by \citeauthor{vlachos2001curved} next to our rendering of, probably, the same model. The only difference between these two models should be the pattern in which the triangles of the input mesh are subdivided into flat triangles. A visual inspection shows no obvious differences between the models, leading us to suggest that the difference in triangulation does not matter much. 
+
+	\input{results_cpugpu}
