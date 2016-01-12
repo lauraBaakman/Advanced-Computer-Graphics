@@ -143,9 +143,9 @@ void Canvas::setUniforms(Material material, Light light)
     setTessellationLevels(this->settings->pnTriangle->innerTessellationLevel,
                           this->settings->pnTriangle->outerTessellationLevel);
 
-    setShadingModel(this->settings->render->interpolationModel);
+    setShadingModel(this->settings->render->interpolationModel, this->settings->pnTriangle->visualizeGeometry);
     setIlluminationModel(this->settings->render);
-    setNormalComputationMethod(false);
+    setNormalComputationMethod(this->settings->pnTriangle->normalMode);
 }
 
 void Canvas::setMaterialInShader(Material material)
@@ -189,32 +189,37 @@ void Canvas::setIlluminationModel(Settings::Render* renderSettings)
     glUniformSubroutinesuiv(GL_FRAGMENT_SHADER, 1, &functionIndex);
 }
 
-void Canvas::setNormalComputationMethod(bool useRealNormals)
+void Canvas::setNormalComputationMethod(Settings::PnTriangle::Normals mode)
 {
     GLuint functionIndex;
-    if(useRealNormals){
-        qDebug() << "Use real normals";
-        functionIndex = glGetSubroutineIndex(shaderProgram->programId(), GL_TESS_EVALUATION_SHADER, "interpolateRealNormals");
-    } else {
-        qDebug() << "Use fake normals";
+    switch(mode){
+    case Settings::PnTriangle::Normals::FAKE:
         functionIndex = glGetSubroutineIndex(shaderProgram->programId(), GL_TESS_EVALUATION_SHADER, "interpolateFakeNormals");
+        break;
+    case Settings::PnTriangle::Normals::REAl:
+        functionIndex = glGetSubroutineIndex(shaderProgram->programId(), GL_TESS_EVALUATION_SHADER, "interpolateRealNormals");
+        break;
     }
     glUniformSubroutinesuiv(GL_TESS_EVALUATION_SHADER, 1, &functionIndex);
 }
 
-void Canvas::setShadingModel(Settings::Render::Interpolation mode)
+void Canvas::setShadingModel(Settings::Render::Interpolation mode, bool showGeometricComponent)
 {
     int interpolationMode;
-    switch(mode){
-    case Settings::Render::Interpolation::PHONG:
-        interpolationMode = 1;
-        break;
-    case Settings::Render::Interpolation::FLAT:
-        interpolationMode = 2;
-        break;
-    case Settings::Render::Interpolation::GOURAUD:
+    if(showGeometricComponent){
         interpolationMode = 3;
-        break;
+    } else {
+        switch(mode){
+        case Settings::Render::Interpolation::PHONG:
+            interpolationMode = 1;
+            break;
+        case Settings::Render::Interpolation::FLAT:
+            interpolationMode = 2;
+            break;
+        case Settings::Render::Interpolation::GOURAUD:
+            interpolationMode = 4;
+            break;
+        }
     }
     shaderProgram->setUniformValue("interpolationMode", interpolationMode);
 }
@@ -269,7 +274,6 @@ void Canvas::onModelChanged(Mesh *model)
 
 void Canvas::onSettingsChanged()
 {
-    qDebug() << "Settings changed in Canvas" << (int)this->settings->render->renderMode;
     update();
 }
 

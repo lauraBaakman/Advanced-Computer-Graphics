@@ -15,7 +15,6 @@ Obj::Obj()
 
 Obj::~Obj()
 {
-    qDebug() << "Obj destructor";
     for(int i = 0; i < vertexPositions.size(); i++){
         delete vertexPositions[i];
     }

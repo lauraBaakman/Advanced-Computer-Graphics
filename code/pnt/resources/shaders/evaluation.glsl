@@ -18,6 +18,16 @@ struct pnPatch {
     float n101;
 };
 
+struct ControlNet {
+    vec3 b210;
+    vec3 b120;
+    vec3 b021;
+    vec3 b012;
+    vec3 b102;
+    vec3 b201;
+    vec3 b111;
+};
+
 //Variable in
 layout (triangles, fractional_odd_spacing, ccw) in;
 
@@ -26,6 +36,7 @@ layout(location = 3) in pnPatch tcsPatches[];
 
 //Variable out
 layout(location = 0) out vec3 tesNormal;
+out ControlNet controlNet;
 
 float u = gl_TessCoord.x;
 float u2 = pow(u, 2.0);
@@ -42,13 +53,25 @@ void interpolateGeometricComponent(){
     vec3 b003 = gl_in[2].gl_Position.xyz;
 
     vec3 b210 = vec3(tcsPatches[0].b210, tcsPatches[1].b210, tcsPatches[2].b210);
+    controlNet.b210 = b210;
+
     vec3 b120 = vec3(tcsPatches[0].b120, tcsPatches[1].b120, tcsPatches[2].b120);
+    controlNet.b120 = b120;
+
     vec3 b021 = vec3(tcsPatches[0].b021, tcsPatches[1].b021, tcsPatches[2].b021);
+    controlNet.b021 = b021;
+
     vec3 b012 = vec3(tcsPatches[0].b012, tcsPatches[1].b012, tcsPatches[2].b012);
+    controlNet.b012 = b012;
+
     vec3 b102 = vec3(tcsPatches[0].b102, tcsPatches[1].b102, tcsPatches[2].b102);
+    controlNet.b102 = b102;
+
     vec3 b201 = vec3(tcsPatches[0].b201, tcsPatches[1].b201, tcsPatches[2].b201);
+    controlNet.b201 = b201;
 
     vec3 b111 = vec3(tcsPatches[0].b111, tcsPatches[1].b111, tcsPatches[2].b111);
+    controlNet.b111 = b111;
 
     float u3 = u2 * u;
     float v3 = v2 * v;
