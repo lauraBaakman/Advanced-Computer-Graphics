@@ -162,6 +162,7 @@ void Sidebar::on_visualizeGeometricCompCheckBox_clicked(bool checked)
     // Render ui
     ui->renderUi->setEnabled(toggle);
 
+
     emit visualizeGeometryChanged(checked);
 }
 
