@@ -74,10 +74,10 @@ private:
     void setLightInShader(Light light);
 
     // Paint stuff
-    Settings::Render::Mode mode = Settings::Render::Mode::POINTCLOUD;
-    void drawPointCloud();
+    Settings::Render::Mode mode;
     void drawWireframe();
-    void drawNormalSurface();
+    void drawShadedSurface();
+    void drawPatches();
 
     // Events
     bool gestureEvent(QGestureEvent *event);

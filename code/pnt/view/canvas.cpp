@@ -108,14 +108,11 @@ void Canvas::paintGL()
     setUniforms();
 
     switch(mode) {
-    case Settings::Render::Mode::POINTCLOUD:
-        drawPointCloud();
-        break;
     case Settings::Render::Mode::WIREFRAME:
         drawWireframe();
         break;
     case Settings::Render::Mode::SURFACE:
-        drawNormalSurface();
+        drawShadedSurface();
     }
 
 //    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -160,23 +157,20 @@ void Canvas::setLightInShader(Light light)
     shaderProgram->setUniformValue("light.specularLightIntensity", light.specularIntensity);
 }
 
-void Canvas::drawPointCloud()
-{
-    glPointSize(5.0f);
-    glDrawArrays(GL_POINTS, 0, this->numVertices);
-}
-
 void Canvas::drawWireframe()
 {
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-//    glDrawElements(GL_TRIANGLES, this->numIndices, GL_UNSIGNED_INT, (void*)(0));
-    glDrawElements(GL_PATCHES, this->numIndices, GL_UNSIGNED_INT, (void*)(0));
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    drawPatches();
 }
 
-void Canvas::drawNormalSurface()
+void Canvas::drawShadedSurface()
 {
-//    glDrawElements(GL_TRIANGLES, this->numIndices, GL_UNSIGNED_INT, (void*)(0));
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    drawPatches();
+}
+
+void Canvas::drawPatches()
+{
     glDrawElements(GL_PATCHES, this->numIndices, GL_UNSIGNED_INT, (void*)(0));
 }
 

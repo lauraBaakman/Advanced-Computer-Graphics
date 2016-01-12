@@ -15,7 +15,6 @@ public:
     class Render {
     public:
         enum class Mode {
-            POINTCLOUD,
             WIREFRAME,
             SURFACE
         };

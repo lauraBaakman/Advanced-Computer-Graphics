@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>374</width>
-    <height>646</height>
+    <height>658</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -259,11 +259,6 @@ QGroupBox::title {
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <item>
-         <property name="text">
-          <string>Point cloud</string>
-         </property>
-        </item>
         <item>
          <property name="text">
           <string>Wireframe</string>

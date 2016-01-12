@@ -15,6 +15,9 @@ Sidebar::Sidebar(QWidget *parent) :
 
     this->outerTessellationMin = ui->outerTessellationSlider->minimum();
     this->outerTessellationMax = ui->outerTessellationSlider->maximum();
+
+    // set default
+    emit renderModeChanged(ui->renderModeComboBox->currentIndex());
 }
 
 Sidebar::~Sidebar()
@@ -115,6 +118,7 @@ void Sidebar::on_illuminationModeComboBox_currentIndexChanged(int index)
 void Sidebar::on_pnTrianglesUi_toggled(bool toggle)
 {
     qDebug() << "Toggle";
+    // Also send slider values
 }
 
 void Sidebar::on_visualizeGeometricCompCheckBox_clicked(bool checked)
