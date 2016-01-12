@@ -19,6 +19,7 @@ public:
 public slots:
     void onTessellationLevelsChanged(float inner, float outer);
     void onNormalCalculationChanged(int index);
+    void onRenderUiChanged(int renderIndex, int shadingIndex, int illuminationIndex, bool visualizeNormals);
 
 signals:
     void renderModeChanged(int index);

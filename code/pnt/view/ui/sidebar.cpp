@@ -155,6 +155,13 @@ void Sidebar::on_visualizeGeometricCompCheckBox_clicked(bool checked)
     ui->outerTessellationSlider->setEnabled(toggle);
     ui->outerTessellationSliderLabel->setEnabled(toggle);
 
+    // Normal ui
+    ui->normalComboBox->setEnabled(toggle);
+    ui->normalComboBoxLabel->setEnabled(toggle);
+
+    // Render ui
+    ui->renderUi->setEnabled(toggle);
+
     emit visualizeGeometryChanged(checked);
 }
 
@@ -166,4 +173,12 @@ void Sidebar::on_normalComboBox_currentIndexChanged(int index)
 void Sidebar::onNormalCalculationChanged(int index)
 {
     ui->normalComboBox->setCurrentIndex(index);
+}
+
+void Sidebar::onRenderUiChanged(int renderIndex, int shadingIndex, int illuminationIndex, bool visualizeNormals)
+{
+    ui->renderModeComboBox->setCurrentIndex(renderIndex);
+    ui->shadingModeComboBox->setCurrentIndex(shadingIndex);
+    ui->illuminationModeComboBox->setCurrentIndex(illuminationIndex);
+    ui->visualizeNormalsCheckBox->setChecked(visualizeNormals);
 }

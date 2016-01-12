@@ -115,6 +115,9 @@ void MainWindow::connectSettingsToUi()
 
     QObject::connect(this->settings, SIGNAL(normalCalculationChanged(int)),
                      this->sidebar, SLOT(onNormalCalculationChanged(int)));
+
+    QObject::connect(this->settings, SIGNAL(renderUiChanged(int,int,int,bool)),
+                     this->sidebar, SLOT(onRenderUiChanged(int,int,int,bool)));
 }
 
 void MainWindow::connectSettingsToCanvas()

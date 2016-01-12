@@ -72,6 +72,7 @@ signals:
     void settingsChanged();
     void tessellationLevelsChanged(float, float);
     void normalCalculationChanged(int);
+    void renderUiChanged(int, int, int, bool);
 
 public slots:
     void onRenderModeChanged(int index);
@@ -88,6 +89,7 @@ public slots:
 private:
     void resetTessellationSliders();
     void resetNormalCalculation();
+    void resetRenderUi();
 };
 
 #endif // SETTINGS_H
