@@ -30,9 +30,10 @@ void Canvas::initializeShaders()
 {
     this->shaderProgram = new QOpenGLShaderProgram();
     this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::Vertex, ":/shaders/resources/shaders/vertex.glsl");
-    this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::Fragment, ":/shaders/resources/shaders/fragment.glsl");
     this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::TessellationControl, ":/shaders/resources/shaders/controll.glsl");
     this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::TessellationEvaluation, ":/shaders/resources/shaders/evaluation.glsl");
+    this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::Geometry, ":/shaders/resources/shaders/geometry.glsl");
+    this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::Fragment, ":/shaders/resources/shaders/fragment.glsl");
     this->shaderProgram->link();
 }
 
@@ -103,6 +104,9 @@ void Canvas::paintGL()
 
     updateTransformationMatrix();
 
+    //Should be placed in correct spot
+    setUniforms();
+
     switch(mode) {
     case Settings::Render::Mode::POINTCLOUD:
         drawPointCloud();
@@ -131,6 +135,29 @@ void Canvas::updateTransformationMatrix()
 {
     constructModelViewProjectionMatrix();
     this->shaderProgram->setUniformValue("mvpMatrix", this->mvpMatrix);
+}
+
+void Canvas::setUniforms(Material material, Light light)
+{
+    setMaterialInShader(material);
+    setLightInShader(light);
+}
+
+void Canvas::setMaterialInShader(Material material)
+{
+    shaderProgram->setUniformValue("material.specularReflectionConstant", material.specularReflectionConstant);
+    shaderProgram->setUniformValue("material.diffuseReflectionConstant", material.diffuseReflectionConstant);
+    shaderProgram->setUniformValue("material.ambientReflectionConstant", material.ambientReflectionConstant);
+    shaderProgram->setUniformValue("material.alfa", material.alfa);
+    shaderProgram->setUniformValue("material.color", material.color);
+}
+
+void Canvas::setLightInShader(Light light)
+{
+    shaderProgram->setUniformValue("light.position", light.position);
+    shaderProgram->setUniformValue("light.ambientLightIntensity", light.ambientIntensity);
+    shaderProgram->setUniformValue("light.diffuseLightIntensity", light.diffuseIntensity);
+    shaderProgram->setUniformValue("light.specularLightIntensity", light.specularIntensity);
 }
 
 void Canvas::drawPointCloud()
