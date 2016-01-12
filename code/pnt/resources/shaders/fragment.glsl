@@ -24,7 +24,7 @@ layout(location = 1) in vec3 gsNormal;
 
 uniform LightInfo light;
 uniform MaterialInfo material;
-uniform subroutine reflectionModelType reflectionModel;
+subroutine uniform reflectionModelType reflectionModel;
 
 //Variable out
 out vec4 fColor;

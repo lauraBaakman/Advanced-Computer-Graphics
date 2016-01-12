@@ -9,7 +9,7 @@ subroutine void interpolationModelType();
 //Variable in
 layout(location = 0) in vec3 tesNormal[];
 
-uniform subroutine interpolationModelType interpolationModel;
+subroutine uniform interpolationModelType interpolationModel;
 
 //Variable out
 layout(location = 0) out vec3 gsPosition;
@@ -50,5 +50,6 @@ void smoothInterpolation(){
 void main() {
 	// flatInterpolation();
 	// smoothInterpolation();
+	
 	interpolationModel();
 }
