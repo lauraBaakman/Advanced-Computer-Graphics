@@ -29,8 +29,8 @@ private slots:
     void on_zDial_valueChanged(int value);
 
     void on_visualizeNormalsCheckBox_clicked(bool checked);
-    void on_outerTessellationSlider_sliderMoved(int position);
-    void on_innerTessellationSlider_sliderMoved(int position);
+    void on_innerTessellationSlider_valueChanged(int value);
+    void on_outerTessellationSlider_valueChanged(int value);
 
     void on_shadingModeComboBox_currentIndexChanged(int index);
 

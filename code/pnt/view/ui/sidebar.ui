@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>374</width>
-    <height>619</height>
+    <height>646</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -402,6 +402,20 @@ QGroupBox::title {
         </property>
        </widget>
       </item>
+      <item row="0" column="0" colspan="3">
+       <widget class="QLabel" name="tesselationLevelLabel">
+        <property name="text">
+         <string>Tesselation Levels:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="innerTessellationLevelLabel">
+        <property name="text">
+         <string>Inner</string>
+        </property>
+       </widget>
+      </item>
       <item row="1" column="1">
        <widget class="QSlider" name="innerTessellationSlider">
         <property name="minimum">
@@ -431,13 +445,6 @@ QGroupBox::title {
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="innerTessellationLevelLabel">
-        <property name="text">
-         <string>Inner</string>
-        </property>
-       </widget>
-      </item>
       <item row="3" column="0">
        <widget class="QLabel" name="outerTessellationLevelLabel">
         <property name="text">
@@ -445,10 +452,10 @@ QGroupBox::title {
         </property>
        </widget>
       </item>
-      <item row="0" column="0" colspan="3">
-       <widget class="QLabel" name="tesselationLevelLabel">
+      <item row="4" column="0" colspan="2">
+       <widget class="QCheckBox" name="visualizeGeometricCompCheckBox">
         <property name="text">
-         <string>Tesselation Levels:</string>
+         <string>Visualize geometry control coefficients</string>
         </property>
        </widget>
       </item>
