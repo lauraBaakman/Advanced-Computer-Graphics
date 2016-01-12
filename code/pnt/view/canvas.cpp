@@ -30,9 +30,10 @@ void Canvas::initializeShaders()
 {
     this->shaderProgram = new QOpenGLShaderProgram();
     this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::Vertex, ":/shaders/resources/shaders/vertex.glsl");
-    this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::Fragment, ":/shaders/resources/shaders/fragment.glsl");
     this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::TessellationControl, ":/shaders/resources/shaders/controll.glsl");
     this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::TessellationEvaluation, ":/shaders/resources/shaders/evaluation.glsl");
+    this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::Geometry, ":/shaders/resources/shaders/geometry.glsl");
+    this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::Fragment, ":/shaders/resources/shaders/fragment.glsl");
     this->shaderProgram->link();
 }
 

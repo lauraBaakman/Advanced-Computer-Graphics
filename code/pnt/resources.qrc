@@ -16,5 +16,6 @@
         <file>resources/shaders/fragment.glsl</file>
         <file>resources/shaders/controll.glsl</file>
         <file>resources/shaders/evaluation.glsl</file>
+        <file>resources/shaders/geometry.glsl</file>
     </qresource>
 </RCC>
