@@ -14,6 +14,7 @@ class Obj
 {
 public:
     Obj();
+    ~Obj();
 
     static Obj* fromFile(QFile *file);
 
