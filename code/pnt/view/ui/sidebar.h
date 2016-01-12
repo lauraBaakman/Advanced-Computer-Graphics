@@ -20,6 +20,9 @@ signals:
     void renderModeChanged(int index);
     void modelChanged(QString modelKey);
     void rotationDialChanged(int axis, int value);
+    void shadingModeChanged(int index);
+    void illuminationModeChanged(int index);
+    void visualizeNormalsChanged(bool toggle);
 
 private slots:
     void on_renderModeComboBox_currentIndexChanged(int index);
@@ -33,10 +36,9 @@ private slots:
     void on_outerTessellationSlider_valueChanged(int value);
 
     void on_shadingModeComboBox_currentIndexChanged(int index);
-
     void on_illuminationModeComboBox_currentIndexChanged(int index);
-
     void on_pnTrianglesUi_toggled(bool arg1);
+    void on_visualizeGeometricCompCheckBox_clicked(bool checked);
 
 private:
     Ui::Sidebar *ui;

@@ -64,7 +64,7 @@ void Sidebar::on_zDial_valueChanged(int value)
 void Sidebar::on_visualizeNormalsCheckBox_clicked(bool checked)
 {
     toggleShaderAndIlluminationUI(checked);
-    // emit visualizeNormalsChanged(checked);
+    emit visualizeNormalsChanged(checked);
 }
 
 void Sidebar::toggleShaderAndIlluminationUI(bool toggle)
@@ -103,16 +103,32 @@ void Sidebar::on_outerTessellationSlider_valueChanged(int position)
 }
 
 void Sidebar::on_shadingModeComboBox_currentIndexChanged(int index)
-{ // To settings
-//    emit shadingModeChanged(index);
+{
+    emit shadingModeChanged(index);
 }
 
 void Sidebar::on_illuminationModeComboBox_currentIndexChanged(int index)
-{ // To settings
-//    emit illuminationModeChanged(index);
+{
+    emit illuminationModeChanged(index);
 }
 
 void Sidebar::on_pnTrianglesUi_toggled(bool toggle)
 {
     qDebug() << "Toggle";
+}
+
+void Sidebar::on_visualizeGeometricCompCheckBox_clicked(bool checked)
+{
+    bool toggle = !checked;
+    ui->tesselationLevelLabel->setEnabled(toggle);
+
+    // Inner tessellation ui
+    ui->innerTessellationLevelLabel->setEnabled(toggle);
+    ui->innerTessellationSlider->setEnabled(toggle);
+    ui->innerTessellationSliderLabel->setEnabled(toggle);
+
+    // Outer tessellation ui
+    ui->outerTessellationLevelLabel->setEnabled(toggle);
+    ui->outerTessellationSlider->setEnabled(toggle);
+    ui->outerTessellationSliderLabel->setEnabled(toggle);
 }

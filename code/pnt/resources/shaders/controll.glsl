@@ -115,7 +115,7 @@ void setTesselationLevels(float inner, float outer){
 
 void main(void)
 {
-    setTesselationLevels(4.0, 4.0);
+    setTesselationLevels(1.0, 1.0);
     computeGeomtryControlPoints();
     computeNormalControlPoints();
     passThroughToTES();

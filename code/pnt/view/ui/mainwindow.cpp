@@ -74,6 +74,15 @@ void MainWindow::connectUiToSettings()
 
     QObject::connect(this->sidebar, SIGNAL(modelChanged(QString)),
                      this->settings, SLOT(onModelChanged(QString)));
+
+    QObject::connect(this->sidebar, SIGNAL(shadingModeChanged(int)),
+                     this->settings, SLOT(onShadingModeChanged(int)));
+
+    QObject::connect(this->sidebar, SIGNAL(illuminationModeChanged(int)),
+                     this->settings, SLOT(onIlluminationModeChanged(int)));
+
+    QObject::connect(this->sidebar, SIGNAL(visualizeNormalsChanged(bool)),
+                     this->settings, SLOT(onVisualizeNormalsChanged(bool)));
 }
 
 void MainWindow::connectUiToCanvas()

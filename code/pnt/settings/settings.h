@@ -14,10 +14,19 @@ public:
 
     class Render {
     public:
-        enum Mode {
+        enum class Mode {
             POINTCLOUD,
             WIREFRAME,
-            NORMALS
+            SURFACE
+        };
+        enum class Illumination {
+            FLAT,
+            PHONG,
+            GOURAUD
+        };
+        enum class Shading {
+            PHONG,
+            NONE
         };
     };
 
@@ -31,6 +40,9 @@ signals:
 public slots:
     void onRenderModeChanged(int index);
     void onModelChanged(QString modelKey);
+    void onIlluminationModeChanged(int index);
+    void onShadingModeChanged(int index);
+    void onVisualizeNormalsChanged(bool toggle);
 
 private:
     Render *render;

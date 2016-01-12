@@ -39,3 +39,18 @@ void Settings::onModelChanged(QString modelKey)
     qDebug() << "Settings::onModelChanged: " << modelKey;
     emit modelChanged(Settings::modelMap().value(modelKey));
 }
+
+void Settings::onIlluminationModeChanged(int index)
+{
+    qDebug() << "illumination changed settings";
+}
+
+void Settings::onShadingModeChanged(int index)
+{
+    qDebug() << "shading changed settings";
+}
+
+void Settings::onVisualizeNormalsChanged(bool toggle)
+{
+    qDebug() << "visualize normals settings";
+}

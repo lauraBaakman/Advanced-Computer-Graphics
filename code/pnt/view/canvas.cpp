@@ -110,7 +110,7 @@ void Canvas::paintGL()
     case Settings::Render::Mode::WIREFRAME:
         drawWireframe();
         break;
-    case Settings::Render::Mode::NORMALS:
+    case Settings::Render::Mode::SURFACE:
         drawNormalSurface();
     }
 
