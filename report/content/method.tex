@@ -2,27 +2,24 @@
 
 \section{Method}
 \label{s:method}
-
+\laura{Read: specifically the intro. I mention the inner and outer tessellation again, so we can reference where this is discussed. We can also leave this out, but that would leave the reader in the dark where to get that information (given that he/she starts reading at the method section, else it would have been mentioned in the introduction maybe...)}
 % \todo[inline]{Global idea of PN triangles, lit less global than in introduction}
-The main goal of PN triangles is to improve the visual quality of rendered models, and tod o this on resource-limited hardware envorionments where e.g. no information about neighboring triangles can be accumulated. We ask the reader to have a look at \cref{fig:preamble:teaser}, with the following question in mind: Which rendering do you prefer? The center and right images both show a rendering using phong shading, together with the phong illumination model. The only difference being, that the right rendering also uses PN triangles with an inner and outer tessellation level of $12.0$ (the meaning of the tessellation level is discussed in \crefs{s:implementation}. 
-
-, and to do this on resource-limited hardware environments where e.g. no information about neighboring triangles can be accumulated. Or more precisely, the goal of point-normal triangles is ``to soften triangle creases and improve the visual appeal by generating smoother silhouettes and better shading" \cite{vlachos2001curved}. Other than the visual improvements PN triangles provide, \citeauthor{vlachos2001curved} mention the following benefits:
+The main goal of PN triangles is to improve the visual quality of rendered models, and to do this on resource-limited hardware environments where e.g. no information about neighboring triangles can be accumulated. We ask the reader to have a look at \cref{fig:preamble:teaser}, with the following question in mind: Which rendering do you prefer? The center and right images both show a rendering using phong shading and llumination. The only difference being, that the right image is rendering using PN triangles, with an inner and outer tessellation level of $12.0$, the meaning of the tessellation level is discussed in \crefs{s:implementation}. The goal of point-normal triangles more precisely is ``to soften triangle creases and improve the visual appeal by generating smoother silhouttes and better shading'' \cite{vlachos2001curved}. \citeauthor{vlachos2001curved} mention, besides the visual improvements, the following benefits:
 
 \begin{enumerate}[label=(\roman*)]
  	\item 
- 		Point-normal triangle construction is \textit{compatible} with the existing API data structures i.e. vertex arrays together with triangle index streams are used, and the triangles arrive in an unpredictable order.
+ 		Point-normal triangle construction is \textit{compatible} with the existing graphics API data structures, i.e., vertex arrays together with triangle index streams, where the triangles arrive in unpredictable order.
  	\item 
  		The models are \textit{backward compatible} with hardware that does not support point-normal triangles, with minimal or no changes needed to existing models.
  	\item 
- 		\todo[inline]{API of what?}
- 		No setup of the application, API, or hardware driver is needed. Specifically hardware should not be able to provide random access to neighboring primitives. Consequently the only possible communicated information between primitives are provided by using shared normals at the vertices. Which does restrict the models to be rendered somewhat, as discussed in section \ref{sss:method:geometric:properties}.
+ 		No setup of the application, API, or hardware driver is needed. Specifically, hardware should not be able to provide random access to neighboring primitives. Consequently the only possible communicated information between primitives are provided by using shared normals at the vertices. This does restrict the models to be rendered somewhat, as discussed in section \ref{sss:method:geometric:properties}.
  	\item 
- 		Point-normal triangles are applicable to \textit{arbitrary topology}.
+ 		Point-normal triangles are applicable to meshes with \textit{arbitrary topology}.
  	\item 
- 		PN-triangle rendering is done \textit{fast} and via \textit{simple implementation} in hardware on the CPU in 2001. At the time of writing this report even faster executing is possible by using programmable tessellation shaders on the GPU.
+ 		PN-triangle rendering is \textit{fast} and done via \textit{simple implementation} in hardware on the CPU in 2001. At the time of writing of this report, even faster execution is possible by using programmable tessellation shaders on the GPU.
  \end{enumerate} 
 
-In the remaining part of this section we discuss the construction of point-normal triangles conceptually as well as mathematically. As mentioned in the introduction, A PN triangle is split in two different components: we refer to section \ref{ss:geometric_component} for a discussion on the geometric component and to section \ref{ss:normal_component} for the review of the normal component.
+In the remaining part of this section we discuss the construction of point-normal triangles conceptually as well as mathematically. As mentioned in the introduction, a PN triangle is split in two different components: we refer to \crefs{ss:geometric_component} for a discussion on the geometric component and to \crefs{ss:normal_component} for the review of the normal component.
 
 \begin{figure}
 	\centering
