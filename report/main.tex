@@ -73,10 +73,16 @@
 % References within paper
 \usepackage{varioref}
 \usepackage{hyperref}
-\usepackage[noabbrev, capitalise]{cleveref}
+\usepackage[noabbrev]{cleveref}
 
 % Lists
 \usepackage{enumitem}
+
+\newcommand{\crefs}[1]{Section~\ref{#1}}
+\newcommand{\Crefs}[1]{Section~\ref{#1}}
+
+\newcommand{\crefe}[1]{Equation~\ref{#1}}
+\newcommand{\Crefe}[1]{Equation~\ref{#1}}
 
 % Temporary
 \usepackage{todonotes}
