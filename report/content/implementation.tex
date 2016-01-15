@@ -51,12 +51,12 @@ Since only the tessellation shaders are relevant for point-normal triangles we d
 	% Output:	
 	The computed data are passed to the next shader in the pipeline, either the geometry shader or the fragment shader, see \cref{fig:implementation:pipeline:new} \cite{wolff2013opengl}.
 
-	\begin{figure}
+	\begin{figure*}
 		\centering
-		\includegraphics[width=\columnwidth]{content/img/implementation/tesselationPipeline.png}
-		\caption{An overview of the tessellation part of the OpenGL render pipeline. Note that in the case of point-normal triangles the input patches, generated primitives and output patches are triangles, not quads. Illustration taken form \textcite{wolff2013opengl}.}
+		\includegraphics[width=\textwidth, height = 0.25\textheight, keepaspectratio]{content/img/implementation/tessellationPipeline-01.png}
+		\caption{An overview of the tessellation part of the OpenGL version 4.1 rendering pipeline as applied to point normal triangles. An input patch, a triangle with normals is presented to the tessellation control shader (TCS). The tessellation primitive generator (TPG) tessellates the triangle and outputs the barycentric coordinates of the newly generated triangle to the tessellation evaluation shader (TES). Apart from these coordinates the TES also receives the control nets from the TCS. Illustration adapted from \cite{wolff2013opengl}.}
 		\label{fig:implementation:tessellationPipeline}
-	\end{figure}
+	\end{figure*}
 
 \subsection{Tessellation Control Shader}
 \label{ss:implementation:tcs}
@@ -77,11 +77,11 @@ Since only the tessellation shaders are relevant for point-normal triangles we d
 		Alternatively one could always compute all vertices of the output patch, independent of the \texttt{invocation\_ID}. This results in a lot of unnecessary computations, but removes the branching required to only compute the control net if the \texttt{invocation\_ID} has a specific value. Neither of these methods are more efficient than the one we used. A downside of our method is that one has to construct the vectors that represent the vertices of the control net in the tessellation evaluation shader. 
 
 		Other than computing the control nets this shader also sets the inner and outer tessellation levels for the Tessellation Primitive Generator. 
-%Output
-	The control nets are output to the tessellation evaluation shader whereas the tessellation levels are sent to the tessellation primitive generator. 
+		%Output
+		The control nets are output to the tessellation evaluation shader whereas the tessellation levels are sent to the tessellation primitive generator. 
 
 \begin{figure}
-	\plaatje{Overtrekken in illustrator, 'nough said.}
+	\plaatje{Eventueel: Overtrekken in illustrator, laat rare groene lijnen in tweede plaatje weg. Gebruik geen groen maar blauw en oranje. Maak plaatje met uiteindelijke tessellations.}
 	\centering
 	\begin{subfigure}[b]{0.18\columnwidth}
 		\centering
@@ -113,7 +113,7 @@ Since only the tessellation shaders are relevant for point-normal triangles we d
 		\caption{Step \ref{it:implementation:4}}
 		\label{fig:implementation:step:4}
 	\end{subfigure}		
-	\caption{Generation of primitive using the TPG from OpenGL.}
+	\caption{Generation of a primitive for the TES  from  \ref{fig:implementation:step:input} an input primitive using the TPG from OpenGL. Illustration adapted from \cite{cozzi2012opengl}.}
 	\label{fig:implementation:step}
 \end{figure}
 
