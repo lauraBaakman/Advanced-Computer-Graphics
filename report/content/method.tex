@@ -4,7 +4,9 @@
 \label{s:method}
 
 % \todo[inline]{Global idea of PN triangles, lit less global than in introduction}
-The main goal of PN triangles is to improve the visual quality of rendered models, compare the models in \cref{fig:preamble:teaser}, and to do this on resource-limited hardware environments where e.g. no information about neighboring triangles can be accumulated. Or more precisely, the goal of point-normal triangles is ``to soften triangle creases and improve the visual appeal by generating smoother silhouettes and better shading" \cite{vlachos2001curved}. Other than the visual improvements PN triangles provide, \citeauthor{vlachos2001curved} mention the following benefits:
+The main goal of PN triangles is to improve the visual quality of rendered models, and tod o this on resource-limited hardware envorionments where e.g. no information about neighboring triangles can be accumulated. We ask the reader to have a look at \cref{fig:preamble:teaser}, with the following question in mind: Which rendering do you prefer? The center and right images both show a rendering using phong shading, together with the phong illumination model. The only difference being, that the right rendering also uses PN triangles with an inner and outer tessellation level of $12.0$ (the meaning of the tessellation level is discussed in \crefs{s:implementation}. 
+
+, and to do this on resource-limited hardware environments where e.g. no information about neighboring triangles can be accumulated. Or more precisely, the goal of point-normal triangles is ``to soften triangle creases and improve the visual appeal by generating smoother silhouettes and better shading" \cite{vlachos2001curved}. Other than the visual improvements PN triangles provide, \citeauthor{vlachos2001curved} mention the following benefits:
 
 \begin{enumerate}[label=(\roman*)]
  	\item 
