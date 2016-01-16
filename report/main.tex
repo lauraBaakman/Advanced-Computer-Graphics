@@ -90,6 +90,8 @@
 \newcommand{\rick}[1]{\todo[inline, color=green]{\textbf{Rick:} #1}}
 \newcommand{\future}[1]{\todo[inline, color=yellow]{\textbf{Possibly eventually:} #1}}
 \newcommand{\plaatje}[1]{\todo[inline, color=blue!20]{\textbf{Plaatje:} #1}}
+\newcommand{\ooit}[1]{\todo[inline, color=green!20]{\textbf{(n)ooit:} #1}}
+
 \usepackage{etoolbox}
 \newtoggle{PHONG}
 \togglefalse{PHONG}
@@ -114,9 +116,7 @@
 \begin{document}
 	
 
-  \todo[inline]{Subdivide vervangen met tesselation}
-\todo[inline]{Gebruik afkrotingen en hoofdletters voor cref}
-\todo[inline]{Macro voor equations en sections}
+\todo[inline]{Subdivide vervangen met tesselation}
 % \laura{Add doi file and url to the bibliography}
 
 \listoftodos
@@ -125,8 +125,8 @@
 
 \input{content/abstract}
 
-% \printlen[3][cm]{\columnwidth}
-% \the\columnwidth
+\printlen[3][cm]{\columnwidth}
+\the\columnwidth
 
 \input{content/introduction}
 
