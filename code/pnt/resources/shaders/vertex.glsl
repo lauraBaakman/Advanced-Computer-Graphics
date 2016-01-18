@@ -9,12 +9,12 @@ layout(location = 0) out vec3 vsNormals;
 
 // Uniform in
 uniform mat4 mvpMatrix;
+uniform mat3 normalMatrix;
 
 void passThroughToFragmentShader()
 {
 //    vsNormals = inputNormal;
-    vec4 temp = mvpMatrix * vec4(inputNormal, 1.0);
-    vsNormals = temp.xyz;
+    vsNormals = normalize(normalMatrix * inputNormal);
 }
 
 void setVertexPosition() {
