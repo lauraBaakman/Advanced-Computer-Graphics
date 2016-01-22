@@ -65,6 +65,7 @@ private:
 
     // Transformation variables;
     QMatrix4x4 mvpMatrix;
+    QMatrix3x3 normalMatrix;
     QVector3D rotationAngles;
     float zoomingFactor;
     void constructModelViewProjectionMatrix();

@@ -24,9 +24,7 @@ It should be noted that just as the geometric component the normal component of 
 	      	    {}& + n_{110}wu + n_{011}uv + n_{101}wv\\
 	\end{split}
 	\end{align}
-	The coefficients of this quadratic `patch' are the normals shown in \cref{fig:method:normal_field}. The normals are computed for a point, halfway on every edge. Point-normal triangles use quadratically varying normals to be able capture the inflection points that are possible due to the cubic geometric component. 
-
-	\Cref{fig:method:linear_vs_quadratically_varying} illustrates why one needs quadratic patches to capture these inflection points. 
+	The coefficients of this quadratic `patch' are the normals shown in \cref{fig:method:normal_field}. The normals are computed for a point, halfway on every edge. Point-normal triangles use quadratically varying normals to be able capture the inflection points that are possible due to the cubic geometric component. \Cref{fig:method:linear_vs_quadratically_varying} illustrates why one needs quadratic patches to capture these inflection points. 
 
 	two cases: the top two images show a parabolic curve wGeehere both linear and quadratically varying normals perform the same. The more interesting case is the one illustrated by the two bottom images that show a cubic curve. We see that the linear varying normals do not capture the correct normal for this curve, but the quadratic varying normals do.
 

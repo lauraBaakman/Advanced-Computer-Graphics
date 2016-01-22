@@ -11,9 +11,9 @@ public:
     QVector3D position;
 
     Light(
-            QVector3D ambientIntensity = QVector3D(1, 1, 1),
-            QVector3D diffuseIntensity = QVector3D(1, 1, 1),
-            QVector3D specularIntensity = QVector3D(1, 1, 1),
+            QVector3D ambientIntensity = QVector3D(1.0, 1.0, 1.0),
+            QVector3D diffuseIntensity = QVector3D(1.0, 1.0, 1.0),
+            QVector3D specularIntensity = QVector3D(1.0, 1.0, 1.0),
             QVector3D position = QVector3D(-2.0, 5.0, -10.0)
     );
 };

@@ -128,6 +128,7 @@ void Canvas::updateTransformationMatrix()
 {
     constructModelViewProjectionMatrix();
     this->shaderProgram->setUniformValue("mvpMatrix", this->mvpMatrix);
+    this->shaderProgram->setUniformValue("normalMatrix", this->normalMatrix);
 }
 
 void Canvas::resetZoomAndRotation()
@@ -258,6 +259,8 @@ void Canvas::constructModelViewProjectionMatrix()
 
     // Scale determined by QPinchEvents
     mvpMatrix.scale(this->zoomingFactor);
+
+    normalMatrix = mvpMatrix.normalMatrix();
 }
 
 void Canvas::onRotationDialChanged(int axis, int value)
