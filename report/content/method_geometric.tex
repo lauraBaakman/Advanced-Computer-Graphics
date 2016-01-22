@@ -2,21 +2,22 @@
 
 \subsection{Geometric component}
 \label{ss:geometric_component}
-Let us emphasize again that the the only available information for the construction of the geometric and normal component are the three vertices that define a single primitive. The vertices contain the vertex \textit{xyz}-coordinates together with a unique shared normal per vertex i.e. the normals of each vertex is the same for every primitive using that vertex. Figure \ref{fig:method:input_primitive} contains an illustration of an input primitive, which is the start point of the construction of every point-normal triangle.
+
+As may have become clear from the previous section, the only available information for the construction of the geometric component (and normal component) are the three vertices that define a single primitive. The vertices contain the vertex \textit{xyz} coordinates together with a unique normal per vertex i.e. the normals of each vertex is the same for every primitive using that vertex. Figure \ref{fig:method:input_primitive} contains an illustration of ``the input primitive'', which is the start point of the construction of every PN triangle.
 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.45\textwidth]{./content/img/method/geometry.png}
-	\caption{The geometric component of a point-normal triangle, i.e. the control net of a triangular Bézier patch. Note that the names of the vertices used in this image coincide with those used in the equations in this section.}
+	\caption{The geometric component: the control net of a triangular B\`ezier patch.}
 	\label{fig:method:control_net}
 \end{figure}
 %
 % ## Geometric component defined by triangluar cubic Bezier patch.
 %
-In the next subsection we discuss the definition of the geometry of a point-normal triangle. In subsection \ref{sss:control_point_construction} we discuss the construction of the control points that define the geometry. 
+In the next subsection we discuss the definition of the geometry of a PN triangle. Next in subsection \ref{sss:control_point_construction} we discuss the construction of the control points necessary for defining the geometry. 
 
 \subsubsection{Basic form}
-The geometric component of a point-normal triangle is defined as a triangular cubic Bézier patch. Such a patch $b$ is defined as follows:
+The geometric component of a PN triangle is defined by a triangular cubic B\`ezier patch. Such a patch $b$ is defines as follows:
 %
 \begin{align}
 \noalign{$b: \quad R^2 \mapsto R^3,\quad$ for $w = 1 - u - v, \quad u, v, w \geq 0$}
@@ -29,29 +30,28 @@ The geometric component of a point-normal triangle is defined as a triangular cu
 \end{split}
 \end{align}
 %
-The $b_{ijk}$ variables in equation \ref{eq:method:cubic_bezier_patch} are the control points of the patch, also called coefficients. In \cref{fig:method:control_net} the visualization of the network of these control points is shown. We group the coefficients in three different groups, as their construction differs:
+The $b_{ijk}$ variables in equation \ref{eq:method:cubic_bezier_patch} are the control points of the patch (also called coefficients). In figure \ref{fig:method:control_net} the visualization of the network of control points is shown. Thereby we group the coefficients in three different groups, as there construction differs:
 %
 \begin{align*}
 	\text{vertex coefficients: } {}&  b_{300},\ b_{030},\ b_{003} \\
 	\text{tangent coefficients: } {}&  b_{210},\ b_{120},\ b_{021},\ b_{012},\ b_{102},\ b_{201}\\
 	\text{center coefficient: }   {}&  b_{111}\\
 \end{align*}
-
-The formula in equation \eqref{eq:method:cubic_bezier_patch} can be used to interpolate any point, parameterized by the barycentric coordinates $u$ and $v$ on the patch. This is used in the sub-triangulation stage of the rendering process. This is the stage where the cubic Bézier surface is approximated by using a number of smaller flat triangles, these flat triangles are actually rendered. The number of sub-triangles is determined by the level of detail (lod). For the original sub-triangulation we refer the reader to \textcite{vlachos2001curved}, as this is where the implementation presented here deviates from the original. Details about this are provided in section \ref{s:implementation}.
-
-As stated above the definition of the geometry of a point-normal triangle is a cubic Bézier patch. This order of patches is a trade-off between simplicity, visual performance, and computational cost. Quadratic patches do not provide the same modeling range of a surface as a cubic patch. For example a cubic representation is necessary to capture inflections implied by the triangle position and normal data. \citeauthor{vlachos2001curved} state that there is no additional data to suggest an higher degree is needed, and that therefore they settled on the form of $b$ as presented in equation \ref{eq:method:cubic_bezier_patch}.
-
-\subsubsection{Coefficients} \label{sss:control_point_construction}
-This section discusses how the `curved' control net geometry, see \cref{fig:method:input_primitive}, is calculated, from the flat input primitive shown in \cref{fig:method:input_primitive}. The input primitive provides the the positions $P_1, P_2, P_3 \in \Real^3$ and normals $N_1, N_2, N_3 \in \Real^3$. The coefficients $b_{ijk}$ are computed as follows:
 %
-\begin{enumerate}[label=(\roman*)]
-	\item 
-		Initially the coefficients $b_{ijk}$ are spread uniformly i.e. the intermediate position of $b_{ijk}$ is calculated using the formula $(i P_i + j P_2 + kP_3) / 3$. 
-	\item 
-		The intermediate positions of the vertex coefficients are the same as their final positions, see equation \eqref{eq:method:vertex_coefficients}. Since their intermediate position places them at the vertices of the input triangle, which is where they are required to stay to keep the mesh water tight.
-	\item 
-		The tangent coefficients are placed at their final position by projecting the intermediate position into the tangent plane of the closest corner, see equation \eqref{eq:method:tangent_coefficients}. This is illustrated in \cref{fig:method:geometry_tangent_projection.png}.
-	\item The center coefficient is moved to the average of the tangent coefficients plus $1/2$ the distance it had to travel from its intermediate position, see equation \eqref{eq:method:center_coefficient}.
+% ## This can be used to triangulated the input primitive and to approximate the cubic bezier patch. Controlled by input tesselation lvl reference to implementation. Barrycentric coordinated and convex combinations.
+%
+The formula in equation \ref{eq:method:cubic_bezier_patch} can be used to interpolate any point, parameterized by the barycentric coordinates $u$ and $v$ on the patch. This fact is used in the sub-triangulation stage of the rendering process. This is the stage where the cubic B\`ezier surface is approximated by using a number of smaller flat triangles. The number of triangles used for this is determined by the level of detail (or lod). For the original sub-triangulation we refer the reader to the paper of \citeauthor{vlachos2001curved}, because this is where the implementation of this report deviates from the original. Details about this are provided in the implementation section \ref{s:implementation}.
+%
+% ## Geometry coefficients construction (tangent, vertex, and center) so three cases
+%
+\subsubsection{Coefficients} \label{sss:control_point_construction}
+In this section we discuss how the `curved' control net geometry (see figure \ref{fig:method:input_primitive}) is calculated, from the flat input primitive shown in figure \ref{fig:method:input_primitive}. The input primitive provides the the positions $P_1, P_2, P_3 \in \Real^3$ and normals $N_1, N_2, N_3 \in \Real^3$, which are the three corner vertices of the triangle. The coefficients $b_{ijk}$ are computed as follows:
+%
+\begin{enumerate}
+	\item Initially the coefficient $b_{ijk}$ are spread uniformly i.e. the intermediate position of $b_{ijk}$ is calculated using the formula $(i P_i + j P_2 + kP_3) / 3$.
+	\item The vertex coefficients are now in the three corners, so these are left as is.
+	\item The tangent coefficients are placed by projecting the intermediate position of the coefficient into the tangent plane of the closest corner. This is illustrated by the image in figure \ref{fig:method:geometry_tangent_projection.png}.
+	\item The center coefficient is moved to the average of the tangent coefficients plus $1/2$ the distance it had to travel from its intermediate position.
 \end{enumerate}
 %
 \begin{figure}
@@ -60,13 +60,11 @@ This section discusses how the `curved' control net geometry, see \cref{fig:meth
 	\caption{Projection of a tangent coefficient $b_{210}$ to the tangent plane of the closes corner $P_1$.}
 	\label{fig:method:geometry_tangent_projection.png}
 \end{figure}
-
-
-The following set of formulas describe how the positions of the coefficients are calculated. For clarity we group together the formulas in the same way as the coefficients. This gives the following formulas for the \textit{vertex coefficients}:
+%
+The following set of formulas describe how the position of the coefficient can be calculated. For clarity we group together the formulas in the same way as the coefficients. This gives the following formulas for the \textit{vertex coefficients}:
 \begin{align}\label{eq:method:vertex_coefficients}
 	b_{300} = P_1,\ b_{030} = P_2,\ b_{003} = P_3.
 \end{align}
-
 The tangent coefficients are given by the projection of a point $Q$ onto a plane defined by the normal $N$ of the point $P$. The projected point $Q'$ is then given by: $Q' = Q - wN$, where $w = (Q - P) \cdot N$. Using this the following set of formulas give the positions of the \textit{tangent coefficients}:
 \begin{align}\label{eq:method:tangent_coefficients}
 	w_{ij} = {}& (P_j - P_i) \cdot N_i \in \Real \nonumber\\
@@ -77,26 +75,25 @@ The tangent coefficients are given by the projection of a point $Q$ onto a plane
 	b_{102} = {}& (2 P_3 + P_1 - w_{31}N_3) / 3,\nonumber\\
 	b_{201} = {}& (2 P_1 + P_3 - w_{13}N_1) / 3. \nonumber
 \end{align}
-
-The last coefficient is the center coefficient which is moved to the average of the previous computed tangent coefficients plus $1/2$ the distance it traveled from its intermediate location to that average position. The \textit{center coefficient} is thus defined as:
+The last coefficient is the center coefficient which is, as explained in the list above, moved to the average of the previous computed tangent coefficients plus $1/2$ the distance it traveled from its intermediate location to that average position. \todo{reason why is very vague, and I do not know what it is... Let them tell us this is not enough?} The \textit{center coefficient} is given by:
 \begin{align}\label{eq:method:center_coefficient}
 	E = {}& (b_{210} + b_{120} + b_{021} \nonumber \\
 		{}& + b_{012} + b_{102} + b_{201}) / 6, \nonumber\\
 	V = {}& (P_1 + P_2 + P_3) / 3, \\
 	b_{111} = {}& E + (E - V) / 2. \nonumber
 \end{align}
-Combining \eqref{eq:method:vertex_coefficients} through \eqref{eq:method:center_coefficient} results in the control net shown in \cref{fig:method:control_net}.
-
+Now the formulas in equations \ref{eq:method:vertex_coefficients}-\ref{eq:method:center_coefficient} can be combined to get the resulting control net as shown in figure \ref{fig:method:control_net}.
 \subsubsection{Properties}
-\label{sss:method:geometric:properties}
-\citeauthor{vlachos2001curved} have shown that point-normal triangles do not deviate too much from the original triangle. This is an important property since this ensures that the shape of the model is preserved and adjacent triangles do not interfere with each other. 
+\citeauthor{vlachos2001curved} have shown that PN triangles do not deviate to much from the original triangle. This is an important property because then the shape of the model is preserved an adjacent triangles do not interfere with each other. 
 
-By demanding shared normals i.e. one unique normal per vertex, the boundary between two point-normal triangles is generated by the same algorithm, thus the surface is water tight. Except at the corners, PN triangles do not usually join with tangent continuity. \Cref{fig:method:cracks} illustrates what happens if normals are not shared.
+By demanding shared normals i.e. one unique normal per vertex, the boundary between two PN triangles is generated by the same algorithm, thus the surface is without cracks. Except at the corners, PN triangles do not usually join with tangent continuity. To illustrate what would happen when normals were not shared an cartoon mesh has been included in figure 
 
 \begin{figure}
-	\plaatje{Moeten dit plaatje eigenlijk maken met driehoeken.}
 	\centering
-	\includegraphics[width=0.45\textwidth]{./content/img/method/cracks.png}
-	\caption{Illustration of what would happen if one renders a model using point-normal triangles where vertices have different normals, depending on the associated faces. Image taken from \cite{mcdonald2010crack}.}
-	\label{fig:method:cracks}
+	\includegraphics[width=0.45\textwidth]{./content/img/method/}
+	\caption{Caption here}
+	\label{fig::}
 \end{figure}
+%
+% ## Properties of PN triangle geometry bla bla 500 BC verhaal.
+%

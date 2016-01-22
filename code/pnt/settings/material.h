@@ -15,8 +15,8 @@ public:
             float specularReflectionConstant = 0.3,
             float diffuseReflectionConstant = 0.5,
             float ambientReflectionConstant = 0.4,
-            float alfa = 150,
-            QVector3D color = QVector3D(252/255.0, 0, 109/255.0)
+            float alfa = 150.0,
+            QVector3D color = QVector3D(252.0/255.0, 0.0, 109.0/255.0)
     );
 };
 
