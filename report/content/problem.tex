@@ -6,10 +6,10 @@ We consider a number of subproblems associated with point-normal triangles.
 \begin{enumerate}[label=(\roman*)]
 	\item \label{it:problem:fakeNormals}
 		% Waarom willen we het weten
-		In the introduction we have mentioned that point-normal triangles are not suitable for rendering in computer aided designed software, due to the `fake' normal field, as the normal component of the PN triangle does not accurately represent the actual normals. Adapting the PN triangle algorithm to use `real' normals, expands its application domain to include rendering for CAD software.
+		In the introduction we have mentioned that point-normal triangles use a `fake' normal field. Consequently the normal field of a PN triangle does not accurately represent the actual normals. One might wonder why \citeauthor{vlachos2001curved} chose to use a `fake' normal field, instead of the real normals. Since all information required to compute the real normal is available. Note that adapting the PN triangle algorithm to use `real' normals does not expand its application domain to include rendering for CAD software. As the smoothness of the rendering, a result of the added geometry, is not present in the actual mesh. 
 		%
 		% Wat willen we weten
-		It is possible to compute the `real' normals of the vertices of the subdivided PN-triangle, using the method we present in section \ref{sss:method:normals:realNormals}. 
+		It is possible to compute the `real' normals of the vertices of the tessellated PN-triangle, using the method we present in section \ref{sss:method:normals:realNormals}. 
 		%
 		%Wat gaan we meten
 		In this paper we compare both the computational and the visual performance of the `real' and `fake' normals. 
@@ -23,7 +23,7 @@ We consider a number of subproblems associated with point-normal triangles.
 
 	\item \label{it:problem:GPUImplementation}
 		%Waarom willen we het weten
-		One major advantage of PN-triangles at the time of its introduction (\citeyear{vlachos2001curved}) was its speed. Since then geometry and tessellation shaders have been introduced into the OpenGL pipeline. 
+		One major advantage of PN-triangles at the time of its introduction (\citeyear{vlachos2001curved}) was its speed when computed on the CPU. Since then geometry and tessellation shaders have been introduced into the OpenGL pipeline. Making it possible to compute point-normal triangles on the GPU. 
 		%
 		% Wat willen we weten
 		We investigate which changes have to be made to the point-normal triangles as proposed by \citeauthor{vlachos2001curved} to fit into a recent OpenGL pipeline (version 4.1).
