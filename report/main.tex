@@ -73,16 +73,19 @@
 % References within paper
 \usepackage{varioref}
 \usepackage{hyperref}
-\usepackage[noabbrev]{cleveref}
+\usepackage[noabbrev, capitalise, nameinlink]{cleveref}
 
 % Lists
 \usepackage{enumitem}
 
-\newcommand{\crefs}[1]{Section~\ref{#1}}
-\newcommand{\Crefs}[1]{Section~\ref{#1}}
+% \hyperref[sec:intro]{Appendix~\ref*{sec:intro}}
 
-\newcommand{\crefe}[1]{Equation~\ref{#1}}
-\newcommand{\Crefe}[1]{Equation~\ref{#1}}
+
+\newcommand{\crefs}[1]{\hyperref[#1]{Section~\ref*{#1}}}
+\newcommand{\Crefs}[1]{\hyperref[#1]{Section~\ref*{#1}}}
+
+\newcommand{\crefe}[1]{\hyperref[#1]{Equation~\ref*{#1}}}
+\newcommand{\Crefe}[1]{\hyperref[#1]{Equation~\ref*{#1}}}
 
 % Temporary
 \usepackage{todonotes}
@@ -125,8 +128,8 @@
 
 \input{content/abstract}
 
-\printlen[3][cm]{\columnwidth}
-\the\columnwidth
+% \printlen[3][cm]{\columnwidth}
+% \the\columnwidth
 
 \input{content/introduction}
 
