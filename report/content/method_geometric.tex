@@ -34,7 +34,7 @@
 	\begin{align*}
 		\text{vertex coefficients: } {}&  b_{300},\ b_{030},\ b_{003} \\
 		\text{tangent coefficients: } {}&  b_{210},\ b_{120},\ b_{021},\ b_{012},\ b_{102},\ b_{201}\\
-		\text{center coefficient: }   {}&  b_{111}\\
+		\text{center coefficient: }   {}&  b_{111}
 	\end{align*}
 
 	\Crefe{eq:method:cubic_bezier_patch} can be used to evaluate any point on the patch that is parameterized by the barycentric coordinates $(u,v,w)$. This evaluation is done in the triangulation stage of the rendering process. In this stage the cubic Bézier surface is approximated by using a number of smaller flat triangles; these are eventually rendered. The number of sub-triangles is determined by the level of detail (lod). For the original sub-triangulation scheme we refer the reader to \textcite{vlachos2001curved}, as this is where the implementation presented in this paper deviates from the one discussed by \citeauthor{vlachos2001curved}. For a more exhaustive discussion of these differences we refer the reader to \crefs{s:implementation}.
@@ -61,7 +61,7 @@
 	\begin{figure}
 		\centering
 		\includegraphics[width=0.45\textwidth]{./content/img/method/geometry_computation.png}
-		\caption{Projection of the initial tangent coefficient $b_{210}'$ to the tangent plane of the closest vertex $P_1$, which results in the final tangent coefficient $b_{210}$. The initial position is represented with a filled circle, the final position with the outline of a circle.}
+		\caption{Projection of the initial tangent coefficient $b_{210}'$ to the tangent plane of the closest vertex $P_1$, which results in the final tangent coefficient $b_{210}$. The initial position is represented with a filled circle, the final position with the outline of a circle. Illustration adapted from \textcite{vlachos2001curved}.}
 		\label{fig:method:geometry_tangent_projection.png}
 	\end{figure}
 
@@ -88,7 +88,7 @@
 	where
 	\begin{align*}
 		E = {}& \frac{b_{210} + b_{120} + b_{021} + b_{012} + b_{102} + b_{201}}{6}\\
-		V = {}& \frac{(P_1 + P_2 + P_3)}{3}. \\
+		V = {}& \frac{(P_1 + P_2 + P_3)}{3}.
 	\end{align*}
 
 	Combining \crefe{eq:method:vertex_coefficients} through \ref{eq:method:center_coefficient} computes the control net shown in \cref{fig:method:control_net}, based on the input primitive presented in \cref{fig:method:input_primitive}.
