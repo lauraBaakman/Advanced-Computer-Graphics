@@ -6,15 +6,14 @@ We consider a number of subproblems associated with point-normal triangles.
 \begin{enumerate}[label=(\roman*)]
 	\item \label{it:problem:fakeNormals}
 		% Waarom willen we het weten
-		In the introduction we have mentioned that point-normal triangles use a `fake' normal field. Consequently the normal field of a PN triangle does not accurately represent the actual normals. One might wonder why \citeauthor{vlachos2001curved} chose to use a `fake' normal field, instead of the real normals. Since all information required to compute the real normal is available. Note that adapting the PN triangle algorithm to use `real' normals does not expand its application domain to include rendering for CAD software. As the smoothness of the rendering, a result of the added geometry, is not present in the actual mesh. 
-		%
-		% Wat willen we weten
-		It is possible to compute the `real' normals of the vertices of the tessellated PN-triangle, using the method we present in section \ref{sss:method:normals:realNormals}. 
+		In the introduction we have mentioned that point-normal triangles use a `fake' normal field. Consequently the normal field of a PN triangle does not accurately represent the actual normals. One might wonder why \citeauthor{vlachos2001curved} chose to use a `fake' normal field, instead of the real normals. Since it is possible to compute the `real' normals of the vertices of the tessellated PN-triangle, using the method we present in \crefs{sss:method:normals:realNormals}. 
 		%
 		%Wat gaan we meten
 		In this paper we compare both the computational and the visual performance of the `real' and `fake' normals. 
 		% Wat verwachten we
 		We do not expect a large difference in visual performance when `real' normals are used. Nor do we suppose that computing the normals based on the geometry will have a significant impact on the computational complexity of point-normal triangles.
+		% Inzicht!
+		Note that adapting the PN triangle algorithm to use `real' normals does not expand its application domain to include rendering for CAD software. As the smoothness of the rendering, a result of the added geometry, is not present in the actual mesh. 
 
 \iftoggle{PHONG}{
 	\item \label{it:problem:CompareWithPhongTesselation}
@@ -23,7 +22,7 @@ We consider a number of subproblems associated with point-normal triangles.
 
 	\item \label{it:problem:GPUImplementation}
 		%Waarom willen we het weten
-		One major advantage of PN-triangles at the time of its introduction (\citeyear{vlachos2001curved}) was its speed when computed on the CPU. Since then geometry and tessellation shaders have been introduced into the OpenGL pipeline. Making it possible to compute point-normal triangles on the GPU. 
+		One major advantage of point-normal triangles at the time of its introduction (\citeyear{vlachos2001curved}) was that it was fast when computed on the CPU. Since then geometry and tessellation shaders have been introduced into the OpenGL pipeline. Making it possible to compute PN triangles on the GPU. 
 		%
 		% Wat willen we weten
 		We investigate which changes have to be made to the point-normal triangles as proposed by \citeauthor{vlachos2001curved} to fit into a recent OpenGL pipeline (version 4.1).
