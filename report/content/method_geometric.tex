@@ -2,15 +2,15 @@
 
 \subsection{Geometric component}
 \label{ss:geometric_component}
-Let us emphasize again that the only used information for the construction of the geometric and normal component are the three vertices with associated normals, that define a single primitive. The vertices contain the vertex \textit{xyz}-coordinates together with a unique shared normal per vertex, i.e., the normal of each vertex is the same for every primitive using that vertex. Figure \ref{fig:method:input_primitive} shows an illustration of an input primitive. Each point-normal triangle construction starts with an input primitive of this form.
+Let us emphasize again that only a single primitve, i.e. three vertices and their associated normals, is used for the construction of the geometric and normal component. The vertices contain the three-dimensional vertex location together with a shared normal per vertex, i.e., the normal of each vertex is the same for every primitive using that vertex. \Cref{fig:method:input_primitive} shows an illustration of an input primitive, based on such input primitives the geometric component of the point-normal triangle is constructed.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.45\textwidth]{./content/img/method/geometry.png}
+	\includegraphics[width=0.45\textwidth]{./content/img/method/geometry_component.png}
 	\caption{The geometric component of a point-normal triangle, i.e. the control net of a cubic Bézier triangle.}
 	\label{fig:method:control_net}
 \end{figure}
-%
+%dfsafsadfdsfs
 % ## Geometric component defined by triangluar cubic Bezier patch.
 %
 In the next subsection we discuss the definition of the geometry of a point-normal triangle. In subsection \crefs{sss:control_point_construction} we discuss the construction of the control points that define the geometry. 
