@@ -78,8 +78,7 @@
 % Lists
 \usepackage{enumitem}
 
-% \hyperref[sec:intro]{Appendix~\ref*{sec:intro}}
-
+\newcommand*\rfrac[2]{\ensuremath{{}^{#1}\!/_{#2}}}
 
 \newcommand{\crefs}[1]{\hyperref[#1]{Section~\ref*{#1}}}
 \newcommand{\Crefs}[1]{\hyperref[#1]{Section~\ref*{#1}}}
@@ -122,26 +121,26 @@
 \todo[inline]{Subdivide vervangen met tesselation}
 % \laura{Add doi file and url to the bibliography}
 
-\listoftodos
-
-\input{content/header}
-
-\input{content/abstract}
-
 % \printlen[3][cm]{\columnwidth}
 % \the\columnwidth
 
-\input{content/introduction}
+\listoftodos
 
-\input{content/problem}
+% \input{content/header}
+
+% \input{content/abstract}
+
+% \input{content/introduction}
+
+% \input{content/problem}
 
 \input{content/method}
 
-\input{content/implementation}
+% \input{content/implementation}
 
-\input{content/results}
+% \input{content/results}
 
-\input{content/conclusion}
+% \input{content/conclusion}
 
 \printbibliography
 
