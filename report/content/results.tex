@@ -3,10 +3,7 @@
 \section{Results}
 \label{s:results}
 
-\subsection{Fake versus real normals}
-	\todo[inline]{Show results of PN triangles with fake and real normals, and discuss differences}
-	\todo[inline]{Computational complexity of the fake normals and the real normals, consider one triangle.}
-	\todo[inline]{Any unsolved problems?}
+\input{content/results_normals}
 
 \iftoggle{PHONG}{
 \subsection{Phong tesselation versus PN triangles}
@@ -14,8 +11,4 @@
 	\future{Any unsolved problems?}
 }
 
-
-\subsection{Pipeline}
-	\Cref{fig:results:cpugpu} shows the rendering by \citeauthor{vlachos2001curved} next to our rendering of, probably, the same model. The only difference between these two models should be the pattern in which the triangles of the input mesh are subdivided into flat triangles. A visual inspection shows no obvious differences between the models, leading us to suggest that the difference in triangulation does not matter much. 
-
-	\input{results_cpugpu}
+\input{content/results_pipeline}
