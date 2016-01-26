@@ -32,9 +32,25 @@
 		\text{vertex coefficients: } {}&  n_{200},\ n_{020},\ n_{002} \\
 		\text{edge coefficients: } {}&  n_{110},\ n_{011},\ n_{101}\\
 	\end{align*}
-	A vertex coefficient is simply the normal provided by the input primitive.
+	A vertex coefficient is simply the normal provided by the input primitive, i.e.
+	\begin{equation}
+		n_{200} = N_1,\ n_{020} = N_2,\ b_{002} = N_3.
+	\end{equation}
 
-	An edge coefficient is calculated by taking the average of the two input vertex normals of the vertices of the edge. This results the normals presented in \cref{fig:method:normal:linear}. To capture the inflection point the average normal is then reflected across the plane perpendicular to the edge, as illustrated in \cref{fig:method:normal:reflection}. When a inflection point exists this will give the correct mid-edge normal, as shown in \cref{fig:method:normal:quadratic}. When no inflection point exists the normal field is not altered, this is illustrated in \cref{fig:method:normal:both}, where once can see that the reflection of the mid-edge normal of the curve is the mid-edge normal.
+	An edge coefficient is calculated by taking the average of the two input vertex normals of the vertices of the edge. This results the normals presented in \cref{fig:method:normal:linear}. To capture the inflection point the average normal is then reflected across the plane perpendicular to the edge, as illustrated in \cref{fig:method:normal:reflection}. When a inflection point exists this will give the correct mid-edge normal, as shown in \cref{fig:method:normal:quadratic}. Consequently the edge coefficients are defined as:
+	\begin{equation}\label{eq:method:edge_coefficients}
+		\begin{aligned}
+			n_{110} = {}& \frac{h_{110}}{\norm{h_{110}}} & h_{110} = N_1 + N_2 - v_{12}\left(P_2 - P_1\right)\\
+			n_{011} = {}& \frac{h_{011}}{\norm{h_{011}}} & h_{011} = N_2 + N_3 - v_{23}\left(P_3 - P_2\right)\\
+			n_{101} = {}& \frac{h_{101}}{\norm{h_{101}}} & h_{101} = N_3 + N_1 - v_{31}\left(P_1 - P_3\right)\\			
+		\end{aligned}		
+	\end{equation}
+	where
+	\begin{equation*}
+		v_{ij} = \frac{\left(P_j - P_i \right) \cdot \left(N_i + N_j \right)}{\left(P_j - P_i \right) \cdot \left(P_j - P_i \right)} \in \Real.
+	\end{equation*}
+
+	 When no inflection point exists the normal field is not altered, this is illustrated in \cref{fig:method:normal:both}, where once can see that the reflection of the mid-edge normal of the curve is the mid-edge normal.
 
 	\begin{figure}
 		\centering
