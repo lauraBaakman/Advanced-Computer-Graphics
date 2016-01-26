@@ -80,6 +80,8 @@
 		%Output
 		The control nets are output to the tessellation evaluation shader whereas the tessellation levels are sent to the tessellation primitive generator. 
 
+		Although the next shader, the tessellation primitive generator, is not programmable, we can control its output via some parameters that are set in the TES, most notably the tessellation levels and the edge tessellation spacing algorithm. We have left the selection of the tessellation levels to the user. This means that the tessellation levels of a rendered object can be changed on the fly, consequently it is important that the transition between different tessellation levels is smooth. We have thus opted to set the tessellation algorithm to fractional odd spacing, which gives a smooth transition \cite{cozzi2012opengl}. 
+
 \begin{figure}
 	\plaatje{Eventueel: Overtrekken in illustrator, laat rare groene lijnen in tweede plaatje weg. Gebruik geen groen maar blauw en oranje. Maak plaatje met uiteindelijke tessellations.}
 	\centering
@@ -119,20 +121,18 @@
 
 \subsection{Tessellation Primitive Generator}
 \label{ss:implementation:tpg}
-	The tessellation primitive generator is not programmable, we can however control its output via some parameter, most notably the tessellation levels and the edge tessellation spacing algorithm. The TPG tessellates an input triangle, see \cref{fig:implementation:step:input}, according to these steps \cite{cozzi2012opengl}:
+	The TPG tessellates an input triangle, see \cref{fig:implementation:step:input}, according to these steps \cite{cozzi2012opengl}:
 		\begin{enumerate}[label=(\roman*)]
 			\item \label{it:implementation:1} The patch is divided into the same number of concentric triangles as the inner tessellation level, see \cref{fig:implementation:step:1}.
 			\item \label{it:implementation:2} The spaces between the concentric triangles, except the outer triangle, are subdivided intro triangles, see \cref{fig:implementation:step:2}.
-			\item \label{it:implementation:3} The outer edges of the triangles are decomposed in smaller edges according to the outer tessellation level, see \cref{fig:implementation:step:3}.
+			\item \label{it:implementation:3} The outer edges of the triangles are decomposed into smaller edges according to the outer tessellation level, see \cref{fig:implementation:step:3}.
 			\item \label{it:implementation:4} The outer ring of triangles is subdivided into triangles by connecting the vertices from the inner triangles with those of the other triangles, see \cref{fig:implementation:step:4}.
 		\end{enumerate}
-	A triangle that is tessellated with fractional spacing, and an inner and outer tessellation level of $4.0$ is presented in \cref{fig:implementation:tessellatedTriangle}. It should be noted that the resulting tessellation is different than the subdivision of triangles proposed by \citeauthor{vlachos2001curved}. 
-
-	We opted for fractional odd spacing to make changes between different tessellation levels as smooth as possible. 
+	A triangle that is tessellated with fractional spacing, and an inner and outer tessellation level of $4.0$, is presented in \cref{fig:implementation:tessellatedTriangle}. It should be noted that the resulting tessellation is different than the subdivision of triangles proposed by \citeauthor{vlachos2001curved}. 
 
 	\begin{figure}
 		\centering
-		\includegraphics[width=\columnwidth]{content/img/implementation/tessellatedTriangle.png}
+		\includegraphics[width=0.6\columnwidth]{content/img/implementation/tessellatedTriangle.png}
 		\caption{A single triangle tessellated with both outer and inner tessellation level set to 4.0, and edge tessellation spacing set to \texttt{fractional\_odd\_spacing}.}
 		\label{fig:implementation:tessellatedTriangle}
 	\end{figure}
@@ -142,6 +142,6 @@
 	% Input
 	Due to our parallelization the first step in the TES is to extract the control points from the input. 
 	% Geometry
-	If we have the control nets we determine the positions of the vertices of the flat triangles that will form the final mesh, according to Equation \eqref{eq:method:cubic_bezier_patch}. 
+	Once we have the control nets, we determine the positions of the vertices of the flat triangles that will form the final patch, according to \crefe{eq:method:cubic_bezier_patch}. 
 	% Normals
-	We compute the normals according to Equation \eqref{eq:method:quadratic_normal_patch} or \todo{reference to the at this point non existing equation.} depending on which normal computation is used. 
+	We compute the normals according to either \crefe{eq:method:quadratic_normal_patch} or \crefe{eq:method:normal:realNormal}.

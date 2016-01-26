@@ -87,4 +87,8 @@
 										   ={}& w^2 b_{012} + v^2 b_{030} + u^2 b_{210} + \\
 										    {}& 2 v w b_{021} + 2 u w b_{111} + 2 u v b_{120}. \nonumber
 	\end{align}
-	The partial derivatives define two tangent vectors in the $u$ and $v$ directions, at some point $(u,v)$ on the surface. The crossproduct of these two vectors gives us the normal of that point, as defined by the geometric component of the PN triangle.
+	The partial derivatives define two tangent vectors in the $u$ and $v$ directions, at some point $(u,v)$ on the surface. The normal, as defined by the geometric component of the PN triangle, at some point $(u,v)$, $n_{uv}$, is defined as the crossproduct of the tangent vectors:
+	\begin{equation}\label{eq:method:normal:realNormal}
+		n_{uv} = \frac{\partial b(u,v)}{\partial u} \times \frac{\partial b(u,v)}{\partial v}.
+	\end{equation}
+	% Beetje akward, maar ik heb de vergelijking nodig in het implementatie stuk
