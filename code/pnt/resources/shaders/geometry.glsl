@@ -33,7 +33,8 @@ void faceNormal(){
 
     vec3 meanNormal = (tesNormal[0] + tesNormal[1] + tesNormal[2]) / 3.0;
     gsNormal = normalize(cross(edge1, edge2));
-    if(dot(meanNormal, gsNormal) < 0) gsNormal = normalize(cross(edge2, edge1));
+//    if(dot(meanNormal, gsNormal) < 0) gsNormal = -1 * gsNormal;
+//    if(dot(vec3(0, 0, -1), gsNormal) < 0) gsNormal = -1 * gsNormal;
 }
 
 void flatInterpolation(){
