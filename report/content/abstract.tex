@@ -1,7 +1,13 @@
 %!TEX root = ../main.tex
 
 \begin{abstract}
-	\todo[inline]{Write some abstract, this may be at most 3 inches (7.62cm) long.}
+	\citeauthor{vlachos2001curved} introduced point-normal triangles in \citeyear{vlachos2001curved} to improve the visual quality of triangle meshes in a fast way on the CPU, without having to change the mesh. Since then a lot of changes have been made to the OpenGL pipeline, making it possible to render with point-normal triangles on the GPU. 
+
+	% Wat gaan we doen % Wat is eruit gekomen: CPU/GPU
+	We discuss how one can implemented point-normal triangles on the GPU and discuss the differences with the CPU implementation. We have found that there are probably no differences.
+
+	% Wat gaan we doen % Wat is eruit gekomen: normals
+	Further more we also consider the use of normals based on the geometry, `real' normals, instead of the quadratically varying normals, `fake' normals, proposed by \citeauthor{vlachos2001curved}. We have concluded that although the resulting normal fields are the same the `fake' normals are computationally less expensive, and thus preferably.
 	~\\
 
 	\begin{classification}

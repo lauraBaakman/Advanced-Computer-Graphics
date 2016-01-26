@@ -79,6 +79,7 @@
 \usepackage{enumitem}
 
 \newcommand*\rfrac[2]{\ensuremath{{}^{#1}\!/_{#2}}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 
 \newcommand{\crefs}[1]{\hyperref[#1]{Section~\ref*{#1}}}
 \newcommand{\Crefs}[1]{\hyperref[#1]{Section~\ref*{#1}}}
@@ -116,31 +117,25 @@
 \usepackage{xprintlen}
 
 \begin{document}
-	
-
-\todo[inline]{Subdivide vervangen met tesselation}
-% \laura{Add doi file and url to the bibliography}
 
 % \printlen[3][cm]{\columnwidth}
 % \the\columnwidth
 
-\listoftodos
+\input{content/header}
 
-% \input{content/header}
+\input{content/abstract}
 
-% \input{content/abstract}
+\input{content/introduction}
 
-% \input{content/introduction}
+\input{content/problem}
 
-% \input{content/problem}
+\input{content/method}
 
-% \input{content/method}
-
-% \input{content/implementation}
+\input{content/implementation}
 
 \input{content/results}
 
-% \input{content/conclusion}
+\input{content/conclusion}
 
 \printbibliography
 
