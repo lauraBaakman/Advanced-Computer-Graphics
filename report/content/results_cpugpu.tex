@@ -1,49 +1,49 @@
 %!TEX root = ../main.tex
 \begin{figure*}
-	\plaatje{Roteer onze rendering zodat hij klopt met de blauwe rendering}
-	\plaatje{In caption mention: material properties, light properties, tessellation levels.}
 	\centering
 	\begin{subfigure}[b]{0.2\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{content/img/results/dogCPU.png}
+		\includegraphics[width=\textwidth]{content/img/results/cpugpu/dogCPU.png}
 		\caption{Rottweiler on CPU}
 		\label{fig:results:cpugpu:cpuDog}
 	\end{subfigure}
 	\hspace{0.1\textwidth}
 	\begin{subfigure}[b]{0.2\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{content/img/results/voreCPU.png}
+		\includegraphics[width=\textwidth]{content/img/results/cpugpu/voreCPU.png}
 		\caption{Vore on CPU}
 		\label{fig:results:cpugpu:cpuVore}
 	\end{subfigure}	
 	\hspace{0.1\textwidth}
 	\begin{subfigure}[b]{0.2\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{content/img/results/shamblercpu.png}
+		\includegraphics[width=\textwidth]{content/img/results/cpugpu/shamblercpu.png}
 		\caption{Shambler on CPU}
 		\label{fig:results:cpugpu:cpuShambler}
 	\end{subfigure}		
 
 	\begin{subfigure}[b]{0.2\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{content/img/results/doggpu.png}
+		\includegraphics[width=\textwidth]{content/img/results/cpugpu/doggpu.png}
 		\caption{Rottweiler on GPU}
 		\label{fig:results:cpugpu:gpuDog}
 	\end{subfigure}
 	\hspace{0.1\textwidth}
 	\begin{subfigure}[b]{0.2\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{content/img/results/voregpu.png}
+		\includegraphics[width=\textwidth]{content/img/results/cpugpu/voregpu.png}
 		\caption{Vore on GPU}
 		\label{fig:results:cpugpu:gpuVore}
 	\end{subfigure}	
 	\hspace{0.1\textwidth}
 	\begin{subfigure}[b]{0.2\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{content/img/results/shamblerGPU.png}
+		\includegraphics[width=\textwidth]{content/img/results/cpugpu/shamblerGPU.png}
 		\caption{Shambler on GPU}
 		\label{fig:results:cpugpu:gpuShambler}
 	\end{subfigure}			
-	\caption{A family of game characters from the game Quake 1. \subref{fig:results:cpugpu:cpuDog}, \subref{fig:results:cpugpu:cpuVore} and \subref{fig:results:cpugpu:cpuShambler} are rendered on a CPU by \citeauthor{vlachos2001curved}. \subref{fig:results:cpugpu:gpuDog}, \subref{fig:results:cpugpu:gpuVore}, \subref{fig:results:cpugpu:gpuShambler} are rendered by our implementation. Figures \subref{fig:results:cpugpu:cpuDog}, \subref{fig:results:cpugpu:cpuVore} and \subref{fig:results:cpugpu:cpuShambler} were taken from \textcite{vlachos2001curved}.}
+	\caption{A family of game characters from the game Quake 1. \Cref{fig:results:cpugpu:cpuDog,fig:results:cpugpu:cpuVore,fig:results:cpugpu:cpuShambler} are rendered on a CPU by \citeauthor{vlachos2001curved}. \Cref{fig:results:cpugpu:gpuDog,fig:results:cpugpu:gpuVore,fig:results:cpugpu:gpuShambler} are rendered by our implementation. We rendered our models with the Phong shading and reflection model ($k_s = 0.3$, $k_d = 0.5$, $k_a = 0.4$, $\alpha = 150.0$, color = $(0.988, 0.0, 0.427)$), with a single light source $\left(I_s = I_d = I_a = (1.0, 1.0, 1.0)\right)$ at $(-2.0, 5.0, -10.0)$. The inner and outer tessellation levels were set to $12.0$. The eye was placed at $(2.0, 5.0, -10.0)$.
+% 
+	\Cref{fig:results:cpugpu:cpuDog,fig:results:cpugpu:cpuVore,fig:results:cpugpu:cpuShambler} were taken from \textcite{vlachos2001curved}.}
 	\label{fig:results:cpugpu}
 \end{figure*}
