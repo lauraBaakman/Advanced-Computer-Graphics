@@ -2,8 +2,8 @@
 
 \subsection{Pipeline}
 \label{s:results:pipeline}
-	\Cref{fig:results:cpugpu} shows the rendering by \citeauthor{vlachos2001curved} next to our rendering of, probably, the same model. The only difference between these two models should be the pattern in which the triangles of the input mesh are subdivided into flat triangles. A visual inspection shows some differences between the models, but we estimate that those are due to different material and light properties. Since \citeauthor{vlachos2001curved} did not report those it is near impossible to exactly replicate their results. 
+	The first row in \cref{fig:results:cpugpu} shows the rendering by \citeauthor{vlachos2001curved} below that we present our rendering of, probably, the same models. The only difference between these each set of models should be tessellation algorithm. A visual inspection shows some differences between the models, but we estimate that those are due to different material and light properties. As \citeauthor{vlachos2001curved} did not report those it is near impossible to exactly replicate their results. 
 
-	The contours of the models is in this case the best place to look for differences. A visual inspection does not reveal any variations between the models rendered on the CPU and those rendered on the GPU. Consequently we tentatively conclude that the different triangulation when point-normal triangles are computed on the GPU does not matter.
+	The contours of the models is in this case the best place to look for differences. A visual inspection does not reveal any variations between the models rendered on the CPU and those rendered on the GPU. Consequently we tentatively conclude that the difference in final meshes, due to the different triangulations, does not matter.
 
 	\input{content/results_cpugpu}
