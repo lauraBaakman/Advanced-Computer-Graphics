@@ -71,15 +71,21 @@
 	\end{align}
 
 	The tangent coefficients are given by the projection of a point $Q$ onto the plane defined by the normal $N$ of the point $P$. The projected point $Q'$ is then given by: $Q' = Q - wN$, where $w = (Q - P) \cdot N$. Using this the positions of the \textit{tangent coefficients} are defined as:
-	\begin{align}\label{eq:method:tangent_coefficients}
-		w_{ij} = {}& (P_j - P_i) \cdot N_i \in \Real \nonumber\\
-		b_{210} = {}& (2 P_1 + P_2 - w_{12}N_1) / 3,\nonumber\\
-		b_{120} = {}& (2 P_2 + P_1 - w_{21}N_2) / 3,\nonumber\\
-		b_{021} = {}& (2 P_2 + P_3 - w_{23}N_2) / 3, \\
-		b_{012} = {}& (2 P_3 + P_2 - w_{32}N_3) / 3,\nonumber\\
-		b_{102} = {}& (2 P_3 + P_1 - w_{31}N_3) / 3,\nonumber\\
-		b_{201} = {}& (2 P_1 + P_3 - w_{13}N_1) / 3. \nonumber
-	\end{align}
+	\begin{equation}\label{eq:method:tangent_coefficients}
+		\begin{aligned}
+			b_{210} = {}& (2 P_1 + P_2 - w_{12}N_1) / 3,\\
+			b_{120} = {}& (2 P_2 + P_1 - w_{21}N_2) / 3,\\
+			b_{021} = {}& (2 P_2 + P_3 - w_{23}N_2) / 3,\\
+			b_{012} = {}& (2 P_3 + P_2 - w_{32}N_3) / 3,\\
+			b_{102} = {}& (2 P_3 + P_1 - w_{31}N_3) / 3,\\
+			b_{201} = {}& (2 P_1 + P_3 - w_{13}N_1) / 3, 
+		\end{aligned}		
+	\end{equation}
+	where
+	\begin{equation*}
+		w_{ij} = (P_j - P_i) \cdot N_i \in \Real.
+	\end{equation*}
+
 
 	The center coefficient is, as stated before, moved to the average of the previous computed tangent coefficients plus $\rfrac{1}{2}$ times the distance it traveled from its intermediate location to that average position. The \textit{center coefficient}, is computed as:
 	\begin{equation}\label{eq:method:center_coefficient}
