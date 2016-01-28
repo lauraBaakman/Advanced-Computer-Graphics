@@ -2,6 +2,6 @@
 
 \section{Conclusion}
 \label{s:conclusion}
-	It seems as computing rendering point-normal triangles on the GPU gives the same results as when the CPU, in spite of the different tessellation algorithm. However to accurately determine the influence, if any, of the tessellation algorithm on the final rendering on should implement point-normal triangles on both the CPU and the GPU. This would give full control over the used models and the shading parameters. This ensures that any differences between models rendered on the CPU and the GPU are due to the different tessellation algorithms.
+	It seems as rendering point-normal triangles on the GPU gives the same results as on the CPU, in spite of the different tessellation algorithms. However, to accurately determine the influence, if any, of the tessellation algorithm on the final rendering, one should implement point-normal triangles on both the CPU and the GPU. This would give full control over the used models and the shading parameters. This ensures that any differences between models rendered on the CPU and the GPU are due to the different tessellation algorithms.
 
 	Although `real' normals result in the same normal as `fake' normals it is computationally advantageous in nearly all cases to use the `fake' normals. Only when one renders an object with point normal triangles with the level of detail set to 0, i.e. the inner and outer tessellation levels are 1.0, is it computationally advantageous to use `real' normals.
